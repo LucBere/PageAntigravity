@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  /* El color exacto que sacamos de tu Figma para el fondo principal */
+  --color-gymDark: #0E0E0E;
+  --color-gymPrimary: #64748B;
+
+  /* Colores auxiliares para los paneles (podés cambiarlos si en Figma ves los códigos exactos) */
+  --color-gymGray: #1F1F22;
+  --color-gymBorder: #333333;
+}
+
+@layer base {
+  body {
+    @apply bg-gymDark text-white font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-gymGray/80 backdrop-blur-md border border-gymBorder shadow-xl;
+  }
+}

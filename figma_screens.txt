@@ -1,0 +1,329 @@
+
+
+=== SCREEN: SquatGym - Registro (Sin Pie de Página) ===
+- [FRAME] SquatGym - Registro (Sin Pie de Página)
+  - [FRAME] Main
+    - [FRAME] Registration Core
+      - [FRAME] Overlay+Border+Shadow+OverlayBlur
+        - [FRAME] Brand Anchor
+          - [FRAME] Heading 1
+            - TEXT: "SQUATGYM"
+          - [FRAME] Heading 2
+            - TEXT: "Únete a SquatGym"
+          - [FRAME] Container
+            - TEXT: "Crea tu cuenta de alumno para empezar a entrenar."
+        - [FRAME] Registration Form
+          - [FRAME] Container
+            - [FRAME] Nombre
+              - TEXT: "NOMBRE/S"
+              - [FRAME] Container
+                - [FRAME] Input
+                  - [FRAME] Container
+                    - TEXT: "Tu nombre"
+                - [FRAME] Container
+            - [FRAME] Apellido
+              - TEXT: "APELLIDO/S"
+              - [FRAME] Container
+                - [FRAME] Input
+                  - [FRAME] Container
+                    - TEXT: "Tu apellido"
+                - [FRAME] Container
+          - [FRAME] DNI
+            - TEXT: "DNI"
+            - [FRAME] Container
+              - [FRAME] Input
+                - [FRAME] Container
+                  - TEXT: "Documento Nacional de Identidad"
+              - [FRAME] Container
+          - [FRAME] Fecha de Nacimiento
+            - TEXT: "FECHA DE NACIMIENTO"
+            - [FRAME] Container
+              - [FRAME] Input
+                - [FRAME] Container
+                  - [FRAME] Container
+                    - [FRAME] Paragraph
+                      - TEXT: "mm"
+                      - TEXT: "/"
+                      - TEXT: "dd"
+                      - TEXT: "/"
+                      - TEXT: "yyyy"
+                  - [FRAME] Button menu
+                    - [FRAME] SVG
+              - [FRAME] Container
+          - [FRAME] Email
+            - TEXT: "EMAIL"
+            - [FRAME] Container
+              - [FRAME] Input
+                - [FRAME] Container
+                  - TEXT: "ejemplo@gym.com"
+              - [FRAME] Container
+          - [FRAME] Teléfono
+            - TEXT: "TELÉFONO"
+            - [FRAME] Container
+              - [FRAME] Input
+                - [FRAME] Container
+                  - TEXT: "+34 000 000 000"
+              - [FRAME] Container
+          - [FRAME] Action Button → Button
+            - TEXT: "CREAR CUENTA"
+          - [FRAME] Login Link
+            - TEXT: "¿Ya tienes una cuenta? Iniciar sesión"
+
+
+=== SCREEN: SquatGym - Declaración Médica (Footer Actualizado) ===
+- [FRAME] SquatGym - Declaración Médica (Footer Actualizado)
+  - [FRAME] Background Image with Overlay
+    - [FRAME] AB6AXuAYKQbLMuV_gKuEZctsfOeh7BTmxgvrWXltGMW3OF6QXJ9W2BqqrHd-9cXyhcZcdiO6hdtTF4OTy7u6B0WdMhxCD2s4Hm9dl5gr6X3okpla44Y16l2fdrRa03Hnbdr4VRaPFloCHoUKWSSkPxfRJpV7275ZX1W1CWClp_I5U0rPcoFMabV4IwtkiaK-JDTY_D7U_FMhcahtQuYa_3mZJwIiTapJopzZz5BK0UR7atMJ53cFMFpRWD48D9hLA3NM7VC1HKJV1TZFGpYV
+  - [FRAME] Main Container
+    - [FRAME] Logo Branding
+      - [FRAME] Heading 1
+        - TEXT: "KINETIC NOIR"
+    - [FRAME] Form Card
+      - [FRAME] Header
+        - [FRAME] Heading 2
+          - TEXT: "Declaración Jurada de Salud"
+        - [FRAME] Container
+          - TEXT: "Por favor, completa la siguiente información con veracidad para
+garantizar tu seguridad durante el entrenamiento."
+      - [FRAME] Form
+        - [FRAME] Section 1: Antecedentes Médicos
+          - [FRAME] Container
+            - [FRAME] Container
+            - [FRAME] Heading 3
+              - TEXT: "ANTECEDENTES MÉDICOS"
+          - [FRAME] Container
+            - [FRAME] Label
+              - [FRAME] Container
+                - TEXT: "¿Padece alguna enfermedad cardiovascular?"
+              - [RECTANGLE] Input
+            - [FRAME] Label
+              - [FRAME] Container
+                - TEXT: "¿Tiene asma o problemas respiratorios?"
+              - [RECTANGLE] Input
+            - [FRAME] Label
+              - [FRAME] Container
+                - TEXT: "¿Sufre de presión alta?"
+              - [RECTANGLE] Input
+            - [FRAME] Label
+              - [FRAME] Container
+                - TEXT: "¿Ha tenido cirugías recientes?"
+              - [RECTANGLE] Input
+        - [FRAME] Section 2: Medicación y Alergias
+          - [FRAME] Container
+            - [FRAME] Container
+            - [FRAME] Heading 3
+              - TEXT: "MEDICACIÓN Y ALERGIAS"
+          - [FRAME] Container
+            - [FRAME] Container
+              - TEXT: "DETALLE MEDICACIÓN ACTUAL"
+              - [FRAME] Textarea
+                - [FRAME] Container
+                  - TEXT: "Enumere medicamentos que toma regularmente..."
+            - [FRAME] Container
+              - TEXT: "ALERGIAS CONOCIDAS"
+              - [FRAME] Textarea
+                - [FRAME] Container
+                  - TEXT: "Describa alergias alimentarias, químicas o ambientales..."
+        - [FRAME] Section 3: Contacto de Emergencia
+          - [FRAME] Container
+            - [FRAME] Container
+            - [FRAME] Heading 3
+              - TEXT: "CONTACTO DE EMERGENCIA"
+          - [FRAME] Container
+            - [FRAME] Container
+              - TEXT: "NOMBRE DEL CONTACTO"
+              - [FRAME] Input
+                - [FRAME] Container
+                  - TEXT: "Nombre completo"
+            - [FRAME] Container
+              - TEXT: "TELÉFONO DE EMERGENCIA"
+              - [FRAME] Input
+                - [FRAME] Container
+                  - TEXT: "+00 000 000 000"
+        - [FRAME] Section 4: Declaración Legal
+          - [FRAME] Label
+            - [FRAME] Margin
+              - [FRAME] Container
+                - [RECTANGLE] Input
+            - [FRAME] Container
+              - TEXT: "Declaro bajo juramento que los datos aquí consignados son
+verídicos y que me encuentro en condiciones físicas para
+realizar actividad física. Entiendo que ocultar información médica
+puede representar un riesgo para mi salud."
+        - [FRAME] Action Button → Button
+          - [RECTANGLE] Button:shadow
+          - TEXT: "ENVIAR Y FINALIZAR REGISTRO"
+    - [FRAME] Footer Logo Element
+      - [FRAME] Margin
+      - [FRAME] Container
+        - TEXT: "PERFORMANCE LAB"
+
+
+=== SCREEN: Login SquatGym - Registro ===
+- [FRAME] Login SquatGym - Registro
+  - [FRAME] Main Container
+    - [FRAME] Glassmorphic Background Glow
+    - [FRAME] Section - Login Card
+      - [FRAME] Logo & Header
+        - [FRAME] Container
+          - [FRAME] Container
+        - [FRAME] Heading 1
+          - TEXT: "SQUATGYM"
+        - [FRAME] Container
+          - TEXT: "Bienvenido a SquatGym"
+      - [FRAME] Role Selector
+        - [FRAME] Button
+          - [RECTANGLE] Button:shadow
+          - TEXT: "Alumno"
+        - [FRAME] Button
+          - TEXT: "Staff"
+      - [FRAME] Login Form
+        - [FRAME] Username/DNI Field
+          - [FRAME] Label
+            - TEXT: "MAIL O DNI"
+          - [FRAME] Container
+            - [FRAME] Input
+              - [FRAME] Container
+                - TEXT: "Ingresa tu identificación"
+            - [FRAME] Container
+              - [FRAME] Container
+        - [FRAME] Password Field
+          - [FRAME] Container
+            - [FRAME] Label
+              - TEXT: "CONTRASEÑA"
+          - [FRAME] Container
+            - [FRAME] Input
+              - [FRAME] Container
+                - TEXT: "••••••••"
+            - [FRAME] Container
+              - [FRAME] Container
+            - [FRAME] Button
+              - [FRAME] Container
+        - [FRAME] Remember & Forgot
+          - [FRAME] Label
+            - [FRAME] Container
+            - [FRAME] Margin
+              - TEXT: "Recordarme"
+          - [FRAME] Link
+            - TEXT: "¿Olvidaste tu contraseña?"
+        - [FRAME] Submit Button → Button
+          - [FRAME] Container
+            - TEXT: "INICIAR SESIÓN"
+      - [FRAME] Footer
+        - TEXT: "¿No tienes una cuenta? Registrarse"
+    - [FRAME] Branding / Version Footer
+      - [FRAME] Container
+        - TEXT: "ELITE PERFORMANCE LAB"
+
+
+=== SCREEN: SquatGym - Recuperar Contraseña ===
+- [FRAME] SquatGym - Recuperar Contraseña
+  - [FRAME] Background Decoration
+    - [FRAME] Asymmetric Hero Image (Faded)
+      - [FRAME] AB6AXuCy7ANX1RHNmJ3RY2YVlbD5-4IOeIu5iPQOXcb-Gw0WDYN0eUKqwTVmOuMZHO1sC9MoFau_0D_O_c2BMC7x3thglxvynEm20iOO2Xwx56-5PqZBa0OExszC4KX4BgnlRAr95n-8r8wSi3_5atvhTAM3ECa1jDyZnKeQxmNE0SdO7cS2FoczkeGgV6CRfm9kBdzipwF-yvNGqx7nGw1lvhUTzTW3Akvd8X-VJ3V2btyHrcv9VOonwZVBQghkJbOgY1hw2fqGJYY7E51G
+  - [FRAME] Main Content: Password Recovery Canvas
+    - [FRAME] Container
+      - [FRAME] Branding/Icon Section
+        - [FRAME] Container
+          - [FRAME] Background+Border
+      - [FRAME] Recovery Card
+        - [FRAME] Container
+          - [FRAME] Heading 1
+            - TEXT: "Recuperar Contraseña"
+          - [FRAME] Container
+            - TEXT: "Ingresa tu email y te enviaremos los pasos para
+restablecer tu contraseña."
+        - [FRAME] Form
+          - [FRAME] Email Input Group
+            - [FRAME] Label
+              - TEXT: "MAIL"
+            - [FRAME] Container
+              - [FRAME] Input
+                - [FRAME] Container
+                  - TEXT: "nombre@ejemplo.com"
+              - [FRAME] Container
+                - [FRAME] Container
+          - [FRAME] Action Button
+            - TEXT: "ENVIAR INSTRUCCIONES"
+        - [FRAME] Footer Link
+          - [FRAME] Link
+            - [FRAME] Container
+            - TEXT: "Volver al inicio de sesión"
+  - [FRAME] Footer Copyright
+    - [FRAME] Container
+      - TEXT: "SINCE 2025 • SQUATGYM • ELITE PERFORMANCE LAB"
+  - [FRAME] Header - Top Navigation Bar
+    - [FRAME] Container
+      - [FRAME] Container
+      - [FRAME] Container
+        - TEXT: "SQUATGYM"
+
+
+=== SCREEN: Login SquatGym - Staff Role Selection ===
+- [FRAME] Login SquatGym - Staff Role Selection
+  - [FRAME] Main Container
+    - [FRAME] Glassmorphic Background Glow
+    - [FRAME] Section - Login Card
+      - [FRAME] Logo & Header
+        - [FRAME] Container
+          - [FRAME] Container
+        - [FRAME] Heading 1
+          - TEXT: "SQUATGYM"
+        - [FRAME] Container
+          - TEXT: "Panel de Staff"
+      - [FRAME] Role Selector Tabs
+        - [FRAME] Button
+          - TEXT: "Alumno"
+        - [FRAME] Button
+          - [RECTANGLE] Button:shadow
+          - TEXT: "Staff"
+      - [FRAME] Login Form
+        - [FRAME] Dropdown Role Field
+          - [FRAME] Label
+            - TEXT: "ROL"
+          - [FRAME] Container
+            - [FRAME] Options
+              - [FRAME] image clip
+                - [FRAME] SVG
+              - [FRAME] Container
+                - TEXT: "Secretaria"
+            - [FRAME] Container
+              - [FRAME] Container
+            - [FRAME] Container
+              - [FRAME] Container
+        - [FRAME] Username/DNI Field
+          - [FRAME] Label
+            - TEXT: "MAIL O DNI"
+          - [FRAME] Container
+            - [FRAME] Input
+              - [FRAME] Container
+                - TEXT: "Ingresa tu identificación"
+            - [FRAME] Container
+              - [FRAME] Container
+        - [FRAME] Password Field
+          - [FRAME] Container
+            - [FRAME] Label
+              - TEXT: "CONTRASEÑA"
+          - [FRAME] Container
+            - [FRAME] Input
+              - [FRAME] Container
+                - TEXT: "••••••••"
+            - [FRAME] Container
+              - [FRAME] Container
+            - [FRAME] Button
+              - [FRAME] Container
+        - [FRAME] Remember & Forgot
+          - [FRAME] Label
+            - [FRAME] Container
+            - [FRAME] Margin
+              - TEXT: "Recordarme"
+          - [FRAME] Link
+            - TEXT: "¿Olvidaste tu contraseña?"
+        - [FRAME] Submit Button → Button
+          - [FRAME] Container
+            - TEXT: "INICIAR SESIÓN"
+      - [FRAME] Footer
+        - TEXT: "¿Dificultades para ingresar? Contactar Soporte"
+    - [FRAME] Branding / Version Footer
+      - [FRAME] Container
+        - TEXT: "ELITE PERFORMANCE LAB"
