@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, Filter, Download, Edit2, Trash2, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const users = [
@@ -52,6 +53,7 @@ const users = [
 export default function GestionUsuarios() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
 
   // 1. Manejo de búsqueda
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,8 +105,11 @@ export default function GestionUsuarios() {
           <h2 className="text-[2rem] font-bold text-[#FAFAFA] tracking-wide mb-1 uppercase">GESTIÓN DE USUARIO</h2>
           <p className="text-zinc-400 text-sm">Listado general de usuarios y personal del sistema</p>
         </div>
-        {/* NO TOCAR SEGÚN REGLA ESTRICTA */}
-        <button className="flex items-center space-x-2 bg-[#7B8B9E] hover:bg-slate-400 text-[#FAFAFA] px-6 py-3.5 rounded-lg font-bold text-[11px] uppercase tracking-widest transition-colors">
+        {/* NO TOCAR SEGÚN REGLA ESTRICTA (excepto para agregar onClick) */}
+        <button 
+          onClick={() => navigate('/admin/usuarios/nuevo')}
+          className="flex items-center space-x-2 bg-[#7B8B9E] hover:bg-slate-400 text-[#FAFAFA] px-6 py-3.5 rounded-lg font-bold text-[11px] uppercase tracking-widest transition-colors cursor-pointer"
+        >
           <Plus className="w-4 h-4 mr-1" />
           <span>NUEVO USUARIO</span>
         </button>
@@ -180,7 +185,7 @@ export default function GestionUsuarios() {
                   <td className="px-8 py-5">
                     <div className="flex items-center justify-end space-x-4 text-zinc-500">
                       <button 
-                        onClick={() => alert("Editando usuario: " + user.name)}
+                        onClick={() => navigate('/admin/usuarios/editar')}
                         className="hover:text-[#7B8B9E] transition-colors cursor-pointer"
                       >
                         <Edit2 className="w-4 h-4" />
