@@ -11,13 +11,24 @@ import EstadosPago from './components/admin/EstadosPago';
 import RolesPermisos from './components/admin/RolesPermisos';
 import AuditoriaLogs from './components/admin/AuditoriaLogs';
 import Configuracion from './components/admin/Configuracion';
+import SecretariaLayout from './layouts/SecretariaLayout';
+import SecretariaDashboard from './components/secretaria/Dashboard';
+import GestionSocios from './components/secretaria/GestionSocios';
+import NuevoSocio from './components/secretaria/NuevoSocio';
+import RegistroPago from './components/secretaria/RegistroPago';
+import Reclamos from './components/secretaria/Reclamos';
+import SocioLayout from './layouts/SocioLayout';
+import DashboardSocio from './components/socio/DashboardSocio';
+import PagosSocio from './components/socio/PagosSocio';
+import CheckoutSocio from './components/socio/CheckoutSocio';
+import NotificacionesSocio from './components/socio/NotificacionesSocio';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginFlow />} />
-        
+
         {/* Layout anidado para Admin */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} /> {/* Pantalla 1 */}
@@ -30,6 +41,25 @@ function App() {
           <Route path="seguridad/roles" element={<RolesPermisos />} />
           <Route path="seguridad/auditoria" element={<AuditoriaLogs />} />
           <Route path="configuracion" element={<Configuracion />} />
+        </Route>
+
+        {/* Rutas de Secretaria (Por ahora accesibles para dev) */}
+        {/* TODO: Implementar Guard de autenticación por rol aquí */}
+        <Route path="/secretaria" element={<SecretariaLayout />}>
+          <Route index element={<SecretariaDashboard />} /> {/* Pantalla adjunta */}
+          <Route path="socios" element={<GestionSocios />} />
+          <Route path="socios/nuevo" element={<NuevoSocio />} />
+          <Route path="pagos/registro" element={<RegistroPago />} />
+          <Route path="reclamos" element={<Reclamos />} />
+          {/* Futuras rutas: /secretaria/clases, etc. */}
+        </Route>
+
+        {/* Rutas de Socio/Alumno */}
+        <Route path="/socio" element={<SocioLayout />}>
+          <Route index element={<DashboardSocio />} />
+          <Route path="pagos" element={<PagosSocio />} />
+          <Route path="checkout" element={<CheckoutSocio />} />
+          <Route path="notificaciones" element={<NotificacionesSocio />} />
         </Route>
       </Routes>
     </BrowserRouter>
