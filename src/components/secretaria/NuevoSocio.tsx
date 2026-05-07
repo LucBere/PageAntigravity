@@ -6,7 +6,7 @@ export default function NuevoSocio() {
 
   return (
     <div className="bg-[#0E0E0E] min-h-full p-8 font-sans text-zinc-100">
-      
+
       {/* 1. Encabezado de la Página */}
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
@@ -26,32 +26,32 @@ export default function NuevoSocio() {
 
       {/* 2. Estructura del Formulario */}
       <div className="max-w-4xl mx-auto flex flex-col gap-8">
-        
+
         {/* SECCIÓN A: DATOS PERSONALES */}
         <div className="bg-[#151515] rounded-2xl p-8 border border-zinc-800/30 shadow-xl shadow-black/20">
           <h2 className="text-lg font-bold text-white border-l-4 border-[#7B8B9E] pl-3 mb-6 uppercase tracking-wide">
             DATOS PERSONALES
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col space-y-2">
               <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
                 NOMBRE COMPLETO
               </label>
-              <input 
-                type="text" 
-                placeholder="Ej: Juan Pérez" 
+              <input
+                type="text"
+                placeholder="Ej: Juan Pérez"
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
               />
             </div>
-            
+
             <div className="flex flex-col space-y-2">
               <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
                 DNI / PASAPORTE
               </label>
-              <input 
-                type="text" 
-                placeholder="Número de identificación" 
+              <input
+                type="text"
+                placeholder="Número de identificación"
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
               />
             </div>
@@ -60,9 +60,9 @@ export default function NuevoSocio() {
               <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
                 TELÉFONO
               </label>
-              <input 
-                type="text" 
-                placeholder="+54 11 0000-0000" 
+              <input
+                type="text"
+                placeholder="+54 11 0000-0000"
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
               />
             </div>
@@ -71,9 +71,9 @@ export default function NuevoSocio() {
               <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
                 CORREO ELECTRÓNICO
               </label>
-              <input 
-                type="email" 
-                placeholder="usuario@email.com" 
+              <input
+                type="email"
+                placeholder="usuario@email.com"
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
               />
             </div>
@@ -114,9 +114,9 @@ export default function NuevoSocio() {
               <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
                 MEDICACIÓN ACTUAL
               </label>
-              <textarea 
+              <textarea
                 rows={3}
-                placeholder="Detalle medicación actual y dosis..." 
+                placeholder="Detalle medicación actual y dosis..."
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors resize-none"
               ></textarea>
             </div>
@@ -124,9 +124,9 @@ export default function NuevoSocio() {
               <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
                 ALERGIAS CONOCIDAS
               </label>
-              <textarea 
+              <textarea
                 rows={3}
-                placeholder="Liste alergias a medicamentos o alimentos..." 
+                placeholder="Liste alergias a medicamentos o alimentos..."
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors resize-none"
               ></textarea>
             </div>
@@ -141,9 +141,9 @@ export default function NuevoSocio() {
               <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
                 NOMBRE DEL CONTACTO
               </label>
-              <input 
-                type="text" 
-                placeholder="Nombre completo" 
+              <input
+                type="text"
+                placeholder="Nombre completo"
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
               />
             </div>
@@ -151,9 +151,9 @@ export default function NuevoSocio() {
               <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
                 TELÉFONO DE EMERGENCIA
               </label>
-              <input 
-                type="text" 
-                placeholder="+54 11 0000-0000" 
+              <input
+                type="text"
+                placeholder="+54 11 0000-0000"
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
               />
             </div>
@@ -173,7 +173,7 @@ export default function NuevoSocio() {
 
         {/* 3. Botón de Acción Final */}
         <div className="flex justify-end mt-4 mb-12">
-          <button 
+          <button
             onClick={() => navigate('/secretaria/socios')}
             className="flex items-center px-8 py-4 bg-[#388E3C] hover:bg-emerald-600 text-white text-sm font-black tracking-widest uppercase rounded-full transition-colors shadow-lg shadow-[#388E3C]/20"
           >
