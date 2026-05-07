@@ -1,198 +1,220 @@
-import { Search, Plus, Users, DollarSign, QrCode } from 'lucide-react';
+import { Bell, Users, Banknote, CheckCircle2, Wallet, LineChart } from 'lucide-react';
 
 export default function SecretariaDashboard() {
-  const asistencias = [
-    { id: 1, alumno: 'Juan Pérez', hora: '08:15 AM', estado: 'Check-in exitoso', avatar: 'J' },
-    { id: 2, alumno: 'María Gómez', hora: '08:30 AM', estado: 'Check-in exitoso', avatar: 'M' },
-    { id: 3, alumno: 'Carlos López', hora: '09:00 AM', estado: 'Check-in exitoso', avatar: 'C' },
-    { id: 4, alumno: 'Ana Silva', hora: '09:45 AM', estado: 'Check-in exitoso', avatar: 'A' },
-  ];
-
-  const cumpleanos = [
-    { id: 1, alumno: 'Pedro Martínez', edad: 25, avatar: 'P' },
-    { id: 2, alumno: 'Laura Torres', edad: 31, avatar: 'L' },
-  ];
-
   return (
-    <div className="max-w-7xl mx-auto space-y-8">
-      {/* Header & Top Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">Hola Marcos 👋</h1>
-          <p className="text-sm text-zinc-400 mt-1">Panel de control rápido - Sede Central</p>
-        </div>
+    <div className="p-8 max-w-7xl mx-auto space-y-8 bg-[#0E0E0E] min-h-full">
+      
+      {/* 1. Topbar */}
+      <div className="flex items-center justify-between border-b border-zinc-800/50 pb-6">
+        <h1 className="text-xs font-bold text-zinc-400 tracking-[0.2em] uppercase">
+          DASHBOARD
+        </h1>
         
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <Search className="w-4 h-4 absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-500" />
-            <input
-              type="text"
-              placeholder="Socio por DNI, Nombre o Email..."
-              className="w-72 bg-[#151515] border border-zinc-800/80 rounded-full py-2.5 pl-11 pr-4 text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-zinc-600 focus:bg-zinc-900 transition-colors"
-            />
-          </div>
-          <button className="flex items-center px-5 py-2.5 bg-[#7B8B9E] hover:bg-[#687a8e] text-white text-sm font-semibold rounded-full transition-colors shadow-lg shadow-[#7B8B9E]/20">
-            <Plus className="w-4 h-4 mr-2" />
-            Registro Rápido
+        <div className="flex items-center space-x-6">
+          <button className="text-zinc-400 hover:text-white transition-colors">
+            <Bell className="w-5 h-5" />
           </button>
-        </div>
-      </div>
-
-      {/* KPIs Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-[#151515] rounded-2xl p-6 border border-zinc-800/50">
-          <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">Socios Activos</h3>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-emerald-400">2.450</span>
-          </div>
-          <p className="text-xs text-zinc-500 mt-1">Total membresías al día</p>
-        </div>
-
-        <div className="bg-[#151515] rounded-2xl p-6 border border-zinc-800/50">
-          <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">Nuevos Inscritos (Hoy)</h3>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-white">15</span>
-          </div>
-          <p className="text-xs text-zinc-500 mt-1">Registros completados</p>
-        </div>
-
-        <div className="bg-[#151515] rounded-2xl p-6 border border-zinc-800/50">
-          <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">Asistencias Hoy</h3>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-white">312</span>
-          </div>
-          <p className="text-xs text-zinc-500 mt-1">Accesos registrados</p>
-        </div>
-
-        <div className="bg-[#151515] rounded-2xl p-6 border border-zinc-800/50">
-          <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">Caja Diaria</h3>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-[#7B8B9E]">$450,300</span>
-          </div>
-          <p className="text-xs text-zinc-500 mt-1">Ingresos de la jornada</p>
-        </div>
-      </div>
-
-      {/* Acciones Rápidas */}
-      <div className="bg-[#151515] rounded-3xl p-8 border border-zinc-800/50">
-        <h2 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-6">ACCIONES RÁPIDAS</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <button className="flex items-center p-6 bg-zinc-900/50 hover:bg-zinc-800 rounded-2xl border border-zinc-800/80 transition-all duration-200 group text-left">
-            <div className="w-14 h-14 rounded-full bg-[#7B8B9E]/10 flex items-center justify-center mr-5 group-hover:bg-[#7B8B9E]/20 transition-colors">
-              <Users className="w-7 h-7 text-[#7B8B9E]" />
+          
+          <div className="flex items-center space-x-3 border-l border-zinc-800/50 pl-6">
+            <div className="text-right">
+              <p className="text-sm font-bold text-white">Alicia Rossi</p>
+              <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">SECRETARÍA</p>
             </div>
+            <div className="w-10 h-10 rounded-full bg-zinc-800 overflow-hidden border border-zinc-700">
+              {/* Simulación de Avatar de Alicia Rossi */}
+              <img src="https://i.pravatar.cc/150?u=alicia" alt="Avatar" className="w-full h-full object-cover" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. Tarjetas Superiores */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+        
+        {/* Tarjeta 1 */}
+        <div className="bg-[#151515] p-6 rounded-2xl border border-zinc-800/30">
+          <div className="flex items-start justify-between mb-4">
+            <h3 className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest leading-relaxed">SOCIOS ACTIVOS<br/>HOY</h3>
+            <Users className="w-5 h-5 text-zinc-600" />
+          </div>
+          <div className="text-5xl font-black text-white tracking-tighter mb-2">142</div>
+          <div className="flex items-center text-[#7B8B9E] text-[10px] font-bold">
+            <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+            +8% vs ayer
+          </div>
+        </div>
+
+        {/* Tarjeta 2 */}
+        <div className="bg-[#151515] p-6 rounded-2xl border border-zinc-800/30">
+          <div className="flex items-start justify-between mb-4">
+            <h3 className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest">PAGOS PENDIENTES</h3>
+            <Banknote className="w-5 h-5 text-red-500/50" />
+          </div>
+          <div className="text-5xl font-black text-[#EF4444] tracking-tighter mb-2">12</div>
+          <div className="text-zinc-500 text-[10px] font-bold italic">
+            Requiere seguimiento
+          </div>
+        </div>
+
+        {/* Tarjeta 3 */}
+        <div className="bg-[#151515] p-6 rounded-2xl border border-zinc-800/30">
+          <div className="flex items-start justify-between mb-4">
+            <h3 className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest">PAGOS REALIZADOS</h3>
+            <Wallet className="w-5 h-5 text-[#22C55E]/50" />
+          </div>
+          <div className="text-5xl font-black text-[#22C55E] tracking-tighter mb-2">45</div>
+          <div className="flex items-center text-[#22C55E]/80 text-[10px] font-bold">
+            <CheckCircle2 className="w-3 h-3 mr-1" />
+            Operación Normal
+          </div>
+        </div>
+
+        {/* Tarjeta 4 */}
+        <div className="bg-[#151515] p-6 rounded-2xl border-l-2 border-l-[#7B8B9E] border-y border-r border-zinc-800/30">
+          <div className="flex items-start justify-between mb-4">
+            <h3 className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest">INGRESOS DEL DÍA</h3>
+            <Wallet className="w-5 h-5 text-[#7B8B9E]/50" />
+          </div>
+          <div className="text-4xl lg:text-5xl font-black text-[#7B8B9E] tracking-tighter mb-2">$124.800</div>
+          <div className="text-zinc-500 text-[10px] font-bold">
+            AR Peso Argentino
+          </div>
+        </div>
+      </div>
+
+      {/* 3. Sección Media */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+        
+        {/* Izquierda: Actividad de Pagos */}
+        <div className="lg:col-span-2 bg-[#151515] p-6 rounded-2xl border border-zinc-800/30 flex flex-col">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-6 gap-4">
             <div>
-              <h3 className="text-lg font-bold text-white">Registrar Nuevo Socio</h3>
-              <p className="text-sm text-zinc-400 mt-1">Alta en sistema y plan</p>
+              <h2 className="text-xl font-bold text-white tracking-wide">Actividad de Pagos</h2>
+              <p className="text-xs text-zinc-500 mt-1 mb-4">Flujo de ingresos anual (por meses)</p>
+              <div className="text-4xl font-black text-white tracking-tighter">$124,800</div>
+              <p className="text-xs text-zinc-500 mt-1">Ingresos totales acumulados</p>
             </div>
-          </button>
+            <div className="flex flex-col sm:items-end">
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-cyan-500 rounded-sm mr-2"></div>
+                  <span className="text-xs text-zinc-400">Anual</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-zinc-700 rounded-sm mr-2"></div>
+                  <span className="text-xs text-zinc-400">Anterior</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Gráfico de Barras Alta Fidelidad */}
+          <div className="relative mt-4 h-64">
+            {/* Eje Y y Líneas de Guía */}
+            <div className="absolute inset-0 flex flex-col justify-between pointer-events-none z-0">
+              {['120k', '90k', '60k', '30k', '0'].map((label, i) => (
+                <div key={i} className="flex items-center w-full">
+                  <div className="w-8 text-right pr-2 text-[10px] text-zinc-500 font-medium tracking-tighter">{label}</div>
+                  <div className="flex-1 border-b border-dashed border-zinc-800/80"></div>
+                </div>
+              ))}
+            </div>
 
-          <button className="flex items-center p-6 bg-zinc-900/50 hover:bg-zinc-800 rounded-2xl border border-zinc-800/80 transition-all duration-200 group text-left">
-            <div className="w-14 h-14 rounded-full bg-[#7B8B9E]/10 flex items-center justify-center mr-5 group-hover:bg-[#7B8B9E]/20 transition-colors">
-              <DollarSign className="w-7 h-7 text-[#7B8B9E]" />
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-white">Cobrar Cuota/Venta</h3>
-              <p className="text-sm text-zinc-400 mt-1">Procesar pagos y artículos</p>
-            </div>
-          </button>
+            {/* Barras y Eje X */}
+            <div className="absolute inset-0 pl-10 flex items-end justify-between pb-6 pt-2 z-10">
+              {[
+                { month: 'ENE', cyan: 30, gray: 20 },
+                { month: 'FEB', cyan: 40, gray: 25 },
+                { month: 'MAR', cyan: 35, gray: 30 },
+                { month: 'ABR', cyan: 55, gray: 40 },
+                { month: 'MAY', cyan: 60, gray: 45 },
+                { month: 'JUN', cyan: 95, gray: 70 },
+                { month: 'JUL', cyan: 80, gray: 60 },
+                { month: 'AGO', cyan: 75, gray: 55, isHover: true },
+                { month: 'SET', cyan: 65, gray: 50 },
+                { month: 'OCT', cyan: 50, gray: 40 },
+                { month: 'NOV', cyan: 40, gray: 35 },
+                { month: 'DIC', cyan: 25, gray: 20 },
+              ].map((data, i) => (
+                <div key={i} className="flex flex-col items-center relative h-full justify-end w-full group">
+                  {/* Tooltip Hover (simulado en AGO) */}
+                  {data.isHover && (
+                    <div className="absolute -top-14 z-20 bg-zinc-800 rounded-md p-2.5 shadow-xl shadow-black/50 border border-zinc-700/50 min-w-[140px] flex flex-col items-center">
+                      <span className="text-[11px] font-bold text-white mb-1.5">{data.month}</span>
+                      <span className="text-[10px] text-zinc-300 mb-0.5">Anual: 88.000,00 ARS</span>
+                      <span className="text-[10px] text-zinc-400">Anterior: 65.000,00 ARS</span>
+                      <div className="absolute -bottom-1 w-2.5 h-2.5 bg-zinc-800 border-b border-r border-zinc-700/50 rotate-45"></div>
+                    </div>
+                  )}
 
-          <button className="flex items-center p-6 bg-zinc-900/50 hover:bg-zinc-800 rounded-2xl border border-zinc-800/80 transition-all duration-200 group text-left">
-            <div className="w-14 h-14 rounded-full bg-[#7B8B9E]/10 flex items-center justify-center mr-5 group-hover:bg-[#7B8B9E]/20 transition-colors">
-              <QrCode className="w-7 h-7 text-[#7B8B9E]" />
+                  <div className="flex items-end justify-center w-full gap-[2px] sm:gap-1 px-0.5 h-full z-10">
+                    {/* Barra Anterior (Gris) */}
+                    <div 
+                      className="w-1/2 max-w-[14px] bg-zinc-700 rounded-t-[3px] transition-all duration-300"
+                      style={{ height: `${data.gray}%` }}
+                    ></div>
+                    {/* Barra Anual (Cyan) */}
+                    <div 
+                      className={`w-1/2 max-w-[14px] bg-cyan-500 rounded-t-[3px] transition-all duration-300 ${
+                        data.isHover ? 'drop-shadow-[0_0_15px_rgba(6,182,212,0.5)] brightness-110' : ''
+                      }`}
+                      style={{ height: `${data.cyan}%` }}
+                    ></div>
+                  </div>
+                  
+                  {/* Etiqueta Eje X */}
+                  <span className={`absolute -bottom-6 text-[10px] font-bold transition-colors ${data.isHover ? 'text-cyan-400' : 'text-zinc-500'}`}>
+                    {data.month}
+                  </span>
+                </div>
+              ))}
             </div>
-            <div>
-              <h3 className="text-lg font-bold text-white">Check-in / Acceso</h3>
-              <p className="text-sm text-zinc-400 mt-1">Validar ingreso al gym</p>
+          </div>
+        </div>
+
+        {/* Derecha: Estado de Sistema */}
+        <div className="lg:col-span-1 bg-[#151515] p-6 rounded-2xl border border-zinc-800/30 flex flex-col h-80">
+          <div className="flex items-center justify-between mb-10">
+            <h2 className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest">ESTADO DE SISTEMA</h2>
+            <div className="w-2 h-2 rounded-full bg-[#7B8B9E]"></div>
+          </div>
+          
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-sm font-medium text-zinc-300">Capacidad Operativa</span>
+              <span className="text-sm font-bold text-[#7B8B9E]">85%</span>
             </div>
-          </button>
+            <div className="w-full bg-zinc-800/50 rounded-full h-2.5">
+              <div className="bg-[#7B8B9E] h-2.5 rounded-full" style={{ width: '85%' }}></div>
+            </div>
+          </div>
+
+          <div className="mt-auto pt-6 border-t border-zinc-800/30">
+            <p className="text-[11px] leading-relaxed text-zinc-500 italic">
+              El servidor está respondiendo dentro de los parámetros normales. Todas las terminales de pago están sincronizadas.
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Tablas Inferiores */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Asistencias Recientes */}
-        <div className="bg-[#151515] rounded-3xl p-8 border border-zinc-800/50">
-          <h2 className="text-lg font-bold text-white mb-6">Asistencias Recientes</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-zinc-800/80 text-xs text-zinc-500 uppercase tracking-wider">
-                  <th className="pb-3 font-medium">Alumno</th>
-                  <th className="pb-3 font-medium">Hora</th>
-                  <th className="pb-3 font-medium">Estado</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-zinc-800/50">
-                {asistencias.map((item) => (
-                  <tr key={item.id}>
-                    <td className="py-4">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-xs font-bold text-zinc-300">
-                          {item.avatar}
-                        </div>
-                        <span className="text-sm font-medium text-white">{item.alumno}</span>
-                      </div>
-                    </td>
-                    <td className="py-4">
-                      <span className="text-sm font-bold text-zinc-300">{item.hora}</span>
-                    </td>
-                    <td className="py-4">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                        {item.estado}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <button className="w-full mt-4 py-3 text-sm font-medium text-zinc-400 hover:text-white transition-colors bg-transparent border border-zinc-800 hover:bg-zinc-800/50 rounded-xl">
-            Ver todas las asistencias
-          </button>
+      {/* 4. Sección Inferior */}
+      <div className="bg-[#151515] p-10 rounded-2xl border border-zinc-800/30 flex flex-col items-center justify-center text-center mt-6">
+        <div className="w-16 h-16 rounded-full border border-zinc-700/50 flex items-center justify-center bg-zinc-900/50 mb-6">
+          <LineChart className="w-8 h-8 text-zinc-500" />
         </div>
-
-        {/* Cumpleaños del Día */}
-        <div className="bg-[#151515] rounded-3xl p-8 border border-zinc-800/50">
-          <h2 className="text-lg font-bold text-white mb-6">Cumpleaños del Día 🎂</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-zinc-800/80 text-xs text-zinc-500 uppercase tracking-wider">
-                  <th className="pb-3 font-medium">Alumno</th>
-                  <th className="pb-3 font-medium">Edad</th>
-                  <th className="pb-3 font-medium">Acción</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-zinc-800/50">
-                {cumpleanos.map((item) => (
-                  <tr key={item.id}>
-                    <td className="py-4">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs font-bold">
-                          {item.avatar}
-                        </div>
-                        <span className="text-sm font-medium text-white">{item.alumno}</span>
-                      </div>
-                    </td>
-                    <td className="py-4">
-                      <span className="text-sm font-bold text-zinc-300">{item.edad} años</span>
-                    </td>
-                    <td className="py-4">
-                      <button className="px-3 py-1.5 text-xs font-medium text-zinc-300 bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors">
-                        Regalar pase
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <button className="w-full mt-4 py-3 text-sm font-medium text-zinc-400 hover:text-white transition-colors bg-transparent border border-zinc-800 hover:bg-zinc-800/50 rounded-xl">
-            Ver calendario completo
-          </button>
+        <h2 className="text-lg font-black text-white uppercase tracking-widest mb-3">
+          REGISTRO DE OPERACIONES
+        </h2>
+        <p className="text-xs text-zinc-500 max-w-sm leading-relaxed">
+          Sistema de monitoreo SquatGym activo. Los datos históricos se sincronizan en tiempo real.
+        </p>
+        <div className="mt-8 flex space-x-2 items-center opacity-30">
+          <div className="w-10 h-px bg-zinc-600"></div>
+          <div className="w-1 h-1 bg-[#7B8B9E] rounded-full"></div>
+          <div className="w-10 h-px bg-zinc-600"></div>
         </div>
       </div>
+
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default function Reclamos() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-8 pb-12">
+    <div className="max-w-7xl mx-auto space-y-8 p-8 pt-12 pb-12 min-h-full bg-[#0E0E0E]">
       {/* 1. Encabezado */}
       <div>
         <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold mb-2">RECLAMOS</p>

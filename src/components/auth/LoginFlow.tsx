@@ -32,6 +32,7 @@ function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
   const [passwordError, setPasswordError] = useState('');
   const [generalError, setGeneralError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,10 +61,18 @@ function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
 
     setTimeout(() => {
       setIsLoading(false);
-      if (email === 'error@gym.com') {
+      const userEmail = email.toLowerCase();
+
+      if (userEmail === 'error@gym.com') {
         setGeneralError('Credenciales incorrectas');
+      } else if (userEmail.includes('admin')) {
+        navigate('/admin');
+      } else if (userEmail.includes('secretaria')) {
+        navigate('/secretaria');
+      } else if (userEmail.includes('socio') || userEmail.includes('alumno')) {
+        navigate('/socio');
       } else {
-        alert('¡Bienvenido a SquatGym!');
+        navigate('/socio'); // Fallback natural para la pestaña de alumno
       }
     }, 2000);
   };
@@ -183,8 +192,10 @@ function LoginStaff({ setStep }: { setStep: (step: Step) => void }) {
       } else {
         if (role === 'Administrador') {
           navigate('/admin');
+        } else if (role === 'Secretaria') {
+          navigate('/secretaria');
         } else {
-          alert('¡Bienvenido a SquatGym!');
+          alert(`El panel de ${role} se encuentra en construcción.`);
         }
       }
     }, 2000);

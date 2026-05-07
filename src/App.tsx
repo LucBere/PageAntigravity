@@ -49,7 +49,7 @@ function App() {
           <Route index element={<SecretariaDashboard />} /> {/* Pantalla adjunta */}
           <Route path="socios" element={<GestionSocios />} />
           <Route path="socios/nuevo" element={<NuevoSocio />} />
-          <Route path="pagos/registro" element={<RegistroPago />} />
+          <Route path="pago" element={<RegistroPago />} />
           <Route path="reclamos" element={<Reclamos />} />
           {/* Futuras rutas: /secretaria/clases, etc. */}
         </Route>

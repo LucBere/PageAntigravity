@@ -1,12 +1,11 @@
 import { Outlet, NavLink } from 'react-router-dom';
-import { LayoutGrid, Users, BookOpen, BarChart3, Settings, LogOut } from 'lucide-react';
+import { LayoutGrid, Users, AlertTriangle, Settings, LogOut } from 'lucide-react';
 
 export default function SecretariaLayout() {
   const navItems = [
-    { name: 'Panel de Control', path: '/secretaria', icon: LayoutGrid, exact: true },
-    { name: 'Gestión de Socios', path: '/secretaria/socios', icon: Users },
-    { name: 'Clases y Reservas', path: '/secretaria/clases', icon: BookOpen },
-    { name: 'Reportes Básicos', path: '/secretaria/reportes', icon: BarChart3 },
+    { name: 'Dashboard', path: '/secretaria', icon: LayoutGrid, exact: true },
+    { name: 'Socios', path: '/secretaria/socios', icon: Users },
+    { name: 'Reclamos', path: '/secretaria/reclamos', icon: AlertTriangle },
   ];
 
   return (
@@ -15,29 +14,16 @@ export default function SecretariaLayout() {
       <aside className="w-64 bg-[#151515] flex flex-col justify-between border-r border-zinc-800/50">
         <div>
           {/* Header */}
-          <div className="p-6">
-            <h1 className="text-2xl font-black tracking-tighter text-white">
-              SQUAT<span className="text-[#7B8B9E]">GYM</span>
+          <div className="p-6 mb-4">
+            <h1 className="text-xl font-bold tracking-tight text-white">
+              SQUATGYM
             </h1>
-            <p className="text-[10px] font-bold text-zinc-500 tracking-[0.2em] mt-1">
-              ELITE PERFORMANCE
+            <p className="text-[10px] font-bold text-zinc-500 tracking-[0.1em] mt-1 uppercase">
+              SECRETARÍA CENTRAL
             </p>
           </div>
 
-          {/* Perfil Secretario */}
-          <div className="px-6 mb-6">
-            <div className="bg-zinc-800/40 rounded-xl p-4 flex items-center space-x-3 border border-zinc-800/50">
-              <div className="w-10 h-10 rounded-full bg-[#7B8B9E] flex items-center justify-center text-white font-bold text-lg">
-                M
-              </div>
-              <div className="overflow-hidden">
-                <p className="text-sm font-bold text-white truncate">Marcos Rodriguez</p>
-                <p className="text-[10px] text-zinc-400 font-bold tracking-wider">SECRETARIO</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Navegación */}
+          {/* Navegación Superior */}
           <nav className="px-4 space-y-1">
             {navItems.map((item) => (
               <NavLink
@@ -45,10 +31,10 @@ export default function SecretariaLayout() {
                 to={item.path}
                 end={item.exact}
                 className={({ isActive }) =>
-                  `flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 group ${
+                  `flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? 'bg-zinc-800/50 text-white border-l-4 border-[#7B8B9E]'
-                      : 'text-zinc-400 hover:bg-zinc-800/30 hover:text-zinc-200 border-l-4 border-transparent'
+                      ? 'bg-zinc-800/40 text-white border-l-[3px] border-[#7B8B9E]'
+                      : 'text-zinc-500 hover:text-zinc-300 border-l-[3px] border-transparent'
                   }`
                 }
               >
@@ -56,7 +42,7 @@ export default function SecretariaLayout() {
                   <>
                     <item.icon
                       className={`w-5 h-5 mr-3 transition-colors ${
-                        isActive ? 'text-[#7B8B9E]' : 'text-zinc-500 group-hover:text-zinc-400'
+                        isActive ? 'text-[#7B8B9E]' : 'text-zinc-500'
                       }`}
                     />
                     {item.name}
@@ -68,20 +54,20 @@ export default function SecretariaLayout() {
         </div>
 
         {/* Footer Sidebar */}
-        <div className="p-4 border-t border-zinc-800/50">
-          <button className="flex items-center w-full px-4 py-2.5 text-sm font-medium text-zinc-400 hover:text-white transition-colors rounded-lg hover:bg-zinc-800/30">
+        <div className="p-4 mb-4">
+          <button className="flex items-center w-full px-4 py-3 text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors rounded-xl">
             <Settings className="w-5 h-5 mr-3 text-zinc-500" />
-            Mi Perfil
+            Configuración
           </button>
-          <button className="flex items-center w-full px-4 py-2.5 text-sm font-medium text-zinc-400 hover:text-white transition-colors rounded-lg hover:bg-zinc-800/30 mt-1">
+          <button className="flex items-center w-full px-4 py-3 text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors rounded-xl mt-1">
             <LogOut className="w-5 h-5 mr-3 text-zinc-500" />
-            Salir
+            Cerrar Sesión
           </button>
         </div>
       </aside>
 
       {/* Contenedor Principal */}
-      <main className="flex-1 overflow-y-auto bg-[#0E0E0E] p-8">
+      <main className="flex-1 overflow-y-auto bg-[#0E0E0E]">
         <Outlet />
       </main>
     </div>
