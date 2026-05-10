@@ -63,7 +63,13 @@ function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
       setIsLoading(false);
       const userEmail = email.toLowerCase();
 
-      if (userEmail === 'error@gym.com') {
+      if (userEmail === 'admin@squatgym.com') {
+        navigate('/admin');
+      } else if (userEmail === 'secretaria@squatgym.com') {
+        navigate('/secretaria');
+      } else if (userEmail === 'socio@squatgym.com') {
+        navigate('/socio');
+      } else if (userEmail === 'error@gym.com') {
         setGeneralError('Credenciales incorrectas');
       } else if (userEmail.includes('admin')) {
         navigate('/admin');
@@ -75,6 +81,20 @@ function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
         navigate('/socio'); // Fallback natural para la pestaña de alumno
       }
     }, 2000);
+  };
+
+  const handleDemoClick = (demoEmail: string, demoPass: string, route: string) => {
+    setEmail(demoEmail);
+    setPassword(demoPass);
+    setEmailError('');
+    setPasswordError('');
+    setGeneralError('');
+    setIsLoading(true);
+    
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate(route);
+    }, 1500);
   };
 
   return (
@@ -137,6 +157,42 @@ function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
           {isLoading ? 'Validando credenciales...' : 'INICIAR SESIÓN'}
         </button>
       </form>
+
+      {/* Cuentas de Demostración */}
+      <div className="mt-8">
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-zinc-800/50"></div>
+          </div>
+          <div className="relative flex justify-center text-xs">
+            <span className="px-3 bg-zinc-900/60 text-zinc-500 font-medium tracking-wider text-[10px]">CUENTAS DE DEMOSTRACIÓN</span>
+          </div>
+        </div>
+
+        <div className="mt-5 grid grid-cols-3 gap-3">
+          <button
+            type="button"
+            onClick={() => handleDemoClick('admin@squatgym.com', 'admin123', '/admin')}
+            className="flex items-center justify-center py-2.5 px-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700 transition-all group"
+          >
+            <span className="text-[11px] font-semibold text-zinc-400 group-hover:text-zinc-200 transition-colors">Demo Admin</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleDemoClick('secretaria@squatgym.com', 'secretaria123', '/secretaria')}
+            className="flex items-center justify-center py-2.5 px-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700 transition-all group"
+          >
+            <span className="text-[11px] font-semibold text-zinc-400 group-hover:text-zinc-200 transition-colors">Demo Secretaría</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleDemoClick('socio@squatgym.com', 'socio123', '/socio')}
+            className="flex items-center justify-center py-2.5 px-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700 transition-all group"
+          >
+            <span className="text-[11px] font-semibold text-zinc-400 group-hover:text-zinc-200 transition-colors">Demo Alumno</span>
+          </button>
+        </div>
+      </div>
 
       <div className="mt-8 text-center">
         <p className="text-sm text-zinc-400">¿No tienes una cuenta? <button onClick={() => setStep('REGISTER')} className="text-white hover:underline font-bold transition-colors">Registrarse</button></p>

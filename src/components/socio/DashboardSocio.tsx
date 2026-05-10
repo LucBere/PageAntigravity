@@ -1,79 +1,78 @@
-import { AlertCircle, ChevronLeft, ChevronRight, Dumbbell, Flame, Clock, Activity } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function DashboardSocio() {
   const navigate = useNavigate();
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 pb-12">
+    <div className="w-full min-h-screen bg-[#0E0E0E] text-zinc-100 p-4 md:p-8 font-sans">
       
-      {/* 1. Banner de Alerta */}
-      <div className="bg-red-950/20 border-l-4 border-l-red-500 p-4 rounded-r-xl flex items-center justify-between">
-        <div className="flex items-center space-x-3 text-red-500">
-          <AlertCircle className="w-5 h-5" />
-          <p className="text-xs font-bold tracking-wider uppercase">¡TU CUOTA VENCE EN 5 DÍAS. EVITA RECARGOS!</p>
+      {/* 1. Alerta Superior */}
+      <div className="w-full mb-6 bg-red-950/20 border border-red-900 rounded-lg p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0">
+            <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+          </div>
+          <span className="text-red-500 font-bold text-sm tracking-wide">¡TU CUOTA VENCE EN 5 DÍAS. EVITA RECARGOS!</span>
         </div>
-        <button className="text-xs font-bold text-red-500 tracking-widest uppercase hover:text-red-400 underline underline-offset-4 cursor-pointer">
+        <button 
+          onClick={() => navigate('/socio/pagos')}
+          className="text-red-500 font-bold text-sm uppercase tracking-wider cursor-pointer hover:underline hover:text-red-400 transition-colors flex-shrink-0"
+        >
           VER DETALLES
         </button>
       </div>
 
-      {/* 2. Hero Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-        {/* Tarjeta Hero (Ocupa 2 col) */}
-        <div className="lg:col-span-2 relative bg-[#151515] rounded-3xl overflow-hidden min-h-[300px] flex items-center p-10">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0E0E0E] via-[#0E0E0E]/90 to-transparent z-10"></div>
-          {/* Placeholder imagen fondo */}
-          <div className="absolute inset-0 bg-zinc-800/20 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop')" }}></div>
-          
-          <div className="relative z-20 max-w-md">
-            <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.3em] mb-4">BIENVENIDO DE VUELTA</p>
-            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-none mb-8">
-              HOLA, JUAN.<br/>
-              <span className="text-[#7B8B9E]">¡A DARLE CON TODO HOY!</span>
-            </h1>
-            <button className="px-8 py-3.5 bg-[#7B8B9E] hover:bg-slate-500 text-white text-xs font-bold uppercase tracking-widest rounded-full transition-colors shadow-lg shadow-[#7B8B9E]/20 cursor-pointer">
-              VER RUTINA
-            </button>
+      {/* 2. Tarjetas Principales */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* Tarjeta Izquierda (Hero) */}
+        <div className="lg:col-span-2 bg-[#151515] rounded-2xl p-8 flex flex-col justify-center relative overflow-hidden border border-zinc-800/50">
+          <div className="relative z-10">
+            <p className="text-zinc-400 text-sm font-bold tracking-widest mb-2">BIENVENIDO DE VUELTA</p>
+            <h1 className="text-white text-5xl md:text-6xl font-black mb-1 tracking-tight">HOLA, JUAN.</h1>
+            <h2 className="text-[#7B8B9E] text-3xl md:text-4xl font-bold tracking-tight">¡A DARLE CON TODO HOY!</h2>
           </div>
+          {/* Decorative gradient */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#7B8B9E]/5 rounded-full blur-3xl pointer-events-none"></div>
         </div>
 
-        {/* Estado Cuenta (Ocupa 1 col) */}
-        <div className="bg-[#151515] p-8 rounded-3xl border border-zinc-800/50 flex flex-col justify-between">
+        {/* Tarjeta Derecha (Estado de Cuenta) */}
+        <div className="bg-[#151515] rounded-2xl p-8 flex flex-col justify-between border border-zinc-800/50 h-full">
           <div>
-            <h2 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-6">ESTADO DE CUENTA</h2>
-            <div className="flex items-baseline space-x-3 mb-2">
-              <span className="text-5xl font-normal text-white tracking-tight">$15.000</span>
+            <div className="flex justify-between items-start mb-4">
+              <p className="text-zinc-400 text-sm font-bold tracking-widest">ESTADO DE CUENTA</p>
+              <div className="flex items-center gap-2 border border-green-500/30 bg-green-500/10 px-3 py-1 rounded-full">
+                <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                <span className="text-green-500 text-xs font-bold tracking-wider">AL DÍA</span>
+              </div>
             </div>
-            <div className="inline-flex items-center px-2.5 py-1 rounded-full border border-[#388E3C]/30 bg-[#388E3C]/10 text-[#388E3C] text-[9px] font-bold uppercase tracking-wider">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#388E3C] mr-2"></div>
-              AL DÍA
-            </div>
+            <p className="text-white text-5xl font-black tracking-tighter mb-6">$15.000</p>
           </div>
           <button 
             onClick={() => navigate('/socio/checkout')}
-            className="w-full mt-8 py-4 bg-[#388E3C] hover:bg-emerald-600 text-white text-sm font-bold uppercase tracking-widest rounded-2xl transition-colors cursor-pointer"
+            className="w-full bg-[#388E3C] hover:bg-green-600 text-white font-bold py-4 rounded-xl transition-colors tracking-wide shadow-lg shadow-green-900/20"
           >
             PAGAR AHORA
           </button>
         </div>
+
       </div>
 
       {/* 3. Calendario Semanal */}
-      <div className="bg-[#151515] p-8 rounded-3xl border border-zinc-800/50 mt-6">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-sm font-bold text-white tracking-widest uppercase">OCTUBRE 2023</h2>
-          <div className="flex items-center space-x-2">
-            <button className="p-2 bg-[#1A1A1A] hover:bg-zinc-800 rounded-full border border-zinc-800 transition-colors cursor-pointer">
-              <ChevronLeft className="w-4 h-4 text-zinc-400" />
+      <div className="w-full bg-[#151515] rounded-2xl p-6 mt-6 border border-zinc-800/50">
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="text-white font-bold text-lg tracking-wide">OCTUBRE 2023</h3>
+          <div className="flex gap-2">
+            <button className="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             </button>
-            <button className="p-2 bg-[#1A1A1A] hover:bg-zinc-800 rounded-full border border-zinc-800 transition-colors cursor-pointer">
-              <ChevronRight className="w-4 h-4 text-zinc-400" />
+            <button className="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </button>
           </div>
         </div>
 
-        <div className="grid grid-cols-7 gap-4">
+        <div className="grid grid-cols-7 gap-2 md:gap-4">
           {[
             { day: 'LUN', date: '14' },
             { day: 'MAR', date: '15' },
@@ -81,112 +80,72 @@ export default function DashboardSocio() {
             { day: 'JUE', date: '17', dot: true },
             { day: 'VIE', date: '18' },
             { day: 'SAB', date: '19', dot: true },
-            { day: 'DOM', date: '20' },
-          ].map((d, i) => (
+            { day: 'DOM', date: '20' }
+          ].map((item, idx) => (
             <div 
-              key={i} 
-              className={`flex flex-col items-center justify-center p-4 rounded-2xl transition-colors cursor-pointer relative ${
-                d.active ? 'bg-[#7B8B9E] shadow-lg shadow-[#7B8B9E]/20' : 'hover:bg-zinc-800/30'
-              }`}
+              key={idx} 
+              className={`flex flex-col items-center justify-center py-4 rounded-xl relative transition-colors ${item.active ? 'bg-[#7B8B9E] text-white shadow-lg shadow-[#7B8B9E]/20' : 'bg-zinc-900/50 text-zinc-400 hover:bg-zinc-800'}`}
             >
-              <span className={`text-[10px] font-bold uppercase tracking-widest mb-2 ${d.active ? 'text-zinc-200' : 'text-zinc-500'}`}>{d.day}</span>
-              <span className={`text-xl font-bold ${d.active ? 'text-white' : 'text-zinc-300'}`}>{d.date}</span>
-              {d.dot && <div className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full bg-yellow-500"></div>}
+              {item.dot && (
+                <div className="absolute top-2 w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
+              )}
+              <span className={`text-xs font-bold mb-1 ${item.active ? 'text-white/80' : 'text-zinc-500'}`}>{item.day}</span>
+              <span className={`text-xl font-black ${item.active ? 'text-white' : 'text-zinc-300'}`}>{item.date}</span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* 4. Sección Inferior (Grid 2 columnas) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+      {/* 4. Tarjetas Inferiores */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         
-        {/* Izquierda (Mis Próximas Sesiones) */}
-        <div className="bg-[#151515] p-8 rounded-3xl border border-zinc-800/50">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-sm font-bold text-white tracking-widest uppercase">MIS PRÓXIMAS SESIONES</h2>
-            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">HOY</span>
+        {/* Mis Próximas Sesiones */}
+        <div className="bg-[#151515] rounded-2xl p-6 border border-zinc-800/50">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-zinc-400 text-xs font-bold tracking-widest uppercase">Mis Próximas Sesiones</h3>
+            <span className="text-zinc-500 text-xs font-bold bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">HOY</span>
           </div>
-
-          <div className="space-y-4">
-            <div className="bg-[#1A1A1A] rounded-2xl p-4 flex items-center justify-between border border-zinc-800/50 hover:bg-zinc-800/40 transition-colors group cursor-pointer">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-zinc-900 rounded-xl flex items-center justify-center border border-zinc-800">
-                  <Dumbbell className="w-5 h-5 text-zinc-400 group-hover:text-[#7B8B9E] transition-colors" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-white uppercase tracking-wide">CROSS TRAINING</h3>
-                  <p className="text-[10px] text-zinc-500 font-bold tracking-widest uppercase mt-1">WOD: AMRAP 20 MIN</p>
-                </div>
+          
+          <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-4 flex items-center justify-between transition-colors">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-zinc-800 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6 text-[#7B8B9E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
               </div>
-              <div className="text-right">
-                <p className="text-lg font-bold text-white">18:00<span className="text-xs text-zinc-500">H</span></p>
-                <p className="text-[10px] text-zinc-500 font-bold tracking-widest uppercase mt-1">BOX A</p>
-              </div>
-            </div>
-
-            <div className="bg-[#1A1A1A] rounded-2xl p-4 flex items-center justify-between border border-zinc-800/50 hover:bg-zinc-800/40 transition-colors group cursor-pointer opacity-70">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-zinc-900 rounded-xl flex items-center justify-center border border-zinc-800">
-                  <Flame className="w-5 h-5 text-zinc-400" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-white uppercase tracking-wide">LEVANTAMIENTO</h3>
-                  <p className="text-[10px] text-zinc-500 font-bold tracking-widest uppercase mt-1">TÉCNICA: SNATCH</p>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="text-lg font-bold text-zinc-400 line-through decoration-zinc-600">10:30<span className="text-xs text-zinc-500">H</span></p>
-                <p className="text-[10px] text-emerald-500 font-bold tracking-widest uppercase mt-1">COMPLETADO</p>
+              <div>
+                <h4 className="text-white font-bold text-[#7B8B9E] transition-colors">CROSS TRAINING</h4>
+                <p className="text-zinc-500 text-sm font-medium">18:00H - Zona Funcional</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Derecha (Actividad Reciente) */}
-        <div className="bg-[#151515] p-8 rounded-3xl border border-zinc-800/50">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-sm font-bold text-white tracking-widest uppercase">ACTIVIDAD RECIENTE</h2>
-            <Clock className="w-5 h-5 text-zinc-500" />
+        {/* Actividad Reciente */}
+        <div className="bg-[#151515] rounded-2xl p-6 border border-zinc-800/50">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-zinc-400 text-xs font-bold tracking-widest uppercase">Actividad Reciente</h3>
           </div>
-
-          <div className="space-y-6">
-            
-            <div className="flex items-start justify-between group cursor-pointer">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-full border border-zinc-700 bg-transparent flex items-center justify-center shrink-0 group-hover:border-zinc-500 transition-colors">
-                  <Activity className="w-5 h-5 text-zinc-400 group-hover:text-white transition-colors" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-white uppercase tracking-wide mb-1 group-hover:text-[#7B8B9E] transition-colors">ENTRENAMIENTO DE FUERZA</h3>
-                  <div className="flex items-center space-x-4">
-                    <span className="flex items-center text-[10px] text-zinc-400 font-bold uppercase tracking-wider"><Flame className="w-3.5 h-3.5 mr-1 text-zinc-500" /> 450 KCAL</span>
-                    <span className="flex items-center text-[10px] text-zinc-400 font-bold uppercase tracking-wider"><Clock className="w-3.5 h-3.5 mr-1 text-zinc-500" /> 55 MIN</span>
-                  </div>
+          
+          <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-4 flex items-center justify-between hover:bg-zinc-800/50 transition-colors cursor-pointer group">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-zinc-800 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <div>
+                <h4 className="text-white font-bold group-hover:text-green-500 transition-colors">ENTRENAMIENTO DE FUERZA</h4>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-zinc-400 text-xs font-semibold">Ayer</span>
+                  <span className="w-1 h-1 rounded-full bg-zinc-700"></span>
+                  <span className="text-zinc-500 text-xs font-medium">450 kcal</span>
+                  <span className="w-1 h-1 rounded-full bg-zinc-700"></span>
+                  <span className="text-zinc-500 text-xs font-medium">55 min</span>
                 </div>
               </div>
-              <span className="text-[10px] text-zinc-500 font-bold tracking-widest uppercase mt-1">Ayer</span>
             </div>
-
-            <div className="flex items-start justify-between group cursor-pointer">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-full border border-zinc-700 bg-[#1A1A1A] flex items-center justify-center shrink-0 group-hover:border-zinc-500 transition-colors">
-                  <Dumbbell className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-zinc-300 uppercase tracking-wide mb-1 group-hover:text-[#7B8B9E] transition-colors">SESIÓN DE CARDIO</h3>
-                  <div className="flex items-center space-x-4">
-                    <span className="flex items-center text-[10px] text-zinc-500 font-bold uppercase tracking-wider"><Flame className="w-3.5 h-3.5 mr-1 text-zinc-600" /> 320 KCAL</span>
-                    <span className="flex items-center text-[10px] text-zinc-500 font-bold uppercase tracking-wider"><Clock className="w-3.5 h-3.5 mr-1 text-zinc-600" /> 30 MIN</span>
-                  </div>
-                </div>
-              </div>
-              <span className="text-[10px] text-zinc-600 font-bold tracking-widest uppercase mt-1">Lunes</span>
-            </div>
-
           </div>
         </div>
 
       </div>
+
     </div>
   );
 }

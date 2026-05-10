@@ -60,28 +60,28 @@ export default function RegistroPago() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 
-                {/* BÁSICO */}
+                {/* MUSCULACIÓN */}
                 <div className="bg-[#151515] p-6 rounded-2xl border border-zinc-800/50 hover:border-zinc-700 transition-colors cursor-pointer group">
-                  <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">BÁSICO</p>
-                  <p className="text-lg font-bold text-zinc-300 mb-4 group-hover:text-white transition-colors">Plan Regular</p>
-                  <p className="text-xl font-black text-zinc-500">$15.500</p>
+                  <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">OPCIÓN 1</p>
+                  <p className="text-lg font-bold text-zinc-300 mb-4 group-hover:text-white transition-colors">Plan Musculación</p>
+                  <p className="text-xl font-black text-zinc-500">$15.000</p>
                 </div>
 
-                {/* POPULAR (Activo) */}
+                {/* PASE LIBRE (Activo) */}
                 <div className="bg-[#151515] p-6 rounded-2xl border-2 border-[#7B8B9E] relative shadow-[0_0_15px_rgba(123,139,158,0.15)] cursor-pointer">
                   <div className="absolute top-4 right-4 w-5 h-5 bg-[#7B8B9E] rounded flex items-center justify-center">
                     <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                   </div>
-                  <p className="text-[10px] font-bold text-[#7B8B9E] uppercase tracking-widest mb-2">POPULAR</p>
-                  <p className="text-lg font-bold text-white mb-4">Plan Platinum</p>
+                  <p className="text-[10px] font-bold text-[#7B8B9E] uppercase tracking-widest mb-2">OPCIÓN 2</p>
+                  <p className="text-lg font-bold text-white mb-4">Pase Libre</p>
                   <p className="text-xl font-black text-[#7B8B9E]">$22.000</p>
                 </div>
 
-                {/* ELITE */}
+                {/* CROSS TRAINING */}
                 <div className="bg-[#151515] p-6 rounded-2xl border border-zinc-800/50 hover:border-zinc-700 transition-colors cursor-pointer group">
-                  <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">ELITE</p>
-                  <p className="text-lg font-bold text-zinc-300 mb-4 group-hover:text-white transition-colors">Plan Black Pro</p>
-                  <p className="text-xl font-black text-zinc-500">$35.000</p>
+                  <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">OPCIÓN 3</p>
+                  <p className="text-lg font-bold text-zinc-300 mb-4 group-hover:text-white transition-colors">Cross Training</p>
+                  <p className="text-xl font-black text-zinc-500">$18.000</p>
                 </div>
 
               </div>
@@ -174,39 +174,49 @@ export default function RegistroPago() {
                   04. SELECCIÓN DE DESCUENTO
                 </h3>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
                 
-                {/* GENERAL (Activo) */}
-                <div className="bg-[#151515] p-4 rounded-xl border border-[#7B8B9E] relative cursor-pointer shadow-[0_0_10px_rgba(123,139,158,0.1)]">
+                {/* SIN DESCUENTO (Activo) */}
+                <div className="bg-[#151515] p-4 rounded-xl border border-[#7B8B9E] relative cursor-pointer shadow-[0_0_10px_rgba(123,139,158,0.1)] flex flex-col items-center justify-center text-center">
                   <div className="absolute top-2 right-2 w-3.5 h-3.5 bg-[#7B8B9E] rounded-sm flex items-center justify-center">
                     <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                   </div>
-                  <p className="text-[9px] text-[#7B8B9E] uppercase tracking-widest mb-1">GENERAL</p>
-                  <p className="text-xs font-bold text-white mb-0.5">SIN DESCUENTO</p>
+                  <p className="text-xs font-bold text-white mb-0.5">SIN PROMOCIÓN</p>
                   <p className="text-[11px] text-[#7B8B9E]">0%</p>
                 </div>
 
-                {/* FAMILIAR */}
-                <div className="bg-[#151515] p-4 rounded-xl border border-zinc-800/50 hover:border-zinc-700 cursor-pointer transition-colors group">
-                  <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1 group-hover:text-zinc-400">FAMILIA</p>
-                  <p className="text-xs font-bold text-zinc-300 mb-0.5 group-hover:text-white">FAMILIAR</p>
-                  <p className="text-[11px] text-zinc-500">15%</p>
-                </div>
-
-                {/* SOCIAL AMIGOS */}
-                <div className="bg-[#151515] p-4 rounded-xl border border-zinc-800/50 hover:border-zinc-700 cursor-pointer transition-colors group">
-                  <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1 group-hover:text-zinc-400">SOCIAL</p>
-                  <p className="text-xs font-bold text-zinc-300 mb-0.5 group-hover:text-white">AMIGOS</p>
+                {/* POR AMIGOS */}
+                <div className="bg-[#151515] p-4 rounded-xl border border-zinc-800/50 hover:border-zinc-700 cursor-pointer transition-colors group flex flex-col items-center justify-center text-center">
+                  <p className="text-xs font-bold text-zinc-300 mb-0.5 group-hover:text-white">POR AMIGOS</p>
                   <p className="text-[11px] text-zinc-500">10%</p>
                 </div>
 
-                {/* ESPECIALES */}
-                <div className="bg-[#151515] p-4 rounded-xl border border-zinc-800/50 hover:border-zinc-700 cursor-pointer transition-colors group">
-                  <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1 group-hover:text-zinc-400">PROMO</p>
-                  <p className="text-xs font-bold text-zinc-300 mb-0.5 group-hover:text-white">ESPECIALES</p>
+                {/* PLAN FAMILIAR */}
+                <div className="bg-[#151515] p-4 rounded-xl border border-zinc-800/50 hover:border-zinc-700 cursor-pointer transition-colors group flex flex-col items-center justify-center text-center">
+                  <p className="text-xs font-bold text-zinc-300 mb-0.5 group-hover:text-white">PLAN FAMILIAR</p>
+                  <p className="text-[11px] text-zinc-500">15%</p>
+                </div>
+
+                {/* DÍAS ESPECIALES */}
+                <div className="bg-[#151515] p-4 rounded-xl border border-zinc-800/50 hover:border-zinc-700 cursor-pointer transition-colors group flex flex-col items-center justify-center text-center">
+                  <p className="text-xs font-bold text-zinc-300 mb-0.5 group-hover:text-white">DÍAS ESPECIALES</p>
                   <p className="text-[11px] text-zinc-500">20%</p>
                 </div>
 
+                {/* CUPÓN */}
+                <div className="bg-[#151515] p-4 rounded-xl border border-zinc-800/50 hover:border-zinc-700 cursor-pointer transition-colors group flex flex-col items-center justify-center text-center">
+                  <p className="text-xs font-bold text-zinc-300 mb-0.5 group-hover:text-white">CUPÓN</p>
+                  <p className="text-[11px] text-zinc-500">INGRESAR</p>
+                </div>
+
+              </div>
+              
+              <div className="mt-4 bg-[#151515] p-4 rounded-xl border border-zinc-800 flex items-center space-x-3 w-full md:w-1/2">
+                <input 
+                  type="text"
+                  placeholder="INGRESAR CÓDIGO DE CUPÓN"
+                  className="flex-1 bg-[#1A1A1A] border border-zinc-700 rounded-lg py-2.5 px-4 text-xs text-white font-bold tracking-widest uppercase placeholder-zinc-600 focus:outline-none focus:border-[#7B8B9E] transition-colors"
+                />
               </div>
             </div>
 

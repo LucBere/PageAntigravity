@@ -1,7 +1,8 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { LayoutGrid, Users, AlertTriangle, Settings, LogOut } from 'lucide-react';
 
 export default function SecretariaLayout() {
+  const navigate = useNavigate();
   const navItems = [
     { name: 'Dashboard', path: '/secretaria', icon: LayoutGrid, exact: true },
     { name: 'Socios', path: '/secretaria/socios', icon: Users },
@@ -55,11 +56,17 @@ export default function SecretariaLayout() {
 
         {/* Footer Sidebar */}
         <div className="p-4 mb-4">
-          <button className="flex items-center w-full px-4 py-3 text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors rounded-xl">
+          <button 
+            onClick={() => alert('Módulo de Ajustes del Sistema en desarrollo para la fase 2.')}
+            className="flex items-center w-full px-4 py-3 text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors rounded-xl cursor-pointer"
+          >
             <Settings className="w-5 h-5 mr-3 text-zinc-500" />
             Configuración
           </button>
-          <button className="flex items-center w-full px-4 py-3 text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors rounded-xl mt-1">
+          <button 
+            onClick={() => navigate('/')}
+            className="flex items-center w-full px-4 py-3 text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors rounded-xl mt-1 cursor-pointer"
+          >
             <LogOut className="w-5 h-5 mr-3 text-zinc-500" />
             Cerrar Sesión
           </button>

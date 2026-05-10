@@ -1,110 +1,256 @@
-import { AlertTriangle, PlusCircle, Info } from 'lucide-react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Bell, AlertTriangle, Info, CheckCircle2, X } from 'lucide-react';
+
+type NotificationType = 'urgent' | 'info' | 'success';
+
+interface Notification {
+  id: string;
+  type: NotificationType;
+  title: string;
+  message: string;
+  time: string;
+  isRead: boolean;
+  isImportant: boolean;
+}
 
 export default function NotificacionesSocio() {
   const navigate = useNavigate();
 
+  const initialNotifications: Notification[] = [
+    {
+      id: '1',
+      type: 'urgent',
+      title: 'TU CUOTA VENCE MAÑANA',
+      message: 'Evita recargos abonando antes del vencimiento.',
+      time: 'Hace 2 horas',
+      isRead: false,
+      isImportant: true,
+    },
+    {
+      id: '2',
+      type: 'info',
+      title: 'NUEVA CLASE DISPONIBLE',
+      message: 'Se ha abierto un nuevo horario para Cross Training.',
+      time: 'Hace 5 horas',
+      isRead: false,
+      isImportant: false,
+    },
+    {
+      id: '3',
+      type: 'info',
+      title: 'CAMBIO EN SALA 4',
+      message: 'Mantenimiento preventivo en equipamiento de cardio.',
+      time: 'Ayer',
+      isRead: true,
+      isImportant: false,
+    },
+    {
+      id: '4',
+      type: 'success',
+      title: 'COMPROBANTE DISPONIBLE - Pago Octubre',
+      message: 'Tu pago ha sido procesado exitosamente.',
+      time: 'Hace 2 días',
+      isRead: false,
+      isImportant: false,
+    },
+    {
+      id: '5',
+      type: 'info',
+      title: 'ACTUALIZACIÓN DE POLÍTICAS DE COBRO',
+      message: 'Por favor revisa las nuevas políticas administrativas.',
+      time: 'Hace 1 semana',
+      isRead: true,
+      isImportant: true,
+    }
+  ];
+
+  const [notifications, setNotifications] = useState<Notification[]>(initialNotifications);
+  const [activeTab, setActiveTab] = useState<'todas' | 'no_leidas' | 'importantes'>('todas');
+  const [showModal, setShowModal] = useState(false);
+
+  const filteredNotifications = notifications.filter(n => {
+    if (activeTab === 'no_leidas') return !n.isRead;
+    if (activeTab === 'importantes') return n.isImportant;
+    return true;
+  });
+
+  const markAllAsRead = () => {
+    setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
+  };
+
+  const markAsRead = (id: string) => {
+    setNotifications(prev => prev.map(n => n.id === id ? { ...n, isRead: true } : n));
+  };
+
+  const renderIcon = (type: NotificationType) => {
+    switch (type) {
+      case 'urgent': return <AlertTriangle className="w-5 h-5 text-red-500" />;
+      case 'success': return <CheckCircle2 className="w-5 h-5 text-emerald-500" />;
+      case 'info': return <Info className="w-5 h-5 text-[#7B8B9E]" />;
+    }
+  };
+
+  const renderBorder = (type: NotificationType) => {
+    switch (type) {
+      case 'urgent': return 'border-l-4 border-l-red-500 border-y border-r border-zinc-800/50';
+      case 'success': return 'border-l-4 border-l-emerald-500 border-y border-r border-zinc-800/50';
+      case 'info': return 'border border-zinc-800/50';
+    }
+  };
+
+  const unreadCount = notifications.filter(n => !n.isRead).length;
+
   return (
-    <div className="max-w-5xl mx-auto pb-12">
+    <div className="max-w-4xl mx-auto pb-12 relative">
       
-      {/* 1. Encabezado y Filtros */}
-      <div className="flex flex-col md:flex-row md:items-start justify-between mb-8 gap-4">
-        <div>
-          <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase mb-4">
-            NOTIFICACIONES
-          </h1>
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 rounded-full bg-[#7B8B9E]"></div>
-            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
-              TIENES 3 MENSAJES SIN LEER
-            </span>
+      {/* MODAL HORARIOS */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0E0E0E]/90 backdrop-blur-sm p-4">
+          <div className="bg-[#151515] border border-zinc-800 rounded-3xl p-8 max-w-sm w-full relative shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            <button 
+              onClick={() => setShowModal(false)}
+              className="absolute top-4 right-4 text-zinc-500 hover:text-white transition-colors cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <h2 className="text-xl font-black text-white tracking-wider mb-4 uppercase">Grilla de Horarios</h2>
+            <div className="bg-[#1A1A1A] rounded-xl p-6 border border-zinc-800 mb-6">
+              <p className="text-zinc-400 font-bold tracking-widest text-xs leading-relaxed text-center">
+                LUNES A VIERNES<br/>
+                <span className="text-white text-lg">08:00 a 22:00</span>
+              </p>
+            </div>
+            <button 
+              onClick={() => setShowModal(false)}
+              className="w-full bg-[#7B8B9E] hover:bg-[#6A788A] text-white py-4 rounded-xl text-xs font-black uppercase tracking-[0.2em] transition-colors cursor-pointer"
+            >
+              CERRAR
+            </button>
           </div>
         </div>
-        <button className="px-4 py-3 md:py-2 bg-[#1A1A1A] hover:bg-zinc-800 text-xs font-bold text-white tracking-widest uppercase rounded-lg transition-colors border border-zinc-800/50 h-fit cursor-pointer">
+      )}
+
+      {/* HEADER */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 space-y-4 md:space-y-0">
+        <div>
+          <h1 className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.3em] mb-2 flex items-center">
+            <Bell className="w-3.5 h-3.5 mr-2" /> BUZÓN DE ENTRADA
+          </h1>
+          <h2 className="text-3xl font-black text-white uppercase tracking-wider flex items-center">
+            NOTIFICACIONES
+            {unreadCount > 0 && (
+              <span className="ml-3 bg-[#7B8B9E] text-white text-[10px] py-1 px-2.5 rounded-full">
+                {unreadCount} NUEVAS
+              </span>
+            )}
+          </h2>
+        </div>
+        <button 
+          onClick={markAllAsRead}
+          className="text-[10px] font-bold text-zinc-500 hover:text-white uppercase tracking-widest transition-colors cursor-pointer border border-zinc-800 hover:border-zinc-600 px-4 py-2 rounded-lg"
+        >
           MARCAR TODAS COMO LEÍDAS
         </button>
       </div>
 
-      {/* Fila de Filtros (Pills) */}
-      <div className="flex items-center gap-3 mb-8 overflow-x-auto pb-2">
-        <button className="px-8 py-3 bg-[#7B8B9E] text-white text-[10px] font-bold uppercase tracking-widest rounded-full transition-colors cursor-pointer shrink-0">
+      {/* TABS */}
+      <div className="bg-[#1A1A1A] p-1.5 rounded-xl flex items-center space-x-1 mb-8 max-w-md">
+        <button 
+          onClick={() => setActiveTab('todas')}
+          className={`flex-1 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors cursor-pointer ${activeTab === 'todas' ? 'bg-[#7B8B9E] text-white shadow-sm' : 'text-zinc-500 hover:text-white'}`}
+        >
           TODAS
         </button>
-        <button className="px-8 py-3 bg-[#1A1A1A] hover:bg-zinc-800 text-zinc-500 hover:text-white text-[10px] font-bold uppercase tracking-widest rounded-full transition-colors cursor-pointer border border-zinc-800/50 shrink-0">
+        <button 
+          onClick={() => setActiveTab('no_leidas')}
+          className={`flex-1 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors cursor-pointer ${activeTab === 'no_leidas' ? 'bg-[#7B8B9E] text-white shadow-sm' : 'text-zinc-500 hover:text-white'}`}
+        >
           NO LEÍDAS
         </button>
-        <button className="px-8 py-3 bg-[#1A1A1A] hover:bg-zinc-800 text-zinc-500 hover:text-white text-[10px] font-bold uppercase tracking-widest rounded-full transition-colors cursor-pointer border border-zinc-800/50 shrink-0">
+        <button 
+          onClick={() => setActiveTab('importantes')}
+          className={`flex-1 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors cursor-pointer ${activeTab === 'importantes' ? 'bg-[#7B8B9E] text-white shadow-sm' : 'text-zinc-500 hover:text-white'}`}
+        >
           IMPORTANTES
         </button>
       </div>
 
-      {/* 2. Lista de Notificaciones */}
+      {/* LISTA DE NOTIFICACIONES */}
       <div className="space-y-4">
-        
-        {/* Tarjeta 1 (URGENTE) */}
-        <div className="bg-[#151515] p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 border border-zinc-800/50 shadow-lg shadow-black/20">
-          <div className="flex items-start md:items-center">
-            <div className="w-12 h-12 rounded-xl bg-orange-950/30 flex items-center justify-center shrink-0 border border-orange-900/30 mt-1 md:mt-0">
-              <AlertTriangle className="w-5 h-5 text-orange-500" />
-            </div>
-            <div className="ml-5">
-              <div className="flex items-center space-x-3 mb-1">
-                <span className="text-[10px] font-bold text-orange-500 uppercase tracking-widest">URGENTE</span>
-                <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">HACE 2 HORAS</span>
-              </div>
-              <h3 className="text-xl font-bold text-white uppercase tracking-wide mb-1">TU CUOTA VENCE MAÑANA</h3>
-              <p className="text-sm text-zinc-400">Recuerda realizar el pago para evitar recargos. Tu membresía actual expira en menos de 24 horas.</p>
-            </div>
+        {filteredNotifications.length === 0 ? (
+          <div className="text-center py-12 bg-[#151515] border border-zinc-800/50 rounded-2xl">
+            <p className="text-zinc-500 text-sm font-bold tracking-widest uppercase">No hay notificaciones en esta categoría.</p>
           </div>
-          <button 
-            onClick={() => navigate('/socio/checkout')}
-            className="w-full md:w-auto px-8 py-4 bg-[#FF6B6B] hover:bg-orange-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-xl transition-colors cursor-pointer shrink-0 shadow-lg shadow-[#FF6B6B]/20 text-center"
-          >
-            PAGAR AHORA
-          </button>
-        </div>
+        ) : (
+          filteredNotifications.map((notif) => (
+            <div 
+              key={notif.id}
+              className={`bg-[#151515] rounded-2xl p-6 relative flex flex-col md:flex-row md:items-center justify-between gap-6 transition-all ${renderBorder(notif.type)} ${!notif.isRead ? 'shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'opacity-70 hover:opacity-100'}`}
+            >
+              {/* Indicador No Leído */}
+              {!notif.isRead && (
+                <div className="absolute top-6 right-6 w-2.5 h-2.5 rounded-full bg-[#7B8B9E] shadow-[0_0_8px_rgba(123,139,158,0.8)]"></div>
+              )}
 
-        {/* Tarjeta 2 (NOVEDAD) */}
-        <div className="bg-[#151515] p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 border border-zinc-800/50 shadow-lg shadow-black/20">
-          <div className="flex items-start md:items-center">
-            <div className="w-12 h-12 rounded-xl bg-[#7B8B9E]/10 flex items-center justify-center shrink-0 border border-[#7B8B9E]/20 mt-1 md:mt-0">
-              <PlusCircle className="w-5 h-5 text-[#7B8B9E]" />
-            </div>
-            <div className="ml-5">
-              <div className="flex items-center space-x-3 mb-1">
-                <span className="text-[10px] font-bold text-[#7B8B9E] uppercase tracking-widest">NOVEDAD</span>
-                <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">HACE 5 HORAS</span>
+              {/* Contenido Izquierdo */}
+              <div className="flex items-start">
+                <div className="mt-1 mr-4 bg-[#1A1A1A] p-3 rounded-xl border border-zinc-800">
+                  {renderIcon(notif.type)}
+                </div>
+                <div>
+                  <div className="flex items-center space-x-3 mb-1">
+                    <h3 className={`text-sm font-black uppercase tracking-wider ${notif.type === 'urgent' ? 'text-red-500' : 'text-white'}`}>
+                      {notif.title}
+                    </h3>
+                    {notif.isImportant && (
+                      <span className="bg-zinc-800 text-zinc-300 text-[8px] font-bold px-2 py-0.5 rounded uppercase tracking-widest">IMPORTANTE</span>
+                    )}
+                  </div>
+                  <p className="text-zinc-400 text-xs font-medium tracking-wide mb-2 leading-relaxed max-w-xl">
+                    {notif.message}
+                  </p>
+                  <span className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest">
+                    {notif.time}
+                  </span>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-white uppercase tracking-wide mb-1">NUEVA CLASE DISPONIBLE</h3>
-              <p className="text-sm text-zinc-400">Se ha añadido una sesión de CrossFit los jueves a las 19:00. ¡Reserva tu lugar ahora!</p>
-            </div>
-          </div>
-          <button className="w-full md:w-auto px-8 py-4 bg-[#7B8B9E] hover:bg-slate-400 text-white text-[10px] font-bold uppercase tracking-widest rounded-xl transition-colors cursor-pointer shrink-0 shadow-lg shadow-[#7B8B9E]/20 text-center">
-            VER HORARIOS
-          </button>
-        </div>
 
-        {/* Tarjeta 3 (INFORMATIVO) */}
-        <div className="bg-[#151515] p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 border border-zinc-800/50 border-l-2 border-l-[#7B8B9E] shadow-lg shadow-black/20">
-          <div className="flex items-start md:items-center">
-            <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex items-center justify-center shrink-0 border border-zinc-800 mt-1 md:mt-0">
-              <Info className="w-5 h-5 text-zinc-400" />
-            </div>
-            <div className="ml-5">
-              <div className="flex items-center space-x-3 mb-1">
-                <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">INFORMATIVO</span>
-                <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">AYER</span>
+              {/* Acciones Derecha */}
+              <div className="flex-shrink-0 md:w-auto w-full">
+                {notif.id === '1' && (
+                  <button 
+                    onClick={() => navigate('/socio/checkout')}
+                    className="w-full md:w-auto px-6 py-3 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/30 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-colors cursor-pointer"
+                  >
+                    PAGAR AHORA
+                  </button>
+                )}
+                {notif.id === '2' && (
+                  <button 
+                    onClick={() => {
+                      setShowModal(true);
+                      markAsRead(notif.id);
+                    }}
+                    className="w-full md:w-auto px-6 py-3 bg-[#1A1A1A] hover:bg-zinc-800 text-white border border-zinc-700 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-colors cursor-pointer"
+                  >
+                    VER HORARIOS
+                  </button>
+                )}
+                {notif.id !== '1' && notif.id !== '2' && !notif.isRead && (
+                  <button 
+                    onClick={() => markAsRead(notif.id)}
+                    className="w-full md:w-auto px-6 py-3 bg-[#1A1A1A] hover:bg-zinc-800 text-white border border-zinc-700 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-colors cursor-pointer"
+                  >
+                    ENTENDIDO
+                  </button>
+                )}
               </div>
-              <h3 className="text-xl font-bold text-white uppercase tracking-wide mb-1">CAMBIO EN SALA 4</h3>
-              <p className="text-sm text-zinc-400">La clase de Yoga se traslada temporalmente a la Sala 2 por mantenimiento.</p>
             </div>
-          </div>
-          <button className="w-full md:w-auto px-8 py-4 bg-[#7B8B9E] hover:bg-slate-400 text-white text-[10px] font-bold uppercase tracking-widest rounded-xl transition-colors cursor-pointer shrink-0 shadow-lg shadow-[#7B8B9E]/20 text-center">
-            ENTENDIDO
-          </button>
-        </div>
-
+          ))
+        )}
       </div>
+
     </div>
   );
 }

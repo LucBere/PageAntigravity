@@ -1,7 +1,8 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, CreditCard, Bell, Settings, LogOut, Search } from 'lucide-react';
 
 export default function SocioLayout() {
+  const navigate = useNavigate();
   const navItems = [
     { name: 'INICIO', path: '/socio', icon: LayoutDashboard, exact: true },
     { name: 'PAGOS', path: '/socio/pagos', icon: CreditCard },
@@ -19,7 +20,7 @@ export default function SocioLayout() {
               SQUAT<span className="text-[#7B8B9E]">GYM</span>
             </h1>
             <p className="text-[10px] font-bold text-zinc-500 tracking-[0.2em] mt-1">
-              ELITE PERFORMANCE
+              HIGH PERFORMANCE
             </p>
           </div>
 
@@ -60,18 +61,24 @@ export default function SocioLayout() {
             <div className="flex items-center space-x-3">
               <img src="https://i.pravatar.cc/150?img=11" alt="Avatar" className="w-10 h-10 rounded-full border border-zinc-700" />
               <div>
-                <p className="text-[10px] text-[#7B8B9E] font-bold uppercase tracking-wider">ELITE MEMBER</p>
-                <p className="text-xs text-white font-bold">ACTIVE MOMENTUM</p>
+                <p className="text-sm text-zinc-100 font-bold tracking-wide">Juan Pérez</p>
+                <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-0.5">PLAN PLATINUM</p>
               </div>
             </div>
           </div>
 
           <div className="p-4 border-t border-zinc-800/50">
-            <button className="flex items-center w-full px-4 py-2 text-sm font-bold tracking-widest text-zinc-500 hover:text-white transition-colors rounded-lg hover:bg-zinc-800/30">
+            <button 
+              onClick={() => alert('Módulo de Ajustes del Sistema en desarrollo para la fase 2.')}
+              className="flex items-center w-full px-4 py-2 text-sm font-bold tracking-widest text-zinc-500 hover:text-white transition-colors rounded-lg hover:bg-zinc-800/30 cursor-pointer"
+            >
               <Settings className="w-4 h-4 mr-3" />
               AJUSTES
             </button>
-            <button className="flex items-center w-full px-4 py-2 text-sm font-bold tracking-widest text-zinc-500 hover:text-white transition-colors rounded-lg hover:bg-zinc-800/30 mt-1">
+            <button 
+              onClick={() => navigate('/')}
+              className="flex items-center w-full px-4 py-2 text-sm font-bold tracking-widest text-zinc-500 hover:text-white transition-colors rounded-lg hover:bg-zinc-800/30 mt-1 cursor-pointer"
+            >
               <LogOut className="w-4 h-4 mr-3" />
               CERRAR SESIÓN
             </button>
@@ -94,18 +101,6 @@ export default function SocioLayout() {
                 placeholder="BUSCAR ENTRENAMIENTO..."
                 className="w-64 bg-[#151515] border border-zinc-800/80 rounded-full py-2.5 pl-11 pr-4 text-xs font-bold tracking-wider text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition-colors"
               />
-            </div>
-            
-            {/* Notificaciones */}
-            <button className="relative text-zinc-400 hover:text-white transition-colors">
-              <div className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border border-[#0E0E0E]"></div>
-              <Bell className="w-5 h-5" />
-            </button>
-            
-            {/* Perfil Header */}
-            <div className="flex items-center space-x-3 pl-6 border-l border-zinc-800/80">
-              <span className="text-sm font-bold text-white uppercase tracking-wider">JUAN PÉREZ</span>
-              <img src="https://i.pravatar.cc/150?img=11" alt="Perfil" className="w-9 h-9 rounded-full border border-zinc-700" />
             </div>
           </div>
         </header>
