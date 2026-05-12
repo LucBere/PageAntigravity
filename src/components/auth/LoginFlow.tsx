@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-type Step = 'LOGIN_STUDENT' | 'LOGIN_STAFF' | 'REGISTER' | 'MEDICAL_DECLARATION' | 'FORGOT_PASSWORD';
+type Step = 'LOGIN_STUDENT' | 'LOGIN_STAFF' | 'REGISTER' | 'FORGOT_PASSWORD';
 
 export default function LoginFlow() {
   const [currentStep, setCurrentStep] = useState<Step>('LOGIN_STUDENT');
@@ -16,7 +16,6 @@ export default function LoginFlow() {
         {currentStep === 'LOGIN_STUDENT' && <LoginStudent setStep={setCurrentStep} />}
         {currentStep === 'LOGIN_STAFF' && <LoginStaff setStep={setCurrentStep} />}
         {currentStep === 'REGISTER' && <Register setStep={setCurrentStep} />}
-        {currentStep === 'MEDICAL_DECLARATION' && <MedicalDeclaration setStep={setCurrentStep} />}
         {currentStep === 'FORGOT_PASSWORD' && <ForgotPassword setStep={setCurrentStep} />}
       </div>
     </div>
@@ -26,8 +25,8 @@ export default function LoginFlow() {
 // --- SUB-COMPONENTS ---
 
 function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('alumno.prueba@squatgym.com');
+  const [password, setPassword] = useState('alumno123');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [generalError, setGeneralError] = useState('');
@@ -83,19 +82,7 @@ function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
     }, 2000);
   };
 
-  const handleDemoClick = (demoEmail: string, demoPass: string, route: string) => {
-    setEmail(demoEmail);
-    setPassword(demoPass);
-    setEmailError('');
-    setPasswordError('');
-    setGeneralError('');
-    setIsLoading(true);
-    
-    setTimeout(() => {
-      setIsLoading(false);
-      navigate(route);
-    }, 1500);
-  };
+
 
   return (
     <div className="bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/50 p-8 rounded-2xl shadow-2xl">
@@ -158,41 +145,6 @@ function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
         </button>
       </form>
 
-      {/* Cuentas de Demostración */}
-      <div className="mt-8">
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-zinc-800/50"></div>
-          </div>
-          <div className="relative flex justify-center text-xs">
-            <span className="px-3 bg-zinc-900/60 text-zinc-500 font-medium tracking-wider text-[10px]">CUENTAS DE DEMOSTRACIÓN</span>
-          </div>
-        </div>
-
-        <div className="mt-5 grid grid-cols-3 gap-3">
-          <button
-            type="button"
-            onClick={() => handleDemoClick('admin@squatgym.com', 'admin123', '/admin')}
-            className="flex items-center justify-center py-2.5 px-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700 transition-all group"
-          >
-            <span className="text-[11px] font-semibold text-zinc-400 group-hover:text-zinc-200 transition-colors">Demo Admin</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => handleDemoClick('secretaria@squatgym.com', 'secretaria123', '/secretaria')}
-            className="flex items-center justify-center py-2.5 px-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700 transition-all group"
-          >
-            <span className="text-[11px] font-semibold text-zinc-400 group-hover:text-zinc-200 transition-colors">Demo Secretaría</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => handleDemoClick('socio@squatgym.com', 'socio123', '/socio')}
-            className="flex items-center justify-center py-2.5 px-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700 transition-all group"
-          >
-            <span className="text-[11px] font-semibold text-zinc-400 group-hover:text-zinc-200 transition-colors">Demo Alumno</span>
-          </button>
-        </div>
-      </div>
 
       <div className="mt-8 text-center">
         <p className="text-sm text-zinc-400">¿No tienes una cuenta? <button onClick={() => setStep('REGISTER')} className="text-white hover:underline font-bold transition-colors">Registrarse</button></p>
@@ -206,8 +158,8 @@ function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
 }
 
 function LoginStaff({ setStep }: { setStep: (step: Step) => void }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('admin@squatgym.com');
+  const [password, setPassword] = useState('admin123');
   const [role, setRole] = useState('Secretaria');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -358,6 +310,57 @@ function LoginStaff({ setStep }: { setStep: (step: Step) => void }) {
 }
 
 function Register({ setStep }: { setStep: (step: Step) => void }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    nombre: '',
+    apellido: '',
+    dni: '',
+    fechaNacimiento: '',
+    email: '',
+    telefono: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    let newValue = value;
+
+    if (name === 'nombre' || name === 'apellido') {
+      newValue = value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+    } else if (name === 'dni') {
+      newValue = value.replace(/\D/g, '').slice(0, 8);
+    } else if (name === 'telefono') {
+      newValue = value.replace(/[^\d\s\-\+]/g, '').slice(0, 15);
+    }
+
+    setFormData(prev => ({ ...prev, [name]: newValue }));
+  };
+
+  const isFormValid = 
+    formData.nombre.trim() !== '' &&
+    formData.apellido.trim() !== '' &&
+    formData.dni.length === 8 &&
+    formData.fechaNacimiento !== '' &&
+    formData.email.trim() !== '' &&
+    formData.telefono.trim() !== '' &&
+    formData.password.trim() !== '' &&
+    formData.password === formData.confirmPassword;
+
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isFormValid) return;
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setStep('LOGIN_STUDENT');
+    }, 1000);
+  };
+
+  const today = new Date().toISOString().split('T')[0];
+
   return (
     <div className="bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/50 p-8 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
       <div className="flex flex-col items-center mb-6">
@@ -368,39 +371,142 @@ function Register({ setStep }: { setStep: (step: Step) => void }) {
         <p className="text-sm text-zinc-400 text-center">Crea tu cuenta de alumno para empezar a entrenar.</p>
       </div>
 
-      <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setStep('MEDICAL_DECLARATION'); }}>
+      <form className="space-y-4" onSubmit={handleRegister}>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-wider">Nombre/s</label>
-            <input type="text" placeholder="Tu nombre" className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" />
+            <input 
+              type="text" 
+              name="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
+              placeholder="Tu nombre" 
+              className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" 
+            />
           </div>
           <div>
             <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-wider">Apellido/s</label>
-            <input type="text" placeholder="Tu apellido" className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" />
+            <input 
+              type="text" 
+              name="apellido"
+              value={formData.apellido}
+              onChange={handleChange}
+              placeholder="Tu apellido" 
+              className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" 
+            />
           </div>
         </div>
 
         <div>
           <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-wider">DNI</label>
-          <input type="text" placeholder="Documento Nacional de Identidad" className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" />
+          <input 
+            type="text" 
+            name="dni"
+            value={formData.dni}
+            onChange={handleChange}
+            maxLength={8}
+            placeholder="Documento Nacional de Identidad" 
+            className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" 
+          />
         </div>
 
         <div>
           <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-wider">Fecha de Nacimiento</label>
-          <input type="date" className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm color-scheme-dark" />
+          <input 
+            type="date" 
+            name="fechaNacimiento"
+            value={formData.fechaNacimiento}
+            onChange={handleChange}
+            max={today}
+            className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm color-scheme-dark" 
+          />
         </div>
 
         <div>
           <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-wider">Email</label>
-          <input type="email" placeholder="ejemplo@gym.com" className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" />
+          <input 
+            type="email" 
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="ejemplo@gym.com" 
+            className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" 
+          />
         </div>
 
         <div>
           <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-wider">Teléfono</label>
-          <input type="tel" placeholder="+54 000 000 000" className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" />
+          <input 
+            type="tel" 
+            name="telefono"
+            value={formData.telefono}
+            onChange={handleChange}
+            maxLength={15}
+            placeholder="+54 000 000 000" 
+            className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" 
+          />
         </div>
 
-        <button type="submit" className="w-full bg-[#64748B] hover:bg-zinc-200 text-[#0E0E0E] font-bold py-3 rounded-lg transition-all mt-4 shadow-[0_0_15px_rgba(250,250,250,0.2)]">CREAR CUENTA</button>
+        <div>
+          <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-wider">Contraseña</label>
+          <div className="relative">
+            <input 
+              type={showPassword ? "text" : "password"} 
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="••••••••" 
+              className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 pr-10 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" 
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-zinc-400 hover:text-zinc-200 transition-colors"
+            >
+              {showPassword ? (
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
+              ) : (
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+              )}
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-wider">Confirmar Contraseña</label>
+          <div className="relative">
+            <input 
+              type={showConfirmPassword ? "text" : "password"} 
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              placeholder="••••••••" 
+              className={`w-full bg-[#0E0E0E]/50 border ${formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword ? 'border-red-500' : 'border-zinc-800'} rounded-lg p-2.5 pr-10 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm`} 
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-zinc-400 hover:text-zinc-200 transition-colors"
+            >
+              {showConfirmPassword ? (
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
+              ) : (
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+              )}
+            </button>
+          </div>
+          {formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword && (
+            <p className="text-red-500 text-[10px] mt-1">Las contraseñas no coinciden</p>
+          )}
+        </div>
+
+        <button 
+          type="submit" 
+          disabled={isLoading || !isFormValid}
+          className={`w-full font-bold py-3 rounded-lg transition-all mt-4 ${(!isFormValid || isLoading) ? 'bg-[#64748B] text-[#0E0E0E] opacity-50 cursor-not-allowed' : 'bg-[#64748B] hover:bg-zinc-200 text-[#0E0E0E] shadow-[0_0_15px_rgba(250,250,250,0.2)]'}`}
+        >
+          {isLoading ? 'CREANDO CUENTA...' : 'CREAR CUENTA'}
+        </button>
       </form>
 
       <div className="mt-6 text-center">
@@ -410,80 +516,7 @@ function Register({ setStep }: { setStep: (step: Step) => void }) {
   );
 }
 
-function MedicalDeclaration({ setStep }: { setStep: (step: Step) => void }) {
-  return (
-    <div className="bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/50 p-8 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar w-[500px] max-w-[95vw] -ml-4 sm:ml-0">
-      <div className="mb-6 border-b border-zinc-800/50 pb-4">
-        <h2 className="text-2xl font-black text-white mb-2">Declaración Jurada de Salud</h2>
-        <p className="text-sm text-zinc-400">Por favor, completa la siguiente información con veracidad para garantizar tu seguridad durante el entrenamiento.</p>
-      </div>
 
-      <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setStep('LOGIN_STUDENT'); }}>
-        {/* Section 1 */}
-        <div className="space-y-3">
-          <h3 className="text-xs font-bold text-[#64748B] uppercase tracking-widest mb-3">Antecedentes Médicos</h3>
-
-          <label className="flex items-center justify-between p-3 bg-[#0E0E0E]/40 rounded-lg border border-zinc-800/50 hover:border-zinc-700 transition-colors cursor-pointer">
-            <span className="text-sm text-zinc-300">¿Padece alguna enfermedad cardiovascular?</span>
-            <input type="checkbox" className="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-[#64748B] focus:ring-[#64748B]/50" />
-          </label>
-          <label className="flex items-center justify-between p-3 bg-[#0E0E0E]/40 rounded-lg border border-zinc-800/50 hover:border-zinc-700 transition-colors cursor-pointer">
-            <span className="text-sm text-zinc-300">¿Tiene asma o problemas respiratorios?</span>
-            <input type="checkbox" className="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-[#64748B] focus:ring-[#64748B]/50" />
-          </label>
-          <label className="flex items-center justify-between p-3 bg-[#0E0E0E]/40 rounded-lg border border-zinc-800/50 hover:border-zinc-700 transition-colors cursor-pointer">
-            <span className="text-sm text-zinc-300">¿Sufre de presión alta?</span>
-            <input type="checkbox" className="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-[#64748B] focus:ring-[#64748B]/50" />
-          </label>
-          <label className="flex items-center justify-between p-3 bg-[#0E0E0E]/40 rounded-lg border border-zinc-800/50 hover:border-zinc-700 transition-colors cursor-pointer">
-            <span className="text-sm text-zinc-300">¿Ha tenido cirugías recientes?</span>
-            <input type="checkbox" className="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-[#64748B] focus:ring-[#64748B]/50" />
-          </label>
-        </div>
-
-        {/* Section 2 */}
-        <div className="space-y-4">
-          <h3 className="text-xs font-bold text-[#64748B] uppercase tracking-widest mb-3 pt-2">Medicación y Alergias</h3>
-
-          <div>
-            <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-wider">Detalle medicación actual</label>
-            <textarea rows={2} placeholder="Enumere medicamentos que toma regularmente..." className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-3 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm resize-none"></textarea>
-          </div>
-          <div>
-            <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-wider">Alergias conocidas</label>
-            <textarea rows={2} placeholder="Describa alergias alimentarias, químicas o ambientales..." className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-3 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm resize-none"></textarea>
-          </div>
-        </div>
-
-        {/* Section 3 */}
-        <div className="space-y-4">
-          <h3 className="text-xs font-bold text-[#64748B] uppercase tracking-widest mb-3 pt-2">Contacto de Emergencia</h3>
-
-          <div>
-            <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-wider">Nombre del contacto</label>
-            <input type="text" placeholder="Nombre completo" className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" />
-          </div>
-          <div>
-            <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-wider">Teléfono de emergencia</label>
-            <input type="tel" placeholder="+54 000 000 000" className="w-full bg-[#0E0E0E]/50 border border-zinc-800 rounded-lg p-2.5 text-zinc-100 placeholder-zinc-600 focus:border-[#64748B] focus:ring-1 focus:ring-[#64748B] outline-none transition-all text-sm" />
-          </div>
-        </div>
-
-        {/* Section 4 */}
-        <div className="pt-4 pb-2">
-          <label className="flex items-start space-x-3 cursor-pointer bg-[#64748B]/5 p-4 rounded-lg border border-[#64748B]/20">
-            <input type="checkbox" required className="mt-1 w-4 h-4 rounded bg-zinc-900 border-[#64748B]/50 text-[#64748B] focus:ring-[#64748B]/50" />
-            <span className="text-xs text-zinc-300 leading-relaxed">
-              Declaro bajo juramento que los datos aquí consignados son verídicos y que me encuentro en condiciones físicas para realizar actividad física. Entiendo que ocultar información médica puede representar un riesgo para mi salud.
-            </span>
-          </label>
-        </div>
-
-        <button type="submit" className="w-full bg-[#64748B] hover:bg-zinc-200 text-[#0E0E0E] font-bold py-3.5 rounded-lg transition-all shadow-[0_0_15px_rgba(250,250,250,0.2)]">ENVIAR Y FINALIZAR REGISTRO</button>
-      </form>
-    </div>
-  );
-}
 
 function ForgotPassword({ setStep }: { setStep: (step: Step) => void }) {
   return (

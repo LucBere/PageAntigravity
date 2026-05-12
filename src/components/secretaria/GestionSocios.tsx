@@ -7,54 +7,96 @@ import {
   ChevronLeft, 
   ChevronRight 
 } from 'lucide-react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+const mockSocios = [
+  { 
+    id: 1, nombre: 'Marcos Paz', dni: '34.902.112', plan: 'Plan Musculación Full', ultimoPago: '12 Oct, 2023', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=marcos' 
+  },
+  { 
+    id: 2, nombre: 'Julia Benitez', dni: '40.112.559', plan: 'Plan Cross Training', ultimoPago: 'Vencido (05 Oct)', vencido: true, estado: 'DEUDOR', avatar: 'https://i.pravatar.cc/150?u=julia' 
+  },
+  { 
+    id: 3, nombre: 'Ricardo Centurión', dni: '28.774.301', plan: 'Plan Personalizado', ultimoPago: '15 Oct, 2023', vencido: false, estado: 'HABILITADO', avatar: 'RC', isInitials: true 
+  },
+  { 
+    id: 4, nombre: 'Sofía Velazquez', dni: '42.880.122', plan: 'Plan Musculación', ultimoPago: '10 Oct, 2023', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=sofia' 
+  },
+  { 
+    id: 5, nombre: 'Lucas Gomez', dni: '35.441.221', plan: 'Pase Libre', ultimoPago: '01 Nov, 2023', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=lucas' 
+  },
+  { 
+    id: 6, nombre: 'Micaela Suarez', dni: '39.882.114', plan: 'Plan Musculación', ultimoPago: 'Vencido (20 Sep)', vencido: true, estado: 'DEUDOR', avatar: 'MS', isInitials: true
+  },
+  { 
+    id: 7, nombre: 'Tomás Aquino', dni: '41.203.491', plan: 'Plan Cross Training', ultimoPago: '05 Nov, 2023', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=tomas' 
+  },
+  { 
+    id: 8, nombre: 'Valentina Rios', dni: '38.102.993', plan: 'Plan Personalizado', ultimoPago: 'Vencido (10 Oct)', vencido: true, estado: 'DEUDOR', avatar: 'https://i.pravatar.cc/150?u=valentina' 
+  },
+  { 
+    id: 9, nombre: 'Juan Perez', dni: '32.114.552', plan: 'Plan Musculación Full', ultimoPago: '02 Nov, 2023', vencido: false, estado: 'HABILITADO', avatar: 'JP', isInitials: true 
+  },
+  { 
+    id: 10, nombre: 'Camila Torres', dni: '43.001.229', plan: 'Pase Libre', ultimoPago: 'Vencido (25 Oct)', vencido: true, estado: 'DEUDOR', avatar: 'https://i.pravatar.cc/150?u=camila' 
+  },
+  { 
+    id: 11, nombre: 'Gonzalo Martinez', dni: '37.881.002', plan: 'Plan Cross Training', ultimoPago: '08 Nov, 2023', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=gonzalo' 
+  },
+  { 
+    id: 12, nombre: 'Lucía Fernández', dni: '36.992.118', plan: 'Plan Musculación', ultimoPago: 'Vencido (01 Nov)', vencido: true, estado: 'DEUDOR', avatar: 'https://i.pravatar.cc/150?u=lucia' 
+  }
+];
 
 export default function GestionSocios() {
   const navigate = useNavigate();
+  
+  const [filtroActivo, setFiltroActivo] = useState<'TODOS' | 'DEUDORES' | 'HABILITADOS'>('TODOS');
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [mostrarFiltros, setMostrarFiltros] = useState(false);
+  const [criterioOrden, setCriterioOrden] = useState<string>('defecto');
 
-  const socios = [
-    { 
-      id: 1, 
-      nombre: 'Marcos Paz', 
-      dni: '34.902.112', 
-      plan: 'Plan Musculación Full', 
-      ultimoPago: '12 Oct, 2023', 
-      vencido: false,
-      estado: 'HABILITADO', 
-      avatar: 'https://i.pravatar.cc/150?u=marcos' 
-    },
-    { 
-      id: 2, 
-      nombre: 'Julia Benitez', 
-      dni: '40.112.559', 
-      plan: 'Plan Cross Training', 
-      ultimoPago: 'Vencido (05 Oct)', 
-      vencido: true,
-      estado: 'DEUDOR', 
-      avatar: 'https://i.pravatar.cc/150?u=julia' 
-    },
-    { 
-      id: 3, 
-      nombre: 'Ricardo Centurión', 
-      dni: '28.774.301', 
-      plan: 'Plan Personalizado', 
-      ultimoPago: '15 Oct, 2023', 
-      vencido: false,
-      estado: 'HABILITADO', 
-      avatar: 'RC', 
-      isInitials: true 
-    },
-    { 
-      id: 4, 
-      nombre: 'Sofía Velazquez', 
-      dni: '42.880.122', 
-      plan: 'Plan Musculación', 
-      ultimoPago: '10 Oct, 2023', 
-      vencido: false,
-      estado: 'HABILITADO', 
-      avatar: 'https://i.pravatar.cc/150?u=sofia' 
-    },
-  ];
+  const handleFiltroClick = (filtro: 'TODOS' | 'DEUDORES' | 'HABILITADOS') => {
+    setFiltroActivo(filtro);
+    setPaginaActual(1);
+  };
+
+  const parseFecha = (fechaStr: string) => {
+    if (fechaStr.includes('Vencido')) return 0;
+    return new Date(fechaStr).getTime();
+  };
+
+  const sociosFiltrados = mockSocios
+    .filter(socio => {
+      if (filtroActivo === 'TODOS') return true;
+      if (filtroActivo === 'DEUDORES') return socio.estado === 'DEUDOR';
+      if (filtroActivo === 'HABILITADOS') return socio.estado === 'HABILITADO';
+      return true;
+    })
+    .sort((a, b) => {
+      if (criterioOrden === 'nombre') {
+        return a.nombre.localeCompare(b.nombre);
+      }
+      if (criterioOrden === 'fecha') {
+        return parseFecha(b.ultimoPago) - parseFecha(a.ultimoPago);
+      }
+      if (criterioOrden === 'plan') {
+        return a.plan.localeCompare(b.plan);
+      }
+      return 0;
+    });
+
+  const sociosPorPagina = 4;
+  const totalPaginas = Math.ceil(sociosFiltrados.length / sociosPorPagina);
+  const indiceInicial = (paginaActual - 1) * sociosPorPagina;
+  const sociosPaginados = sociosFiltrados.slice(indiceInicial, indiceInicial + sociosPorPagina);
+
+  const getFiltroClass = (filtro: string) => {
+    return filtroActivo === filtro 
+      ? "px-5 py-1.5 bg-[#7B8B9E] text-white text-xs font-bold rounded-full tracking-widest shadow-lg shadow-[#7B8B9E]/20 shrink-0 transition-colors" 
+      : "px-5 py-1.5 text-xs font-bold text-zinc-500 hover:text-zinc-300 tracking-widest transition-colors shrink-0";
+  };
 
   return (
     <div className="bg-[#0E0E0E] min-h-full p-8 font-sans text-zinc-100">
@@ -96,21 +138,58 @@ export default function GestionSocios() {
 
         {/* 3. Barra de Pestañas / Filtros */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-zinc-800 pb-4 mb-6 gap-4">
-          <div className="flex items-center gap-6 overflow-x-auto w-full sm:w-auto">
-            <button className="px-5 py-1.5 bg-[#7B8B9E] text-white text-xs font-bold rounded-full tracking-widest shadow-lg shadow-[#7B8B9E]/20 shrink-0">
+          <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto">
+            <button 
+              onClick={() => handleFiltroClick('TODOS')}
+              className={getFiltroClass('TODOS')}
+            >
               TODOS
             </button>
-            <button className="text-xs font-bold text-zinc-500 hover:text-zinc-300 tracking-widest transition-colors shrink-0">
+            <button 
+              onClick={() => handleFiltroClick('DEUDORES')}
+              className={getFiltroClass('DEUDORES')}
+            >
               DEUDORES
             </button>
-            <button className="text-xs font-bold text-zinc-500 hover:text-zinc-300 tracking-widest transition-colors shrink-0">
+            <button 
+              onClick={() => handleFiltroClick('HABILITADOS')}
+              className={getFiltroClass('HABILITADOS')}
+            >
               HABILITADOS
             </button>
           </div>
-          <button className="flex items-center text-xs font-bold text-zinc-500 hover:text-zinc-300 tracking-widest transition-colors shrink-0">
-            <ListFilter className="w-4 h-4 mr-2" />
-            FILTROS AVANZADOS
-          </button>
+          <div className="relative">
+            <button 
+              onClick={() => setMostrarFiltros(!mostrarFiltros)}
+              className="flex items-center text-xs font-bold text-zinc-500 hover:text-zinc-300 tracking-widest transition-colors shrink-0"
+            >
+              <ListFilter className="w-4 h-4 mr-2" />
+              FILTROS AVANZADOS
+            </button>
+            
+            {mostrarFiltros && (
+              <div className="absolute right-0 mt-2 w-56 bg-[#1A1A1A] border border-zinc-800 rounded-xl shadow-xl z-10 py-2">
+                <button 
+                  onClick={() => { setCriterioOrden('nombre'); setMostrarFiltros(false); }}
+                  className={`w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'nombre' ? 'text-[#7B8B9E] font-bold' : 'text-zinc-300'}`}
+                >
+                  Ordenar por Nombre (A-Z)
+                </button>
+                <button 
+                  onClick={() => { setCriterioOrden('fecha'); setMostrarFiltros(false); }}
+                  className={`w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'fecha' ? 'text-[#7B8B9E] font-bold' : 'text-zinc-300'}`}
+                >
+                  Ordenar por Último Pago
+                </button>
+                <button 
+                  onClick={() => { setCriterioOrden('plan'); setMostrarFiltros(false); }}
+                  className={`w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'plan' ? 'text-[#7B8B9E] font-bold' : 'text-zinc-300'}`}
+                >
+                  Filtrar por Plan
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* 4. Tabla Principal */}
@@ -127,7 +206,7 @@ export default function GestionSocios() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-800/50">
-                {socios.map((socio) => (
+                {sociosPaginados.map((socio) => (
                   <tr key={socio.id} className="hover:bg-zinc-800/20 transition-colors">
                     {/* SOCIO */}
                     <td className="py-5 pr-4">
@@ -184,22 +263,44 @@ export default function GestionSocios() {
           {/* 5. Footer de la Tabla */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-6 mt-2 gap-4">
             <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
-              MOSTRANDO 4 DE 1.250 SOCIOS
+              MOSTRANDO {sociosPaginados.length} DE {sociosFiltrados.length} SOCIOS
             </span>
             <div className="flex items-center space-x-2">
-              <button className="w-8 h-8 flex items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-500 hover:text-white transition-colors">
+              <button 
+                onClick={() => setPaginaActual(p => Math.max(1, p - 1))}
+                disabled={paginaActual === 1}
+                className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-colors ${
+                  paginaActual === 1 
+                    ? 'bg-transparent border-transparent text-zinc-700 cursor-not-allowed' 
+                    : 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-white'
+                }`}
+              >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <button className="w-8 h-8 flex items-center justify-center rounded-lg bg-transparent text-[#7B8B9E] font-bold text-xs transition-colors">
-                1
-              </button>
-              <button className="w-8 h-8 flex items-center justify-center rounded-lg bg-transparent text-zinc-500 hover:text-white font-bold text-xs transition-colors">
-                2
-              </button>
-              <button className="w-8 h-8 flex items-center justify-center rounded-lg bg-transparent text-zinc-500 hover:text-white font-bold text-xs transition-colors">
-                3
-              </button>
-              <button className="w-8 h-8 flex items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-500 hover:text-white transition-colors">
+
+              {Array.from({ length: totalPaginas }, (_, i) => i + 1).map(pag => (
+                <button 
+                  key={pag}
+                  onClick={() => setPaginaActual(pag)}
+                  className={`w-8 h-8 flex items-center justify-center rounded-lg font-bold text-xs transition-colors ${
+                    paginaActual === pag
+                      ? 'bg-transparent text-[#7B8B9E]'
+                      : 'bg-transparent text-zinc-500 hover:text-white'
+                  }`}
+                >
+                  {pag}
+                </button>
+              ))}
+
+              <button 
+                onClick={() => setPaginaActual(p => Math.min(totalPaginas, p + 1))}
+                disabled={paginaActual === totalPaginas || totalPaginas === 0}
+                className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-colors ${
+                  paginaActual === totalPaginas || totalPaginas === 0
+                    ? 'bg-transparent border-transparent text-zinc-700 cursor-not-allowed' 
+                    : 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-white'
+                }`}
+              >
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>

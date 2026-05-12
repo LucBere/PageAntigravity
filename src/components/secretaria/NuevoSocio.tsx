@@ -1,8 +1,34 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function NuevoSocio() {
   const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    nombre: '',
+    dni: '',
+    telefono: '',
+    email: '',
+  });
+  const [emailError, setEmailError] = useState(false);
+
+  // Estados de Salud y Emergencia
+  const [salud, setSalud] = useState({
+    cardiovascular: false,
+    asma: false,
+    presionAlta: false,
+    cirugias: false,
+  });
+  const [medicacion, setMedicacion] = useState('');
+  const [alergias, setAlergias] = useState('');
+  
+  const [contactoEmergencia, setContactoEmergencia] = useState({
+    nombre: '',
+    telefono: '',
+  });
+  
+  const [terminosAceptados, setTerminosAceptados] = useState(false);
 
   return (
     <div className="bg-[#0E0E0E] min-h-full p-8 font-sans text-zinc-100">
@@ -41,6 +67,11 @@ export default function NuevoSocio() {
               <input
                 type="text"
                 placeholder="Ej: Juan Pérez"
+                value={formData.nombre}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+                  setFormData({...formData, nombre: val});
+                }}
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
               />
             </div>
@@ -52,6 +83,12 @@ export default function NuevoSocio() {
               <input
                 type="text"
                 placeholder="Número de identificación"
+                maxLength={8}
+                value={formData.dni}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/\D/g, '');
+                  setFormData({...formData, dni: val});
+                }}
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
               />
             </div>
@@ -63,6 +100,12 @@ export default function NuevoSocio() {
               <input
                 type="text"
                 placeholder="+54 11 0000-0000"
+                maxLength={15}
+                value={formData.telefono}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/[^0-9\s\-+]/g, '');
+                  setFormData({...formData, telefono: val});
+                }}
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
               />
             </div>
@@ -74,7 +117,20 @@ export default function NuevoSocio() {
               <input
                 type="email"
                 placeholder="usuario@email.com"
-                className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
+                value={formData.email}
+                onChange={(e) => {
+                  setFormData({...formData, email: e.target.value});
+                  if (emailError) setEmailError(false);
+                }}
+                onBlur={(e) => {
+                  const val = e.target.value;
+                  if (val.length > 0 && (!val.includes('@') || !val.includes('.com'))) {
+                    setEmailError(true);
+                  } else {
+                    setEmailError(false);
+                  }
+                }}
+                className={`w-full bg-[#1A1A1A] border ${emailError ? 'border-red-500/50 focus:border-red-500/50' : 'border-zinc-800 focus:border-zinc-600'} rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none transition-colors`}
               />
             </div>
           </div>
@@ -91,20 +147,28 @@ export default function NuevoSocio() {
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <label className="flex items-center space-x-3 cursor-pointer group">
-              <div className="w-5 h-5 rounded border border-zinc-700 bg-[#1A1A1A] flex items-center justify-center group-hover:border-[#7B8B9E] transition-colors"></div>
+            <label className="flex items-center space-x-3 cursor-pointer group" onClick={() => setSalud({...salud, cardiovascular: !salud.cardiovascular})}>
+              <div className={`w-5 h-5 rounded border ${salud.cardiovascular ? 'bg-[#7B8B9E] border-[#7B8B9E]' : 'border-zinc-700 bg-[#1A1A1A] group-hover:border-[#7B8B9E]'} flex items-center justify-center transition-colors`}>
+                {salud.cardiovascular && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
+              </div>
               <span className="text-sm text-zinc-400 group-hover:text-zinc-300 transition-colors">¿Padece alguna enfermedad cardiovascular?</span>
             </label>
-            <label className="flex items-center space-x-3 cursor-pointer group">
-              <div className="w-5 h-5 rounded border border-zinc-700 bg-[#1A1A1A] flex items-center justify-center group-hover:border-[#7B8B9E] transition-colors"></div>
+            <label className="flex items-center space-x-3 cursor-pointer group" onClick={() => setSalud({...salud, asma: !salud.asma})}>
+              <div className={`w-5 h-5 rounded border ${salud.asma ? 'bg-[#7B8B9E] border-[#7B8B9E]' : 'border-zinc-700 bg-[#1A1A1A] group-hover:border-[#7B8B9E]'} flex items-center justify-center transition-colors`}>
+                {salud.asma && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
+              </div>
               <span className="text-sm text-zinc-400 group-hover:text-zinc-300 transition-colors">¿Tiene asma?</span>
             </label>
-            <label className="flex items-center space-x-3 cursor-pointer group">
-              <div className="w-5 h-5 rounded border border-zinc-700 bg-[#1A1A1A] flex items-center justify-center group-hover:border-[#7B8B9E] transition-colors"></div>
+            <label className="flex items-center space-x-3 cursor-pointer group" onClick={() => setSalud({...salud, presionAlta: !salud.presionAlta})}>
+              <div className={`w-5 h-5 rounded border ${salud.presionAlta ? 'bg-[#7B8B9E] border-[#7B8B9E]' : 'border-zinc-700 bg-[#1A1A1A] group-hover:border-[#7B8B9E]'} flex items-center justify-center transition-colors`}>
+                {salud.presionAlta && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
+              </div>
               <span className="text-sm text-zinc-400 group-hover:text-zinc-300 transition-colors">¿Sufre de presión alta?</span>
             </label>
-            <label className="flex items-center space-x-3 cursor-pointer group">
-              <div className="w-5 h-5 rounded border border-zinc-700 bg-[#1A1A1A] flex items-center justify-center group-hover:border-[#7B8B9E] transition-colors"></div>
+            <label className="flex items-center space-x-3 cursor-pointer group" onClick={() => setSalud({...salud, cirugias: !salud.cirugias})}>
+              <div className={`w-5 h-5 rounded border ${salud.cirugias ? 'bg-[#7B8B9E] border-[#7B8B9E]' : 'border-zinc-700 bg-[#1A1A1A] group-hover:border-[#7B8B9E]'} flex items-center justify-center transition-colors`}>
+                {salud.cirugias && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
+              </div>
               <span className="text-sm text-zinc-400 group-hover:text-zinc-300 transition-colors">¿Ha tenido cirugías recientes?</span>
             </label>
           </div>
@@ -116,6 +180,9 @@ export default function NuevoSocio() {
               </label>
               <textarea
                 rows={3}
+                maxLength={250}
+                value={medicacion}
+                onChange={(e) => setMedicacion(e.target.value)}
                 placeholder="Detalle medicación actual y dosis..."
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors resize-none"
               ></textarea>
@@ -126,6 +193,9 @@ export default function NuevoSocio() {
               </label>
               <textarea
                 rows={3}
+                maxLength={250}
+                value={alergias}
+                onChange={(e) => setAlergias(e.target.value)}
                 placeholder="Liste alergias a medicamentos o alimentos..."
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors resize-none"
               ></textarea>
@@ -143,6 +213,11 @@ export default function NuevoSocio() {
               </label>
               <input
                 type="text"
+                value={contactoEmergencia.nombre}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+                  setContactoEmergencia({...contactoEmergencia, nombre: val});
+                }}
                 placeholder="Nombre completo"
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
               />
@@ -153,6 +228,11 @@ export default function NuevoSocio() {
               </label>
               <input
                 type="text"
+                value={contactoEmergencia.telefono}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/[^0-9\s\-+]/g, '');
+                  setContactoEmergencia({...contactoEmergencia, telefono: val});
+                }}
                 placeholder="+54 11 0000-0000"
                 className="w-full bg-[#1A1A1A] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
               />
@@ -164,8 +244,13 @@ export default function NuevoSocio() {
             <p className="text-[10px] text-zinc-500 leading-relaxed md:w-[70%]">
               Declaro bajo juramento que los datos consignados en la presente declaración son veraces y exactos. Me comprometo a informar cualquier cambio en mi estado de salud al personal de SquatGym. Asumo la responsabilidad total por la práctica de actividad física dentro de las instalaciones.
             </p>
-            <button className="flex items-center px-5 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-sm font-bold text-white hover:bg-zinc-800 transition-colors whitespace-nowrap">
-              <div className="w-4 h-4 rounded border border-zinc-500 mr-3 flex items-center justify-center"></div>
+            <button 
+              onClick={() => setTerminosAceptados(!terminosAceptados)}
+              className="flex items-center px-5 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-sm font-bold text-white hover:bg-zinc-800 transition-colors whitespace-nowrap"
+            >
+              <div className={`w-4 h-4 rounded border ${terminosAceptados ? 'bg-[#7B8B9E] border-[#7B8B9E]' : 'border-zinc-500'} mr-3 flex items-center justify-center transition-colors`}>
+                {terminosAceptados && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
+              </div>
               ACEPTO TÉRMINOS
             </button>
           </div>
@@ -175,7 +260,8 @@ export default function NuevoSocio() {
         <div className="flex justify-end mt-4 mb-12">
           <button
             onClick={() => navigate('/secretaria/socios')}
-            className="flex items-center px-8 py-4 bg-[#388E3C] hover:bg-emerald-600 text-white text-sm font-black tracking-widest uppercase rounded-full transition-colors shadow-lg shadow-[#388E3C]/20"
+            disabled={!terminosAceptados}
+            className={`flex items-center px-8 py-4 bg-[#388E3C] text-white text-sm font-black tracking-widest uppercase rounded-full transition-colors shadow-lg shadow-[#388E3C]/20 ${!terminosAceptados ? 'opacity-50 cursor-not-allowed' : 'hover:bg-emerald-600'}`}
           >
             REGISTRAR Y PAGAR
             <ArrowRight className="w-5 h-5 ml-3" />
