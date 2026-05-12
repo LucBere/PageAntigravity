@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Image, ClipboardList, Timer, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 
 type Reclamo = {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, CreditCard, CheckCircle, Info, Zap, QrCode } from 'lucide-react';
+import { Search, CreditCard, CheckCircle, Info, QrCode } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 type Plan = {
