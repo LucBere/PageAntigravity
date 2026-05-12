@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginFlow from './components/auth/LoginFlow';
 import AdminLayout from './components/admin/AdminLayout';
 import AdminDashboard from './components/admin/AdminDashboard';
@@ -61,6 +61,9 @@ function App() {
           <Route path="checkout" element={<CheckoutSocio />} />
           <Route path="notificaciones" element={<NotificacionesSocio />} />
         </Route>
+
+        {/* Fallback route - Redirige a Login */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
