@@ -1,22 +1,121 @@
+import { useState } from 'react';
 import { Archive, BookOpen, Users, DollarSign, Shield, Settings2 } from 'lucide-react';
 
-const perfiles = [
-  { id: 1, type: 'PERFIL ACTIVO', role: 'Administrador/ra', isActive: true },
-  { id: 2, type: 'SUCURSAL', role: 'Encargado/da', isActive: false },
-  { id: 3, type: 'ADMINISTRATIVO', role: 'Secretario/a', isActive: false },
-  { id: 4, type: 'TÉCNICO', role: 'Profesor/a', isActive: false },
-  { id: 5, type: 'USUARIO', role: 'Alumno/a', isActive: false },
+type Rol = 'admin' | 'encargado' | 'secretario' | 'profesor' | 'alumno';
+type Modulo = 'inventario' | 'clases' | 'clientes' | 'finanzas' | 'seguridad';
+type Accion = 'ver' | 'crear' | 'editar' | 'eliminar';
+
+const perfiles: { id: number, roleKey: Rol, type: string, role: string }[] = [
+  { id: 1, roleKey: 'admin', type: 'PERFIL ACTIVO', role: 'Administrador/ra' },
+  { id: 2, roleKey: 'encargado', type: 'SUCURSAL', role: 'Encargado/da' },
+  { id: 3, roleKey: 'secretario', type: 'ADMINISTRATIVO', role: 'Secretario/a' },
+  { id: 4, roleKey: 'profesor', type: 'TÉCNICO', role: 'Profesor/a' },
+  { id: 5, roleKey: 'alumno', type: 'USUARIO', role: 'Alumno/a' },
 ];
 
-const modulos = [
-  { id: 1, title: 'INVENTARIO Y STOCK', desc: 'Gestión de insumos y equipamiento', icon: Archive },
-  { id: 2, title: 'CLASES Y RUTINAS', desc: 'Planificación académica y asignación', icon: BookOpen },
-  { id: 3, title: 'GESTIÓN DE CLIENTES', desc: 'Altas, bajas y expedientes', icon: Users },
-  { id: 4, title: 'FINANZAS Y COBROS', desc: 'Facturación, pagos y reportes', icon: DollarSign },
-  { id: 5, title: 'SEGURIDAD Y CONTROL', desc: 'Logs de acceso y configuraciones', icon: Shield },
+const modulos: { id: number, key: Modulo, title: string, desc: string, icon: any }[] = [
+  { id: 1, key: 'inventario', title: 'INVENTARIO Y STOCK', desc: 'Gestión de insumos y equipamiento', icon: Archive },
+  { id: 2, key: 'clases', title: 'CLASES Y RUTINAS', desc: 'Planificación académica y asignación', icon: BookOpen },
+  { id: 3, key: 'clientes', title: 'GESTIÓN DE CLIENTES', desc: 'Altas, bajas y expedientes', icon: Users },
+  { id: 4, key: 'finanzas', title: 'FINANZAS Y COBROS', desc: 'Facturación, pagos y reportes', icon: DollarSign },
+  { id: 5, key: 'seguridad', title: 'SEGURIDAD Y CONTROL', desc: 'Logs de acceso y configuraciones', icon: Shield },
 ];
+
+const defaultPermisos: Record<Rol, Record<Modulo, Record<Accion, boolean>>> = {
+  admin: {
+    inventario: { ver: true, crear: true, editar: true, eliminar: true },
+    clases: { ver: true, crear: true, editar: true, eliminar: true },
+    clientes: { ver: true, crear: true, editar: true, eliminar: true },
+    finanzas: { ver: true, crear: true, editar: true, eliminar: true },
+    seguridad: { ver: true, crear: true, editar: true, eliminar: true },
+  },
+  encargado: {
+    inventario: { ver: true, crear: true, editar: true, eliminar: false },
+    clases: { ver: true, crear: true, editar: true, eliminar: false },
+    clientes: { ver: true, crear: true, editar: true, eliminar: false },
+    finanzas: { ver: true, crear: false, editar: false, eliminar: false },
+    seguridad: { ver: false, crear: false, editar: false, eliminar: false },
+  },
+  secretario: {
+    inventario: { ver: false, crear: false, editar: false, eliminar: false },
+    clases: { ver: false, crear: false, editar: false, eliminar: false },
+    clientes: { ver: true, crear: true, editar: true, eliminar: false },
+    finanzas: { ver: true, crear: true, editar: false, eliminar: false },
+    seguridad: { ver: false, crear: false, editar: false, eliminar: false },
+  },
+  profesor: {
+    inventario: { ver: false, crear: false, editar: false, eliminar: false },
+    clases: { ver: true, crear: false, editar: true, eliminar: false },
+    clientes: { ver: true, crear: false, editar: false, eliminar: false },
+    finanzas: { ver: false, crear: false, editar: false, eliminar: false },
+    seguridad: { ver: false, crear: false, editar: false, eliminar: false },
+  },
+  alumno: {
+    inventario: { ver: false, crear: false, editar: false, eliminar: false },
+    clases: { ver: true, crear: false, editar: false, eliminar: false },
+    clientes: { ver: false, crear: false, editar: false, eliminar: false },
+    finanzas: { ver: false, crear: false, editar: false, eliminar: false },
+    seguridad: { ver: false, crear: false, editar: false, eliminar: false },
+  }
+};
 
 export default function RolesPermisos() {
+  const [rolActivo, setRolActivo] = useState<Rol>('admin');
+  const [permisos, setPermisos] = useState(defaultPermisos);
+
+  const handleTogglePermiso = (modulo: Modulo, accion: Accion) => {
+    setPermisos(prev => {
+      const rolPermisos = { ...prev[rolActivo] };
+      const modPermisos = { ...rolPermisos[modulo] };
+      
+      const newValue = !modPermisos[accion];
+      modPermisos[accion] = newValue;
+
+      if (accion === 'ver' && !newValue) {
+        // Si el usuario desmarca ver, desmarcar crear, editar y eliminar automáticamente
+        modPermisos.crear = false;
+        modPermisos.editar = false;
+        modPermisos.eliminar = false;
+      } else if (['crear', 'editar', 'eliminar'].includes(accion) && newValue) {
+        // Si el usuario marca crear, editar o eliminar, automáticamente poner ver en true
+        modPermisos.ver = true;
+      }
+
+      return {
+        ...prev,
+        [rolActivo]: {
+          ...rolPermisos,
+          [modulo]: modPermisos
+        }
+      };
+    });
+  };
+
+  const handleGuardarCambios = () => {
+    setTimeout(() => {
+      alert("¡Matriz de permisos guardada exitosamente!");
+    }, 300);
+  };
+
+  const handleDescargarLog = () => {
+    alert("Generando archivo de auditoría...");
+  };
+
+  const renderCheckbox = (modulo: Modulo, accion: Accion) => {
+    const isChecked = permisos[rolActivo][modulo][accion];
+    
+    return (
+      <div className="flex justify-center">
+        <input 
+          type="checkbox"
+          checked={isChecked}
+          onChange={() => handleTogglePermiso(modulo, accion)}
+          className="squat-checkbox"
+        />
+      </div>
+    );
+  };
+
   return (
     <div className="space-y-8 max-w-7xl mx-auto pb-10">
       
@@ -34,10 +133,16 @@ export default function RolesPermisos() {
             Define los niveles de acceso y capacidades operativas para cada perfil dentro del ecosistema SquatGym.
           </p>
           <div className="flex items-center gap-4">
-            <button className="px-6 py-3.5 rounded-xl border border-zinc-700 bg-[#0E0E0E] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-zinc-900 transition-colors cursor-pointer">
+            <button 
+              onClick={handleDescargarLog}
+              className="px-6 py-3.5 rounded-xl border border-zinc-700 bg-[#0E0E0E] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-zinc-900 transition-colors cursor-pointer"
+            >
               DESCARGAR LOG
             </button>
-            <button className="px-6 py-3.5 rounded-xl bg-[#7B8B9E] hover:bg-slate-400 text-white text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer">
+            <button 
+              onClick={handleGuardarCambios}
+              className="px-6 py-3.5 rounded-xl bg-[#7B8B9E] hover:bg-slate-400 text-white text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
+            >
               GUARDAR CAMBIOS
             </button>
           </div>
@@ -46,19 +151,23 @@ export default function RolesPermisos() {
 
       {/* Selector de Perfiles */}
       <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-        {perfiles.map(p => (
-          <div 
-            key={p.id} 
-            className={`min-w-[180px] p-5 rounded-2xl cursor-pointer transition-colors ${
-              p.isActive 
-                ? 'bg-[#151515] border-l-4 border-l-[#7B8B9E] shadow-lg' 
-                : 'bg-[#151515] hover:bg-[#1A1A1A] border-l-4 border-l-transparent'
-            }`}
-          >
-            <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest mb-1.5">{p.type}</p>
-            <p className={`font-medium ${p.isActive ? 'text-white' : 'text-zinc-400'}`}>{p.role}</p>
-          </div>
-        ))}
+        {perfiles.map(p => {
+          const isActive = rolActivo === p.roleKey;
+          return (
+            <div 
+              key={p.id} 
+              onClick={() => setRolActivo(p.roleKey)}
+              className={`min-w-[180px] p-5 rounded-2xl cursor-pointer transition-colors ${
+                isActive 
+                  ? 'bg-[#151515] border-l-4 border-l-[#7B8B9E] shadow-lg opacity-100' 
+                  : 'bg-[#151515] hover:bg-[#1A1A1A] border-l-4 border-l-transparent opacity-60'
+              }`}
+            >
+              <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest mb-1.5">{p.type}</p>
+              <p className={`font-medium ${isActive ? 'text-white' : 'text-zinc-400'}`}>{p.role}</p>
+            </div>
+          );
+        })}
       </div>
 
       {/* Matriz de Permisos */}
@@ -90,40 +199,16 @@ export default function RolesPermisos() {
                     </div>
                   </td>
                   <td className="px-4 py-5 text-center">
-                    <div className="flex justify-center">
-                      <div className="w-5 h-5 rounded border border-[#7B8B9E] bg-[#7B8B9E] flex items-center justify-center cursor-pointer">
-                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                    </div>
+                    {renderCheckbox(m.key, 'ver')}
                   </td>
                   <td className="px-4 py-5 text-center">
-                    <div className="flex justify-center">
-                      <div className="w-5 h-5 rounded border border-[#7B8B9E] bg-[#7B8B9E] flex items-center justify-center cursor-pointer">
-                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                    </div>
+                    {renderCheckbox(m.key, 'crear')}
                   </td>
                   <td className="px-4 py-5 text-center">
-                    <div className="flex justify-center">
-                      <div className="w-5 h-5 rounded border border-[#7B8B9E] bg-[#7B8B9E] flex items-center justify-center cursor-pointer">
-                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                    </div>
+                    {renderCheckbox(m.key, 'editar')}
                   </td>
                   <td className="px-4 py-5 text-center">
-                    <div className="flex justify-center">
-                      <div className="w-5 h-5 rounded border border-[#7B8B9E] bg-[#7B8B9E] flex items-center justify-center cursor-pointer">
-                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                    </div>
+                    {renderCheckbox(m.key, 'eliminar')}
                   </td>
                   <td className="px-8 py-5">
                     <div className="flex justify-end items-center space-x-2 text-zinc-500 hover:text-white transition-colors cursor-pointer">

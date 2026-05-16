@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   /* El color exacto que sacamos de tu Figma para el fondo principal */
@@ -12,12 +13,32 @@
 
 @layer base {
   body {
-    @apply bg-gymDark text-white font-sans antialiased;
+    @apply bg-slate-50 text-slate-800 font-sans antialiased dark:bg-gymDark dark:text-white transition-colors duration-300;
   }
 }
 
 @layer utilities {
   .glass-panel {
-    @apply bg-gymGray/80 backdrop-blur-md border border-gymBorder shadow-xl;
+    @apply bg-white/80 dark:bg-gymGray/80 backdrop-blur-md border border-slate-200 dark:border-gymBorder shadow-xl transition-colors duration-300;
+  }
+
+  .squat-checkbox {
+    @apply appearance-none w-5 h-5 rounded border border-slate-300 bg-white dark:border-zinc-700 dark:bg-[#1A1A1A] cursor-pointer flex items-center justify-center transition-colors relative;
+  }
+  
+  .squat-checkbox:checked {
+    @apply border-slate-400 bg-slate-200 dark:border-[#7B8B9E] dark:bg-[#7B8B9E];
+  }
+  
+  .squat-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    width: 0.35rem;
+    height: 0.6rem;
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+    @apply text-slate-800 dark:text-white;
   }
 }
