@@ -8,13 +8,13 @@ export default function CajaPagos() {
       {/* Encabezado */}
       <div>
         <div className="flex items-center space-x-2 mb-2">
-          <div className="w-2 h-2 rounded-full bg-[#7B8B9E]"></div>
-          <span className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">ESTADO DE CUENTA REAL</span>
+          <div className="w-2 h-2 rounded-full bg-slate-800 dark:bg-[#7B8B9E] transition-colors"></div>
+          <span className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold transition-colors">ESTADO DE CUENTA REAL</span>
         </div>
-        <h1 className="text-[2.5rem] leading-tight font-bold text-[#FAFAFA] tracking-wide mb-2 uppercase">
+        <h1 className="text-[2.5rem] leading-tight font-bold text-slate-900 dark:text-[#FAFAFA] tracking-wide mb-2 uppercase transition-colors">
           CAJA / PAGOS
         </h1>
-        <p className="text-zinc-400 text-sm max-w-2xl">
+        <p className="text-slate-500 dark:text-zinc-400 text-sm max-w-2xl transition-colors">
           Gestión de flujo de efectivo, recuperación de cartera y alertas de morosidad automatizadas.
         </p>
       </div>
@@ -27,19 +27,19 @@ export default function CajaPagos() {
           
           {/* Tarjetas KPI */}
           <div className="grid grid-cols-2 gap-6">
-            <div className="bg-[#151515] rounded-2xl p-6 border border-zinc-800/50">
-              <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold mb-4">RECAUDADO HOY</p>
-              <p className="text-4xl font-normal text-[#FAFAFA] mb-2">$4.250,00</p>
-              <p className="text-emerald-500 text-xs font-medium flex items-center">
+            <div className="bg-white dark:bg-[#151515] rounded-2xl p-6 border border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
+              <p className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold mb-4 transition-colors">RECAUDADO HOY</p>
+              <p className="text-4xl font-normal text-slate-900 dark:text-[#FAFAFA] mb-2 transition-colors">$4.250,00</p>
+              <p className="text-emerald-600 dark:text-emerald-500 text-xs font-medium flex items-center transition-colors">
                 <TrendingUp className="w-3 h-3 mr-1" />
                 +12.5% vs ayer
               </p>
             </div>
             
-            <div className="bg-[#151515] rounded-2xl p-6 border border-zinc-800/50">
-              <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold mb-4">DEUDA PENDIENTE</p>
-              <p className="text-4xl font-normal text-[#FAFAFA] mb-2">$1.840,00</p>
-              <p className="text-red-500 text-xs font-medium flex items-center">
+            <div className="bg-white dark:bg-[#151515] rounded-2xl p-6 border border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
+              <p className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold mb-4 transition-colors">DEUDA PENDIENTE</p>
+              <p className="text-4xl font-normal text-slate-900 dark:text-[#FAFAFA] mb-2 transition-colors">$1.840,00</p>
+              <p className="text-red-600 dark:text-red-500 text-xs font-medium flex items-center transition-colors">
                 <AlertTriangle className="w-3 h-3 mr-1" />
                 14 Clientes en mora
               </p>
@@ -49,8 +49,8 @@ export default function CajaPagos() {
           {/* Sección Clientes en Mora */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3 mb-4">
-              <h2 className="text-sm font-bold text-[#FAFAFA] uppercase tracking-widest">CLIENTES EN MORA</h2>
-              <span className="bg-red-500/10 text-red-500 text-[9px] px-2 py-0.5 rounded uppercase font-bold tracking-wider border border-red-500/20">
+              <h2 className="text-sm font-bold text-slate-900 dark:text-[#FAFAFA] uppercase tracking-widest transition-colors">CLIENTES EN MORA</h2>
+              <span className="bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-500 text-[9px] px-2 py-0.5 rounded uppercase font-bold tracking-wider border border-red-200 dark:border-red-500/20 transition-colors">
                 CRÍTICO
               </span>
             </div>
@@ -58,66 +58,66 @@ export default function CajaPagos() {
             {/* Lista */}
             <div className="space-y-3">
               {/* Item 1 */}
-              <div className="bg-[#1A1A1A] rounded-xl p-4 flex items-center justify-between border border-zinc-800/50">
+              <div className="bg-white dark:bg-[#1A1A1A] rounded-xl p-4 flex items-center justify-between border border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
                 <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center text-[#FAFAFA] font-bold text-sm">
+                  <div className="w-10 h-10 rounded-lg bg-slate-100 text-slate-600 dark:bg-zinc-800 flex items-center justify-center dark:text-[#FAFAFA] font-bold text-sm transition-colors">
                     RM
                   </div>
                   <div>
-                    <p className="text-[#FAFAFA] text-sm font-bold">Ricardo Mendoza</p>
-                    <p className="text-zinc-500 text-xs">Vencido hace 12 días</p>
+                    <p className="text-slate-900 dark:text-[#FAFAFA] text-sm font-bold transition-colors">Ricardo Mendoza</p>
+                    <p className="text-slate-500 dark:text-zinc-500 text-xs transition-colors">Vencido hace 12 días</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-6">
                   <div className="text-right">
-                    <p className="text-red-500 text-sm font-bold">$120,00</p>
-                    <p className="text-zinc-600 text-[10px] uppercase font-bold tracking-wider">PLAN ANUAL</p>
+                    <p className="text-red-600 dark:text-red-500 text-sm font-bold transition-colors">$120,00</p>
+                    <p className="text-slate-500 dark:text-zinc-600 text-[10px] uppercase font-bold tracking-wider transition-colors">PLAN ANUAL</p>
                   </div>
-                  <button className="w-10 h-10 rounded-lg border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">
+                  <button className="w-10 h-10 rounded-lg border border-slate-200 dark:border-zinc-700 flex items-center justify-center text-slate-400 dark:text-zinc-400 hover:bg-slate-50 hover:text-slate-600 dark:hover:text-white dark:hover:bg-zinc-800 transition-colors cursor-pointer">
                     <Mail className="w-4 h-4" />
                   </button>
                 </div>
               </div>
 
               {/* Item 2 */}
-              <div className="bg-[#1A1A1A] rounded-xl p-4 flex items-center justify-between border border-zinc-800/50">
+              <div className="bg-white dark:bg-[#1A1A1A] rounded-xl p-4 flex items-center justify-between border border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
                 <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center text-[#FAFAFA] font-bold text-sm">
+                  <div className="w-10 h-10 rounded-lg bg-slate-100 text-slate-600 dark:bg-zinc-800 flex items-center justify-center dark:text-[#FAFAFA] font-bold text-sm transition-colors">
                     LS
                   </div>
                   <div>
-                    <p className="text-[#FAFAFA] text-sm font-bold">Lucía Suárez</p>
-                    <p className="text-zinc-500 text-xs">Vencido hace 4 días</p>
+                    <p className="text-slate-900 dark:text-[#FAFAFA] text-sm font-bold transition-colors">Lucía Suárez</p>
+                    <p className="text-slate-500 dark:text-zinc-500 text-xs transition-colors">Vencido hace 4 días</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-6">
                   <div className="text-right">
-                    <p className="text-red-500 text-sm font-bold">$45,00</p>
-                    <p className="text-zinc-600 text-[10px] uppercase font-bold tracking-wider">PERSONAL TRAINING</p>
+                    <p className="text-red-600 dark:text-red-500 text-sm font-bold transition-colors">$45,00</p>
+                    <p className="text-slate-500 dark:text-zinc-600 text-[10px] uppercase font-bold tracking-wider transition-colors">PERSONAL TRAINING</p>
                   </div>
-                  <button className="w-10 h-10 rounded-lg border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">
+                  <button className="w-10 h-10 rounded-lg border border-slate-200 dark:border-zinc-700 flex items-center justify-center text-slate-400 dark:text-zinc-400 hover:bg-slate-50 hover:text-slate-600 dark:hover:text-white dark:hover:bg-zinc-800 transition-colors cursor-pointer">
                     <Send className="w-4 h-4" />
                   </button>
                 </div>
               </div>
 
               {/* Item 3 */}
-              <div className="bg-[#1A1A1A] rounded-xl p-4 flex items-center justify-between border border-zinc-800/50">
+              <div className="bg-white dark:bg-[#1A1A1A] rounded-xl p-4 flex items-center justify-between border border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
                 <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center text-[#FAFAFA] font-bold text-sm">
+                  <div className="w-10 h-10 rounded-lg bg-slate-100 text-slate-600 dark:bg-zinc-800 flex items-center justify-center dark:text-[#FAFAFA] font-bold text-sm transition-colors">
                     AF
                   </div>
                   <div>
-                    <p className="text-[#FAFAFA] text-sm font-bold">Andrés Figueroa</p>
-                    <p className="text-zinc-500 text-xs">Vencido hoy</p>
+                    <p className="text-slate-900 dark:text-[#FAFAFA] text-sm font-bold transition-colors">Andrés Figueroa</p>
+                    <p className="text-slate-500 dark:text-zinc-500 text-xs transition-colors">Vencido hoy</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-6">
                   <div className="text-right">
-                    <p className="text-red-500 text-sm font-bold">$85,00</p>
-                    <p className="text-zinc-600 text-[10px] uppercase font-bold tracking-wider">BOXEO ELITE</p>
+                    <p className="text-red-600 dark:text-red-500 text-sm font-bold transition-colors">$85,00</p>
+                    <p className="text-slate-500 dark:text-zinc-600 text-[10px] uppercase font-bold tracking-wider transition-colors">BOXEO ELITE</p>
                   </div>
-                  <button className="w-10 h-10 rounded-lg border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">
+                  <button className="w-10 h-10 rounded-lg border border-slate-200 dark:border-zinc-700 flex items-center justify-center text-slate-400 dark:text-zinc-400 hover:bg-slate-50 hover:text-slate-600 dark:hover:text-white dark:hover:bg-zinc-800 transition-colors cursor-pointer">
                     <Bell className="w-4 h-4" />
                   </button>
                 </div>
@@ -126,7 +126,7 @@ export default function CajaPagos() {
 
             <button 
               onClick={() => navigate('/admin/finanzas/mora')}
-              className="w-full py-4 rounded-xl border border-zinc-800 text-xs text-zinc-400 font-bold tracking-widest uppercase hover:bg-zinc-900 transition-colors mt-4 cursor-pointer"
+              className="w-full py-4 rounded-xl border border-slate-200 dark:border-zinc-800 text-xs text-slate-500 dark:text-zinc-400 font-bold tracking-widest uppercase hover:bg-slate-50 dark:hover:bg-zinc-900 transition-colors mt-4 cursor-pointer"
             >
               VER LISTA COMPLETA (14)
             </button>
@@ -134,46 +134,46 @@ export default function CajaPagos() {
         </div>
 
         {/* COLUMNA DERECHA */}
-        <div className="bg-[#151515] rounded-2xl p-6 border border-zinc-800/50 h-full flex flex-col">
-          <h2 className="text-sm font-bold text-[#FAFAFA] uppercase tracking-widest mb-6">ESTADOS DE PAGO</h2>
+        <div className="bg-white dark:bg-[#151515] rounded-2xl p-6 border border-slate-200 dark:border-zinc-800/50 h-full flex flex-col transition-colors shadow-sm dark:shadow-none">
+          <h2 className="text-sm font-bold text-slate-900 dark:text-[#FAFAFA] uppercase tracking-widest mb-6 transition-colors">ESTADOS DE PAGO</h2>
           
           <div className="space-y-6 flex-grow">
             <div className="flex justify-between items-start">
               <div className="flex space-x-3">
                 <div className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5"></div>
-                <p className="text-sm text-zinc-300 pr-4">Cuota Mensual (Oct) - Martin R.</p>
+                <p className="text-sm text-slate-600 dark:text-zinc-300 pr-4 transition-colors">Cuota Mensual (Oct) - Martin R.</p>
               </div>
-              <p className="text-sm text-emerald-500 whitespace-nowrap">$25.000</p>
+              <p className="text-sm text-emerald-600 dark:text-emerald-500 whitespace-nowrap transition-colors">$25.000</p>
             </div>
 
             <div className="flex justify-between items-start">
               <div className="flex space-x-3">
                 <div className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5"></div>
-                <p className="text-sm text-zinc-300 pr-4">Pase Libre - Laura G.</p>
+                <p className="text-sm text-slate-600 dark:text-zinc-300 pr-4 transition-colors">Pase Libre - Laura G.</p>
               </div>
-              <p className="text-sm text-emerald-500 whitespace-nowrap">$180.000</p>
+              <p className="text-sm text-emerald-600 dark:text-emerald-500 whitespace-nowrap transition-colors">$180.000</p>
             </div>
 
             <div className="flex justify-between items-start">
               <div className="flex space-x-3">
                 <div className="w-2 h-2 rounded-full bg-yellow-500 mt-1.5"></div>
-                <p className="text-sm text-zinc-300 pr-4">Cuota Mensual + Locker - Carlo S.</p>
+                <p className="text-sm text-slate-600 dark:text-zinc-300 pr-4 transition-colors">Cuota Mensual + Locker - Carlo S.</p>
               </div>
-              <p className="text-sm text-yellow-500 whitespace-nowrap">$28.500</p>
+              <p className="text-sm text-yellow-600 dark:text-yellow-500 whitespace-nowrap transition-colors">$28.500</p>
             </div>
 
             <div className="flex justify-between items-start">
               <div className="flex space-x-3">
                 <div className="w-2 h-2 rounded-full bg-red-500 mt-1.5"></div>
-                <p className="text-sm text-zinc-300 pr-4">Clases Personales (x10) - Valeria F.</p>
+                <p className="text-sm text-slate-600 dark:text-zinc-300 pr-4 transition-colors">Clases Personales (x10) - Valeria F.</p>
               </div>
-              <p className="text-sm text-red-500 whitespace-nowrap">$45.000</p>
+              <p className="text-sm text-red-600 dark:text-red-500 whitespace-nowrap transition-colors">$45.000</p>
             </div>
           </div>
 
           <button 
             onClick={() => navigate('/admin/finanzas/pagos')}
-            className="w-full mt-6 bg-[#7B8B9E] hover:bg-slate-400 text-white font-bold text-sm py-3.5 rounded-xl transition-colors cursor-pointer"
+            className="w-full mt-6 bg-slate-800 hover:bg-slate-700 text-white dark:bg-[#7B8B9E] dark:hover:bg-slate-400 font-bold text-sm py-3.5 rounded-xl transition-colors cursor-pointer"
           >
             + Ver más
           </button>

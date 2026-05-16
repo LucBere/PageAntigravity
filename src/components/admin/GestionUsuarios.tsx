@@ -102,8 +102,8 @@ export default function GestionUsuarios() {
         onClick={() => handlePageChange(page)}
         className={`w-8 h-8 flex items-center justify-center rounded-lg font-medium text-xs transition-colors cursor-pointer ${
           isActive 
-            ? 'bg-[#7B8B9E] text-white' 
-            : 'hover:bg-zinc-800 text-zinc-400'
+            ? 'bg-slate-800 dark:bg-[#7B8B9E] text-white' 
+            : 'hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-500 dark:text-zinc-400'
         }`}
       >
         {page}
@@ -151,12 +151,12 @@ export default function GestionUsuarios() {
       {/* 1. Encabezado */}
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-[2rem] font-bold text-[#FAFAFA] tracking-wide mb-1 uppercase">GESTIÓN DE USUARIO</h2>
-          <p className="text-zinc-400 text-sm">Listado general de usuarios y personal del sistema</p>
+          <h2 className="text-[2rem] font-bold text-slate-900 dark:text-[#FAFAFA] tracking-wide mb-1 uppercase transition-colors">GESTIÓN DE USUARIO</h2>
+          <p className="text-slate-500 dark:text-zinc-400 text-sm">Listado general de usuarios y personal del sistema</p>
         </div>
         <button 
           onClick={() => navigate('/admin/usuarios/nuevo')}
-          className="flex items-center space-x-2 bg-[#7B8B9E] hover:bg-slate-400 text-[#FAFAFA] px-6 py-3.5 rounded-lg font-bold text-[11px] uppercase tracking-widest transition-colors cursor-pointer"
+          className="flex items-center space-x-2 bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white px-6 py-3.5 rounded-lg font-bold text-[11px] uppercase tracking-widest transition-colors cursor-pointer"
         >
           <Plus className="w-4 h-4 mr-1" />
           <span>NUEVO USUARIO</span>
@@ -166,27 +166,27 @@ export default function GestionUsuarios() {
       {/* 2. Barra de Herramientas */}
       <div className="flex items-center gap-4 relative">
         <div className="flex-grow relative">
-          <Search className="w-4 h-4 absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-500" />
+          <Search className="w-4 h-4 absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 dark:text-zinc-500" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Buscar por nombre, cargo o rol..."
-            className="w-full bg-[#151515] border border-zinc-800 rounded-xl py-3 pl-11 pr-4 text-sm text-[#FAFAFA] placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition-colors"
+            className="w-full bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 pl-11 pr-4 text-sm text-slate-900 dark:text-[#FAFAFA] placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors shadow-sm dark:shadow-none"
           />
         </div>
         
         <div className="relative">
           <button 
             onClick={() => setIsFilterMenuOpen(!isFilterMenuOpen)}
-            className={`p-3 border rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${isFilterMenuOpen || filtroActivo !== 'Todos' ? 'bg-zinc-800 border-zinc-600 text-[#FAFAFA]' : 'bg-[#151515] border-zinc-800 text-zinc-400 hover:text-[#FAFAFA] hover:bg-zinc-800 hover:border-zinc-600'}`}
+            className={`p-3 border rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${isFilterMenuOpen || filtroActivo !== 'Todos' ? 'bg-slate-100 dark:bg-zinc-800 border-zinc-600 text-slate-900 dark:text-[#FAFAFA]' : 'bg-white dark:bg-[#151515] border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-[#FAFAFA] hover:bg-slate-100 dark:hover:bg-zinc-800 hover:border-zinc-600'}`}
           >
             <Filter className="w-4 h-4" />
             {filtroActivo !== 'Todos' && <span className="text-xs font-medium">{filtroActivo}</span>}
           </button>
           
           {isFilterMenuOpen && (
-            <div className="absolute right-0 top-full mt-2 w-48 bg-[#1A1A1A] border border-zinc-800 rounded-lg shadow-xl z-50 overflow-hidden">
+            <div className="absolute right-0 top-full mt-2 w-48 bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-lg shadow-xl z-50 overflow-hidden">
               <div className="py-1">
                 {filterOptions.map((opcion) => (
                   <button
@@ -196,7 +196,7 @@ export default function GestionUsuarios() {
                       setIsFilterMenuOpen(false);
                       setPaginaActual(1);
                     }}
-                    className={`w-full text-left px-4 py-2 text-sm hover:bg-zinc-800 transition-colors ${filtroActivo === opcion ? 'text-[#FAFAFA] bg-zinc-800/50' : 'text-zinc-400'}`}
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors ${filtroActivo === opcion ? 'text-slate-900 dark:text-[#FAFAFA] bg-slate-100 dark:bg-zinc-800/50' : 'text-slate-500 dark:text-zinc-400'}`}
                   >
                     {opcion}
                   </button>
@@ -208,56 +208,56 @@ export default function GestionUsuarios() {
 
         <button 
           onClick={handleDownloadPDF}
-          className="p-3 bg-[#151515] border border-zinc-800 rounded-xl text-zinc-400 hover:text-[#FAFAFA] hover:bg-zinc-800 hover:border-zinc-600 transition-colors cursor-pointer"
+          className="p-3 bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-[#FAFAFA] hover:bg-slate-100 dark:hover:bg-zinc-800 hover:border-zinc-600 transition-colors cursor-pointer shadow-sm dark:shadow-none"
         >
           <Download className="w-4 h-4" />
         </button>
       </div>
 
       {/* 3. Tabla Principal */}
-      <div className="bg-[#151515] border border-zinc-800 rounded-xl overflow-hidden min-h-[400px] flex flex-col">
+      <div className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl overflow-hidden min-h-[400px] flex flex-col transition-colors shadow-sm dark:shadow-none">
         <div className="overflow-x-auto flex-grow">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr>
-                <th className="px-8 py-5 text-[10px] font-bold text-zinc-400 uppercase tracking-widest border-b border-zinc-800">NOMBRE</th>
-                <th className="px-8 py-5 text-[10px] font-bold text-zinc-400 uppercase tracking-widest border-b border-zinc-800">ROL</th>
-                <th className="px-8 py-5 text-[10px] font-bold text-zinc-400 uppercase tracking-widest border-b border-zinc-800">ESTADO</th>
-                <th className="px-8 py-5 text-[10px] font-bold text-zinc-400 uppercase tracking-widest border-b border-zinc-800">ÚLTIMA CONEXIÓN</th>
-                <th className="px-8 py-5 text-[10px] font-bold text-zinc-400 uppercase tracking-widest border-b border-zinc-800 text-right">ACCIONES</th>
+                <th className="px-8 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest border-b border-slate-200 dark:border-zinc-800">NOMBRE</th>
+                <th className="px-8 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest border-b border-slate-200 dark:border-zinc-800">ROL</th>
+                <th className="px-8 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest border-b border-slate-200 dark:border-zinc-800">ESTADO</th>
+                <th className="px-8 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest border-b border-slate-200 dark:border-zinc-800">ÚLTIMA CONEXIÓN</th>
+                <th className="px-8 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest border-b border-slate-200 dark:border-zinc-800 text-right">ACCIONES</th>
               </tr>
             </thead>
             <tbody>
               {currentUsers.length > 0 ? (
                 currentUsers.map((user) => (
-                  <tr key={user.id} className="border-b border-zinc-800/50 hover:bg-white/[0.02] transition-colors last:border-0">
+                  <tr key={user.id} className="border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 hover:bg-slate-50 dark:bg-white/[0.02] transition-colors last:border-0">
                     <td className="px-8 py-5">
                       <div className="flex items-center space-x-4">
-                        <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full object-cover border border-zinc-800" />
+                        <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-zinc-800" />
                         <div>
-                          <p className="text-sm font-bold text-[#FAFAFA] leading-tight">{user.name}</p>
-                          <p className="text-[10px] text-zinc-500 mt-0.5">{user.email}</p>
+                          <p className="text-sm font-bold text-slate-900 dark:text-[#FAFAFA] leading-tight transition-colors">{user.name}</p>
+                          <p className="text-[10px] text-slate-500 dark:text-zinc-500 mt-0.5">{user.email}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-8 py-5">
-                      <p className="text-xs text-[#FAFAFA] whitespace-pre-line leading-snug">{user.role}</p>
+                      <p className="text-xs text-slate-900 dark:text-[#FAFAFA] whitespace-pre-line leading-snug transition-colors">{user.role}</p>
                     </td>
                     <td className="px-8 py-5">
                       <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-wider border ${
                         user.status === 'ACTIVO' 
                           ? 'bg-[#1B2A1E]/80 border-[#234A2E] text-[#4ADE80]' 
-                          : 'bg-[#2A2A2A]/80 border-zinc-700 text-zinc-400'
+                          : 'bg-[#2A2A2A]/80 border-slate-300 dark:border-zinc-700 text-slate-500 dark:text-zinc-400'
                       }`}>
                         <span className={`w-1.5 h-1.5 rounded-full mr-2 ${user.status === 'ACTIVO' ? 'bg-[#4ADE80]' : 'bg-zinc-400'}`}></span>
                         {user.status}
                       </span>
                     </td>
-                    <td className="px-8 py-5 text-xs text-zinc-400">
+                    <td className="px-8 py-5 text-xs text-slate-500 dark:text-zinc-400">
                       {user.lastConnection}
                     </td>
                     <td className="px-8 py-5">
-                      <div className="flex items-center justify-end space-x-4 text-zinc-500">
+                      <div className="flex items-center justify-end space-x-4 text-slate-500 dark:text-zinc-500">
                         <button 
                           onClick={() => navigate('/admin/usuarios/editar')}
                           className="hover:text-[#7B8B9E] transition-colors cursor-pointer"
@@ -266,7 +266,7 @@ export default function GestionUsuarios() {
                         </button>
                         <button 
                           onClick={() => confirm("¿Estás seguro que deseas deshabilitar a " + user.name + "?")}
-                          className="hover:text-red-500 transition-colors cursor-pointer"
+                          className="hover:text-red-600 dark:text-red-500 transition-colors cursor-pointer"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -276,7 +276,7 @@ export default function GestionUsuarios() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5} className="px-8 py-10 text-center text-zinc-500 text-sm">
+                  <td colSpan={5} className="px-8 py-10 text-center text-slate-500 dark:text-zinc-500 text-sm">
                     No se encontraron usuarios que coincidan con la búsqueda.
                   </td>
                 </tr>
@@ -286,8 +286,8 @@ export default function GestionUsuarios() {
         </div>
 
         {/* Paginación */}
-        <div className="px-8 py-5 flex items-center justify-between border-t border-zinc-800 bg-[#151515] mt-auto">
-          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+        <div className="px-8 py-5 flex items-center justify-between border-t border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#151515] mt-auto transition-colors shadow-sm dark:shadow-none">
+          <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest">
             MOSTRANDO {startItem}-{endItem} DE {usuariosFiltrados.length}
           </p>
           {totalPages > 1 && (
@@ -295,7 +295,7 @@ export default function GestionUsuarios() {
               <button 
                 onClick={handlePrevPage}
                 disabled={paginaActual === 1}
-                className="w-8 h-8 flex items-center justify-center rounded-lg bg-[#0E0E0E] border border-zinc-800/50 text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-[#0E0E0E] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
@@ -305,7 +305,7 @@ export default function GestionUsuarios() {
               <button 
                 onClick={handleNextPage}
                 disabled={paginaActual === totalPages}
-                className="w-8 h-8 flex items-center justify-center rounded-lg bg-[#0E0E0E] border border-zinc-800/50 text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-[#0E0E0E] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -316,18 +316,18 @@ export default function GestionUsuarios() {
 
       {/* 4. Tarjetas KPI */}
       <div className="grid grid-cols-3 gap-6">
-        <div className="bg-[#151515] border border-zinc-800 rounded-xl p-6">
-          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">TOTAL PERSONAL</p>
-          <p className="text-4xl font-normal text-[#FAFAFA]">{totalPersonal}</p>
+        <div className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl p-6 transition-colors shadow-sm dark:shadow-none">
+          <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest mb-3">TOTAL PERSONAL</p>
+          <p className="text-4xl font-normal text-slate-900 dark:text-[#FAFAFA] transition-colors">{totalPersonal}</p>
         </div>
         {/* highlighted card */}
-        <div className="bg-[#151515] border border-[#7B8B9E] rounded-xl p-6 shadow-[0_0_20px_rgba(123,139,158,0.08)]">
-          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">PERSONAL ACTIVO</p>
-          <p className="text-4xl font-normal text-[#FAFAFA]">{personalActivo}</p>
+        <div className="bg-white dark:bg-[#151515] border border-[#7B8B9E] rounded-xl p-6 shadow-[0_0_20px_rgba(123,139,158,0.08)] transition-colors shadow-sm dark:shadow-none">
+          <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest mb-3">PERSONAL ACTIVO</p>
+          <p className="text-4xl font-normal text-slate-900 dark:text-[#FAFAFA] transition-colors">{personalActivo}</p>
         </div>
-        <div className="bg-[#151515] border border-zinc-800 rounded-xl p-6">
-          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">SOLICITUDES PENDIENTES</p>
-          <p className="text-4xl font-normal text-[#FAFAFA]">03</p>
+        <div className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl p-6 transition-colors shadow-sm dark:shadow-none">
+          <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest mb-3">SOLICITUDES PENDIENTES</p>
+          <p className="text-4xl font-normal text-slate-900 dark:text-[#FAFAFA] transition-colors">03</p>
         </div>
       </div>
     </div>

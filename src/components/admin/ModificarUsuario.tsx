@@ -57,7 +57,7 @@ export default function ModificarUsuario() {
 
   if (isLoadingData) {
     return (
-      <div className="max-w-3xl space-y-8 flex justify-center items-center h-64 text-zinc-500 text-sm">
+      <div className="max-w-3xl space-y-8 flex justify-center items-center h-64 text-slate-500 dark:text-zinc-500 text-sm">
         Cargando datos del usuario...
       </div>
     );
@@ -67,43 +67,43 @@ export default function ModificarUsuario() {
     <div className="max-w-3xl space-y-8">
       {/* Encabezado */}
       <div>
-        <h1 className="text-[2rem] font-bold text-[#FAFAFA] tracking-wide mb-1">
+        <h1 className="text-[2rem] font-bold text-slate-900 dark:text-[#FAFAFA] tracking-wide mb-1 transition-colors">
           Modificar usuario
         </h1>
       </div>
 
       {/* Contenedor del Formulario */}
-      <div className="bg-[#151515] rounded-2xl p-8">
+      <div className="bg-white dark:bg-[#151515] rounded-2xl p-8 transition-colors shadow-sm dark:shadow-none">
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Fila 1 */}
           <div className="grid grid-cols-2 gap-6">
             <div className="flex flex-col space-y-2">
-              <label className="text-[10px] text-zinc-500 tracking-wider uppercase font-bold">NOMBRE</label>
+              <label className="text-[10px] text-slate-500 dark:text-zinc-500 tracking-wider uppercase font-bold">NOMBRE</label>
               <input
                 type="text"
                 name="nombre"
                 value={formData.nombre}
                 onChange={handleChange}
                 required
-                className="bg-[#1A1A1A] border border-zinc-800 h-12 rounded-xl px-4 text-[#FAFAFA] focus:outline-none focus:ring-1 focus:ring-zinc-700 w-full transition-colors"
+                className="bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 h-12 rounded-xl px-4 text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:ring-1 focus:ring-zinc-700 w-full transition-colors"
               />
             </div>
             <div className="flex flex-col space-y-2">
-              <label className="text-[10px] text-zinc-500 tracking-wider uppercase font-bold">APELLIDO</label>
+              <label className="text-[10px] text-slate-500 dark:text-zinc-500 tracking-wider uppercase font-bold">APELLIDO</label>
               <input
                 type="text"
                 name="apellido"
                 value={formData.apellido}
                 onChange={handleChange}
                 required
-                className="bg-[#1A1A1A] border border-zinc-800 h-12 rounded-xl px-4 text-[#FAFAFA] focus:outline-none focus:ring-1 focus:ring-zinc-700 w-full transition-colors"
+                className="bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 h-12 rounded-xl px-4 text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:ring-1 focus:ring-zinc-700 w-full transition-colors"
               />
             </div>
           </div>
 
           {/* Fila 2 */}
           <div className="flex flex-col space-y-2">
-            <label className="text-[10px] text-zinc-500 tracking-wider uppercase font-bold">DIRECCIÓN</label>
+            <label className="text-[10px] text-slate-500 dark:text-zinc-500 tracking-wider uppercase font-bold">DIRECCIÓN</label>
             <input
               type="text"
               name="direccion"
@@ -111,21 +111,21 @@ export default function ModificarUsuario() {
               onChange={handleChange}
               maxLength={100}
               required
-              className="bg-[#1A1A1A] border border-zinc-800 h-12 rounded-xl px-4 text-[#FAFAFA] focus:outline-none focus:ring-1 focus:ring-zinc-700 w-full transition-colors"
+              className="bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 h-12 rounded-xl px-4 text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:ring-1 focus:ring-zinc-700 w-full transition-colors"
             />
           </div>
 
           {/* Fila 3 */}
           <div className="flex flex-col space-y-2">
-            <label className="text-[10px] text-zinc-500 tracking-wider uppercase font-bold">ROL</label>
+            <label className="text-[10px] text-slate-500 dark:text-zinc-500 tracking-wider uppercase font-bold">ROL</label>
             <select
               name="rol"
               value={formData.rol}
               onChange={handleChange}
               required
-              className="bg-[#1A1A1A] border border-zinc-800 h-12 rounded-xl px-4 text-[#FAFAFA] focus:outline-none focus:ring-1 focus:ring-zinc-700 w-full appearance-none transition-colors"
+              className="bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 h-12 rounded-xl px-4 text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:ring-1 focus:ring-zinc-700 w-full appearance-none transition-colors"
             >
-              <option value="" disabled className="text-zinc-500">Seleccione un rol</option>
+              <option value="" disabled className="text-slate-500 dark:text-zinc-500">Seleccione un rol</option>
               <option value="Profesor">Profesor</option>
               <option value="Secretaria">Secretaria</option>
               <option value="Encargado">Encargado</option>
@@ -138,8 +138,8 @@ export default function ModificarUsuario() {
             disabled={!isValid || isSaving}
             className={`w-full font-bold text-sm h-12 rounded-xl mt-4 transition-all tracking-wide uppercase ${
               !isValid || isSaving
-                ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed opacity-50'
-                : 'bg-[#7B8B9E] hover:bg-slate-400 text-[#FAFAFA] cursor-pointer'
+                ? 'bg-slate-100 dark:bg-zinc-800 text-slate-500 dark:text-zinc-500 cursor-not-allowed opacity-50'
+                : 'bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white cursor-pointer'
             }`}
           >
             {isSaving ? 'GUARDANDO...' : 'GUARDAR CAMBIOS'}

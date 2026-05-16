@@ -121,27 +121,27 @@ export default function RolesPermisos() {
       
       {/* Encabezado */}
       <div>
-        <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold mb-3">
+        <p className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold mb-3">
           SEGURIDAD Y CONTROL <span className="mx-1">{">"}</span> ROLES Y PERMISOS
         </p>
-        <h1 className="text-[3rem] font-black text-[#FAFAFA] tracking-tighter mb-4 uppercase leading-none">
+        <h1 className="text-[3rem] font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-4 uppercase leading-none transition-colors">
           ROLES Y PERMISOS
         </h1>
         
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <p className="text-zinc-400 text-sm max-w-xl">
+          <p className="text-slate-500 dark:text-zinc-400 text-sm max-w-xl">
             Define los niveles de acceso y capacidades operativas para cada perfil dentro del ecosistema SquatGym.
           </p>
           <div className="flex items-center gap-4">
             <button 
               onClick={handleDescargarLog}
-              className="px-6 py-3.5 rounded-xl border border-zinc-700 bg-[#0E0E0E] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-zinc-900 transition-colors cursor-pointer"
+              className="px-6 py-3.5 rounded-xl border border-slate-300 dark:border-zinc-700 bg-white dark:bg-[#0E0E0E] text-slate-900 dark:text-white text-[11px] font-bold uppercase tracking-widest hover:bg-slate-200 dark:bg-zinc-900 transition-colors cursor-pointer"
             >
               DESCARGAR LOG
             </button>
             <button 
               onClick={handleGuardarCambios}
-              className="px-6 py-3.5 rounded-xl bg-[#7B8B9E] hover:bg-slate-400 text-white text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
+              className="px-6 py-3.5 rounded-xl bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
             >
               GUARDAR CAMBIOS
             </button>
@@ -159,42 +159,42 @@ export default function RolesPermisos() {
               onClick={() => setRolActivo(p.roleKey)}
               className={`min-w-[180px] p-5 rounded-2xl cursor-pointer transition-colors ${
                 isActive 
-                  ? 'bg-[#151515] border-l-4 border-l-[#7B8B9E] shadow-lg opacity-100' 
-                  : 'bg-[#151515] hover:bg-[#1A1A1A] border-l-4 border-l-transparent opacity-60'
+                  ? 'bg-white dark:bg-[#151515] border-l-4 border-l-[#7B8B9E] shadow-lg opacity-100' 
+                  : 'bg-white dark:bg-[#151515] hover:bg-slate-50 dark:bg-[#1A1A1A] border-l-4 border-l-transparent opacity-60'
               }`}
             >
-              <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest mb-1.5">{p.type}</p>
-              <p className={`font-medium ${isActive ? 'text-white' : 'text-zinc-400'}`}>{p.role}</p>
+              <p className="text-[9px] text-slate-500 dark:text-zinc-500 font-bold uppercase tracking-widest mb-1.5">{p.type}</p>
+              <p className={`font-medium ${isActive ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-zinc-400'}`}>{p.role}</p>
             </div>
           );
         })}
       </div>
 
       {/* Matriz de Permisos */}
-      <div className="bg-[#151515] border border-zinc-800 rounded-2xl overflow-hidden">
+      <div className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-2xl overflow-hidden transition-colors shadow-sm dark:shadow-none">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr>
-                <th className="px-8 py-6 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/50 w-1/3">MÓDULO DEL SISTEMA</th>
-                <th className="px-4 py-6 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/50 text-center">VER</th>
-                <th className="px-4 py-6 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/50 text-center">CREAR</th>
-                <th className="px-4 py-6 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/50 text-center">EDITAR</th>
-                <th className="px-4 py-6 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/50 text-center">ELIMINAR</th>
-                <th className="px-8 py-6 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/50 text-right">AVANZADO</th>
+                <th className="px-8 py-6 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 w-1/3">MÓDULO DEL SISTEMA</th>
+                <th className="px-4 py-6 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-center">VER</th>
+                <th className="px-4 py-6 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-center">CREAR</th>
+                <th className="px-4 py-6 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-center">EDITAR</th>
+                <th className="px-4 py-6 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-center">ELIMINAR</th>
+                <th className="px-8 py-6 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-right">AVANZADO</th>
               </tr>
             </thead>
             <tbody>
               {modulos.map((m) => (
-                <tr key={m.id} className="border-b border-zinc-800/30 last:border-0 hover:bg-white/[0.02] transition-colors">
+                <tr key={m.id} className="border-b border-slate-100 dark:border-slate-200 dark:border-zinc-800/30 last:border-0 hover:bg-slate-50 dark:bg-white/[0.02] transition-colors">
                   <td className="px-8 py-5">
                     <div className="flex items-center space-x-4">
-                      <div className="w-10 h-10 rounded-lg bg-[#1A1A1A] border border-zinc-800/50 flex items-center justify-center text-zinc-400">
+                      <div className="w-10 h-10 rounded-lg bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 flex items-center justify-center text-slate-500 dark:text-zinc-400">
                         <m.icon className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="text-xs font-bold text-[#FAFAFA] uppercase tracking-wider mb-0.5">{m.title}</p>
-                        <p className="text-[11px] text-zinc-500">{m.desc}</p>
+                        <p className="text-xs font-bold text-slate-900 dark:text-[#FAFAFA] uppercase tracking-wider mb-0.5 transition-colors">{m.title}</p>
+                        <p className="text-[11px] text-slate-500 dark:text-zinc-500">{m.desc}</p>
                       </div>
                     </div>
                   </td>
@@ -211,7 +211,7 @@ export default function RolesPermisos() {
                     {renderCheckbox(m.key, 'eliminar')}
                   </td>
                   <td className="px-8 py-5">
-                    <div className="flex justify-end items-center space-x-2 text-zinc-500 hover:text-white transition-colors cursor-pointer">
+                    <div className="flex justify-end items-center space-x-2 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors cursor-pointer">
                       <span className="text-[9px] font-bold tracking-widest uppercase">CONFIGURACIÓN</span>
                       <Settings2 className="w-4 h-4" />
                     </div>

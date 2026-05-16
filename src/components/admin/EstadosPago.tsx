@@ -101,8 +101,8 @@ export default function EstadosPago() {
         key={page}
         onClick={() => handlePageChange(page)}
         className={`w-7 h-7 flex items-center justify-center rounded text-xs font-bold transition-colors cursor-pointer ${isActive
-            ? 'bg-[#7B8B9E] text-white'
-            : 'hover:bg-zinc-800 text-zinc-400 font-medium'
+            ? 'bg-slate-800 dark:bg-[#7B8B9E] text-white'
+            : 'hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-500 dark:text-zinc-400 font-medium'
           }`}
       >
         {page}
@@ -252,63 +252,63 @@ export default function EstadosPago() {
     <div className="space-y-6 max-w-7xl mx-auto flex flex-col h-full min-h-[calc(100vh-100px)]">
       {/* Encabezado */}
       <div>
-        <h1 className="text-[3rem] font-black text-[#FAFAFA] tracking-tighter mb-6 uppercase leading-none">
+        <h1 className="text-[3rem] font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-6 uppercase leading-none transition-colors">
           ESTADOS DE PAGO
         </h1>
       </div>
 
       {/* Tarjetas KPI Superiores */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-[#151515] p-6 rounded-2xl border-b-2 border-emerald-500 relative transition-all">
+        <div className="bg-white dark:bg-[#151515] p-6 rounded-2xl border-b-2 border-emerald-500 relative transition-all transition-colors shadow-sm dark:shadow-none">
           <div className="flex justify-between items-start mb-2">
-            <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">TOTAL RECIBIDO</p>
+            <p className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold">TOTAL RECIBIDO</p>
             <Banknote className="w-4 h-4 text-emerald-500" />
           </div>
           <div className="flex items-baseline space-x-2 mb-1">
-            <p className="text-3xl font-normal text-[#FAFAFA]">{formatCurrency(totalRecibido)}</p>
+            <p className="text-3xl font-normal text-slate-900 dark:text-[#FAFAFA] transition-colors">{formatCurrency(totalRecibido)}</p>
           </div>
-          <p className="text-sm text-zinc-400">Según filtros aplicados</p>
+          <p className="text-sm text-slate-500 dark:text-zinc-400">Según filtros aplicados</p>
         </div>
 
-        <div className="bg-[#151515] p-6 rounded-2xl border-b-2 border-yellow-500 relative transition-all">
+        <div className="bg-white dark:bg-[#151515] p-6 rounded-2xl border-b-2 border-yellow-500 relative transition-all transition-colors shadow-sm dark:shadow-none">
           <div className="flex justify-between items-start mb-2">
-            <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">TOTAL PENDIENTE</p>
+            <p className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold">TOTAL PENDIENTE</p>
             <Clock className="w-4 h-4 text-yellow-500" />
           </div>
           <div className="flex items-baseline space-x-2 mb-1">
-            <p className="text-3xl font-normal text-[#FAFAFA]">{formatCurrency(totalPendiente)}</p>
+            <p className="text-3xl font-normal text-slate-900 dark:text-[#FAFAFA] transition-colors">{formatCurrency(totalPendiente)}</p>
           </div>
-          <p className="text-sm text-zinc-400">Según filtros aplicados</p>
+          <p className="text-sm text-slate-500 dark:text-zinc-400">Según filtros aplicados</p>
         </div>
 
-        <div className="bg-[#151515] p-6 rounded-2xl border-b-2 border-red-500 relative transition-all">
+        <div className="bg-white dark:bg-[#151515] p-6 rounded-2xl border-b-2 border-red-500 relative transition-all transition-colors shadow-sm dark:shadow-none">
           <div className="flex justify-between items-start mb-2">
-            <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">TOTAL EN DEUDA</p>
-            <AlertTriangle className="w-4 h-4 text-red-500" />
+            <p className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold">TOTAL EN DEUDA</p>
+            <AlertTriangle className="w-4 h-4 text-red-600 dark:text-red-500" />
           </div>
           <div className="flex items-baseline space-x-2 mb-1">
-            <p className="text-3xl font-normal text-[#FAFAFA]">{formatCurrency(totalDeuda)}</p>
+            <p className="text-3xl font-normal text-slate-900 dark:text-[#FAFAFA] transition-colors">{formatCurrency(totalDeuda)}</p>
           </div>
-          <p className="text-sm text-zinc-400">Según filtros aplicados</p>
+          <p className="text-sm text-slate-500 dark:text-zinc-400">Según filtros aplicados</p>
         </div>
       </div>
 
       {/* Barra de Herramientas (Filtros) */}
       <div className="flex flex-col md:flex-row items-center gap-4 py-2">
         <div className="flex-grow relative w-full md:w-auto">
-          <Search className="w-4 h-4 absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-500" />
+          <Search className="w-4 h-4 absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 dark:text-zinc-500" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Buscar por Nombre o DNI..."
-            className="w-full bg-[#151515] border border-zinc-800 rounded-xl py-3 pl-11 pr-4 text-sm text-[#FAFAFA] placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition-colors"
+            className="w-full bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 pl-11 pr-4 text-sm text-slate-900 dark:text-[#FAFAFA] placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors shadow-sm dark:shadow-none"
           />
         </div>
         <select
           value={filtroSede}
           onChange={(e) => setFiltroSede(e.target.value)}
-          className="bg-[#151515] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-[#FAFAFA] focus:outline-none focus:border-zinc-600 appearance-none pr-10 min-w-[160px] cursor-pointer transition-colors"
+          className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 appearance-none pr-10 min-w-[160px] cursor-pointer transition-colors shadow-sm dark:shadow-none"
         >
           <option value="Todas las Sedes">Todas las Sedes</option>
           <option value="Sede Norte">Sede Norte</option>
@@ -318,7 +318,7 @@ export default function EstadosPago() {
         <select
           value={filtroPeriodo}
           onChange={(e) => setFiltroPeriodo(e.target.value)}
-          className="bg-[#151515] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-[#FAFAFA] focus:outline-none focus:border-zinc-600 appearance-none pr-10 min-w-[140px] cursor-pointer transition-colors"
+          className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 appearance-none pr-10 min-w-[140px] cursor-pointer transition-colors shadow-sm dark:shadow-none"
         >
           <option value="Todos los Meses">Todos los Meses</option>
           <option value="Octubre 2023">Octubre 2023</option>
@@ -327,7 +327,7 @@ export default function EstadosPago() {
         <select
           value={filtroEstado}
           onChange={(e) => setFiltroEstado(e.target.value)}
-          className="bg-[#151515] border border-zinc-800 rounded-xl py-3 px-4 text-sm text-[#FAFAFA] focus:outline-none focus:border-zinc-600 appearance-none pr-10 min-w-[160px] cursor-pointer transition-colors"
+          className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 appearance-none pr-10 min-w-[160px] cursor-pointer transition-colors shadow-sm dark:shadow-none"
         >
           <option value="Todos los Estados">Todos los Estados</option>
           <option value="Recibido">Recibido</option>
@@ -337,53 +337,53 @@ export default function EstadosPago() {
       </div>
 
       {/* Tabla Principal */}
-      <div className="bg-[#151515] border border-zinc-800 rounded-2xl overflow-hidden flex flex-col flex-grow">
+      <div className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-2xl overflow-hidden flex flex-col flex-grow transition-colors shadow-sm dark:shadow-none">
         <div className="overflow-x-auto flex-grow">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr>
-                <th className="px-6 py-5 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/50">FECHA</th>
-                <th className="px-6 py-5 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/50">SOCIO / ALUMNO</th>
-                <th className="px-6 py-5 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/50">SEDE</th>
-                <th className="px-6 py-5 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/50">CONCEPTO</th>
-                <th className="px-6 py-5 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/50">MONTO</th>
-                <th className="px-6 py-5 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/50">ESTADO</th>
+                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">FECHA</th>
+                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">SOCIO / ALUMNO</th>
+                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">SEDE</th>
+                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">CONCEPTO</th>
+                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">MONTO</th>
+                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">ESTADO</th>
               </tr>
             </thead>
             <tbody>
               {currentPagos.length > 0 ? (
                 currentPagos.map((p) => (
-                  <tr key={p.id} className="bg-[#1A1A1A] border-b border-zinc-800/30 hover:bg-white/[0.02] transition-colors last:border-0">
+                  <tr key={p.id} className="bg-slate-50 dark:bg-[#1A1A1A] border-b border-slate-100 dark:border-slate-200 dark:border-zinc-800/30 hover:bg-slate-50 dark:bg-white/[0.02] transition-colors last:border-0">
                     <td className="px-6 py-4">
-                      <p className={`text-sm font-medium ${p.estado === 'Deuda' ? 'text-red-500' : 'text-[#FAFAFA]'}`}>
+                      <p className={`text-sm font-medium ${p.estado === 'Deuda' ? 'text-red-600 dark:text-red-500' : 'text-slate-900 dark:text-[#FAFAFA]'}`}>
                         {p.fecha}
                       </p>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-xs font-bold text-[#FAFAFA]">
+                        <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-zinc-800 flex items-center justify-center text-xs font-bold text-slate-900 dark:text-[#FAFAFA] transition-colors">
                           {p.avatar}
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-[#FAFAFA]">{p.socio}</p>
-                          <p className="text-[10px] text-zinc-500">DNI: {p.dni}</p>
+                          <p className="text-sm font-bold text-slate-900 dark:text-[#FAFAFA] transition-colors">{p.socio}</p>
+                          <p className="text-[10px] text-slate-500 dark:text-zinc-500">DNI: {p.dni}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="text-sm text-zinc-400">{p.sede}</p>
+                      <p className="text-sm text-slate-500 dark:text-zinc-400">{p.sede}</p>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="text-sm text-zinc-300">{p.concepto}</p>
+                      <p className="text-sm text-slate-600 dark:text-zinc-300">{p.concepto}</p>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="text-sm font-bold text-[#FAFAFA]">{formatCurrency(p.monto)}</p>
+                      <p className="text-sm font-bold text-slate-900 dark:text-[#FAFAFA] transition-colors">{formatCurrency(p.monto)}</p>
                     </td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase
-                        ${p.estado === 'Recibido' ? 'bg-[#1B2A1E]/80 text-[#4ADE80] border border-[#234A2E]' :
-                          p.estado === 'Pendiente' ? 'bg-[#3A2D12]/80 text-[#FBBF24] border border-[#52401A]' :
-                            'bg-[#3A1818]/80 text-[#F87171] border border-[#5A2525]'}`}
+                        ${p.estado === 'Recibido' ? 'bg-green-50 text-green-700 border border-green-200 dark:bg-[#1B2A1E]/80 dark:text-[#4ADE80] dark:border-[#234A2E]' :
+                          p.estado === 'Pendiente' ? 'bg-yellow-50 text-yellow-700 border border-yellow-200 dark:bg-[#3A2D12]/80 dark:text-[#FBBF24] dark:border-[#52401A]' :
+                            'bg-red-50 text-red-700 border border-red-200 dark:bg-[#3A1818]/80 dark:text-[#F87171] dark:border-[#5A2525]'}`}
                       >
                         {p.estado}
                       </span>
@@ -392,7 +392,7 @@ export default function EstadosPago() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={6} className="px-6 py-10 text-center text-zinc-500 text-sm">
+                  <td colSpan={6} className="px-6 py-10 text-center text-slate-500 dark:text-zinc-500 text-sm">
                     No se encontraron pagos con los filtros seleccionados.
                   </td>
                 </tr>
@@ -402,14 +402,14 @@ export default function EstadosPago() {
         </div>
 
         {/* Paginación */}
-        <div className="px-6 py-4 flex items-center justify-between border-t border-zinc-800 bg-[#151515] mt-auto">
-          <p className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">Mostrando {startItem} a {endItem} de {pagosFiltrados.length} registros</p>
+        <div className="px-6 py-4 flex items-center justify-between border-t border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#151515] mt-auto transition-colors shadow-sm dark:shadow-none">
+          <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 tracking-widest uppercase">Mostrando {startItem} a {endItem} de {pagosFiltrados.length} registros</p>
           {totalPages > 1 && (
             <div className="flex items-center space-x-1">
               <button
                 onClick={handlePrevPage}
                 disabled={paginaActual === 1}
-                className="px-3 py-1.5 rounded text-xs text-zinc-500 hover:text-white transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1.5 rounded text-xs text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Anterior
               </button>
@@ -419,7 +419,7 @@ export default function EstadosPago() {
               <button
                 onClick={handleNextPage}
                 disabled={paginaActual === totalPages}
-                className="px-3 py-1.5 rounded text-xs border border-zinc-700 text-zinc-300 hover:bg-zinc-800 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1.5 rounded text-xs border border-slate-300 dark:border-zinc-700 text-slate-600 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Siguiente
               </button>
@@ -432,7 +432,7 @@ export default function EstadosPago() {
       <div className="flex items-center justify-between mt-auto pt-2">
         <button
           onClick={() => navigate('/admin/finanzas')}
-          className="flex items-center space-x-2 text-zinc-500 hover:text-white transition-colors text-xs font-bold tracking-widest uppercase cursor-pointer"
+          className="flex items-center space-x-2 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors text-xs font-bold tracking-widest uppercase cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>VOLVER AL DASHBOARD FINANCIERO</span>
@@ -440,7 +440,7 @@ export default function EstadosPago() {
 
         <button
           onClick={exportarReportePDF}
-          className="flex items-center space-x-2 bg-[#7B8B9E] hover:bg-slate-400 text-white px-6 py-3.5 rounded-xl text-xs font-bold tracking-widest uppercase transition-colors cursor-pointer"
+          className="flex items-center space-x-2 bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white px-6 py-3.5 rounded-xl text-xs font-bold tracking-widest uppercase transition-colors cursor-pointer"
         >
           <Download className="w-4 h-4" />
           <span>Exportar Reporte</span>

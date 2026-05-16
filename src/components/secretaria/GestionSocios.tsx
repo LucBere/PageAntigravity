@@ -94,16 +94,16 @@ export default function GestionSocios() {
 
   const getFiltroClass = (filtro: string) => {
     return filtroActivo === filtro 
-      ? "px-5 py-1.5 bg-[#7B8B9E] text-white text-xs font-bold rounded-full tracking-widest shadow-lg shadow-[#7B8B9E]/20 shrink-0 transition-colors" 
-      : "px-5 py-1.5 text-xs font-bold text-zinc-500 hover:text-zinc-300 tracking-widest transition-colors shrink-0";
+      ? "px-5 py-1.5 bg-slate-800 dark:bg-[#7B8B9E] text-white text-xs font-bold rounded-full tracking-widest shadow-lg shadow-[#7B8B9E]/20 shrink-0 transition-colors" 
+      : "px-5 py-1.5 text-xs font-bold text-slate-500 dark:text-zinc-500 hover:text-slate-600 dark:text-zinc-300 tracking-widest transition-colors shrink-0";
   };
 
   return (
-    <div className="bg-[#0E0E0E] min-h-full p-8 font-sans text-zinc-100">
+    <div className="bg-slate-50 dark:bg-[#0E0E0E] min-h-full p-8 font-sans text-zinc-100">
       <div className="max-w-7xl mx-auto">
         
         {/* 1. Encabezado Principal */}
-        <h1 className="text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase mb-8">
+        <h1 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-8">
           GESTIÓN DE SOCIOS
         </h1>
 
@@ -112,14 +112,14 @@ export default function GestionSocios() {
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
             <button 
               onClick={() => navigate('/secretaria/socios/nuevo')}
-              className="w-full sm:w-auto flex items-center justify-center px-6 py-3 bg-[#7B8B9E] hover:bg-[#687a8e] text-white text-sm font-bold rounded-xl transition-colors shadow-lg shadow-[#7B8B9E]/20"
+              className="w-full sm:w-auto flex items-center justify-center px-6 py-3 bg-slate-800 dark:bg-[#7B8B9E] hover:bg-[#687a8e] text-white text-sm font-bold rounded-xl transition-colors shadow-lg shadow-[#7B8B9E]/20"
             >
               <UserPlus className="w-5 h-5 mr-2" />
               NUEVO SOCIO
             </button>
             <button 
               onClick={() => navigate('/secretaria/pago')}
-              className="w-full sm:w-auto flex items-center justify-center px-6 py-3 bg-transparent border border-zinc-700 hover:bg-zinc-800 text-zinc-400 hover:text-white text-sm font-bold rounded-xl transition-colors"
+              className="w-full sm:w-auto flex items-center justify-center px-6 py-3 bg-transparent border border-slate-300 dark:border-zinc-700 hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-white text-sm font-bold rounded-xl transition-colors"
             >
               <CreditCard className="w-5 h-5 mr-2" />
               REGISTRAR PAGO
@@ -127,17 +127,17 @@ export default function GestionSocios() {
           </div>
           
           <div className="relative w-full md:max-w-md">
-            <Search className="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-500" />
+            <Search className="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 dark:text-zinc-500" />
             <input
               type="text"
               placeholder="Búsqueda rápida por nombre o DNI..."
-              className="w-full bg-[#151515] rounded-full py-3 pl-12 pr-4 text-sm text-zinc-200 placeholder-zinc-500 border border-zinc-800/50 focus:outline-none focus:border-zinc-700 transition-colors"
+              className="w-full bg-white dark:bg-[#151515] rounded-full py-3 pl-12 pr-4 text-sm text-zinc-200 placeholder-slate-400 dark:placeholder-zinc-500 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 focus:outline-none focus:border-slate-300 dark:border-zinc-700 transition-colors shadow-sm dark:shadow-none"
             />
           </div>
         </div>
 
         {/* 3. Barra de Pestañas / Filtros */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-zinc-800 pb-4 mb-6 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 dark:border-zinc-800 pb-4 mb-6 gap-4">
           <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto">
             <button 
               onClick={() => handleFiltroClick('TODOS')}
@@ -161,29 +161,29 @@ export default function GestionSocios() {
           <div className="relative">
             <button 
               onClick={() => setMostrarFiltros(!mostrarFiltros)}
-              className="flex items-center text-xs font-bold text-zinc-500 hover:text-zinc-300 tracking-widest transition-colors shrink-0"
+              className="flex items-center text-xs font-bold text-slate-500 dark:text-zinc-500 hover:text-slate-600 dark:text-zinc-300 tracking-widest transition-colors shrink-0"
             >
               <ListFilter className="w-4 h-4 mr-2" />
               FILTROS AVANZADOS
             </button>
             
             {mostrarFiltros && (
-              <div className="absolute right-0 mt-2 w-56 bg-[#1A1A1A] border border-zinc-800 rounded-xl shadow-xl z-10 py-2">
+              <div className="absolute right-0 mt-2 w-56 bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl shadow-xl z-10 py-2">
                 <button 
                   onClick={() => { setCriterioOrden('nombre'); setMostrarFiltros(false); }}
-                  className={`w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'nombre' ? 'text-[#7B8B9E] font-bold' : 'text-zinc-300'}`}
+                  className={`w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'nombre' ? 'text-[#7B8B9E] font-bold' : 'text-slate-600 dark:text-zinc-300'}`}
                 >
                   Ordenar por Nombre (A-Z)
                 </button>
                 <button 
                   onClick={() => { setCriterioOrden('fecha'); setMostrarFiltros(false); }}
-                  className={`w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'fecha' ? 'text-[#7B8B9E] font-bold' : 'text-zinc-300'}`}
+                  className={`w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'fecha' ? 'text-[#7B8B9E] font-bold' : 'text-slate-600 dark:text-zinc-300'}`}
                 >
                   Ordenar por Último Pago
                 </button>
                 <button 
                   onClick={() => { setCriterioOrden('plan'); setMostrarFiltros(false); }}
-                  className={`w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'plan' ? 'text-[#7B8B9E] font-bold' : 'text-zinc-300'}`}
+                  className={`w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'plan' ? 'text-[#7B8B9E] font-bold' : 'text-slate-600 dark:text-zinc-300'}`}
                 >
                   Filtrar por Plan
                 </button>
@@ -193,11 +193,11 @@ export default function GestionSocios() {
         </div>
 
         {/* 4. Tabla Principal */}
-        <div className="bg-[#151515] rounded-2xl p-6 border border-zinc-800/50 shadow-xl shadow-black/20 overflow-hidden">
+        <div className="bg-white dark:bg-[#151515] rounded-2xl p-6 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 shadow-xl shadow-black/20 overflow-hidden transition-colors shadow-sm dark:shadow-none">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[800px]">
               <thead>
-                <tr className="border-b border-zinc-800/80 text-[10px] text-zinc-500 uppercase tracking-widest">
+                <tr className="border-b border-slate-200 dark:border-zinc-800/80 text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest">
                   <th className="pb-4 font-bold">SOCIO</th>
                   <th className="pb-4 font-bold">DNI / ID</th>
                   <th className="pb-4 font-bold">ÚLTIMO PAGO</th>
@@ -207,37 +207,37 @@ export default function GestionSocios() {
               </thead>
               <tbody className="divide-y divide-zinc-800/50">
                 {sociosPaginados.map((socio) => (
-                  <tr key={socio.id} className="hover:bg-zinc-800/20 transition-colors">
+                  <tr key={socio.id} className="hover:bg-slate-100 dark:hover:bg-zinc-800/20 transition-colors">
                     {/* SOCIO */}
                     <td className="py-5 pr-4">
                       <div className="flex items-center space-x-4">
                         {socio.isInitials ? (
-                          <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-sm font-bold text-zinc-400 shrink-0 border border-zinc-700/50">
+                          <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-zinc-800 flex items-center justify-center text-sm font-bold text-slate-500 dark:text-zinc-400 shrink-0 border border-slate-300 dark:border-zinc-700/50">
                             {socio.avatar}
                           </div>
                         ) : (
-                          <img src={socio.avatar} alt={socio.nombre} className="w-12 h-12 rounded-full border border-zinc-700/50 object-cover shrink-0" />
+                          <img src={socio.avatar} alt={socio.nombre} className="w-12 h-12 rounded-full border border-slate-300 dark:border-zinc-700/50 object-cover shrink-0" />
                         )}
                         <div>
-                          <p className="text-sm font-bold text-white mb-0.5">{socio.nombre}</p>
-                          <p className="text-[11px] font-medium text-zinc-500">{socio.plan}</p>
+                          <p className="text-sm font-bold text-slate-900 dark:text-white mb-0.5">{socio.nombre}</p>
+                          <p className="text-[11px] font-medium text-slate-500 dark:text-zinc-500">{socio.plan}</p>
                         </div>
                       </div>
                     </td>
                     {/* DNI / ID */}
                     <td className="py-5 pr-4">
-                      <span className="text-xs font-bold text-zinc-400">{socio.dni}</span>
+                      <span className="text-xs font-bold text-slate-500 dark:text-zinc-400">{socio.dni}</span>
                     </td>
                     {/* ÚLTIMO PAGO */}
                     <td className="py-5 pr-4">
-                      <span className={`text-xs font-bold ${socio.vencido ? 'text-[#EF4444]' : 'text-zinc-400'}`}>
+                      <span className={`text-xs font-bold ${socio.vencido ? 'text-[#EF4444]' : 'text-slate-500 dark:text-zinc-400'}`}>
                         {socio.ultimoPago}
                       </span>
                     </td>
                     {/* ESTADO */}
                     <td className="py-5 pr-4">
                       {socio.estado === 'HABILITADO' ? (
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-zinc-950 text-zinc-300 border border-zinc-800/50">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-zinc-950 text-slate-600 dark:text-zinc-300 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] mr-2"></span>
                           HABILITADO
                         </span>
@@ -250,7 +250,7 @@ export default function GestionSocios() {
                     </td>
                     {/* ACCIONES */}
                     <td className="py-5 text-right pr-4">
-                      <button className="text-zinc-600 hover:text-zinc-300 transition-colors">
+                      <button className="text-slate-400 dark:text-zinc-600 hover:text-slate-600 dark:text-zinc-300 transition-colors">
                         <MoreVertical className="w-5 h-5" />
                       </button>
                     </td>
@@ -262,7 +262,7 @@ export default function GestionSocios() {
           
           {/* 5. Footer de la Tabla */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-6 mt-2 gap-4">
-            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+            <span className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest">
               MOSTRANDO {sociosPaginados.length} DE {sociosFiltrados.length} SOCIOS
             </span>
             <div className="flex items-center space-x-2">
@@ -272,7 +272,7 @@ export default function GestionSocios() {
                 className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-colors ${
                   paginaActual === 1 
                     ? 'bg-transparent border-transparent text-zinc-700 cursor-not-allowed' 
-                    : 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-white'
+                    : 'bg-slate-200 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white'
                 }`}
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -285,7 +285,7 @@ export default function GestionSocios() {
                   className={`w-8 h-8 flex items-center justify-center rounded-lg font-bold text-xs transition-colors ${
                     paginaActual === pag
                       ? 'bg-transparent text-[#7B8B9E]'
-                      : 'bg-transparent text-zinc-500 hover:text-white'
+                      : 'bg-transparent text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white'
                   }`}
                 >
                   {pag}
@@ -298,7 +298,7 @@ export default function GestionSocios() {
                 className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-colors ${
                   paginaActual === totalPaginas || totalPaginas === 0
                     ? 'bg-transparent border-transparent text-zinc-700 cursor-not-allowed' 
-                    : 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-white'
+                    : 'bg-slate-200 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white'
                 }`}
               >
                 <ChevronRight className="w-4 h-4" />

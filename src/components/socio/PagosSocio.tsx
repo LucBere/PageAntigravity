@@ -98,34 +98,34 @@ export default function PagosSocio() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
 
         {/* Tarjeta Izquierda (Estado de Cuenta) */}
-        <div className="lg:col-span-2 bg-[#151515] p-8 md:p-10 rounded-3xl flex flex-col md:flex-row justify-between border border-zinc-800/50">
+        <div className="lg:col-span-2 bg-white dark:bg-[#151515] p-8 md:p-10 rounded-3xl flex flex-col md:flex-row justify-between border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
           <div className="flex flex-col justify-between">
             <div>
-              <div className="inline-flex items-center px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-500 text-[10px] font-bold uppercase tracking-wider mb-6">
+              <div className="inline-flex items-center px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-500 text-[10px] font-bold uppercase tracking-wider mb-6">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></div>
                 AL DÍA
               </div>
-              <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase mb-2 leading-none">
+              <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-2 leading-none">
                 ESTADO DE<br />CUENTA
               </h2>
-              <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em] mb-2 mt-4">
+              <p className="text-[10px] text-slate-500 dark:text-zinc-500 font-bold uppercase tracking-[0.2em] mb-2 mt-4">
                 ÚLTIMO PAGO RECIBIDO
               </p>
-              <p className="text-5xl md:text-6xl font-normal text-emerald-500 tracking-tight">
+              <p className="text-5xl md:text-6xl font-normal text-emerald-600 dark:text-emerald-500 tracking-tight">
                 $15.000
               </p>
             </div>
 
             <div className="flex items-center space-x-2 mt-10">
-              <Calendar className="w-4 h-4 text-zinc-500" />
-              <p className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">FECHA: 10 DE NOVIEMBRE, 2023</p>
+              <Calendar className="w-4 h-4 text-slate-500 dark:text-zinc-500" />
+              <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 tracking-widest uppercase">FECHA: 10 DE NOVIEMBRE, 2023</p>
             </div>
           </div>
 
           <div className="flex flex-col justify-center mt-8 md:mt-0 md:ml-8 shrink-0">
             <button
               onClick={() => navigate('/socio/checkout')}
-              className="px-10 py-10 bg-[#388E3C] hover:bg-emerald-600 text-white text-sm font-bold uppercase tracking-[0.2em] rounded-2xl transition-colors shadow-lg shadow-[#388E3C]/20 text-center leading-relaxed cursor-pointer h-full md:max-h-40 flex items-center justify-center"
+              className="px-10 py-10 bg-[#388E3C] hover:bg-emerald-600 text-slate-900 dark:text-white text-sm font-bold uppercase tracking-[0.2em] rounded-2xl transition-colors shadow-lg shadow-[#388E3C]/20 text-center leading-relaxed cursor-pointer h-full md:max-h-40 flex items-center justify-center"
             >
               <span>PAGAR<br />AHORA</span>
             </button>
@@ -133,19 +133,19 @@ export default function PagosSocio() {
         </div>
 
         {/* Tarjeta Derecha (Última Actividad) */}
-        <div className="bg-[#151515] p-8 md:p-10 rounded-3xl border border-zinc-800/50 flex flex-col justify-between">
+        <div className="bg-white dark:bg-[#151515] p-8 md:p-10 rounded-3xl border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 flex flex-col justify-between transition-colors shadow-sm dark:shadow-none">
           <div>
-            <h3 className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] mb-4">ÚLTIMA ACTIVIDAD</h3>
-            <h2 className="text-2xl md:text-[1.7rem] font-normal text-white leading-tight uppercase tracking-wide">
+            <h3 className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-[0.2em] mb-4">ÚLTIMA ACTIVIDAD</h3>
+            <h2 className="text-2xl md:text-[1.7rem] font-normal text-slate-900 dark:text-white leading-tight uppercase tracking-wide">
               PASE LIBRE<br />ACTIVO
             </h2>
           </div>
 
           <div className="mt-12">
-            <div className="h-2 w-full bg-zinc-800 rounded-full overflow-hidden mb-4">
-              <div className="h-full bg-[#7B8B9E] rounded-full w-[75%]"></div>
+            <div className="h-2 w-full bg-slate-100 dark:bg-zinc-800 rounded-full overflow-hidden mb-4">
+              <div className="h-full bg-slate-800 dark:bg-[#7B8B9E] rounded-full w-[75%]"></div>
             </div>
-            <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+            <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest">
               FALTAN 5 DÍAS PARA EL PRÓXIMO CICLO
             </p>
           </div>
@@ -155,47 +155,47 @@ export default function PagosSocio() {
       {/* 2. Sección Historial de Transacciones */}
       <div>
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4 relative">
-          <h2 className="text-[11px] font-bold text-white uppercase tracking-[0.3em]">HISTORIAL DE TRANSACCIONES</h2>
+          <h2 className="text-[11px] font-bold text-slate-900 dark:text-white uppercase tracking-[0.3em]">HISTORIAL DE TRANSACCIONES</h2>
           <div className="relative">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center space-x-2 px-6 py-2.5 bg-[#151515] border border-zinc-800 rounded-xl text-zinc-400 hover:text-white transition-colors cursor-pointer text-[10px] font-bold tracking-widest uppercase"
+              className="flex items-center space-x-2 px-6 py-2.5 bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-white transition-colors cursor-pointer text-[10px] font-bold tracking-widest uppercase shadow-sm dark:shadow-none"
             >
               <SlidersHorizontal className="w-4 h-4" />
               <span>FILTRAR</span>
             </button>
 
             {showFilters && (
-              <div className="absolute right-0 top-full mt-2 w-56 bg-zinc-800 border border-zinc-700 rounded-xl shadow-xl z-20 overflow-hidden text-white">
-                <div className="p-4 border-b border-zinc-700/50">
-                  <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-3">Por Período</h4>
+              <div className="absolute right-0 top-full mt-2 w-56 bg-slate-100 dark:bg-zinc-800 border border-slate-300 dark:border-zinc-700 rounded-xl shadow-xl z-20 overflow-hidden text-slate-900 dark:text-white">
+                <div className="p-4 border-b border-slate-300 dark:border-zinc-700/50">
+                  <h4 className="text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-3">Por Período</h4>
                   <div className="space-y-2">
                     {['Últimos 30 días', 'Últimos 3 meses', 'Año 2023'].map(opt => (
                       <label key={opt} className="flex items-center space-x-3 cursor-pointer group">
-                        <input type="radio" name="periodo" checked={filtroPeriodo === opt} onChange={() => setFiltroPeriodo(opt)} className="w-3 h-3 accent-[#7B8B9E] bg-zinc-900 border-zinc-700" />
-                        <span className="text-xs text-zinc-300 group-hover:text-white transition-colors">{opt}</span>
+                        <input type="radio" name="periodo" checked={filtroPeriodo === opt} onChange={() => setFiltroPeriodo(opt)} className="w-3 h-3 accent-[#7B8B9E] bg-slate-200 dark:bg-zinc-900 border-slate-300 dark:border-zinc-700" />
+                        <span className="text-xs text-slate-600 dark:text-zinc-300 group-hover:text-slate-900 dark:text-white transition-colors">{opt}</span>
                       </label>
                     ))}
                   </div>
                 </div>
-                <div className="p-4 border-b border-zinc-700/50">
-                  <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-3">Por Método</h4>
+                <div className="p-4 border-b border-slate-300 dark:border-zinc-700/50">
+                  <h4 className="text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-3">Por Método</h4>
                   <div className="space-y-2">
                     {['Tarjeta', 'Transferencia', 'QR'].map(opt => (
                       <label key={opt} className="flex items-center space-x-3 cursor-pointer group">
-                        <input type="radio" name="metodo" checked={filtroMetodo === opt} onChange={() => setFiltroMetodo(opt)} className="w-3 h-3 accent-[#7B8B9E] bg-zinc-900 border-zinc-700" />
-                        <span className="text-xs text-zinc-300 group-hover:text-white transition-colors">{opt}</span>
+                        <input type="radio" name="metodo" checked={filtroMetodo === opt} onChange={() => setFiltroMetodo(opt)} className="w-3 h-3 accent-[#7B8B9E] bg-slate-200 dark:bg-zinc-900 border-slate-300 dark:border-zinc-700" />
+                        <span className="text-xs text-slate-600 dark:text-zinc-300 group-hover:text-slate-900 dark:text-white transition-colors">{opt}</span>
                       </label>
                     ))}
                   </div>
                 </div>
                 <div className="p-4">
-                  <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-3">Por Estado</h4>
+                  <h4 className="text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-3">Por Estado</h4>
                   <div className="space-y-2">
                     {['Pagado', 'Rechazado'].map(opt => (
                       <label key={opt} className="flex items-center space-x-3 cursor-pointer group">
-                        <input type="radio" name="estado" checked={filtroEstado === opt} onChange={() => setFiltroEstado(opt)} className="w-3 h-3 accent-[#7B8B9E] bg-zinc-900 border-zinc-700" />
-                        <span className="text-xs text-zinc-300 group-hover:text-white transition-colors">{opt}</span>
+                        <input type="radio" name="estado" checked={filtroEstado === opt} onChange={() => setFiltroEstado(opt)} className="w-3 h-3 accent-[#7B8B9E] bg-slate-200 dark:bg-zinc-900 border-slate-300 dark:border-zinc-700" />
+                        <span className="text-xs text-slate-600 dark:text-zinc-300 group-hover:text-slate-900 dark:text-white transition-colors">{opt}</span>
                       </label>
                     ))}
                   </div>
@@ -205,11 +205,11 @@ export default function PagosSocio() {
           </div>
         </div>
 
-        <div className="bg-[#151515] rounded-3xl border border-zinc-800/50 overflow-hidden">
+        <div className="bg-white dark:bg-[#151515] rounded-3xl border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 overflow-hidden transition-colors shadow-sm dark:shadow-none">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-max">
               <thead>
-                <tr className="border-b border-zinc-800/80 text-[10px] text-zinc-500 uppercase tracking-widest">
+                <tr className="border-b border-slate-300 dark:border-slate-200 dark:border-zinc-800/80 text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest">
                   <th className="px-8 py-6 font-bold">FECHA</th>
                   <th className="px-8 py-6 font-bold">MONTO</th>
                   <th className="px-8 py-6 font-bold">MÉTODO</th>
@@ -219,19 +219,19 @@ export default function PagosSocio() {
               </thead>
               <tbody className="divide-y divide-zinc-800/50">
                 {transacciones.map((t) => (
-                  <tr key={t.id} className="hover:bg-zinc-800/20 transition-colors">
+                  <tr key={t.id} className="hover:bg-slate-100 dark:bg-zinc-800/20 transition-colors">
                     <td className="px-8 py-6">
-                      <span className={`text-sm font-bold uppercase tracking-wider ${t.rejected ? 'text-zinc-500' : 'text-white'}`}>{t.fecha}</span>
+                      <span className={`text-sm font-bold uppercase tracking-wider ${t.rejected ? 'text-slate-500 dark:text-zinc-500' : 'text-slate-900 dark:text-white'}`}>{t.fecha}</span>
                     </td>
                     <td className="px-8 py-6">
-                      <span className={`text-sm font-bold tracking-wider ${t.rejected ? 'text-zinc-500' : 'text-white'}`}>{t.monto}</span>
+                      <span className={`text-sm font-bold tracking-wider ${t.rejected ? 'text-slate-500 dark:text-zinc-500' : 'text-slate-900 dark:text-white'}`}>{t.monto}</span>
                     </td>
                     <td className="px-8 py-6">
-                      <span className="text-[10px] text-zinc-400 font-bold tracking-[0.15em] uppercase">{t.metodo}</span>
+                      <span className="text-[10px] text-slate-500 dark:text-zinc-400 font-bold tracking-[0.15em] uppercase">{t.metodo}</span>
                     </td>
                     <td className="px-8 py-6">
                       {t.rejected ? (
-                        <span className="inline-flex items-center px-3 py-1 rounded border border-red-900/30 bg-[#1A0A0A] text-red-500/80 text-[9px] font-bold uppercase tracking-[0.2em]">
+                        <span className="inline-flex items-center px-3 py-1 rounded border border-red-900/30 bg-[#1A0A0A] text-red-600 dark:text-red-500/80 text-[9px] font-bold uppercase tracking-[0.2em]">
                           RECHAZADO
                         </span>
                       ) : (
@@ -247,7 +247,7 @@ export default function PagosSocio() {
                         ) : (
                           <button
                             onClick={() => handleDownloadReceipt(t)}
-                            className="text-zinc-400 hover:text-white hover:scale-110 transition-all cursor-pointer"
+                            className="text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-white hover:scale-110 transition-all cursor-pointer"
                             title="Descargar Comprobante"
                           >
                             <Download className="w-5 h-5" />
