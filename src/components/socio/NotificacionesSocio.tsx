@@ -135,7 +135,7 @@ export default function NotificacionesSocio() {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 space-y-4 md:space-y-0">
         <div>
           <h1 className="text-[11px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-[0.3em] mb-2 flex items-center">
-            <Bell className="w-3.5 h-3.5 mr-2" /> BUZÓN DE ENTRADA
+            <Bell className="w-3.5 h-3.5 mr-2" />
           </h1>
           <h2 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center">
             NOTIFICACIONES

@@ -1,5 +1,4 @@
 import { 
-  Search, 
   UserPlus, 
   CreditCard,
   ListFilter,
@@ -103,12 +102,14 @@ export default function GestionSocios() {
       <div className="max-w-7xl mx-auto">
         
         {/* 1. Encabezado Principal */}
-        <h1 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-8">
-          GESTIÓN DE SOCIOS
-        </h1>
+        <div className="pb-2 mb-8">
+          <h1 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">
+            GESTIÓN DE SOCIOS
+          </h1>
+        </div>
 
-        {/* 2. Barra de Acciones y Búsqueda */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+        {/* 2. Barra de Acciones */}
+        <div className="flex flex-col md:flex-row md:items-center justify-start gap-6 mb-8">
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
             <button 
               onClick={() => navigate('/secretaria/socios/nuevo')}
@@ -124,15 +125,6 @@ export default function GestionSocios() {
               <CreditCard className="w-5 h-5 mr-2" />
               REGISTRAR PAGO
             </button>
-          </div>
-          
-          <div className="relative w-full md:max-w-md">
-            <Search className="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 dark:text-zinc-500" />
-            <input
-              type="text"
-              placeholder="Búsqueda rápida por nombre o DNI..."
-              className="w-full bg-white dark:bg-[#151515] rounded-full py-3 pl-12 pr-4 text-sm text-zinc-200 placeholder-slate-400 dark:placeholder-zinc-500 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 focus:outline-none focus:border-slate-300 dark:border-zinc-700 transition-colors shadow-sm dark:shadow-none"
-            />
           </div>
         </div>
 

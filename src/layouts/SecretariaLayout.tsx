@@ -1,10 +1,12 @@
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import { LayoutGrid, Users, AlertTriangle, Settings, LogOut, Sun, Moon } from 'lucide-react';
+import { LayoutGrid, Users, AlertTriangle, Settings, LogOut, Sun, Moon, Search, Bell } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 export default function SecretariaLayout() {
   const navigate = useNavigate();
+
   const { theme, toggleTheme } = useTheme();
+  
   const navItems = [
     { name: 'Dashboard', path: '/secretaria', icon: LayoutGrid, exact: true },
     { name: 'Socios', path: '/secretaria/socios', icon: Users },
@@ -16,7 +18,7 @@ export default function SecretariaLayout() {
       {/* Sidebar Izquierda */}
       <aside className="w-64 bg-slate-50 dark:bg-[#151515] flex flex-col justify-between border-r border-slate-200 dark:border-zinc-800/50 transition-colors duration-300">
         <div>
-          {/* Header */}
+          {/* Header Sidebar */}
           <div className="p-6 mb-4 flex items-start justify-between">
             <div>
               <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white transition-colors">
@@ -84,10 +86,51 @@ export default function SecretariaLayout() {
         </div>
       </aside>
 
-      {/* Contenedor Principal */}
-      <main className="flex-1 overflow-y-auto bg-slate-50 dark:bg-[#0E0E0E] transition-colors duration-300">
-        <Outlet />
-      </main>
+      {/* Contenedor Principal con Header Global */}
+      <div className="flex-1 flex flex-col overflow-hidden bg-slate-50 dark:bg-[#0E0E0E] transition-colors duration-300">
+        
+        {/* Header Global */}
+        <header className="h-20 px-8 flex justify-between items-center border-b border-slate-200 dark:border-zinc-800/50 shrink-0 bg-slate-50 dark:bg-[#0E0E0E]">
+          
+          {/* Izquierda: Espacio vacío para que el título de la página tome el protagonismo */}
+          <div className="flex-1"></div>
+          
+          {/* Centro/Derecha: Controles */}
+          <div className="flex items-center space-x-6">
+            {/* Barra de Búsqueda Global */}
+            <div className="relative w-80 hidden md:block">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Search className="w-4 h-4 text-slate-400 dark:text-zinc-500" />
+              </div>
+              <input 
+                type="text" 
+                placeholder="Buscar por nombre, DNI o comprobante..." 
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#1A1A1A] text-sm text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-[#7B8B9E] transition-colors shadow-sm dark:shadow-none"
+              />
+            </div>
+
+            <button className="text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-white transition-colors cursor-pointer">
+              <Bell className="w-5 h-5" />
+            </button>
+            
+            <div className="flex items-center space-x-3 border-l border-slate-200 dark:border-zinc-800/50 pl-6">
+              <div className="text-right hidden sm:block">
+                <p className="text-sm font-bold text-slate-900 dark:text-white">Alicia Rossi</p>
+                <p className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold">SECRETARÍA</p>
+              </div>
+              <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-zinc-800 overflow-hidden border border-slate-300 dark:border-zinc-700">
+                {/* Simulación de Avatar de Alicia Rossi */}
+                <img src="https://i.pravatar.cc/150?u=alicia" alt="Avatar" className="w-full h-full object-cover" />
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Área de Contenido Dinámico */}
+        <main className="flex-1 overflow-y-auto">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }

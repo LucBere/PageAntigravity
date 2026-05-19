@@ -1,31 +1,14 @@
-import { Bell, Users, Banknote, CheckCircle2, Wallet, LineChart } from 'lucide-react';
+import { Users, Banknote, CheckCircle2, Wallet, LineChart } from 'lucide-react';
 
 export default function SecretariaDashboard() {
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8 bg-slate-50 dark:bg-[#0E0E0E] min-h-full">
       
-      {/* 1. Topbar */}
-      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 pb-6">
-        <h1 className="text-xs font-bold text-slate-500 dark:text-zinc-400 tracking-[0.2em] uppercase">
+      {/* 1. Título de la Página */}
+      <div className="pb-2 mb-8">
+        <h1 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">
           DASHBOARD
         </h1>
-        
-        <div className="flex items-center space-x-6">
-          <button className="text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-white transition-colors">
-            <Bell className="w-5 h-5" />
-          </button>
-          
-          <div className="flex items-center space-x-3 border-l border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 pl-6">
-            <div className="text-right">
-              <p className="text-sm font-bold text-slate-900 dark:text-white">Alicia Rossi</p>
-              <p className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold">SECRETARÍA</p>
-            </div>
-            <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-zinc-800 overflow-hidden border border-slate-300 dark:border-zinc-700">
-              {/* Simulación de Avatar de Alicia Rossi */}
-              <img src="https://i.pravatar.cc/150?u=alicia" alt="Avatar" className="w-full h-full object-cover" />
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* 2. Tarjetas Superiores */}

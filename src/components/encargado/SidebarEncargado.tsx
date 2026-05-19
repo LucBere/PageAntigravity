@@ -1,5 +1,5 @@
 import { NavLink, useNavigate, Link } from 'react-router-dom';
-import { LayoutDashboard, Users, LogOut, Sun, Moon, ChevronDown } from 'lucide-react';
+import { LayoutDashboard, Users, LogOut, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 
 export default function SidebarEncargado() {
@@ -13,8 +13,8 @@ export default function SidebarEncargado() {
   };
 
   const navItems = [
-    { name: 'Dashboard (Inicio)', path: '/encargado', icon: LayoutDashboard, exact: true },
-    { name: 'Socios (Mora y Pagos)', path: '/encargado/deudores', icon: Users },
+    { name: 'Dashboard Inicio', path: '/encargado', icon: LayoutDashboard, exact: true },
+    { name: 'Socios Mora y Pagos', path: '/encargado/deudores', icon: Users },
   ];
 
   return (
@@ -37,17 +37,7 @@ export default function SidebarEncargado() {
         </button>
       </div>
 
-      {/* Perfil de Usuario */}
-      <div className="px-6 pb-6 mb-2 border-b border-slate-200 dark:border-zinc-800/50">
-        <div className="flex items-center space-x-3 cursor-pointer group">
-          <img src="https://i.pravatar.cc/150?img=11" alt="Juan Pérez" className="w-10 h-10 rounded-full border-2 border-slate-200 dark:border-zinc-700 transition-colors" />
-          <div className="flex-1">
-            <p className="text-sm font-bold text-slate-900 dark:text-white leading-tight">JUAN PÉREZ</p>
-            <p className="text-[9px] font-bold tracking-wider text-emerald-600 dark:text-emerald-500 uppercase mt-0.5">ENCARGADO SEDE CENTRO</p>
-          </div>
-          <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-slate-600 dark:text-zinc-500 dark:group-hover:text-zinc-300 transition-colors" />
-        </div>
-      </div>
+
 
       {/* Navegación */}
       <nav className="flex-1 px-4 pt-4 space-y-2 overflow-y-auto scrollbar-hide pb-6">

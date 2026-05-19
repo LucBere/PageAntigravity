@@ -7,10 +7,7 @@ export default function CajaPagos() {
     <div className="space-y-8 max-w-7xl mx-auto">
       {/* Encabezado */}
       <div>
-        <div className="flex items-center space-x-2 mb-2">
-          <div className="w-2 h-2 rounded-full bg-slate-800 dark:bg-[#7B8B9E] transition-colors"></div>
-          <span className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold transition-colors">ESTADO DE CUENTA REAL</span>
-        </div>
+
         <h1 className="text-[2.5rem] leading-tight font-bold text-slate-900 dark:text-[#FAFAFA] tracking-wide mb-2 uppercase transition-colors">
           CAJA / PAGOS
         </h1>

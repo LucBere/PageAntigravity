@@ -62,7 +62,7 @@ const defaultPermisos: Record<Rol, Record<Modulo, Record<Accion, boolean>>> = {
 export default function RolesPermisos() {
   const [rolActivo, setRolActivo] = useState<Rol>('admin');
   const [permisos, setPermisos] = useState(defaultPermisos);
-  const [isDownloading, setIsDownloading] = useState(false);
+
 
   const handleTogglePermiso = (modulo: Modulo, accion: Accion) => {
     setPermisos(prev => {
@@ -98,20 +98,7 @@ export default function RolesPermisos() {
     }, 300);
   };
 
-  const handleDescargarLog = () => {
-    setIsDownloading(true);
-    setTimeout(() => {
-      const dataStr = JSON.stringify(permisos, null, 2);
-      const blob = new Blob([dataStr], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'squatgym_audit_roles.json';
-      a.click();
-      URL.revokeObjectURL(url);
-      setIsDownloading(false);
-    }, 1000);
-  };
+
 
   const renderCheckbox = (modulo: Modulo, accion: Accion) => {
     const isChecked = permisos[rolActivo][modulo][accion];
@@ -133,9 +120,7 @@ export default function RolesPermisos() {
       
       {/* Encabezado */}
       <div>
-        <p className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold mb-3">
-          SEGURIDAD Y CONTROL <span className="mx-1">{">"}</span> ROLES Y PERMISOS
-        </p>
+
         <h1 className="text-[3rem] font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-4 uppercase leading-none transition-colors">
           ROLES Y PERMISOS
         </h1>
@@ -145,13 +130,7 @@ export default function RolesPermisos() {
             Define los niveles de acceso y capacidades operativas para cada perfil dentro del ecosistema SquatGym.
           </p>
           <div className="flex items-center gap-4">
-            <button 
-              onClick={handleDescargarLog}
-              disabled={isDownloading}
-              className="px-6 py-3.5 rounded-xl border border-slate-300 dark:border-zinc-700 bg-white dark:bg-[#0E0E0E] text-slate-900 dark:text-white text-[11px] font-bold uppercase tracking-widest hover:bg-slate-200 dark:bg-zinc-900 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-wait"
-            >
-              {isDownloading ? 'GENERANDO...' : 'DESCARGAR LOG'}
-            </button>
+
             <button 
               onClick={handleGuardarCambios}
               className="px-6 py-3.5 rounded-xl bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer"

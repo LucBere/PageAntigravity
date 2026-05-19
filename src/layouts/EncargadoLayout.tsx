@@ -1,10 +1,9 @@
 import { Outlet } from 'react-router-dom';
-import { Search, Bell, Sun, Moon, ChevronDown } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import { Search, Bell, ChevronDown } from 'lucide-react';
 import SidebarEncargado from '../components/encargado/SidebarEncargado';
 
 export default function EncargadoLayout() {
-  const { theme, toggleTheme } = useTheme();
+
 
   return (
     <div className="flex w-full h-screen bg-slate-50 dark:bg-[#0E0E0E] transition-colors duration-300 text-slate-800 dark:text-zinc-100 font-sans overflow-hidden">
@@ -28,20 +27,17 @@ export default function EncargadoLayout() {
           </div>
 
           <div className="flex items-center space-x-6 ml-8">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full border border-slate-200 dark:border-zinc-800/80 bg-slate-50 dark:bg-[#0E0E0E] text-slate-400 hover:text-slate-700 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors cursor-pointer"
-              aria-label="Toggle Theme"
-            >
-              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
             <button className="text-slate-400 hover:text-slate-700 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors relative cursor-pointer">
               <div className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></div>
               <Bell className="w-6 h-6" />
             </button>
-            <div className="flex items-center space-x-3 cursor-pointer">
+            <div className="flex items-center gap-3 cursor-pointer">
                <img src="https://i.pravatar.cc/150?img=11" alt="Profile" className="w-10 h-10 rounded-full border-2 border-slate-200 dark:border-zinc-700 transition-colors" />
-               <ChevronDown className="w-4 h-4 text-slate-400 dark:text-zinc-500" />
+               <div className="hidden sm:block text-left">
+                 <p className="text-sm font-semibold text-slate-800 dark:text-white tracking-wide leading-tight">Juan Pérez</p>
+                 <p className="text-[10px] font-medium text-slate-500 dark:text-zinc-400">Encargado Sede Centro</p>
+               </div>
+               <ChevronDown className="w-4 h-4 text-slate-400 dark:text-zinc-500 ml-1" />
             </div>
           </div>
         </header>

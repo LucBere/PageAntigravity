@@ -23,9 +23,7 @@ export default function EncargadoDashboard() {
       
       {/* 1. Encabezado de Contexto */}
       <div>
-        <p className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold mb-2">
-          SEDE CENTRO - OPERACIONES Y COBRANZAS
-        </p>
+
         <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-wide uppercase">
           DASHBOARD SUCURSAL
         </h1>

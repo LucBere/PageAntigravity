@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink, useLocation, useNavigate, Link } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, Users, Banknote, ShieldCheck, Settings, ChevronDown, ChevronUp, LogOut, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -38,11 +38,11 @@ export default function Sidebar() {
 
       {/* HEADER: Logo Link y Toggle de Tema */}
       <div className="p-8 flex items-start justify-between">
-        <Link to="/dashboard" className="cursor-pointer group flex-1">
-          <h1 className="text-xl font-black tracking-tight text-slate-900 dark:text-white mb-1 group-hover:text-slate-600 dark:group-hover:text-zinc-300 transition-colors">
+        <div className="flex-1">
+          <h1 className="text-xl font-black tracking-tight text-slate-900 dark:text-white mb-1 transition-colors">
             SQUATGYM
           </h1>
-        </Link>
+        </div>
 
         <button
           onClick={toggleTheme}

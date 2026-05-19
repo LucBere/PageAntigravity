@@ -53,16 +53,6 @@ export default function SocioLayout() {
 
         {/* Footer Sidebar */}
         <div className="mt-auto pb-6">
-          {/* Mini perfil */}
-          <div className="px-6 mb-6">
-            <div className="flex items-center space-x-3">
-              <img src="https://i.pravatar.cc/150?img=11" alt="Avatar" className="w-10 h-10 rounded-full border border-slate-300 dark:border-zinc-700" />
-              <div>
-                <p className="text-sm text-slate-800 dark:text-zinc-100 font-bold tracking-wide">Juan Pérez</p>
-              </div>
-            </div>
-          </div>
-
           <div className="p-4 border-t border-slate-200 dark:border-zinc-800/50">
             <button
               onClick={() => alert('Módulo de Ajustes del Sistema en desarrollo para la fase 2.')}
@@ -85,10 +75,9 @@ export default function SocioLayout() {
       {/* Contenedor Principal */}
       <main className="flex-1 flex flex-col overflow-hidden bg-slate-50 dark:bg-[#0E0E0E] transition-colors duration-300">
         {/* Topbar */}
-        <header className="h-20 px-8 flex justify-between items-center border-b border-slate-200 dark:border-zinc-800/50 shrink-0">
-          <h2 className="text-[11px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-[0.2em]">PANEL DE CONTROL</h2>
+        <header className="h-20 px-8 flex justify-end items-center border-b border-slate-200 dark:border-zinc-800/50 shrink-0">
 
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center gap-4 md:gap-6">
             {/* Buscador */}
             <div className="relative hidden md:block">
               <Search className="w-4 h-4 absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 dark:text-zinc-500" />
@@ -98,14 +87,26 @@ export default function SocioLayout() {
                 className="w-64 bg-white dark:bg-[#151515] border border-slate-300 dark:border-zinc-800/80 rounded-full py-2.5 pl-11 pr-4 text-xs font-bold tracking-wider text-slate-700 dark:text-zinc-200 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors shadow-sm dark:shadow-none"
               />
             </div>
+            
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full border border-slate-200 dark:border-zinc-800/80 bg-white dark:bg-[#151515] text-slate-400 hover:text-slate-700 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors cursor-pointer shadow-sm dark:shadow-none"
+              className="p-2 rounded-full border border-slate-200 dark:border-zinc-800/80 bg-white dark:bg-[#151515] text-slate-400 hover:text-slate-700 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors cursor-pointer shadow-sm dark:shadow-none shrink-0"
               aria-label="Toggle Theme"
             >
               {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
+
+            {/* Separador */}
+            <div className="hidden sm:block w-px h-8 bg-slate-200 dark:bg-zinc-800/80"></div>
+
+            {/* User Profile */}
+            <div className="flex items-center space-x-3">
+              <img src="https://i.pravatar.cc/150?img=11" alt="Avatar" className="w-10 h-10 rounded-full border border-slate-300 dark:border-zinc-700 shrink-0" />
+              <div className="hidden sm:block text-left">
+                <p className="text-sm font-semibold text-slate-800 dark:text-white tracking-wide whitespace-nowrap">Juan Pérez</p>
+              </div>
+            </div>
           </div>
         </header>
 
