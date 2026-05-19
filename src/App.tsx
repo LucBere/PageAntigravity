@@ -18,8 +18,11 @@ import GestionSocios from './components/secretaria/GestionSocios';
 import NuevoSocio from './components/secretaria/NuevoSocio';
 import RegistroPago from './components/secretaria/RegistroPago';
 import Reclamos from './components/secretaria/Reclamos';
+import EncargadoLayout from './layouts/EncargadoLayout';
 import SocioLayout from './layouts/SocioLayout';
 import DashboardSocio from './components/socio/DashboardSocio';
+import EncargadoDashboard from './components/encargado/EncargadoDashboard';
+import ConsultaDeudoresEncargado from './components/encargado/ConsultaDeudoresEncargado';
 import PagosSocio from './components/socio/PagosSocio';
 import CheckoutSocio from './components/socio/CheckoutSocio';
 import NotificacionesSocio from './components/socio/NotificacionesSocio';
@@ -54,6 +57,12 @@ function App() {
             <Route path="pago" element={<RegistroPago />} />
             <Route path="reclamos" element={<Reclamos />} />
             {/* Futuras rutas: /secretaria/clases, etc. */}
+          </Route>
+
+          {/* Rutas del Encargado */}
+          <Route path="/encargado" element={<EncargadoLayout />}>
+            <Route index element={<EncargadoDashboard />} />
+            <Route path="deudores" element={<ConsultaDeudoresEncargado />} />
           </Route>
 
           {/* Rutas de Socio/Alumno */}

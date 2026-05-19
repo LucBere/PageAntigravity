@@ -202,6 +202,8 @@ function LoginStaff({ setStep }: { setStep: (step: Step) => void }) {
           navigate('/admin');
         } else if (role === 'Secretaria') {
           navigate('/secretaria');
+        } else if (role === 'Encargado') {
+          navigate('/encargado');
         } else {
           alert(`El panel de ${role} se encuentra en construcción.`);
         }
@@ -243,7 +245,7 @@ function LoginStaff({ setStep }: { setStep: (step: Step) => void }) {
 
           {isDropdownOpen && (
             <div className="absolute z-20 w-full mt-2 bg-[#0E0E0E] border border-zinc-800 rounded-lg shadow-2xl overflow-hidden backdrop-blur-xl">
-              {['Secretaria', 'Entrenador', 'Administrador'].map((option) => (
+              {['Secretaria', 'Encargado', 'Administrador'].map((option) => (
                 <div
                   key={option}
                   className={`p-3 cursor-pointer transition-colors text-sm ${role === option ? 'bg-[#64748B]/20 text-[#64748B] font-bold border-l-2 border-[#64748B]' : 'text-zinc-300 hover:bg-zinc-800/50 hover:text-white border-l-2 border-transparent'}`}
