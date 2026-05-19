@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Archive, BookOpen, Users, DollarSign, Shield, Settings2 } from 'lucide-react';
+import { Archive, BookOpen, Users, DollarSign, Shield } from 'lucide-react';
 
 type Rol = 'admin' | 'encargado' | 'secretario' | 'profesor' | 'alumno';
 type Modulo = 'inventario' | 'clases' | 'clientes' | 'finanzas' | 'seguridad';
@@ -62,6 +62,7 @@ const defaultPermisos: Record<Rol, Record<Modulo, Record<Accion, boolean>>> = {
 export default function RolesPermisos() {
   const [rolActivo, setRolActivo] = useState<Rol>('admin');
   const [permisos, setPermisos] = useState(defaultPermisos);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const handleTogglePermiso = (modulo: Modulo, accion: Accion) => {
     setPermisos(prev => {
@@ -98,7 +99,18 @@ export default function RolesPermisos() {
   };
 
   const handleDescargarLog = () => {
-    alert("Generando archivo de auditoría...");
+    setIsDownloading(true);
+    setTimeout(() => {
+      const dataStr = JSON.stringify(permisos, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'squatgym_audit_roles.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      setIsDownloading(false);
+    }, 1000);
   };
 
   const renderCheckbox = (modulo: Modulo, accion: Accion) => {
@@ -135,9 +147,10 @@ export default function RolesPermisos() {
           <div className="flex items-center gap-4">
             <button 
               onClick={handleDescargarLog}
-              className="px-6 py-3.5 rounded-xl border border-slate-300 dark:border-zinc-700 bg-white dark:bg-[#0E0E0E] text-slate-900 dark:text-white text-[11px] font-bold uppercase tracking-widest hover:bg-slate-200 dark:bg-zinc-900 transition-colors cursor-pointer"
+              disabled={isDownloading}
+              className="px-6 py-3.5 rounded-xl border border-slate-300 dark:border-zinc-700 bg-white dark:bg-[#0E0E0E] text-slate-900 dark:text-white text-[11px] font-bold uppercase tracking-widest hover:bg-slate-200 dark:bg-zinc-900 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-wait"
             >
-              DESCARGAR LOG
+              {isDownloading ? 'GENERANDO...' : 'DESCARGAR LOG'}
             </button>
             <button 
               onClick={handleGuardarCambios}
@@ -181,7 +194,6 @@ export default function RolesPermisos() {
                 <th className="px-4 py-6 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-center">CREAR</th>
                 <th className="px-4 py-6 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-center">EDITAR</th>
                 <th className="px-4 py-6 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-center">ELIMINAR</th>
-                <th className="px-8 py-6 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-right">AVANZADO</th>
               </tr>
             </thead>
             <tbody>
@@ -209,12 +221,6 @@ export default function RolesPermisos() {
                   </td>
                   <td className="px-4 py-5 text-center">
                     {renderCheckbox(m.key, 'eliminar')}
-                  </td>
-                  <td className="px-8 py-5">
-                    <div className="flex justify-end items-center space-x-2 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors cursor-pointer">
-                      <span className="text-[9px] font-bold tracking-widest uppercase">CONFIGURACIÓN</span>
-                      <Settings2 className="w-4 h-4" />
-                    </div>
                   </td>
                 </tr>
               ))}

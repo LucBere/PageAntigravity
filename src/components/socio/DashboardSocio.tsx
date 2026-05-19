@@ -5,7 +5,7 @@ export default function DashboardSocio() {
 
   return (
     <div className="w-full min-h-screen bg-slate-50 dark:bg-[#0E0E0E] transition-colors duration-300 text-slate-800 dark:text-zinc-100 p-4 md:p-8 font-sans">
-      
+
       {/* 1. Alerta Superior */}
       <div className="w-full mb-6 bg-red-950/20 border border-red-900 rounded-lg p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
@@ -14,7 +14,7 @@ export default function DashboardSocio() {
           </div>
           <span className="text-red-600 dark:text-red-500 font-bold text-sm tracking-wide">¡TU CUOTA VENCE EN 5 DÍAS. EVITA RECARGOS!</span>
         </div>
-        <button 
+        <button
           onClick={() => navigate('/socio/pagos')}
           className="text-red-600 dark:text-red-500 font-bold text-sm uppercase tracking-wider cursor-pointer hover:underline hover:text-red-400 transition-colors flex-shrink-0"
         >
@@ -24,16 +24,16 @@ export default function DashboardSocio() {
 
       {/* 2. Tarjetas Principales */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Tarjeta Izquierda (Hero) */}
-        <div className="lg:col-span-2 bg-white dark:bg-[#151515] rounded-2xl p-8 flex flex-col justify-center relative overflow-hidden border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
+        <div className="lg:col-span-2 bg-white dark:bg-[#151515] rounded-2xl p-8 flex flex-col justify-center relative overflow-hidden border border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
           <div className="relative z-10">
             <p className="text-slate-500 dark:text-zinc-400 text-sm font-bold tracking-widest mb-2">BIENVENIDO DE VUELTA</p>
             <h1 className="text-slate-900 dark:text-white text-5xl md:text-6xl font-black mb-1 tracking-tight">HOLA, JUAN.</h1>
-            <h2 className="text-[#7B8B9E] text-3xl md:text-4xl font-bold tracking-tight">¡A DARLE CON TODO HOY!</h2>
+            <h2 className="text-slate-500 dark:text-[#7B8B9E] text-3xl md:text-4xl font-bold tracking-tight">¡A DARLE CON TODO HOY!</h2>
           </div>
           {/* Decorative gradient */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-slate-800 dark:bg-[#7B8B9E]/5 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="hidden dark:block absolute top-0 right-0 w-64 h-64 bg-[#7B8B9E]/5 rounded-full blur-3xl pointer-events-none"></div>
         </div>
 
         {/* Tarjeta Derecha (Estado de Cuenta) */}
@@ -48,7 +48,7 @@ export default function DashboardSocio() {
             </div>
             <p className="text-slate-900 dark:text-white text-5xl font-black tracking-tighter mb-6">$15.000</p>
           </div>
-          <button 
+          <button
             onClick={() => navigate('/socio/checkout')}
             className="w-full bg-[#388E3C] hover:bg-green-600 text-slate-900 dark:text-white font-bold py-4 rounded-xl transition-colors tracking-wide shadow-lg shadow-green-900/20"
           >
@@ -61,7 +61,7 @@ export default function DashboardSocio() {
       {/* 3. Calendario Semanal */}
       <div className="w-full bg-white dark:bg-[#151515] rounded-2xl p-6 mt-6 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-slate-900 dark:text-white font-bold text-lg tracking-wide">OCTUBRE 2023</h3>
+          <h3 className="text-slate-900 dark:text-white font-bold text-lg tracking-wide">MAYO 2026</h3>
           <div className="flex gap-2">
             <button className="w-8 h-8 rounded-lg bg-slate-200 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 flex items-center justify-center text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-white hover:bg-slate-100 dark:bg-zinc-800 transition-colors">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
@@ -82,15 +82,15 @@ export default function DashboardSocio() {
             { day: 'SAB', date: '19', dot: true },
             { day: 'DOM', date: '20' }
           ].map((item, idx) => (
-            <div 
-              key={idx} 
-              className={`flex flex-col items-center justify-center py-4 rounded-xl relative transition-colors ${item.active ? 'bg-slate-800 dark:bg-[#7B8B9E] text-white shadow-lg shadow-[#7B8B9E]/20' : 'bg-slate-200 dark:bg-slate-100 dark:bg-zinc-900/50 text-slate-500 dark:text-zinc-400 hover:bg-slate-100 dark:bg-zinc-800'}`}
+            <div
+              key={idx}
+              className={`flex flex-col items-center justify-center py-4 rounded-xl relative transition-colors ${item.active ? 'bg-sky-500 dark:bg-[#7B8B9E] text-white shadow-lg shadow-sky-500/20 dark:shadow-[#7B8B9E]/20' : 'bg-slate-100 dark:bg-zinc-900/50 text-slate-600 dark:text-zinc-400 hover:bg-slate-200 dark:hover:bg-zinc-800'}`}
             >
               {item.dot && (
                 <div className="absolute top-2 w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
               )}
-              <span className={`text-xs font-bold mb-1 ${item.active ? 'text-slate-900 dark:text-white/80' : 'text-slate-500 dark:text-zinc-500'}`}>{item.day}</span>
-              <span className={`text-xl font-black ${item.active ? 'text-slate-900 dark:text-white' : 'text-slate-600 dark:text-zinc-300'}`}>{item.date}</span>
+              <span className={`text-xs font-bold mb-1 ${item.active ? 'text-white dark:text-white/80' : 'text-slate-500 dark:text-zinc-500'}`}>{item.day}</span>
+              <span className={`text-xl font-black ${item.active ? 'text-white dark:text-white' : 'text-slate-600 dark:text-zinc-300'}`}>{item.date}</span>
             </div>
           ))}
         </div>
@@ -98,14 +98,14 @@ export default function DashboardSocio() {
 
       {/* 4. Tarjetas Inferiores */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        
+
         {/* Mis Próximas Sesiones */}
         <div className="bg-white dark:bg-[#151515] rounded-2xl p-6 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-slate-500 dark:text-zinc-400 text-xs font-bold tracking-widest uppercase">Mis Próximas Sesiones</h3>
             <span className="text-slate-500 dark:text-zinc-500 text-xs font-bold bg-slate-200 dark:bg-zinc-900 px-3 py-1 rounded-full border border-slate-200 dark:border-zinc-800">HOY</span>
           </div>
-          
+
           <div className="bg-slate-200 dark:bg-slate-100 dark:bg-zinc-900/50 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 rounded-xl p-4 flex items-center justify-between transition-colors">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-slate-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center">
@@ -124,7 +124,7 @@ export default function DashboardSocio() {
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-slate-500 dark:text-zinc-400 text-xs font-bold tracking-widest uppercase">Actividad Reciente</h3>
           </div>
-          
+
           <div className="bg-slate-200 dark:bg-slate-100 dark:bg-zinc-900/50 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 rounded-xl p-4 flex items-center justify-between hover:bg-slate-100 dark:bg-slate-100 dark:bg-zinc-800/50 transition-colors cursor-pointer group">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-slate-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center">

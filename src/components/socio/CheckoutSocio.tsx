@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CreditCard, Building2, QrCode, Lock, ShieldCheck, CheckCircle2, Copy, Tag } from 'lucide-react';
+import { CreditCard, Building2, QrCode, Lock, ShieldCheck, CheckCircle2, Copy } from 'lucide-react';
 
 export default function CheckoutSocio() {
   const navigate = useNavigate();
 
   const [selectedPlan, setSelectedPlan] = useState('Plan Musculación');
   const [paymentMethod, setPaymentMethod] = useState('tarjeta');
-  const [discountType, setDiscountType] = useState('Sin Promoción');
-  const [couponCode, setCouponCode] = useState('');
   
   const [cardNumber, setCardNumber] = useState('');
   const [cardHolder, setCardHolder] = useState('');
@@ -25,24 +23,9 @@ export default function CheckoutSocio() {
     'Cross Training': 18000
   };
 
-  const discounts = {
-    'Sin Promoción': 0,
-    'Por Amigos': 0.10,
-    'Plan Familiar': 0.15,
-    'Días Especiales': 0.20,
-    'Cupón': 0
-  };
-
-  let discountFactor = discounts[discountType as keyof typeof discounts] || 0;
-  if (discountType === 'Cupón' && couponCode.toUpperCase() === 'SQUAT100') {
-    discountFactor = 0.50; // Just an example fake coupon
-  }
-
   const basePrice = plans[selectedPlan as keyof typeof plans];
-  const discountAmount = basePrice * discountFactor;
-  const priceAfterDiscount = basePrice - discountAmount;
-  const iva = priceAfterDiscount * 0.21;
-  const total = priceAfterDiscount + iva;
+  const iva = basePrice * 0.21;
+  const total = basePrice + iva;
 
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, '');
@@ -125,41 +108,9 @@ export default function CheckoutSocio() {
             </div>
           </div>
 
-          {/* 2. PROMOCIONES Y DESCUENTOS */}
+          {/* 2. MÉTODO DE PAGO */}
           <div>
-            <h2 className="text-[11px] font-bold text-[#7B8B9E] uppercase tracking-widest mb-4">2. PROMOCIONES Y DESCUENTOS</h2>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-              {['Sin Promoción', 'Por Amigos', 'Plan Familiar', 'Días Especiales', 'Cupón'].map((promo) => (
-                <div 
-                  key={promo}
-                  onClick={() => setDiscountType(promo)}
-                  className={`bg-slate-50 dark:bg-[#1A1A1A] border rounded-xl p-3 flex flex-col items-center justify-center text-center cursor-pointer transition-all ${discountType === promo ? 'border-[#7B8B9E] shadow-[0_0_10px_rgba(123,139,158,0.1)]' : 'border-slate-200 dark:border-zinc-800 hover:border-zinc-600'}`}
-                >
-                  <Tag className={`w-4 h-4 mb-2 ${discountType === promo ? 'text-[#7B8B9E]' : 'text-slate-400 dark:text-zinc-600'}`} />
-                  <span className={`text-[9px] font-bold uppercase tracking-wider ${discountType === promo ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-zinc-400'}`}>{promo}</span>
-                  {promo !== 'Sin Promoción' && promo !== 'Cupón' && (
-                    <span className="text-[10px] text-slate-500 dark:text-zinc-500 mt-1">{discounts[promo as keyof typeof discounts] * 100}% OFF</span>
-                  )}
-                </div>
-              ))}
-            </div>
-            
-            {discountType === 'Cupón' && (
-              <div className="mt-4 bg-white dark:bg-[#151515] p-4 rounded-xl border border-slate-200 dark:border-zinc-800 flex items-center space-x-3 transition-colors shadow-sm dark:shadow-none">
-                <input 
-                  type="text"
-                  placeholder="INGRESAR CÓDIGO DE CUPÓN"
-                  value={couponCode}
-                  onChange={(e) => setCouponCode(e.target.value)}
-                  className="flex-1 bg-slate-50 dark:bg-[#1A1A1A] border border-slate-300 dark:border-zinc-700 rounded-lg py-2.5 px-4 text-xs text-slate-900 dark:text-white font-bold tracking-widest uppercase placeholder-zinc-600 focus:outline-none focus:border-[#7B8B9E] transition-colors"
-                />
-              </div>
-            )}
-          </div>
-
-          {/* 3. MÉTODO DE PAGO */}
-          <div>
-            <h2 className="text-[11px] font-bold text-[#7B8B9E] uppercase tracking-widest mb-4">3. MÉTODO DE PAGO</h2>
+            <h2 className="text-[11px] font-bold text-[#7B8B9E] uppercase tracking-widest mb-4">2. MÉTODO DE PAGO</h2>
             <div className="bg-slate-50 dark:bg-[#1A1A1A] p-1.5 rounded-xl flex items-center space-x-1">
               <button 
                 onClick={() => setPaymentMethod('tarjeta')}
@@ -185,7 +136,7 @@ export default function CheckoutSocio() {
             </div>
           </div>
 
-          {/* 4. DETALLES DE PAGO */}
+          {/* 3. DETALLES DE PAGO */}
           <div className="bg-white dark:bg-[#151515] p-8 md:p-10 rounded-3xl border-l-4 border-l-emerald-500 border-y border-r border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 shadow-[-10px_0_30px_rgba(16,185,129,0.05)] relative overflow-hidden transition-colors shadow-sm dark:shadow-none">
             <h2 className="text-3xl font-normal text-slate-900 dark:text-white uppercase tracking-wider mb-8 relative z-10">
               DETALLES DE PAGO
@@ -278,12 +229,6 @@ export default function CheckoutSocio() {
                 <span className="text-sm font-bold text-slate-900 dark:text-white tracking-wider">$0.00</span>
               </div>
               
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-[#7B8B9E] uppercase tracking-widest">
-                  {discountType !== 'Sin Promoción' ? `DESCUENTO (${discountType.toUpperCase()})` : 'DESCUENTO'}
-                </span>
-                <span className="text-sm font-bold text-[#7B8B9E] tracking-wider">-${discountAmount.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
-              </div>
               
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest">IMPUESTOS (IVA 21%)</span>

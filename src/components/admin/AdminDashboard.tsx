@@ -1,4 +1,20 @@
+import { useState } from 'react';
+
+const mockAuditorias = [
+  { iniciales: 'JP', usuario: 'Juan Pérez', accion: 'Modificación de Precio', modulo: 'FINANZAS', fecha: '14 Jun, 2024 - 10:45 AM', estado: 'EXITOSO' },
+  { iniciales: 'LG', usuario: 'Lucas Gómez', accion: 'Intento de Login Fallido', modulo: 'SEGURIDAD', fecha: '14 Jun, 2024 - 09:12 AM', estado: 'BLOQUEADO' },
+  { iniciales: 'MA', usuario: 'Melisa Admin', accion: 'Alta Nuevo Socio', modulo: 'MEMBRESÍAS', fecha: '14 Jun, 2024 - 08:30 AM', estado: 'EXITOSO' },
+  { iniciales: 'CM', usuario: 'Carlos Martínez', accion: 'Cancelación Membresía', modulo: 'MEMBRESÍAS', fecha: '13 Jun, 2024 - 15:20 PM', estado: 'EXITOSO' },
+  { iniciales: 'SR', usuario: 'Sofía Rodríguez', accion: 'Actualización Roles', modulo: 'CONFIGURACIÓN', fecha: '13 Jun, 2024 - 11:15 AM', estado: 'EXITOSO' },
+  { iniciales: 'JP', usuario: 'Juan Pérez', accion: 'Apertura de Caja', modulo: 'FINANZAS', fecha: '13 Jun, 2024 - 08:00 AM', estado: 'EXITOSO' },
+  { iniciales: 'XX', usuario: 'Usuario Desconocido', accion: 'Acceso no autorizado', modulo: 'SEGURIDAD', fecha: '12 Jun, 2024 - 23:45 PM', estado: 'BLOQUEADO' },
+  { iniciales: 'LG', usuario: 'Lucas Gómez', accion: 'Cierre de Caja', modulo: 'FINANZAS', fecha: '12 Jun, 2024 - 22:10 PM', estado: 'EXITOSO' },
+];
+
 export default function AdminDashboard() {
+  const [mostrarTodo, setMostrarTodo] = useState(false);
+  const auditoriasVisibles = mostrarTodo ? mockAuditorias : mockAuditorias.slice(0, 3);
+
   return (
     <div className="space-y-8 max-w-7xl">
       {/* Header */}
@@ -61,8 +77,11 @@ export default function AdminDashboard() {
       <div className="bg-white dark:bg-[#141414] border border-slate-200 dark:border-zinc-800/60 rounded-xl overflow-hidden pb-4 transition-colors duration-300 shadow-sm dark:shadow-none">
         <div className="flex justify-between items-center p-6 border-b border-slate-200 dark:border-zinc-800/60 transition-colors">
           <h3 className="text-sm font-medium text-slate-900 dark:text-white tracking-wide transition-colors">AUDITORÍA RECIENTE</h3>
-          <button className="text-[10px] font-bold text-slate-900 dark:text-white uppercase tracking-wider hover:text-slate-600 dark:hover:text-zinc-300 transition-colors">
-            VER HISTORIAL COMPLETO
+          <button 
+            onClick={() => setMostrarTodo(!mostrarTodo)}
+            className="text-[10px] font-bold text-slate-900 dark:text-white uppercase tracking-wider hover:text-slate-600 dark:hover:text-zinc-300 transition-colors cursor-pointer"
+          >
+            {mostrarTodo ? 'VER MENOS' : 'VER HISTORIAL COMPLETO'}
           </button>
         </div>
 
@@ -78,57 +97,28 @@ export default function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              {/* Row 1 */}
-              <tr className="hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors">
-                <td className="px-6 py-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded bg-slate-200 dark:bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-slate-600 dark:text-zinc-400 transition-colors">JP</div>
-                    <span className="text-sm font-bold text-slate-900 dark:text-white transition-colors">Juan Pérez</span>
-                  </div>
-                </td>
-                <td className="px-6 py-4 text-sm font-bold text-slate-700 dark:text-zinc-300 transition-colors">Modificación de Precio</td>
-                <td className="px-6 py-4 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest transition-colors">FINANZAS</td>
-                <td className="px-6 py-4 text-xs text-slate-500 dark:text-zinc-500 transition-colors">14 Jun, 2024 - 10:45 AM</td>
-                <td className="px-6 py-4 text-right">
-                  <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold bg-green-100 text-green-700 border border-green-200 dark:bg-[#1B2A1E]/80 dark:text-[#4ADE80] dark:border-[#234A2E] transition-colors">
-                    EXITOSO
-                  </span>
-                </td>
-              </tr>
-              {/* Row 2 */}
-              <tr className="hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors">
-                <td className="px-6 py-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded bg-slate-200 dark:bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-slate-600 dark:text-zinc-400 transition-colors">LG</div>
-                    <span className="text-sm font-bold text-slate-900 dark:text-white transition-colors">Lucas Gómez</span>
-                  </div>
-                </td>
-                <td className="px-6 py-4 text-sm font-bold text-slate-700 dark:text-zinc-300 transition-colors">Intento de Login Fallido</td>
-                <td className="px-6 py-4 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest transition-colors">SEGURIDAD</td>
-                <td className="px-6 py-4 text-xs text-slate-500 dark:text-zinc-500 transition-colors">14 Jun, 2024 - 09:12 AM</td>
-                <td className="px-6 py-4 text-right">
-                  <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold bg-red-100 text-red-700 border border-red-200 dark:bg-[#2A1B1B]/80 dark:text-[#F87171] dark:border-[#4A2323] transition-colors">
-                    BLOQUEADO
-                  </span>
-                </td>
-              </tr>
-              {/* Row 3 */}
-              <tr className="hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors">
-                <td className="px-6 py-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded bg-slate-200 dark:bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-slate-600 dark:text-zinc-400 transition-colors">MA</div>
-                    <span className="text-sm font-bold text-slate-900 dark:text-white transition-colors">Melisa Admin</span>
-                  </div>
-                </td>
-                <td className="px-6 py-4 text-sm font-bold text-slate-700 dark:text-zinc-300 transition-colors">Alta Nuevo Socio</td>
-                <td className="px-6 py-4 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest transition-colors">MEMBRESÍAS</td>
-                <td className="px-6 py-4 text-xs text-slate-500 dark:text-zinc-500 transition-colors">14 Jun, 2024 - 08:30 AM</td>
-                <td className="px-6 py-4 text-right">
-                  <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold bg-green-100 text-green-700 border border-green-200 dark:bg-[#1B2A1E]/80 dark:text-[#4ADE80] dark:border-[#234A2E] transition-colors">
-                    EXITOSO
-                  </span>
-                </td>
-              </tr>
+              {auditoriasVisibles.map((auditoria, idx) => (
+                <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors">
+                  <td className="px-6 py-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-6 h-6 rounded bg-slate-200 dark:bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-slate-600 dark:text-zinc-400 transition-colors">{auditoria.iniciales}</div>
+                      <span className="text-sm font-bold text-slate-900 dark:text-white transition-colors">{auditoria.usuario}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 text-sm font-bold text-slate-700 dark:text-zinc-300 transition-colors">{auditoria.accion}</td>
+                  <td className="px-6 py-4 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest transition-colors">{auditoria.modulo}</td>
+                  <td className="px-6 py-4 text-xs text-slate-500 dark:text-zinc-500 transition-colors">{auditoria.fecha}</td>
+                  <td className="px-6 py-4 text-right">
+                    <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold border transition-colors ${
+                      auditoria.estado === 'EXITOSO' 
+                        ? 'bg-green-100 text-green-700 border-green-200 dark:bg-[#1B2A1E]/80 dark:text-[#4ADE80] dark:border-[#234A2E]' 
+                        : 'bg-red-100 text-red-700 border-red-200 dark:bg-[#2A1B1B]/80 dark:text-[#F87171] dark:border-[#4A2323]'
+                    }`}>
+                      {auditoria.estado}
+                    </span>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

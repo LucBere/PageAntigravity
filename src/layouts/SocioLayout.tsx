@@ -14,16 +14,13 @@ export default function SocioLayout() {
   return (
     <div className="flex w-full h-screen bg-slate-50 dark:bg-[#0E0E0E] transition-colors duration-300 text-slate-800 dark:text-zinc-100 font-sans overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-64 bg-white dark:bg-[#151515] flex flex-col justify-between border-r border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
+      <aside className="w-64 h-full bg-white dark:bg-[#151515] flex flex-col border-r border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
         <div>
           {/* Header */}
           <div className="p-8">
             <h1 className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
               SQUAT<span className="text-[#7B8B9E]">GYM</span>
             </h1>
-            <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 tracking-[0.2em] mt-1">
-              HIGH PERFORMANCE
-            </p>
           </div>
 
           {/* Navegación */}
@@ -34,19 +31,17 @@ export default function SocioLayout() {
                 to={item.path}
                 end={item.exact}
                 className={({ isActive }) =>
-                  `flex items-center px-4 py-3 rounded-lg text-sm font-bold tracking-widest transition-all duration-200 group ${
-                    isActive
-                      ? 'bg-slate-100 dark:bg-zinc-800/50 text-slate-900 dark:text-white border-l-[3px] border-[#7B8B9E]'
-                      : 'text-slate-500 hover:text-slate-600 hover:bg-slate-50 dark:text-zinc-500 dark:hover:bg-zinc-800/30 dark:hover:text-zinc-300 border-l-[3px] border-transparent'
+                  `flex items-center px-4 py-3 rounded-lg text-sm font-bold tracking-widest transition-all duration-200 group ${isActive
+                    ? 'bg-slate-100 dark:bg-zinc-800/50 text-slate-900 dark:text-white border-l-[3px] border-[#7B8B9E]'
+                    : 'text-slate-500 hover:text-slate-600 hover:bg-slate-50 dark:text-zinc-500 dark:hover:bg-zinc-800/30 dark:hover:text-zinc-300 border-l-[3px] border-transparent'
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
                     <item.icon
-                      className={`w-5 h-5 mr-3 transition-colors ${
-                        isActive ? 'text-[#7B8B9E]' : 'text-slate-500 group-hover:text-slate-600 dark:text-zinc-500 dark:group-hover:text-zinc-400'
-                      }`}
+                      className={`w-5 h-5 mr-3 transition-colors ${isActive ? 'text-[#7B8B9E]' : 'text-slate-500 group-hover:text-slate-600 dark:text-zinc-500 dark:group-hover:text-zinc-400'
+                        }`}
                     />
                     {item.name}
                   </>
@@ -57,27 +52,26 @@ export default function SocioLayout() {
         </div>
 
         {/* Footer Sidebar */}
-        <div>
+        <div className="mt-auto pb-6">
           {/* Mini perfil */}
           <div className="px-6 mb-6">
             <div className="flex items-center space-x-3">
               <img src="https://i.pravatar.cc/150?img=11" alt="Avatar" className="w-10 h-10 rounded-full border border-slate-300 dark:border-zinc-700" />
               <div>
                 <p className="text-sm text-slate-800 dark:text-zinc-100 font-bold tracking-wide">Juan Pérez</p>
-                <p className="text-[10px] text-slate-500 dark:text-zinc-500 font-bold uppercase tracking-widest mt-0.5">PLAN PLATINUM</p>
               </div>
             </div>
           </div>
 
           <div className="p-4 border-t border-slate-200 dark:border-zinc-800/50">
-            <button 
+            <button
               onClick={() => alert('Módulo de Ajustes del Sistema en desarrollo para la fase 2.')}
               className="flex items-center w-full px-4 py-2 text-sm font-bold tracking-widest text-slate-500 hover:text-slate-900 hover:bg-slate-50 dark:text-zinc-500 dark:hover:text-white dark:hover:bg-zinc-800/30 transition-colors rounded-lg cursor-pointer"
             >
               <Settings className="w-4 h-4 mr-3" />
               AJUSTES
             </button>
-            <button 
+            <button
               onClick={() => navigate('/')}
               className="flex items-center w-full px-4 py-2 text-sm font-bold tracking-widest text-slate-500 hover:text-slate-900 hover:bg-slate-50 dark:text-zinc-500 dark:hover:text-white dark:hover:bg-zinc-800/30 transition-colors rounded-lg mt-1 cursor-pointer"
             >
@@ -93,7 +87,7 @@ export default function SocioLayout() {
         {/* Topbar */}
         <header className="h-20 px-8 flex justify-between items-center border-b border-slate-200 dark:border-zinc-800/50 shrink-0">
           <h2 className="text-[11px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-[0.2em]">PANEL DE CONTROL</h2>
-          
+
           <div className="flex items-center space-x-6">
             {/* Buscador */}
             <div className="relative hidden md:block">
@@ -105,8 +99,8 @@ export default function SocioLayout() {
               />
             </div>
             {/* Theme Toggle Button */}
-            <button 
-              onClick={toggleTheme} 
+            <button
+              onClick={toggleTheme}
               className="p-2 rounded-full border border-slate-200 dark:border-zinc-800/80 bg-white dark:bg-[#151515] text-slate-400 hover:text-slate-700 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors cursor-pointer shadow-sm dark:shadow-none"
               aria-label="Toggle Theme"
             >
