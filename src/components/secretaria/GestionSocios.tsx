@@ -93,12 +93,12 @@ export default function GestionSocios() {
 
   const getFiltroClass = (filtro: string) => {
     return filtroActivo === filtro 
-      ? "px-5 py-1.5 bg-slate-800 dark:bg-[#7B8B9E] text-white text-xs font-bold rounded-full tracking-widest shadow-lg shadow-[#7B8B9E]/20 shrink-0 transition-colors" 
-      : "px-5 py-1.5 text-xs font-bold text-slate-500 dark:text-zinc-500 hover:text-slate-600 dark:text-zinc-300 tracking-widest transition-colors shrink-0";
+      ? "px-5 py-3 border-b-4 border-green-600 text-slate-900 dark:text-white text-sm font-bold tracking-widest transition-colors shrink-0" 
+      : "px-5 py-3 border-b-4 border-transparent text-sm font-medium text-slate-500 dark:text-zinc-500 hover:text-slate-700 dark:hover:text-zinc-300 tracking-widest transition-colors shrink-0";
   };
 
   return (
-    <div className="bg-slate-50 dark:bg-[#0E0E0E] min-h-full p-8 font-sans text-zinc-100">
+    <div className="bg-slate-50 dark:bg-[#0E0E0E] min-h-full p-8 font-sans text-slate-900 dark:text-zinc-100">
       <div className="max-w-7xl mx-auto">
         
         {/* 1. Encabezado Principal */}
@@ -147,7 +147,7 @@ export default function GestionSocios() {
               onClick={() => handleFiltroClick('HABILITADOS')}
               className={getFiltroClass('HABILITADOS')}
             >
-              HABILITADOS
+              ACTIVOS
             </button>
           </div>
           <div className="relative">
@@ -199,7 +199,7 @@ export default function GestionSocios() {
               </thead>
               <tbody className="divide-y divide-zinc-800/50">
                 {sociosPaginados.map((socio) => (
-                  <tr key={socio.id} className="hover:bg-slate-100 dark:hover:bg-zinc-800/20 transition-colors">
+                  <tr key={socio.id} className="hover:bg-slate-50 dark:hover:bg-zinc-800/20 transition-colors">
                     {/* SOCIO */}
                     <td className="py-5 pr-4">
                       <div className="flex items-center space-x-4">
@@ -229,12 +229,12 @@ export default function GestionSocios() {
                     {/* ESTADO */}
                     <td className="py-5 pr-4">
                       {socio.estado === 'HABILITADO' ? (
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-zinc-950 text-slate-600 dark:text-zinc-300 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-800 border border-green-200 dark:bg-zinc-950 dark:text-zinc-300 dark:border-zinc-800/50">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] mr-2"></span>
                           HABILITADO
                         </span>
                       ) : (
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-[#2A1111] text-[#EF4444] border border-[#EF4444]/20">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-red-100 text-red-800 border border-red-200 dark:bg-[#2A1111] dark:text-[#EF4444] dark:border-[#EF4444]/20">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444] mr-2"></span>
                           DEUDOR
                         </span>

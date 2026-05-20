@@ -19,8 +19,34 @@ export default function RegistroPago() {
 
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [descuentoPorcentaje, setDescuentoPorcentaje] = useState(0);
+  const [showCouponInput, setShowCouponInput] = useState(false);
+  const [couponCode, setCouponCode] = useState("");
 
   const [metodoPago, setMetodoPago] = useState('tarjeta');
+
+  const handleDescuentoSelect = (porcentaje: number) => {
+    setDescuentoPorcentaje(porcentaje);
+    setShowCouponInput(false);
+    setCouponCode("");
+  };
+
+  const handleCuponClick = () => {
+    setShowCouponInput(true);
+    setDescuentoPorcentaje(0);
+    setCouponCode("");
+  };
+
+  const handleCouponChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setCouponCode(val);
+    if (val.toLowerCase() === 'cupon') {
+      setDescuentoPorcentaje(7);
+    } else {
+      if (descuentoPorcentaje === 7) {
+        setDescuentoPorcentaje(0);
+      }
+    }
+  };
   
   const [nombreTarjeta, setNombreTarjeta] = useState('');
   const [numeroTarjeta, setNumeroTarjeta] = useState('');
@@ -290,8 +316,8 @@ export default function RegistroPago() {
               </div>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
                 
-                {/* SIN DESCUENTO */}
-                <div onClick={() => setDescuentoPorcentaje(0)} className={`p-4 rounded-xl relative cursor-pointer flex flex-col items-center justify-center text-center transition-colors ${descuentoPorcentaje === 0 ? 'bg-white dark:bg-[#151515] border-2 border-[#7B8B9E] shadow-[0_0_10px_rgba(123,139,158,0.1)]' : 'bg-white dark:bg-[#151515] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 hover:border-slate-300 dark:border-zinc-700 group'}`}>
+                {/* SIN PROMOCIÓN */}
+                <div onClick={() => handleDescuentoSelect(0)} className={`p-4 rounded-xl relative cursor-pointer flex flex-col items-center justify-center text-center transition-colors ${descuentoPorcentaje === 0 ? 'bg-white dark:bg-[#151515] border-2 border-[#7B8B9E] shadow-[0_0_10px_rgba(123,139,158,0.1)]' : 'bg-white dark:bg-[#151515] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 hover:border-slate-300 dark:border-zinc-700 group'}`}>
                   {descuentoPorcentaje === 0 && (
                     <div className="absolute top-2 right-2 w-3.5 h-3.5 bg-slate-800 dark:bg-[#7B8B9E] rounded-sm flex items-center justify-center">
                       <svg className="w-2.5 h-2.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
@@ -302,7 +328,7 @@ export default function RegistroPago() {
                 </div>
 
                 {/* POR AMIGOS */}
-                <div onClick={() => setDescuentoPorcentaje(10)} className={`p-4 rounded-xl relative cursor-pointer flex flex-col items-center justify-center text-center transition-colors ${descuentoPorcentaje === 10 ? 'bg-white dark:bg-[#151515] border-2 border-[#7B8B9E] shadow-[0_0_10px_rgba(123,139,158,0.1)]' : 'bg-white dark:bg-[#151515] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 hover:border-slate-300 dark:border-zinc-700 group'}`}>
+                <div onClick={() => handleDescuentoSelect(10)} className={`p-4 rounded-xl relative cursor-pointer flex flex-col items-center justify-center text-center transition-colors ${descuentoPorcentaje === 10 ? 'bg-white dark:bg-[#151515] border-2 border-[#7B8B9E] shadow-[0_0_10px_rgba(123,139,158,0.1)]' : 'bg-white dark:bg-[#151515] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 hover:border-slate-300 dark:border-zinc-700 group'}`}>
                   {descuentoPorcentaje === 10 && (
                     <div className="absolute top-2 right-2 w-3.5 h-3.5 bg-slate-800 dark:bg-[#7B8B9E] rounded-sm flex items-center justify-center">
                       <svg className="w-2.5 h-2.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
@@ -313,7 +339,7 @@ export default function RegistroPago() {
                 </div>
 
                 {/* PLAN FAMILIAR */}
-                <div onClick={() => setDescuentoPorcentaje(15)} className={`p-4 rounded-xl relative cursor-pointer flex flex-col items-center justify-center text-center transition-colors ${descuentoPorcentaje === 15 ? 'bg-white dark:bg-[#151515] border-2 border-[#7B8B9E] shadow-[0_0_10px_rgba(123,139,158,0.1)]' : 'bg-white dark:bg-[#151515] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 hover:border-slate-300 dark:border-zinc-700 group'}`}>
+                <div onClick={() => handleDescuentoSelect(15)} className={`p-4 rounded-xl relative cursor-pointer flex flex-col items-center justify-center text-center transition-colors ${descuentoPorcentaje === 15 ? 'bg-white dark:bg-[#151515] border-2 border-[#7B8B9E] shadow-[0_0_10px_rgba(123,139,158,0.1)]' : 'bg-white dark:bg-[#151515] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 hover:border-slate-300 dark:border-zinc-700 group'}`}>
                   {descuentoPorcentaje === 15 && (
                     <div className="absolute top-2 right-2 w-3.5 h-3.5 bg-slate-800 dark:bg-[#7B8B9E] rounded-sm flex items-center justify-center">
                       <svg className="w-2.5 h-2.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
@@ -324,7 +350,7 @@ export default function RegistroPago() {
                 </div>
 
                 {/* DÍAS ESPECIALES */}
-                <div onClick={() => setDescuentoPorcentaje(20)} className={`p-4 rounded-xl relative cursor-pointer flex flex-col items-center justify-center text-center transition-colors ${descuentoPorcentaje === 20 ? 'bg-white dark:bg-[#151515] border-2 border-[#7B8B9E] shadow-[0_0_10px_rgba(123,139,158,0.1)]' : 'bg-white dark:bg-[#151515] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 hover:border-slate-300 dark:border-zinc-700 group'}`}>
+                <div onClick={() => handleDescuentoSelect(20)} className={`p-4 rounded-xl relative cursor-pointer flex flex-col items-center justify-center text-center transition-colors ${descuentoPorcentaje === 20 ? 'bg-white dark:bg-[#151515] border-2 border-[#7B8B9E] shadow-[0_0_10px_rgba(123,139,158,0.1)]' : 'bg-white dark:bg-[#151515] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 hover:border-slate-300 dark:border-zinc-700 group'}`}>
                   {descuentoPorcentaje === 20 && (
                     <div className="absolute top-2 right-2 w-3.5 h-3.5 bg-slate-800 dark:bg-[#7B8B9E] rounded-sm flex items-center justify-center">
                       <svg className="w-2.5 h-2.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
@@ -335,20 +361,27 @@ export default function RegistroPago() {
                 </div>
 
                 {/* CUPÓN */}
-                <div className="bg-white dark:bg-[#151515] p-4 rounded-xl border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 hover:border-slate-300 dark:border-zinc-700 cursor-pointer transition-colors group flex flex-col items-center justify-center text-center shadow-sm dark:shadow-none">
-                  <p className="text-xs font-bold text-slate-600 dark:text-zinc-300 mb-0.5 group-hover:text-slate-900 dark:text-white">CUPÓN</p>
-                  <p className="text-[11px] text-slate-500 dark:text-zinc-500">INGRESAR</p>
+                <div 
+                  onClick={handleCuponClick}
+                  className={`bg-white dark:bg-[#151515] p-4 rounded-xl cursor-pointer transition-colors group flex flex-col items-center justify-center text-center shadow-sm dark:shadow-none ${showCouponInput || descuentoPorcentaje === 7 ? 'border-2 border-[#7B8B9E] shadow-[0_0_10px_rgba(123,139,158,0.1)]' : 'border border-slate-200 dark:border-zinc-800/50 hover:border-slate-300 dark:hover:border-zinc-700'}`}
+                >
+                  <p className={`text-xs font-bold mb-0.5 ${showCouponInput || descuentoPorcentaje === 7 ? 'text-slate-900 dark:text-white' : 'text-slate-600 dark:text-zinc-300 group-hover:text-slate-900 dark:text-white'}`}>CUPÓN</p>
+                  <p className={`text-[11px] ${showCouponInput || descuentoPorcentaje === 7 ? 'text-[#7B8B9E]' : 'text-slate-500 dark:text-zinc-500'}`}>{descuentoPorcentaje === 7 ? '7%' : 'INGRESAR'}</p>
                 </div>
 
               </div>
               
-              <div className="mt-4 bg-white dark:bg-[#151515] p-4 rounded-xl border border-slate-200 dark:border-zinc-800 flex items-center space-x-3 w-full md:w-1/2 transition-colors shadow-sm dark:shadow-none">
-                <input 
-                  type="text"
-                  placeholder="INGRESAR CÓDIGO DE CUPÓN"
-                  className="flex-1 bg-slate-50 dark:bg-[#1A1A1A] border border-slate-300 dark:border-zinc-700 rounded-lg py-2.5 px-4 text-xs text-slate-900 dark:text-white font-bold tracking-widest uppercase placeholder-zinc-600 focus:outline-none focus:border-[#7B8B9E] transition-colors"
-                />
-              </div>
+              {showCouponInput && (
+                <div className="mt-4 bg-white dark:bg-[#151515] p-4 rounded-xl border border-slate-200 dark:border-zinc-800 flex items-center space-x-3 w-full md:w-1/2 transition-colors shadow-sm dark:shadow-none">
+                  <input 
+                    type="text"
+                    value={couponCode}
+                    onChange={handleCouponChange}
+                    placeholder="INGRESAR CÓDIGO DE CUPÓN"
+                    className="flex-1 bg-slate-50 dark:bg-[#1A1A1A] border border-slate-300 dark:border-zinc-700 rounded-lg py-2.5 px-4 text-xs text-slate-900 dark:text-white font-bold tracking-widest uppercase placeholder-zinc-600 focus:outline-none focus:border-[#7B8B9E] transition-colors"
+                  />
+                </div>
+              )}
             </div>
 
             {/* BOTÓN CONFIRMAR PAGO (debajo de los pasos) */}

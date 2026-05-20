@@ -16,9 +16,24 @@ export default function Reclamos() {
     { id: 1, date: '24 OCT 2023', time: '14:32 PM', name: 'MARCOS G. VILLALBA', email: 'marcos.v@email.com', dni: '38.442.109', avatar: 'https://i.pravatar.cc/150?img=11' },
     { id: 2, date: '23 OCT 2023', time: '09:15 AM', name: 'CARLA MENDEZ', email: 'carla.m88@email.com', dni: '42.115.903', avatar: 'https://i.pravatar.cc/150?img=5' },
     { id: 3, date: '22 OCT 2023', time: '18:45 PM', name: 'JULIÁN PEREZ', email: 'j.perez.coach@email.com', dni: '35.667.112', avatar: 'https://i.pravatar.cc/150?img=12' },
+    { id: 4, date: '21 OCT 2023', time: '11:20 AM', name: 'LAURA GOMEZ', email: 'laura.gomez@email.com', dni: '31.221.445', avatar: 'https://i.pravatar.cc/150?img=20' },
+    { id: 5, date: '21 OCT 2023', time: '08:10 AM', name: 'DIEGO MARTINEZ', email: 'dmartinez@email.com', dni: '29.887.654', avatar: 'https://i.pravatar.cc/150?img=33' },
+    { id: 6, date: '20 OCT 2023', time: '16:40 PM', name: 'ANA SOFIA RUIZ', email: 'ana.ruiz99@email.com', dni: '41.555.222', avatar: 'https://i.pravatar.cc/150?img=42' },
+    { id: 7, date: '19 OCT 2023', time: '10:05 AM', name: 'PABLO HERRERA', email: 'pherrera@email.com', dni: '36.998.111', avatar: 'https://i.pravatar.cc/150?img=53' },
+    { id: 8, date: '18 OCT 2023', time: '13:50 PM', name: 'VALERIA RIOS', email: 'valerios@email.com', dni: '39.444.777', avatar: 'https://i.pravatar.cc/150?img=47' },
+    { id: 9, date: '17 OCT 2023', time: '19:15 PM', name: 'FERNANDO DIAZ', email: 'fer.diaz@email.com', dni: '33.111.999', avatar: 'https://i.pravatar.cc/150?img=15' },
+    { id: 10, date: '16 OCT 2023', time: '07:30 AM', name: 'CAMILA BLANCO', email: 'cblanco@email.com', dni: '40.222.333', avatar: 'https://i.pravatar.cc/150?img=25' },
+    { id: 11, date: '15 OCT 2023', time: '15:25 PM', name: 'LUCAS NAVARRO', email: 'lucasn@email.com', dni: '37.888.555', avatar: 'https://i.pravatar.cc/150?img=59' },
+    { id: 12, date: '14 OCT 2023', time: '12:10 PM', name: 'SOFIA LUNA', email: 'sluna@email.com', dni: '43.666.111', avatar: 'https://i.pravatar.cc/150?img=31' },
   ]);
 
   const [reclamoSeleccionado, setReclamoSeleccionado] = useState<Reclamo | null>(null);
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const totalPages = Math.ceil(reclamos.length / itemsPerPage);
+  
+  const currentReclamos = reclamos.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const handleVerificar = (reclamo: Reclamo) => {
     setReclamoSeleccionado(reclamo);
@@ -51,8 +66,8 @@ export default function Reclamos() {
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-800/50">
-              {reclamos.length > 0 ? (
-                reclamos.map((r) => (
+              {currentReclamos.length > 0 ? (
+                currentReclamos.map((r) => (
                   <tr key={r.id} className="hover:bg-slate-100 dark:hover:bg-zinc-800/20 transition-colors">
                     <td className="py-4">
                       <p className="text-sm font-bold text-slate-900 dark:text-white uppercase">{r.date}</p>
@@ -78,7 +93,7 @@ export default function Reclamos() {
                     <td className="py-4 text-right">
                       <button 
                         onClick={() => handleVerificar(r)}
-                        className="px-6 py-2 bg-slate-500/20 hover:bg-slate-500/40 text-slate-300 text-xs font-bold rounded-full transition-colors cursor-pointer"
+                        className="px-6 py-2 bg-slate-800 hover:bg-slate-900 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white text-xs font-bold rounded-full transition-colors cursor-pointer shadow-md"
                       >
                         VERIFICAR
                       </button>
@@ -99,16 +114,32 @@ export default function Reclamos() {
         {/* Footer Tabla */}
         <div className="flex flex-col md:flex-row md:items-center justify-between pt-6 mt-2 border-t border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">
           <p className="text-[11px] text-slate-500 dark:text-zinc-500 font-bold tracking-widest uppercase">
-            MOSTRANDO {reclamos.length} DE {reclamos.length} RECLAMOS PENDIENTES
+            MOSTRANDO {reclamos.length === 0 ? 0 : ((currentPage - 1) * itemsPerPage) + 1} AL {Math.min(currentPage * itemsPerPage, reclamos.length)} DE {reclamos.length} RECLAMOS PENDIENTES
           </p>
           <div className="flex items-center space-x-2 mt-4 md:mt-0">
-            <button className="p-2 rounded-lg bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors cursor-pointer disabled:opacity-50" disabled>
+            <button 
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="p-2 rounded-lg bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors cursor-pointer disabled:opacity-50"
+            >
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-lg bg-transparent border border-[#7B8B9E] text-[#7B8B9E] font-bold text-xs cursor-pointer">
-              1
-            </button>
-            <button className="p-2 rounded-lg bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors cursor-pointer disabled:opacity-50" disabled>
+            
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button 
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`w-8 h-8 flex items-center justify-center rounded-lg border font-bold text-xs cursor-pointer transition-colors ${currentPage === i + 1 ? 'bg-slate-800 dark:bg-[#7B8B9E] border-slate-800 dark:border-[#7B8B9E] text-white' : 'bg-transparent border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 hover:border-slate-400 dark:hover:border-zinc-600'}`}
+              >
+                {i + 1}
+              </button>
+            ))}
+
+            <button 
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages || totalPages === 0}
+              className="p-2 rounded-lg bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors cursor-pointer disabled:opacity-50"
+            >
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>

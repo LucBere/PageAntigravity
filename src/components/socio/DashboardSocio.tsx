@@ -50,7 +50,7 @@ export default function DashboardSocio() {
           </div>
           <button
             onClick={() => navigate('/socio/checkout')}
-            className="w-full bg-[#388E3C] hover:bg-green-600 text-slate-900 dark:text-white font-bold py-4 rounded-xl transition-colors tracking-wide shadow-lg shadow-green-900/20"
+            className="w-full bg-[#388E3C] hover:bg-green-600 text-white font-bold py-4 rounded-xl transition-colors tracking-wide shadow-lg shadow-green-900/20"
           >
             PAGAR AHORA
           </button>

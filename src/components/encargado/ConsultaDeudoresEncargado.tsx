@@ -112,16 +112,13 @@ export default function ConsultaDeudoresEncargado() {
                 setActiveTab(tab);
                 setCurrentPage(1);
               }}
-              className={`pb-3 text-sm font-bold tracking-wide transition-colors cursor-pointer relative whitespace-nowrap ${
+              className={`pb-3 text-sm font-bold tracking-wide transition-colors cursor-pointer relative whitespace-nowrap border-b-4 ${
                 activeTab === tab 
-                  ? 'text-slate-900 dark:text-white' 
-                  : 'text-slate-400 hover:text-slate-600 dark:text-zinc-500 dark:hover:text-zinc-300'
+                  ? 'border-green-600 text-slate-900 dark:text-white' 
+                  : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-zinc-500 dark:hover:text-zinc-300'
               }`}
             >
               {tab}
-              {activeTab === tab && (
-                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-slate-900 dark:bg-white rounded-t-full"></div>
-              )}
             </button>
           ))}
         </div>
@@ -170,7 +167,9 @@ export default function ConsultaDeudoresEncargado() {
                         <img src={d.avatar} alt={d.nombre} className="w-8 h-8 rounded-full border border-slate-200 dark:border-zinc-700" />
                         <div>
                           <p className="text-sm font-bold text-slate-800 dark:text-white">{d.nombre}</p>
-                          <p className="text-[10px] text-slate-500 dark:text-zinc-500">{d.plan}</p>
+                          <span className={`inline-flex items-center px-2 py-0.5 mt-1 rounded text-[10px] font-bold ${d.plan.includes('Cross Training') ? 'bg-sky-100 text-sky-900 dark:bg-sky-900/30 dark:text-sky-300' : d.plan.includes('Musculación') ? 'bg-green-100 text-green-900 dark:bg-green-900/30 dark:text-green-300' : 'bg-purple-100 text-purple-900 dark:bg-purple-900/30 dark:text-purple-300'}`}>
+                            {d.plan}
+                          </span>
                         </div>
                       </div>
                     </td>
