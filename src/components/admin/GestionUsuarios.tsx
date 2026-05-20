@@ -151,8 +151,12 @@ export default function GestionUsuarios() {
       {/* 1. Encabezado */}
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-[2rem] font-bold text-slate-900 dark:text-[#FAFAFA] tracking-wide mb-1 uppercase transition-colors">GESTIÓN DE USUARIO</h2>
-          <p className="text-slate-500 dark:text-zinc-400 text-sm">Listado general de usuarios y personal del sistema</p>
+          <h1 className="text-[3rem] font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-4 uppercase leading-none transition-colors">
+            GESTIÓN DE USUARIO
+          </h1>
+          <p className="text-slate-500 dark:text-zinc-400 text-sm max-w-xl transition-colors">
+            Listado general de usuarios y personal del sistema
+          </p>
         </div>
         <button 
           onClick={() => navigate('/admin/usuarios/nuevo')}

@@ -8,10 +8,10 @@ export default function CajaPagos() {
       {/* Encabezado */}
       <div>
 
-        <h1 className="text-[2.5rem] leading-tight font-bold text-slate-900 dark:text-[#FAFAFA] tracking-wide mb-2 uppercase transition-colors">
+        <h1 className="text-[3rem] font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-4 uppercase leading-none transition-colors">
           CAJA / PAGOS
         </h1>
-        <p className="text-slate-500 dark:text-zinc-400 text-sm max-w-2xl transition-colors">
+        <p className="text-slate-500 dark:text-zinc-400 text-sm max-w-xl transition-colors">
           Gestión de flujo de efectivo, recuperación de cartera y alertas de morosidad automatizadas.
         </p>
       </div>
