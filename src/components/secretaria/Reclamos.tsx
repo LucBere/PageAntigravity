@@ -28,6 +28,7 @@ export default function Reclamos() {
   ]);
 
   const [reclamoSeleccionado, setReclamoSeleccionado] = useState<Reclamo | null>(null);
+  const [comprobanteAbierto, setComprobanteAbierto] = useState<Reclamo | null>(null);
   
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -86,9 +87,12 @@ export default function Reclamos() {
                       <span className="text-sm text-slate-900 dark:text-white">{r.dni}</span>
                     </td>
                     <td className="py-4 text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800">
-                        <Image className="w-5 h-5 text-slate-500 dark:text-zinc-500" />
-                      </div>
+                      <button 
+                        onClick={() => setComprobanteAbierto(r)}
+                        className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 cursor-pointer hover:border-emerald-500 transition-colors group"
+                      >
+                        <Image className="w-5 h-5 text-slate-500 dark:text-zinc-500 group-hover:text-emerald-500 transition-colors" />
+                      </button>
                     </td>
                     <td className="py-4 text-right">
                       <button 
@@ -235,6 +239,46 @@ export default function Reclamos() {
               </button>
             </div>
 
+          </div>
+        </div>
+      )}
+
+      {/* Modal del Comprobante (Mockup) */}
+      {comprobanteAbierto && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-[#151515] rounded-xl p-8 max-w-sm w-full border border-slate-200 dark:border-zinc-800 shadow-2xl flex flex-col items-center">
+            
+            <div className="w-full bg-slate-50 dark:bg-zinc-100 p-6 rounded-lg font-mono text-slate-800 shadow-inner border border-slate-200 dark:border-zinc-300 relative">
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-b from-slate-200 dark:from-zinc-300 to-transparent opacity-50"></div>
+              
+              <h3 className="text-center font-bold text-lg mb-4 border-b border-dashed border-slate-400 pb-2">COMPROBANTE DE TRANSFERENCIA</h3>
+              
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="font-semibold text-slate-500">Socio:</span>
+                  <span className="text-right font-bold truncate max-w-[150px]">{comprobanteAbierto.name}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-semibold text-slate-500">Fecha:</span>
+                  <span className="text-right font-bold">{comprobanteAbierto.date} {comprobanteAbierto.time}</span>
+                </div>
+                <div className="flex justify-between items-center mt-2 pt-2 border-t border-dashed border-slate-400">
+                  <span className="font-semibold text-slate-500">Monto:</span>
+                  <span className="text-right font-black text-lg">$ 15.000,00</span>
+                </div>
+                <div className="flex justify-between mt-2">
+                  <span className="font-semibold text-slate-500">Estado:</span>
+                  <span className="text-right font-bold uppercase">Aprobado</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setComprobanteAbierto(null)}
+              className="mt-6 w-full py-4 bg-slate-800 dark:bg-zinc-800 hover:bg-slate-900 dark:hover:bg-zinc-700 text-white font-bold tracking-widest uppercase rounded-xl transition-all cursor-pointer shadow-md"
+            >
+              CERRAR
+            </button>
           </div>
         </div>
       )}
