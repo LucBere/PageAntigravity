@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, CreditCard, CheckCircle, Info, QrCode } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 type Plan = {
   id: string;
@@ -16,6 +16,10 @@ const PLANES: Plan[] = [
 
 export default function RegistroPago() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const prefilledName: string | undefined = (location.state as { nuevoSocioNombre?: string })?.nuevoSocioNombre;
+
+  const [socioBuscado, setSocioBuscado] = useState(prefilledName || '');
 
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [descuentoPorcentaje, setDescuentoPorcentaje] = useState(0);
@@ -106,13 +110,24 @@ export default function RegistroPago() {
                   <Search className="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-[#7B8B9E]" />
                   <input
                     type="text"
+                    value={socioBuscado}
+                    onChange={(e) => setSocioBuscado(e.target.value)}
                     placeholder="EJ: JUAN PEREZ O DNI 35.123.456"
-                    className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-4 pl-12 pr-4 text-sm font-bold text-slate-900 dark:text-white placeholder-zinc-600 focus:outline-none focus:border-[#7B8B9E] transition-colors uppercase"
+                    className={`w-full bg-slate-50 dark:bg-[#1A1A1A] border rounded-xl py-4 pl-12 pr-4 text-sm font-bold text-slate-900 dark:text-white placeholder-zinc-600 focus:outline-none focus:border-[#7B8B9E] transition-colors uppercase ${
+                      prefilledName ? 'border-[#7B8B9E] ring-1 ring-[#7B8B9E]/30' : 'border-slate-200 dark:border-zinc-800'
+                    }`}
                   />
                 </div>
-                <p className="text-[10px] text-slate-500 dark:text-zinc-500 mt-3 ml-2 italic">
-                  Identifique al socio para vincular la transacción a su cuenta.
-                </p>
+                {prefilledName && socioBuscado === prefilledName ? (
+                  <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold mt-3 ml-2 uppercase tracking-wider flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+                    Socio pre-cargado desde nueva inscripción
+                  </p>
+                ) : (
+                  <p className="text-[10px] text-slate-500 dark:text-zinc-500 mt-3 ml-2 italic">
+                    Identifique al socio para vincular la transacción a su cuenta.
+                  </p>
+                )}
               </div>
             </div>
 
