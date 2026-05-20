@@ -25,8 +25,8 @@ export default function LoginFlow() {
 // --- SUB-COMPONENTS ---
 
 function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
-  const [email, setEmail] = useState('alumno.prueba@squatgym.com');
-  const [password, setPassword] = useState('alumno123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [generalError, setGeneralError] = useState('');
@@ -42,11 +42,15 @@ function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
     let isValid = true;
 
     if (!email) {
-      setEmailError('El email es requerido');
+      setEmailError('El campo es requerido');
       isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      setEmailError('Formato de email inválido');
-      isValid = false;
+    } else {
+      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const isDni = /^\d{7,9}$/.test(email);
+      if (!isEmail && !isDni) {
+        setEmailError('Ingresa un email válido o tu número de DNI');
+        isValid = false;
+      }
     }
 
     if (!password) {
@@ -158,8 +162,8 @@ function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
 }
 
 function LoginStaff({ setStep }: { setStep: (step: Step) => void }) {
-  const [email, setEmail] = useState('admin@squatgym.com');
-  const [password, setPassword] = useState('admin123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [role, setRole] = useState('Secretaria');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -177,11 +181,15 @@ function LoginStaff({ setStep }: { setStep: (step: Step) => void }) {
     let isValid = true;
 
     if (!email) {
-      setEmailError('El email es requerido');
+      setEmailError('El campo es requerido');
       isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      setEmailError('Formato de email inválido');
-      isValid = false;
+    } else {
+      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const isDni = /^\d{7,9}$/.test(email);
+      if (!isEmail && !isDni) {
+        setEmailError('Ingresa un email válido o tu número de DNI');
+        isValid = false;
+      }
     }
 
     if (!password) {

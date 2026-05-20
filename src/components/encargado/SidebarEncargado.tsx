@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, Link } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, Users, LogOut, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -13,8 +13,8 @@ export default function SidebarEncargado() {
   };
 
   const navItems = [
-    { name: 'Dashboard Inicio', path: '/encargado', icon: LayoutDashboard, exact: true },
-    { name: 'Socios Mora y Pagos', path: '/encargado/deudores', icon: Users },
+    { name: 'Dashboard', path: '/encargado', icon: LayoutDashboard, exact: true },
+    { name: 'Socios', path: '/encargado/deudores', icon: Users },
   ];
 
   return (
@@ -22,11 +22,11 @@ export default function SidebarEncargado() {
       
       {/* HEADER: Logo Link y Toggle de Tema */}
       <div className="p-8 flex items-start justify-between">
-        <Link to="/encargado" className="cursor-pointer group flex-1">
-          <h1 className="text-xl font-black tracking-tight text-slate-900 dark:text-white mb-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-500 transition-colors">
+        <div className="flex-1">
+          <h1 className="text-xl font-black tracking-tight text-slate-900 dark:text-white mb-1 transition-colors">
             SQUATGYM
           </h1>
-        </Link>
+        </div>
 
         <button 
           onClick={toggleTheme} 
@@ -47,15 +47,23 @@ export default function SidebarEncargado() {
             to={item.path}
             end={item.exact}
             className={({ isActive }) =>
-              `flex items-center space-x-3 px-4 py-3 rounded-lg font-medium transition-colors ${
+              `flex items-center space-x-3 px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
                 isActive
-                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400 font-bold'
-                  : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100 dark:text-zinc-400 dark:hover:text-zinc-200 dark:hover:bg-zinc-800/30'
+                  ? 'bg-slate-200 text-slate-800 font-semibold dark:bg-zinc-800/40 dark:text-white border-l-[3px] border-[#7B8B9E]'
+                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50 dark:text-zinc-500 dark:hover:text-zinc-300 dark:hover:bg-zinc-800/20 border-l-[3px] border-transparent'
               }`
             }
           >
-            <item.icon className="w-5 h-5" />
-            <span className="text-sm">{item.name}</span>
+            {({ isActive }) => (
+              <>
+                <item.icon
+                  className={`w-5 h-5 transition-colors ${
+                    isActive ? 'text-[#7B8B9E]' : 'text-slate-500 dark:text-zinc-500'
+                  }`}
+                />
+                <span className="text-sm">{item.name}</span>
+              </>
+            )}
           </NavLink>
         ))}
       </nav>
