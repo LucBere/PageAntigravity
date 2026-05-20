@@ -259,7 +259,8 @@ export default function NuevoSocio() {
         {/* 3. Botón de Acción Final */}
         <div className="flex justify-end mt-4 mb-12">
           <button
-            onClick={() => navigate('/secretaria/registrar-pago', { state: { nuevoSocioNombre: formData.nombre } })}
+            type="button"
+            onClick={() => navigate('/secretaria/pago', { state: { nuevoSocioNombre: formData.nombre } })}
             disabled={!terminosAceptados}
             className={`flex items-center px-8 py-4 bg-[#388E3C] text-slate-900 dark:text-white text-sm font-black tracking-widest uppercase rounded-full transition-colors shadow-lg shadow-[#388E3C]/20 ${!terminosAceptados ? 'opacity-50 cursor-not-allowed' : 'hover:bg-emerald-600'}`}
           >
