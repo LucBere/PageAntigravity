@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Download, ArrowLeft, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
-import * as XLSX from 'xlsx';
+import { Search, ArrowLeft, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -99,21 +98,6 @@ export default function ClientesMora() {
     );
   };
 
-  // Exports
-  const handleExportExcel = () => {
-    const dataToExport = clientesFiltrados.map(c => ({
-      Alumno: c.alumno,
-      DNI: c.dni,
-      Plan: c.plan,
-      'Días de Mora': c.diasMora,
-      'Monto Adeudado': c.montoAdeudado
-    }));
-
-    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Morosos");
-    XLSX.writeFile(workbook, "Clientes_Mora_SquatGym.xlsx");
-  };
 
   const handleExportPDF = () => {
     const doc = new jsPDF();

@@ -1,6 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Search, FileText, Download, AlertTriangle, History, ChevronLeft, ChevronRight } from 'lucide-react';
-import * as XLSX from 'xlsx';
+import { Search, Download, AlertTriangle, History, ChevronLeft, ChevronRight } from 'lucide-react';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -65,21 +64,6 @@ export default function AuditoriaLogs() {
     }
   };
 
-  const handleExportExcel = () => {
-    const dataToExport = filteredLogs.map(log => ({
-      ID: log.id,
-      Usuario: log.usuario,
-      IP: log.ip,
-      Acción: log.accion,
-      Módulo: log.modulo,
-      'Fecha/Hora': log.fechaHora.replace('\n', ' '),
-      Estado: log.estado
-    }));
-    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Logs");
-    XLSX.writeFile(workbook, "Auditoria_Logs.xlsx");
-  };
 
   const handleExportPDF = () => {
     const doc = new jsPDF();
