@@ -178,13 +178,7 @@ export default function ClientesMora() {
           <option value="Más de 60 días">Más de 60 días</option>
           <option value="Crítico (+90 días)">Crítico (+90 días)</option>
         </select>
-        <button 
-          onClick={handleExportExcel}
-          className="flex items-center space-x-2 bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-800 text-slate-700 dark:text-white px-6 py-3 rounded-xl text-sm font-medium transition-colors cursor-pointer shadow-sm dark:shadow-none"
-        >
-          <Download className="w-4 h-4" />
-          <span>Exportar Excel</span>
-        </button>
+
       </div>
 
       {/* Tabla Principal */}
