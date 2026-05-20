@@ -6,39 +6,39 @@ import autoTable from 'jspdf-autotable';
 
 // Mock Data (25 registros)
 const mockPagos = [
-  // Sede Norte, Octubre
-  { id: 1, fecha: '24 Oct 2023', socio: 'Martín Rodríguez', dni: '34.555.880', sede: 'Sede Norte', concepto: 'Cuota Mensual', monto: 25000, estado: 'Recibido', periodo: 'Octubre 2023', avatar: 'MR' },
-  { id: 2, fecha: '20 Oct 2023', socio: 'Ana Paz', dni: '40.111.222', sede: 'Sede Norte', concepto: 'Pase Libre', monto: 35000, estado: 'Recibido', periodo: 'Octubre 2023', avatar: 'AP' },
-  { id: 3, fecha: '25 Oct 2023', socio: 'Carlos Rey', dni: '35.444.555', sede: 'Sede Norte', concepto: 'Cross Training', monto: 28000, estado: 'Pendiente', periodo: 'Octubre 2023', avatar: 'CR' },
-  // Sede Norte, Noviembre
-  { id: 4, fecha: '05 Nov 2023', socio: 'Lucía Fernández', dni: '38.452.910', sede: 'Sede Norte', concepto: 'Musculación', monto: 14200, estado: 'Deuda', periodo: 'Noviembre 2023', avatar: 'LF' },
-  { id: 5, fecha: '10 Nov 2023', socio: 'Juan Pérez', dni: '31.144.255', sede: 'Sede Norte', concepto: 'Inscripción Inicial', monto: 15000, estado: 'Recibido', periodo: 'Noviembre 2023', avatar: 'JP' },
-  { id: 6, fecha: '12 Nov 2023', socio: 'María López', dni: '42.333.444', sede: 'Sede Norte', concepto: 'Pase Libre', monto: 35000, estado: 'Pendiente', periodo: 'Noviembre 2023', avatar: 'ML' },
+  // Sede Norte, Abril 2026
+  { id: 1, fecha: '24 Abr 2026', socio: 'Martín Rodríguez', dni: '34.555.880', sede: 'Sede Norte', concepto: 'Cuota Mensual', monto: 25000, estado: 'Recibido', periodo: 'Abril 2026', avatar: 'MR' },
+  { id: 2, fecha: '20 Abr 2026', socio: 'Ana Paz', dni: '40.111.222', sede: 'Sede Norte', concepto: 'Pase Libre', monto: 35000, estado: 'Recibido', periodo: 'Abril 2026', avatar: 'AP' },
+  { id: 3, fecha: '25 Abr 2026', socio: 'Carlos Rey', dni: '35.444.555', sede: 'Sede Norte', concepto: 'Cross Training', monto: 28000, estado: 'Pendiente', periodo: 'Abril 2026', avatar: 'CR' },
+  // Sede Norte, Mayo 2026
+  { id: 4, fecha: '05 May 2026', socio: 'Lucía Fernández', dni: '38.452.910', sede: 'Sede Norte', concepto: 'Musculación', monto: 14200, estado: 'Deuda', periodo: 'Mayo 2026', avatar: 'LF' },
+  { id: 5, fecha: '10 May 2026', socio: 'Juan Pérez', dni: '31.144.255', sede: 'Sede Norte', concepto: 'Inscripción Inicial', monto: 15000, estado: 'Recibido', periodo: 'Mayo 2026', avatar: 'JP' },
+  { id: 6, fecha: '12 May 2026', socio: 'María López', dni: '42.333.444', sede: 'Sede Norte', concepto: 'Pase Libre', monto: 35000, estado: 'Pendiente', periodo: 'Mayo 2026', avatar: 'ML' },
 
-  // Sede Centro, Octubre
-  { id: 7, fecha: '23 Oct 2023', socio: 'Laura Gómez', dni: '41.214.557', sede: 'Sede Centro', concepto: 'Pase Libre Anual', monto: 180000, estado: 'Recibido', periodo: 'Octubre 2023', avatar: 'LG' },
-  { id: 8, fecha: '10 Oct 2023', socio: 'Valeria Fernández', dni: '38.111.222', sede: 'Sede Centro', concepto: 'Clases Personales (x10)', monto: 45000, estado: 'Deuda', periodo: 'Octubre 2023', avatar: 'VF' },
-  { id: 9, fecha: '15 Oct 2023', socio: 'Santiago Ruiz', dni: '36.555.666', sede: 'Sede Centro', concepto: 'Musculación', monto: 20000, estado: 'Recibido', periodo: 'Octubre 2023', avatar: 'SR' },
-  { id: 10, fecha: '28 Oct 2023', socio: 'Elena Gil', dni: '39.777.888', sede: 'Sede Centro', concepto: 'Cross Training', monto: 30000, estado: 'Pendiente', periodo: 'Octubre 2023', avatar: 'EG' },
-  // Sede Centro, Noviembre
-  { id: 11, fecha: '02 Nov 2023', socio: 'Marcos Rossi', dni: '41.201.033', sede: 'Sede Centro', concepto: 'Cross Training', monto: 8500, estado: 'Deuda', periodo: 'Noviembre 2023', avatar: 'MR' },
-  { id: 12, fecha: '08 Nov 2023', socio: 'Sofía Méndez', dni: '35.981.222', sede: 'Sede Centro', concepto: 'Pase Libre', monto: 22400, estado: 'Recibido', periodo: 'Noviembre 2023', avatar: 'SM' },
-  { id: 13, fecha: '18 Nov 2023', socio: 'Mateo Gómez', dni: '40.112.553', sede: 'Sede Centro', concepto: 'Musculación', monto: 12400, estado: 'Pendiente', periodo: 'Noviembre 2023', avatar: 'MG' },
-  { id: 14, fecha: '20 Nov 2023', socio: 'Valentina Ortiz', dni: '39.882.112', sede: 'Sede Centro', concepto: 'Yoga & Balance', monto: 9800, estado: 'Recibido', periodo: 'Noviembre 2023', avatar: 'VO' },
+  // Sede Centro, Abril 2026
+  { id: 7, fecha: '23 Abr 2026', socio: 'Laura Gómez', dni: '41.214.557', sede: 'Sede Centro', concepto: 'Pase Libre Anual', monto: 180000, estado: 'Recibido', periodo: 'Abril 2026', avatar: 'LG' },
+  { id: 8, fecha: '10 Abr 2026', socio: 'Valeria Fernández', dni: '38.111.222', sede: 'Sede Centro', concepto: 'Clases Personales (x10)', monto: 45000, estado: 'Deuda', periodo: 'Abril 2026', avatar: 'VF' },
+  { id: 9, fecha: '15 Abr 2026', socio: 'Santiago Ruiz', dni: '36.555.666', sede: 'Sede Centro', concepto: 'Musculación', monto: 20000, estado: 'Recibido', periodo: 'Abril 2026', avatar: 'SR' },
+  { id: 10, fecha: '28 Abr 2026', socio: 'Elena Gil', dni: '39.777.888', sede: 'Sede Centro', concepto: 'Cross Training', monto: 30000, estado: 'Pendiente', periodo: 'Abril 2026', avatar: 'EG' },
+  // Sede Centro, Mayo 2026
+  { id: 11, fecha: '02 May 2026', socio: 'Marcos Rossi', dni: '41.201.033', sede: 'Sede Centro', concepto: 'Cross Training', monto: 8500, estado: 'Deuda', periodo: 'Mayo 2026', avatar: 'MR' },
+  { id: 12, fecha: '08 May 2026', socio: 'Sofía Méndez', dni: '35.981.222', sede: 'Sede Centro', concepto: 'Pase Libre', monto: 22400, estado: 'Recibido', periodo: 'Mayo 2026', avatar: 'SM' },
+  { id: 13, fecha: '18 May 2026', socio: 'Mateo Gómez', dni: '40.112.553', sede: 'Sede Centro', concepto: 'Musculación', monto: 12400, estado: 'Pendiente', periodo: 'Mayo 2026', avatar: 'MG' },
+  { id: 14, fecha: '20 May 2026', socio: 'Valentina Ortiz', dni: '39.882.112', sede: 'Sede Centro', concepto: 'Yoga & Balance', monto: 9800, estado: 'Recibido', periodo: 'Mayo 2026', avatar: 'VO' },
 
-  // Sede Sur, Octubre
-  { id: 15, fecha: '25 Oct 2023', socio: 'Carlos Silva', dni: '28.875.143', sede: 'Sede Sur', concepto: 'Cuota Mensual + Locker', monto: 28500, estado: 'Pendiente', periodo: 'Octubre 2023', avatar: 'CS' },
-  { id: 16, fecha: '05 Oct 2023', socio: 'Diego Torres', dni: '34.777.555', sede: 'Sede Sur', concepto: 'Musculación', monto: 15000, estado: 'Deuda', periodo: 'Octubre 2023', avatar: 'DT' },
-  { id: 17, fecha: '11 Oct 2023', socio: 'Camila Ríos', dni: '39.888.666', sede: 'Sede Sur', concepto: 'Cross Training', monto: 40000, estado: 'Deuda', periodo: 'Octubre 2023', avatar: 'CR' },
-  { id: 18, fecha: '22 Oct 2023', socio: 'Andrés Castro', dni: '40.999.777', sede: 'Sede Sur', concepto: 'Pase Libre', monto: 18000, estado: 'Recibido', periodo: 'Octubre 2023', avatar: 'AC' },
-  { id: 19, fecha: '29 Oct 2023', socio: 'Florencia Luna', dni: '38.111.888', sede: 'Sede Sur', concepto: 'Musculación', monto: 18000, estado: 'Recibido', periodo: 'Octubre 2023', avatar: 'FL' },
-  // Sede Sur, Noviembre
-  { id: 20, fecha: '04 Nov 2023', socio: 'Santiago Vega', dni: '37.222.999', sede: 'Sede Sur', concepto: 'Cross Training', monto: 21000, estado: 'Pendiente', periodo: 'Noviembre 2023', avatar: 'SV' },
-  { id: 21, fecha: '09 Nov 2023', socio: 'Martina Paz', dni: '41.333.000', sede: 'Sede Sur', concepto: 'Pase Libre', monto: 35000, estado: 'Recibido', periodo: 'Noviembre 2023', avatar: 'MP' },
-  { id: 22, fecha: '15 Nov 2023', socio: 'Tomás Herrero', dni: '36.444.111', sede: 'Sede Sur', concepto: 'Musculación', monto: 28000, estado: 'Deuda', periodo: 'Noviembre 2023', avatar: 'TH' },
-  { id: 23, fecha: '19 Nov 2023', socio: 'Paula Blanco', dni: '35.555.222', sede: 'Sede Sur', concepto: 'Cross Training', monto: 45000, estado: 'Recibido', periodo: 'Noviembre 2023', avatar: 'PB' },
-  { id: 24, fecha: '24 Nov 2023', socio: 'Nicolás Rojas', dni: '42.666.333', sede: 'Sede Sur', concepto: 'Pase Libre', monto: 12000, estado: 'Pendiente', periodo: 'Noviembre 2023', avatar: 'NR' },
-  { id: 25, fecha: '27 Nov 2023', socio: 'Esteban Cruz', dni: '38.888.555', sede: 'Sede Sur', concepto: 'Cross Training', monto: 16000, estado: 'Deuda', periodo: 'Noviembre 2023', avatar: 'EC' }
+  // Sede Sur, Octubre 2025
+  { id: 15, fecha: '25 Oct 2025', socio: 'Carlos Silva', dni: '28.875.143', sede: 'Sede Sur', concepto: 'Cuota Mensual + Locker', monto: 28500, estado: 'Pendiente', periodo: 'Octubre 2025', avatar: 'CS' },
+  { id: 16, fecha: '05 Oct 2025', socio: 'Diego Torres', dni: '34.777.555', sede: 'Sede Sur', concepto: 'Musculación', monto: 15000, estado: 'Deuda', periodo: 'Octubre 2025', avatar: 'DT' },
+  { id: 17, fecha: '11 Oct 2025', socio: 'Camila Ríos', dni: '39.888.666', sede: 'Sede Sur', concepto: 'Cross Training', monto: 40000, estado: 'Deuda', periodo: 'Octubre 2025', avatar: 'CR' },
+  { id: 18, fecha: '22 Oct 2025', socio: 'Andrés Castro', dni: '40.999.777', sede: 'Sede Sur', concepto: 'Pase Libre', monto: 18000, estado: 'Recibido', periodo: 'Octubre 2025', avatar: 'AC' },
+  { id: 19, fecha: '29 Oct 2025', socio: 'Florencia Luna', dni: '38.111.888', sede: 'Sede Sur', concepto: 'Musculación', monto: 18000, estado: 'Recibido', periodo: 'Octubre 2025', avatar: 'FL' },
+  // Sede Sur, Noviembre 2025
+  { id: 20, fecha: '04 Nov 2025', socio: 'Santiago Vega', dni: '37.222.999', sede: 'Sede Sur', concepto: 'Cross Training', monto: 21000, estado: 'Pendiente', periodo: 'Noviembre 2025', avatar: 'SV' },
+  { id: 21, fecha: '09 Nov 2025', socio: 'Martina Paz', dni: '41.333.000', sede: 'Sede Sur', concepto: 'Pase Libre', monto: 35000, estado: 'Recibido', periodo: 'Noviembre 2025', avatar: 'MP' },
+  { id: 22, fecha: '15 Nov 2025', socio: 'Tomás Herrero', dni: '36.444.111', sede: 'Sede Sur', concepto: 'Musculación', monto: 28000, estado: 'Deuda', periodo: 'Noviembre 2025', avatar: 'TH' },
+  { id: 23, fecha: '19 Nov 2025', socio: 'Paula Blanco', dni: '35.555.222', sede: 'Sede Sur', concepto: 'Cross Training', monto: 45000, estado: 'Recibido', periodo: 'Noviembre 2025', avatar: 'PB' },
+  { id: 24, fecha: '24 Nov 2025', socio: 'Nicolás Rojas', dni: '42.666.333', sede: 'Sede Sur', concepto: 'Pase Libre', monto: 12000, estado: 'Pendiente', periodo: 'Noviembre 2025', avatar: 'NR' },
+  { id: 25, fecha: '27 Nov 2025', socio: 'Esteban Cruz', dni: '38.888.555', sede: 'Sede Sur', concepto: 'Cross Training', monto: 16000, estado: 'Deuda', periodo: 'Noviembre 2025', avatar: 'EC' }
 ];
 
 export default function EstadosPago() {
@@ -321,8 +321,10 @@ export default function EstadosPago() {
           className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 appearance-none pr-10 min-w-[140px] cursor-pointer transition-colors shadow-sm dark:shadow-none"
         >
           <option value="Todos los Meses">Todos los Meses</option>
-          <option value="Octubre 2023">Octubre 2023</option>
-          <option value="Noviembre 2023">Noviembre 2023</option>
+          <option value="Mayo 2026">Mayo 2026</option>
+          <option value="Abril 2026">Abril 2026</option>
+          <option value="Noviembre 2025">Noviembre 2025</option>
+          <option value="Octubre 2025">Octubre 2025</option>
         </select>
         <select
           value={filtroEstado}

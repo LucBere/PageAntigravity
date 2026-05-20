@@ -13,18 +13,18 @@ type Reclamo = {
 
 export default function Reclamos() {
   const [reclamos, setReclamos] = useState<Reclamo[]>([
-    { id: 1, date: '24 OCT 2023', time: '14:32 PM', name: 'MARCOS G. VILLALBA', email: 'marcos.v@email.com', dni: '38.442.109', avatar: 'https://i.pravatar.cc/150?img=11' },
-    { id: 2, date: '23 OCT 2023', time: '09:15 AM', name: 'CARLA MENDEZ', email: 'carla.m88@email.com', dni: '42.115.903', avatar: 'https://i.pravatar.cc/150?img=5' },
-    { id: 3, date: '22 OCT 2023', time: '18:45 PM', name: 'JULIÁN PEREZ', email: 'j.perez.coach@email.com', dni: '35.667.112', avatar: 'https://i.pravatar.cc/150?img=12' },
-    { id: 4, date: '21 OCT 2023', time: '11:20 AM', name: 'LAURA GOMEZ', email: 'laura.gomez@email.com', dni: '31.221.445', avatar: 'https://i.pravatar.cc/150?img=20' },
-    { id: 5, date: '21 OCT 2023', time: '08:10 AM', name: 'DIEGO MARTINEZ', email: 'dmartinez@email.com', dni: '29.887.654', avatar: 'https://i.pravatar.cc/150?img=33' },
-    { id: 6, date: '20 OCT 2023', time: '16:40 PM', name: 'ANA SOFIA RUIZ', email: 'ana.ruiz99@email.com', dni: '41.555.222', avatar: 'https://i.pravatar.cc/150?img=42' },
-    { id: 7, date: '19 OCT 2023', time: '10:05 AM', name: 'PABLO HERRERA', email: 'pherrera@email.com', dni: '36.998.111', avatar: 'https://i.pravatar.cc/150?img=53' },
-    { id: 8, date: '18 OCT 2023', time: '13:50 PM', name: 'VALERIA RIOS', email: 'valerios@email.com', dni: '39.444.777', avatar: 'https://i.pravatar.cc/150?img=47' },
-    { id: 9, date: '17 OCT 2023', time: '19:15 PM', name: 'FERNANDO DIAZ', email: 'fer.diaz@email.com', dni: '33.111.999', avatar: 'https://i.pravatar.cc/150?img=15' },
-    { id: 10, date: '16 OCT 2023', time: '07:30 AM', name: 'CAMILA BLANCO', email: 'cblanco@email.com', dni: '40.222.333', avatar: 'https://i.pravatar.cc/150?img=25' },
-    { id: 11, date: '15 OCT 2023', time: '15:25 PM', name: 'LUCAS NAVARRO', email: 'lucasn@email.com', dni: '37.888.555', avatar: 'https://i.pravatar.cc/150?img=59' },
-    { id: 12, date: '14 OCT 2023', time: '12:10 PM', name: 'SOFIA LUNA', email: 'sluna@email.com', dni: '43.666.111', avatar: 'https://i.pravatar.cc/150?img=31' },
+    { id: 1, date: '19 MAY 2026', time: '14:32 PM', name: 'MARCOS G. VILLALBA', email: 'marcos.v@email.com', dni: '38.442.109', avatar: 'https://i.pravatar.cc/150?img=11' },
+    { id: 2, date: '18 MAY 2026', time: '09:15 AM', name: 'CARLA MENDEZ', email: 'carla.m88@email.com', dni: '42.115.903', avatar: 'https://i.pravatar.cc/150?img=5' },
+    { id: 3, date: '17 MAY 2026', time: '18:45 PM', name: 'JULIÁN PEREZ', email: 'j.perez.coach@email.com', dni: '35.667.112', avatar: 'https://i.pravatar.cc/150?img=12' },
+    { id: 4, date: '16 MAY 2026', time: '11:20 AM', name: 'LAURA GOMEZ', email: 'laura.gomez@email.com', dni: '31.221.445', avatar: 'https://i.pravatar.cc/150?img=20' },
+    { id: 5, date: '15 MAY 2026', time: '08:10 AM', name: 'DIEGO MARTINEZ', email: 'dmartinez@email.com', dni: '29.887.654', avatar: 'https://i.pravatar.cc/150?img=33' },
+    { id: 6, date: '14 MAY 2026', time: '16:40 PM', name: 'ANA SOFIA RUIZ', email: 'ana.ruiz99@email.com', dni: '41.555.222', avatar: 'https://i.pravatar.cc/150?img=42' },
+    { id: 7, date: '13 MAY 2026', time: '10:05 AM', name: 'PABLO HERRERA', email: 'pherrera@email.com', dni: '36.998.111', avatar: 'https://i.pravatar.cc/150?img=53' },
+    { id: 8, date: '12 MAY 2026', time: '13:50 PM', name: 'VALERIA RIOS', email: 'valerios@email.com', dni: '39.444.777', avatar: 'https://i.pravatar.cc/150?img=47' },
+    { id: 9, date: '10 MAY 2026', time: '19:15 PM', name: 'FERNANDO DIAZ', email: 'fer.diaz@email.com', dni: '33.111.999', avatar: 'https://i.pravatar.cc/150?img=15' },
+    { id: 10, date: '08 MAY 2026', time: '07:30 AM', name: 'CAMILA BLANCO', email: 'cblanco@email.com', dni: '40.222.333', avatar: 'https://i.pravatar.cc/150?img=25' },
+    { id: 11, date: '06 MAY 2026', time: '15:25 PM', name: 'LUCAS NAVARRO', email: 'lucasn@email.com', dni: '37.888.555', avatar: 'https://i.pravatar.cc/150?img=59' },
+    { id: 12, date: '04 MAY 2026', time: '12:10 PM', name: 'SOFIA LUNA', email: 'sluna@email.com', dni: '43.666.111', avatar: 'https://i.pravatar.cc/150?img=31' },
   ]);
 
   const [reclamoSeleccionado, setReclamoSeleccionado] = useState<Reclamo | null>(null);

@@ -11,40 +11,40 @@ import { useNavigate } from 'react-router-dom';
 
 const mockSocios = [
   { 
-    id: 1, nombre: 'Marcos Paz', dni: '34.902.112', plan: 'Plan Musculación Full', ultimoPago: '12 Oct, 2023', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=marcos' 
+    id: 1, nombre: 'Marcos Paz', dni: '34.902.112', plan: 'Plan Musculación Full', ultimoPago: '12 May, 2026', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=marcos' 
   },
   { 
-    id: 2, nombre: 'Julia Benitez', dni: '40.112.559', plan: 'Plan Cross Training', ultimoPago: 'Vencido (05 Oct)', vencido: true, estado: 'DEUDOR', avatar: 'https://i.pravatar.cc/150?u=julia' 
+    id: 2, nombre: 'Julia Benitez', dni: '40.112.559', plan: 'Plan Cross Training', ultimoPago: 'Vencido (05 Abr)', vencido: true, estado: 'DEUDOR', avatar: 'https://i.pravatar.cc/150?u=julia' 
   },
   { 
-    id: 3, nombre: 'Ricardo Centurión', dni: '28.774.301', plan: 'Plan Personalizado', ultimoPago: '15 Oct, 2023', vencido: false, estado: 'HABILITADO', avatar: 'RC', isInitials: true 
+    id: 3, nombre: 'Ricardo Centurión', dni: '28.774.301', plan: 'Plan Personalizado', ultimoPago: '10 May, 2026', vencido: false, estado: 'HABILITADO', avatar: 'RC', isInitials: true 
   },
   { 
-    id: 4, nombre: 'Sofía Velazquez', dni: '42.880.122', plan: 'Plan Musculación', ultimoPago: '10 Oct, 2023', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=sofia' 
+    id: 4, nombre: 'Sofía Velazquez', dni: '42.880.122', plan: 'Plan Musculación', ultimoPago: '08 May, 2026', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=sofia' 
   },
   { 
-    id: 5, nombre: 'Lucas Gomez', dni: '35.441.221', plan: 'Pase Libre', ultimoPago: '01 Nov, 2023', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=lucas' 
+    id: 5, nombre: 'Lucas Gomez', dni: '35.441.221', plan: 'Pase Libre', ultimoPago: '01 May, 2026', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=lucas' 
   },
   { 
-    id: 6, nombre: 'Micaela Suarez', dni: '39.882.114', plan: 'Plan Musculación', ultimoPago: 'Vencido (20 Sep)', vencido: true, estado: 'DEUDOR', avatar: 'MS', isInitials: true
+    id: 6, nombre: 'Micaela Suarez', dni: '39.882.114', plan: 'Plan Musculación', ultimoPago: 'Vencido (20 Mar)', vencido: true, estado: 'DEUDOR', avatar: 'MS', isInitials: true
   },
   { 
-    id: 7, nombre: 'Tomás Aquino', dni: '41.203.491', plan: 'Plan Cross Training', ultimoPago: '05 Nov, 2023', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=tomas' 
+    id: 7, nombre: 'Tomás Aquino', dni: '41.203.491', plan: 'Plan Cross Training', ultimoPago: '05 May, 2026', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=tomas' 
   },
   { 
-    id: 8, nombre: 'Valentina Rios', dni: '38.102.993', plan: 'Plan Personalizado', ultimoPago: 'Vencido (10 Oct)', vencido: true, estado: 'DEUDOR', avatar: 'https://i.pravatar.cc/150?u=valentina' 
+    id: 8, nombre: 'Valentina Rios', dni: '38.102.993', plan: 'Plan Personalizado', ultimoPago: 'Vencido (10 Abr)', vencido: true, estado: 'DEUDOR', avatar: 'https://i.pravatar.cc/150?u=valentina' 
   },
   { 
-    id: 9, nombre: 'Juan Perez', dni: '32.114.552', plan: 'Plan Musculación Full', ultimoPago: '02 Nov, 2023', vencido: false, estado: 'HABILITADO', avatar: 'JP', isInitials: true 
+    id: 9, nombre: 'Juan Perez', dni: '32.114.552', plan: 'Plan Musculación Full', ultimoPago: '02 May, 2026', vencido: false, estado: 'HABILITADO', avatar: 'JP', isInitials: true 
   },
   { 
-    id: 10, nombre: 'Camila Torres', dni: '43.001.229', plan: 'Pase Libre', ultimoPago: 'Vencido (25 Oct)', vencido: true, estado: 'DEUDOR', avatar: 'https://i.pravatar.cc/150?u=camila' 
+    id: 10, nombre: 'Camila Torres', dni: '43.001.229', plan: 'Pase Libre', ultimoPago: 'Vencido (25 Abr)', vencido: true, estado: 'DEUDOR', avatar: 'https://i.pravatar.cc/150?u=camila' 
   },
   { 
-    id: 11, nombre: 'Gonzalo Martinez', dni: '37.881.002', plan: 'Plan Cross Training', ultimoPago: '08 Nov, 2023', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=gonzalo' 
+    id: 11, nombre: 'Gonzalo Martinez', dni: '37.881.002', plan: 'Plan Cross Training', ultimoPago: '14 May, 2026', vencido: false, estado: 'HABILITADO', avatar: 'https://i.pravatar.cc/150?u=gonzalo' 
   },
   { 
-    id: 12, nombre: 'Lucía Fernández', dni: '36.992.118', plan: 'Plan Musculación', ultimoPago: 'Vencido (01 Nov)', vencido: true, estado: 'DEUDOR', avatar: 'https://i.pravatar.cc/150?u=lucia' 
+    id: 12, nombre: 'Lucía Fernández', dni: '36.992.118', plan: 'Plan Musculación', ultimoPago: 'Vencido (01 Abr)', vencido: true, estado: 'DEUDOR', avatar: 'https://i.pravatar.cc/150?u=lucia' 
   }
 ];
 
