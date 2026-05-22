@@ -85,10 +85,10 @@ export default function PagosSocio() {
   };
 
   const transacciones = [
-    { id: 1, fecha: '15 OCT, 2023', monto: '$15.000', metodo: 'VISA DEBIT **** 4210', estado: 'PAGADO', rejected: false },
-    { id: 2, fecha: '12 SEP, 2023', monto: '$12.500', metodo: 'TRANSFERENCIA BANCARIA', estado: 'PAGADO', rejected: false },
-    { id: 3, fecha: '10 AGO, 2023', monto: '$12.500', metodo: 'QR MERCADO PAGO', estado: 'PAGADO', rejected: false },
-    { id: 4, fecha: '08 JUL, 2023', monto: '$12.500', metodo: 'VISA DEBIT **** 4210', estado: 'RECHAZADO', rejected: true },
+    { id: 1, fecha: '15 MAY, 2026', monto: '$15.000', metodo: 'VISA DEBIT **** 4210', estado: 'PAGADO', rejected: false },
+    { id: 2, fecha: '12 ABR, 2026', monto: '$12.500', metodo: 'TRANSFERENCIA BANCARIA', estado: 'PAGADO', rejected: false },
+    { id: 3, fecha: '10 MAR, 2026', monto: '$12.500', metodo: 'QR MERCADO PAGO', estado: 'PAGADO', rejected: false },
+    { id: 4, fecha: '08 FEB, 2026', monto: '$12.500', metodo: 'VISA DEBIT **** 4210', estado: 'RECHAZADO', rejected: true },
   ];
 
   return (
@@ -118,7 +118,7 @@ export default function PagosSocio() {
 
             <div className="flex items-center space-x-2 mt-10">
               <Calendar className="w-4 h-4 text-slate-500 dark:text-zinc-500" />
-              <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 tracking-widest uppercase">FECHA: 10 DE NOVIEMBRE, 2023</p>
+              <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 tracking-widest uppercase">FECHA: 10 DE MAYO, 2026</p>
             </div>
           </div>
 
@@ -170,7 +170,7 @@ export default function PagosSocio() {
                 <div className="p-4 border-b border-slate-300 dark:border-zinc-700/50">
                   <h4 className="text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-3">Por Período</h4>
                   <div className="space-y-2">
-                    {['Últimos 30 días', 'Últimos 3 meses', 'Año 2023'].map(opt => (
+                    {['Últimos 30 días', 'Últimos 3 meses', 'Año 2026'].map(opt => (
                       <label key={opt} className="flex items-center space-x-3 cursor-pointer group">
                         <input type="radio" name="periodo" checked={filtroPeriodo === opt} onChange={() => setFiltroPeriodo(opt)} className="w-3 h-3 accent-[#7B8B9E] bg-slate-200 dark:bg-zinc-900 border-slate-300 dark:border-zinc-700" />
                         <span className="text-xs text-slate-600 dark:text-zinc-300 group-hover:text-slate-900 dark:text-white transition-colors">{opt}</span>
