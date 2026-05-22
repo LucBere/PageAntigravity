@@ -114,6 +114,7 @@ export default function EstadosPago() {
   const exportarReportePDF = () => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
 
     // Fecha del Informe (Calculando ancho manualmente para evitar problemas de alineación)
     const fechaActual = new Date().toLocaleDateString('es-AR');
@@ -201,7 +202,16 @@ export default function EstadosPago() {
           theme: 'grid',
           headStyles: { fillColor: [40, 40, 40], textColor: [255, 255, 255] },
           styles: { fontSize: 9, cellPadding: 3 },
-          columnStyles: { 5: { halign: 'right' } }
+          columnStyles: { 5: { halign: 'right' } },
+          didDrawPage: function (data: any) {
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(80, 80, 80);
+            // INYECCIÓN DE PAGINACIÓN (Footer)
+            const textPag = `Pag: ${data.pageNumber}`;
+            const textPagWidth = doc.getTextWidth(textPag);
+            doc.text(textPag, pageWidth - 14 - textPagWidth, pageHeight - 10);
+          }
         });
 
         startY = (doc as any).lastAutoTable.finalY + 6;
@@ -249,19 +259,6 @@ export default function EstadosPago() {
       doc.setFontSize(12);
       doc.setFont("helvetica", "normal");
       doc.text("No hay registros para los filtros seleccionados.", 14, startY);
-    }
-
-    // Paginación
-    const pageCount = doc.internal.getNumberOfPages();
-    const pageHeight = doc.internal.pageSize.getHeight();
-    for (let i = 1; i <= pageCount; i++) {
-      doc.setPage(i);
-      doc.setFontSize(10);
-      doc.setFont("helvetica", "normal");
-      doc.setTextColor(80, 80, 80);
-      const textPag = `Pag: ${i} / ${pageCount}`;
-      const textPagWidth = doc.getTextWidth(textPag);
-      doc.text(textPag, pageWidth - 14 - textPagWidth, pageHeight - 10);
     }
 
     doc.save("Reporte_Pagos_SquatGym.pdf");
