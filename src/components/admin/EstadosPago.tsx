@@ -202,16 +202,7 @@ export default function EstadosPago() {
           theme: 'grid',
           headStyles: { fillColor: [40, 40, 40], textColor: [255, 255, 255] },
           styles: { fontSize: 9, cellPadding: 3 },
-          columnStyles: { 5: { halign: 'right' } },
-          didDrawPage: function (data: any) {
-            doc.setFontSize(10);
-            doc.setFont("helvetica", "normal");
-            doc.setTextColor(80, 80, 80);
-            // INYECCIÓN DE PAGINACIÓN (Footer)
-            const textPag = `Pag: ${data.pageNumber}`;
-            const textPagWidth = doc.getTextWidth(textPag);
-            doc.text(textPag, pageWidth - 14 - textPagWidth, pageHeight - 10);
-          }
+          columnStyles: { 5: { halign: 'right' } }
         });
 
         startY = (doc as any).lastAutoTable.finalY + 6;
@@ -259,6 +250,24 @@ export default function EstadosPago() {
       doc.setFontSize(12);
       doc.setFont("helvetica", "normal");
       doc.text("No hay registros para los filtros seleccionados.", 14, startY);
+    }
+
+    // --- INYECCIÓN GLOBAL DE PAGINACIÓN ---
+    // Casteamos a 'any' para evitar el falso positivo de TypeScript en Vercel
+    const totalPages = (doc as any).internal.getNumberOfPages();
+
+    for (let i = 1; i <= totalPages; i++) {
+      doc.setPage(i);
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(80, 80, 80);
+
+      // Formato exacto: "Pag: X / Y"
+      const textPag = `Pag: ${i} / ${totalPages}`;
+      const textPagWidth = doc.getTextWidth(textPag);
+      
+      // Alineación perfecta a la derecha restando el ancho del texto
+      doc.text(textPag, pageWidth - 14 - textPagWidth, pageHeight - 10);
     }
 
     doc.save("Reporte_Pagos_SquatGym.pdf");
