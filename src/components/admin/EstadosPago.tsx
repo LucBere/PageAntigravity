@@ -115,6 +115,13 @@ export default function EstadosPago() {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
 
+    // Fecha del Informe
+    const fechaActual = new Date().toLocaleDateString('es-AR');
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(80, 80, 80);
+    doc.text(`Fecha del Informe: ${fechaActual}`, pageWidth - 14, 15, { align: 'right' });
+
     // Título Centrado
     doc.setFontSize(18);
     doc.setFont("helvetica", "bold");
@@ -240,6 +247,17 @@ export default function EstadosPago() {
       doc.setFontSize(12);
       doc.setFont("helvetica", "normal");
       doc.text("No hay registros para los filtros seleccionados.", 14, startY);
+    }
+
+    // Paginación
+    const pageCount = doc.internal.getNumberOfPages();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(80, 80, 80);
+      doc.text(`Pag: ${i} / ${pageCount}`, pageWidth - 14, pageHeight - 10, { align: 'right' });
     }
 
     doc.save("Reporte_Pagos_SquatGym.pdf");
