@@ -115,12 +115,14 @@ export default function EstadosPago() {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
 
-    // Fecha del Informe
+    // Fecha del Informe (Calculando ancho manualmente para evitar problemas de alineación)
     const fechaActual = new Date().toLocaleDateString('es-AR');
+    const textFecha = `Fecha del Informe: ${fechaActual}`;
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     doc.setTextColor(80, 80, 80);
-    doc.text(`Fecha del Informe: ${fechaActual}`, pageWidth - 14, 15, { align: 'right' });
+    const textFechaWidth = doc.getTextWidth(textFecha);
+    doc.text(textFecha, pageWidth - 14 - textFechaWidth, 15);
 
     // Título Centrado
     doc.setFontSize(18);
@@ -257,7 +259,9 @@ export default function EstadosPago() {
       doc.setFontSize(10);
       doc.setFont("helvetica", "normal");
       doc.setTextColor(80, 80, 80);
-      doc.text(`Pag: ${i} / ${pageCount}`, pageWidth - 14, pageHeight - 10, { align: 'right' });
+      const textPag = `Pag: ${i} / ${pageCount}`;
+      const textPagWidth = doc.getTextWidth(textPag);
+      doc.text(textPag, pageWidth - 14 - textPagWidth, pageHeight - 10);
     }
 
     doc.save("Reporte_Pagos_SquatGym.pdf");
