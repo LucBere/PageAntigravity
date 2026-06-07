@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Search, CreditCard, CheckCircle, Info, QrCode } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import AlertModal from '../common/AlertModal';
 
 type Plan = {
   id: string;
@@ -27,6 +28,7 @@ export default function RegistroPago() {
   const [couponCode, setCouponCode] = useState("");
 
   const [metodoPago, setMetodoPago] = useState('tarjeta');
+  const [showAcreditado, setShowAcreditado] = useState(false);
 
   const handleDescuentoSelect = (porcentaje: number) => {
     setDescuentoPorcentaje(porcentaje);
@@ -76,7 +78,14 @@ export default function RegistroPago() {
 
   return (
     <div className="bg-slate-50 dark:bg-[#0E0E0E] min-h-full p-8 font-sans text-zinc-100">
-      
+      <AlertModal
+        open={showAcreditado}
+        variant="success"
+        title="Acreditación verificada"
+        message="La transferencia fue verificada y acreditada correctamente."
+        onClose={() => setShowAcreditado(false)}
+      />
+
       {/* 1. Encabezado */}
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
@@ -278,7 +287,10 @@ export default function RegistroPago() {
                         </div>
                       </div>
                     </div>
-                    <button className="flex items-center px-6 py-3 bg-slate-200 dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded-lg text-sm font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors">
+                    <button
+                      onClick={() => setShowAcreditado(true)}
+                      className="flex items-center px-6 py-3 bg-slate-200 dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded-lg text-sm font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                    >
                       VERIFICAR ACREDITACIÓN
                     </button>
                   </div>

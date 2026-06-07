@@ -62,14 +62,6 @@ export default function DashboardSocio() {
       <div className="w-full bg-white dark:bg-[#151515] rounded-2xl p-6 mt-6 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-slate-900 dark:text-white font-bold text-lg tracking-wide">MAYO 2026</h3>
-          <div className="flex gap-2">
-            <button className="w-8 h-8 rounded-lg bg-slate-200 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 flex items-center justify-center text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-white hover:bg-slate-100 dark:bg-zinc-800 transition-colors">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-            </button>
-            <button className="w-8 h-8 rounded-lg bg-slate-200 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 flex items-center justify-center text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-white hover:bg-slate-100 dark:bg-zinc-800 transition-colors">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-            </button>
-          </div>
         </div>
 
         <div className="grid grid-cols-7 gap-2 md:gap-4">

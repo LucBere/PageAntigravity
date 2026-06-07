@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Search, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, FileText, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
+import FilterSelect from '../common/FilterSelect';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -150,16 +151,20 @@ export default function ClientesMora() {
             className="w-full bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 pl-11 pr-4 text-sm text-slate-900 dark:text-[#FAFAFA] placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors shadow-sm dark:shadow-none"
           />
         </div>
-        <select 
+        <FilterSelect
           value={filtroDiasMora}
-          onChange={(e) => setFiltroDiasMora(e.target.value)}
-          className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 appearance-none pr-10 cursor-pointer transition-colors shadow-sm dark:shadow-none"
-        >
-          <option value="Todos">Todos los Días de Mora</option>
-          <option value="Más de 30 días">Más de 30 días</option>
-          <option value="Más de 60 días">Más de 60 días</option>
-          <option value="Crítico (+90 días)">Crítico (+90 días)</option>
-        </select>
+          onChange={setFiltroDiasMora}
+          ariaLabel="Filtrar por días de mora"
+          active={filtroDiasMora !== 'Todos'}
+          icon={<Clock className="w-4 h-4" />}
+          className="min-w-[210px]"
+          options={[
+            { value: 'Todos', label: 'Todos los Días de Mora' },
+            { value: 'Más de 30 días', label: 'Más de 30 días' },
+            { value: 'Más de 60 días', label: 'Más de 60 días' },
+            { value: 'Crítico (+90 días)', label: 'Crítico (+90 días)' },
+          ]}
+        />
 
       </div>
 

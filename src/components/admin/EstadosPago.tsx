@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Banknote, Clock, AlertTriangle, Search, Download } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Banknote, Clock, AlertTriangle, Search, Download, MapPin, CircleDot, Calendar, X, ChevronDown } from 'lucide-react';
+import FilterSelect from '../common/FilterSelect';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -92,6 +93,16 @@ const periodoToISO = (periodo: string): string => {
   return `${anio}-${MESES_NUM[mes] ?? '01'}`;
 };
 
+// "2026-08" -> "Agosto 2026" para mostrar el mes elegido
+const NOMBRE_MES: Record<string, string> = {
+  '01': 'Enero', '02': 'Febrero', '03': 'Marzo', '04': 'Abril', '05': 'Mayo', '06': 'Junio',
+  '07': 'Julio', '08': 'Agosto', '09': 'Septiembre', '10': 'Octubre', '11': 'Noviembre', '12': 'Diciembre',
+};
+const formatMesISO = (iso: string): string => {
+  const [anio, mes] = iso.split('-');
+  return `${NOMBRE_MES[mes] ?? mes} ${anio}`;
+};
+
 export default function EstadosPago() {
   // Estados
   const [searchTerm, setSearchTerm] = useState('');
@@ -99,6 +110,7 @@ export default function EstadosPago() {
   const [filtroMes, setFiltroMes] = useState('');
   const [filtroEstado, setFiltroEstado] = useState('Todos los Estados');
   const [paginaActual, setPaginaActual] = useState(1);
+  const mesPickerRef = useRef<HTMLInputElement>(null);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 }).format(amount);
@@ -382,33 +394,68 @@ export default function EstadosPago() {
             className="w-full bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 pl-11 pr-4 text-sm text-slate-900 dark:text-[#FAFAFA] placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors shadow-sm dark:shadow-none"
           />
         </div>
-        <select
+        <FilterSelect
           value={filtroSede}
-          onChange={(e) => setFiltroSede(e.target.value)}
-          className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 appearance-none pr-10 min-w-[160px] cursor-pointer transition-colors shadow-sm dark:shadow-none"
-        >
-          <option value="Todas las Sedes">Todas las Sedes</option>
-          <option value="Sede Norte">Sede Norte</option>
-          <option value="Sede Centro">Sede Centro</option>
-          <option value="Sede Sur">Sede Sur</option>
-        </select>
-        <input
-          type="month"
-          value={filtroMes}
-          onChange={(e) => setFiltroMes(e.target.value)}
-          aria-label="Filtrar por mes"
-          className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 min-w-[160px] cursor-pointer transition-colors shadow-sm dark:shadow-none [color-scheme:light] dark:[color-scheme:dark]"
+          onChange={setFiltroSede}
+          ariaLabel="Filtrar por sede"
+          active={filtroSede !== 'Todas las Sedes'}
+          icon={<MapPin className="w-4 h-4" />}
+          className="min-w-[180px]"
+          options={[
+            { value: 'Todas las Sedes', label: 'Todas las Sedes' },
+            { value: 'Sede Norte', label: 'Sede Norte' },
+            { value: 'Sede Centro', label: 'Sede Centro' },
+            { value: 'Sede Sur', label: 'Sede Sur' },
+          ]}
         />
-        <select
+        <div className="relative w-full md:w-auto md:min-w-[200px]">
+          {/* Input nativo de mes (oculto, solo para abrir el calendario) */}
+          <input
+            ref={mesPickerRef}
+            type="month"
+            value={filtroMes}
+            onChange={(e) => setFiltroMes(e.target.value)}
+            aria-label="Filtrar por mes"
+            className="absolute inset-0 w-full h-full opacity-0 pointer-events-none [color-scheme:light] dark:[color-scheme:dark]"
+          />
+          {/* Control visible */}
+          <button
+            type="button"
+            onClick={() => mesPickerRef.current?.showPicker?.()}
+            className={`w-full flex items-center rounded-xl py-3 pl-10 pr-9 text-sm border transition-colors shadow-sm dark:shadow-none cursor-pointer ${filtroMes
+              ? 'bg-slate-100 dark:bg-zinc-800 border-slate-400 dark:border-zinc-600 text-slate-900 dark:text-white font-semibold'
+              : 'bg-white dark:bg-[#151515] border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-[#FAFAFA] hover:border-slate-300 dark:hover:border-zinc-700'}`}
+          >
+            <Calendar className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-zinc-500" />
+            <span className="flex-grow text-left truncate">{filtroMes ? formatMesISO(filtroMes) : 'Todos los meses'}</span>
+            {!filtroMes && <ChevronDown className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-zinc-500" />}
+          </button>
+          {/* Botón para borrar el mes y volver a "Todos los meses" */}
+          {filtroMes && (
+            <button
+              type="button"
+              onClick={() => setFiltroMes('')}
+              aria-label="Quitar mes y ver todos"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded text-slate-400 hover:text-slate-700 dark:text-zinc-400 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+        <FilterSelect
           value={filtroEstado}
-          onChange={(e) => setFiltroEstado(e.target.value)}
-          className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 appearance-none pr-10 min-w-[160px] cursor-pointer transition-colors shadow-sm dark:shadow-none"
-        >
-          <option value="Todos los Estados">Todos los Estados</option>
-          <option value="Recibido">Recibido</option>
-          <option value="Pendiente">Pendiente</option>
-          <option value="Deuda">Deuda</option>
-        </select>
+          onChange={setFiltroEstado}
+          ariaLabel="Filtrar por estado"
+          active={filtroEstado !== 'Todos los Estados'}
+          icon={<CircleDot className="w-4 h-4" />}
+          className="min-w-[180px]"
+          options={[
+            { value: 'Todos los Estados', label: 'Todos los Estados' },
+            { value: 'Recibido', label: 'Recibido' },
+            { value: 'Pendiente', label: 'Pendiente' },
+            { value: 'Deuda', label: 'Deuda' },
+          ]}
+        />
       </div>
 
       {/* Tabla Principal */}

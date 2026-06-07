@@ -2,13 +2,16 @@ import {
   UserPlus,
   CreditCard,
   ListFilter,
-  MoreVertical,
   ChevronLeft,
   ChevronRight,
-  Search
+  Search,
+  Edit2,
+  Trash2
 } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ConfirmModal from '../common/ConfirmModal';
+import AlertModal from '../common/AlertModal';
 
 const mockSocios = [
   { 
@@ -57,6 +60,15 @@ export default function GestionSocios() {
   const [mostrarFiltros, setMostrarFiltros] = useState(false);
   const [criterioOrden, setCriterioOrden] = useState<string>('defecto');
   const [searchTerm, setSearchTerm] = useState('');
+  const [socios, setSocios] = useState(mockSocios);
+  const [socioAEliminar, setSocioAEliminar] = useState<typeof mockSocios[0] | null>(null);
+  const [showEditInfo, setShowEditInfo] = useState(false);
+
+  const confirmarEliminar = () => {
+    if (!socioAEliminar) return;
+    setSocios(prev => prev.filter(s => s.id !== socioAEliminar.id));
+    setSocioAEliminar(null);
+  };
 
   const handleFiltroClick = (filtro: 'TODOS' | 'DEUDORES' | 'HABILITADOS') => {
     setFiltroActivo(filtro);
@@ -68,7 +80,7 @@ export default function GestionSocios() {
     return new Date(fechaStr).getTime();
   };
 
-  const sociosFiltrados = mockSocios
+  const sociosFiltrados = socios
     .filter(socio => {
       const q = searchTerm.toLowerCase();
       const matchSearch =
@@ -106,6 +118,22 @@ export default function GestionSocios() {
 
   return (
     <div className="bg-slate-50 dark:bg-[#0E0E0E] min-h-full p-8 font-sans text-slate-900 dark:text-zinc-100">
+      <ConfirmModal
+        open={socioAEliminar !== null}
+        variant="danger"
+        title="Eliminar socio"
+        message={<>¿Estás seguro que deseas eliminar a <strong className="text-slate-900 dark:text-white">{socioAEliminar?.nombre}</strong>? Esta acción no se puede deshacer.</>}
+        confirmLabel="Sí, eliminar"
+        onConfirm={confirmarEliminar}
+        onCancel={() => setSocioAEliminar(null)}
+      />
+      <AlertModal
+        open={showEditInfo}
+        variant="info"
+        title="Editar socio"
+        message="La edición de la ficha del socio estará disponible próximamente."
+        onClose={() => setShowEditInfo(false)}
+      />
       <div className="max-w-7xl mx-auto">
         
         {/* 1. Encabezado Principal */}
@@ -261,9 +289,22 @@ export default function GestionSocios() {
                     </td>
                     {/* ACCIONES */}
                     <td className="py-5 text-right pr-4">
-                      <button className="text-slate-400 dark:text-zinc-600 hover:text-slate-600 dark:text-zinc-300 transition-colors">
-                        <MoreVertical className="w-5 h-5" />
-                      </button>
+                      <div className="flex items-center justify-end space-x-3 text-slate-400 dark:text-zinc-500">
+                        <button
+                          onClick={() => setShowEditInfo(true)}
+                          title="Editar socio"
+                          className="hover:text-[#7B8B9E] transition-colors cursor-pointer"
+                        >
+                          <Edit2 className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => setSocioAEliminar(socio)}
+                          title="Eliminar socio"
+                          className="hover:text-red-600 dark:hover:text-red-500 transition-colors cursor-pointer"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

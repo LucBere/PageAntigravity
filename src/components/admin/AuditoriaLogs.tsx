@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Search, Download, AlertTriangle, History, ChevronLeft, ChevronRight } from 'lucide-react';
+import FilterSelect from '../common/FilterSelect';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -147,32 +148,38 @@ export default function AuditoriaLogs() {
           </div>
           <div className="flex flex-col space-y-2">
             <label className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-zinc-500 font-bold transition-colors">TIPO DE ACCIÓN</label>
-            <select
+            <FilterSelect
+              variant="panel"
               value={tipoAccion}
-              onChange={(e) => setTipoAccion(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 text-slate-900 dark:bg-[#1A1A1A] dark:border-transparent dark:text-white h-10 rounded-lg px-3 text-sm focus:outline-none focus:border-slate-400 dark:focus:ring-1 dark:focus:ring-zinc-700 appearance-none cursor-pointer transition-colors"
-            >
-              <option value="Todos los eventos">Todos los eventos</option>
-              <option value="ELIMINACIÓN DE USUARIO">Eliminación de Usuario</option>
-              <option value="CAMBIO DE PASSWORD">Cambio de Password</option>
-              <option value="FALLA DE LOGIN">Falla de Login</option>
-              <option value="NUEVO INGRESO">Nuevo Ingreso</option>
-              <option value="PAGO REGISTRADO">Pago Registrado</option>
-            </select>
+              onChange={setTipoAccion}
+              ariaLabel="Tipo de acción"
+              active={tipoAccion !== 'Todos los eventos'}
+              options={[
+                { value: 'Todos los eventos', label: 'Todos los eventos' },
+                { value: 'ELIMINACIÓN DE USUARIO', label: 'Eliminación de Usuario' },
+                { value: 'CAMBIO DE PASSWORD', label: 'Cambio de Password' },
+                { value: 'FALLA DE LOGIN', label: 'Falla de Login' },
+                { value: 'NUEVO INGRESO', label: 'Nuevo Ingreso' },
+                { value: 'PAGO REGISTRADO', label: 'Pago Registrado' },
+              ]}
+            />
           </div>
           <div className="flex flex-col space-y-2">
             <label className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-zinc-500 font-bold transition-colors">USUARIO RESPONSABLE</label>
-            <select
+            <FilterSelect
+              variant="panel"
               value={usuarioResponsable}
-              onChange={(e) => setUsuarioResponsable(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 text-slate-900 dark:bg-[#1A1A1A] dark:border-transparent dark:text-white h-10 rounded-lg px-3 text-sm focus:outline-none focus:border-slate-400 dark:focus:ring-1 dark:focus:ring-zinc-700 appearance-none cursor-pointer transition-colors"
-            >
-              <option value="Cualquier administrador">Cualquier administrador</option>
-              <option value="Admin_Mario">Admin_Mario</option>
-              <option value="Lucia_Rec">Lucia_Rec</option>
-              <option value="SuperAdmin">SuperAdmin</option>
-              <option value="Anónimo">Anónimo</option>
-            </select>
+              onChange={setUsuarioResponsable}
+              ariaLabel="Usuario responsable"
+              active={usuarioResponsable !== 'Cualquier administrador'}
+              options={[
+                { value: 'Cualquier administrador', label: 'Cualquier administrador' },
+                { value: 'Admin_Mario', label: 'Admin_Mario' },
+                { value: 'Lucia_Rec', label: 'Lucia_Rec' },
+                { value: 'SuperAdmin', label: 'SuperAdmin' },
+                { value: 'Anónimo', label: 'Anónimo' },
+              ]}
+            />
           </div>
           <div className="flex flex-col space-y-2 md:col-span-2">
             <label className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-zinc-500 font-bold transition-colors">RANGO DE FECHAS</label>

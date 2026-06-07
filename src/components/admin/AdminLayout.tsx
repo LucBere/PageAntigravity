@@ -1,17 +1,7 @@
-import { useState, type FormEvent } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
 export default function AdminLayout() {
-  const navigate = useNavigate();
-  const [query, setQuery] = useState('');
-
-  const handleSearch = (e: FormEvent) => {
-    e.preventDefault();
-    if (query.trim()) navigate(`/buscar?q=${encodeURIComponent(query.trim())}`);
-  };
-
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 dark:bg-[#0E0E0E] dark:text-zinc-100 font-sans flex transition-colors duration-300">
       {/* Sidebar Layout */}
@@ -20,19 +10,8 @@ export default function AdminLayout() {
       {/* Main Content Layout */}
       <main className="flex-1 flex flex-col min-w-0">
         {/* Top Bar */}
-        <header className="h-20 px-8 flex justify-between items-center border-b border-slate-200 bg-slate-50 dark:border-zinc-800/50 dark:bg-[#0E0E0E] transition-colors duration-300">
-          <form onSubmit={handleSearch} className="flex-1 max-w-xl relative">
-            <Search className="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-zinc-500 transition-colors" />
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Buscar socios, transacciones..."
-              className="w-full bg-white border border-slate-300 dark:bg-zinc-900/50 dark:border-zinc-800/50 rounded-full py-2.5 pl-12 pr-4 text-sm text-slate-900 placeholder-slate-400 dark:text-zinc-200 dark:placeholder-zinc-500 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors duration-300 shadow-sm dark:shadow-none"
-            />
-          </form>
-
-          <div className="flex items-center space-x-6 ml-8">
+        <header className="h-20 px-8 flex justify-end items-center border-b border-slate-200 bg-slate-50 dark:border-zinc-800/50 dark:bg-[#0E0E0E] transition-colors duration-300">
+          <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-3">
               <div className="text-right">
                 <p className="text-sm font-bold text-slate-900 dark:text-white leading-tight transition-colors">Melisa</p>

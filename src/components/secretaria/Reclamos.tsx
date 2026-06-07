@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Image, ClipboardList, Timer, CheckCircle2, ChevronLeft, ChevronRight, Search } from 'lucide-react';
+import { Image, ClipboardList, Timer, CheckCircle2, ChevronLeft, ChevronRight, Search, ArrowUpDown } from 'lucide-react';
+import FilterSelect from '../common/FilterSelect';
 
 // Convierte "19 MAY 2026" en un objeto Date para poder ordenar por fecha.
 const MESES_ES: Record<string, number> = {
@@ -102,15 +103,19 @@ export default function Reclamos() {
             className="w-full bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 pl-11 pr-4 text-sm text-slate-900 dark:text-[#FAFAFA] placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors shadow-sm dark:shadow-none"
           />
         </div>
-        <select
+        <FilterSelect
           value={orden}
-          onChange={(e) => { setOrden(e.target.value); setCurrentPage(1); }}
-          className="w-full md:w-auto bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 appearance-none pr-10 cursor-pointer transition-colors shadow-sm dark:shadow-none"
-        >
-          <option value="recientes">Más recientes</option>
-          <option value="antiguos">Más antiguos</option>
-          <option value="nombre">Nombre (A-Z)</option>
-        </select>
+          onChange={(v) => { setOrden(v); setCurrentPage(1); }}
+          ariaLabel="Ordenar reclamos"
+          active={orden !== 'recientes'}
+          icon={<ArrowUpDown className="w-4 h-4" />}
+          className="w-full md:w-auto md:min-w-[190px]"
+          options={[
+            { value: 'recientes', label: 'Más recientes' },
+            { value: 'antiguos', label: 'Más antiguos' },
+            { value: 'nombre', label: 'Nombre (A-Z)' },
+          ]}
+        />
       </div>
 
       {/* 2. Tabla Principal */}

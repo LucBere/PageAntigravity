@@ -151,10 +151,6 @@ function LoginStudent({ setStep }: { setStep: (step: Step) => void }) {
       </form>
 
 
-      <div className="mt-8 text-center">
-        <p className="text-sm text-zinc-400">¿No tienes una cuenta? <button onClick={() => setStep('REGISTER')} className="text-white hover:underline font-bold transition-colors">Registrarse</button></p>
-      </div>
-
       <div className="mt-8 pt-6 border-t border-zinc-800/50 text-center">
         <p className="text-xs text-zinc-600 font-semibold tracking-widest">Bienvenido a SquatGym</p>
       </div>
@@ -234,7 +230,6 @@ function LoginStaff({ setStep }: { setStep: (step: Step) => void }) {
       <AlertModal
         open={infoMsg !== null}
         variant="info"
-        title="En construcción"
         message={infoMsg ?? ''}
         onClose={() => setInfoMsg(null)}
       />
@@ -319,7 +314,7 @@ function LoginStaff({ setStep }: { setStep: (step: Step) => void }) {
       </form>
 
       <div className="mt-8 text-center">
-        <p className="text-sm text-zinc-400">¿Dificultades para ingresar? <button className="text-white hover:underline font-bold transition-colors">Contactar Soporte</button></p>
+        <p className="text-sm text-zinc-400">¿Dificultades para ingresar? <button onClick={() => setInfoMsg('Escribinos a soporte@squatgym.com o llamá al (011) 4000-0000 de lunes a viernes de 9 a 18 hs.')} className="text-white hover:underline font-bold transition-colors cursor-pointer">Contactar Soporte</button></p>
       </div>
 
       <div className="mt-8 pt-6 border-t border-zinc-800/50 text-center">
