@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AlertModal from '../common/AlertModal';
 
 export default function NuevoUsuario() {
   const navigate = useNavigate();
+  const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
@@ -42,8 +44,7 @@ export default function NuevoUsuario() {
     // Simular carga
     setTimeout(() => {
       setIsLoading(false);
-      alert("Usuario creado exitosamente");
-      navigate('/admin/usuarios');
+      setShowSuccess(true);
     }, 1500);
   };
 
@@ -51,6 +52,13 @@ export default function NuevoUsuario() {
 
   return (
     <div className="max-w-3xl space-y-8">
+      <AlertModal
+        open={showSuccess}
+        variant="success"
+        title="Usuario creado"
+        message="El usuario se creó exitosamente."
+        onClose={() => navigate('/admin/usuarios')}
+      />
       {/* Encabezado */}
       <div>
         <h1 className="text-[2rem] font-bold text-slate-900 dark:text-[#FAFAFA] tracking-wide mb-1 uppercase transition-colors">

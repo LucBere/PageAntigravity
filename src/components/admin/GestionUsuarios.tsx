@@ -3,6 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { Search, Filter, Download, Edit2, Trash2, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import ConfirmModal from '../common/ConfirmModal';
+
+type Usuario = {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  lastConnection: string;
+  avatar: string;
+};
 
 const mockUsers = [
   { id: 1, name: 'Marcus Thorne', email: 'm.thorne@squatgym.com', role: 'Administrador', status: 'ACTIVO', lastConnection: 'Hace 5 minutos', avatar: 'https://i.pravatar.cc/150?u=1' },
@@ -32,10 +43,18 @@ export default function GestionUsuarios() {
   const [filtroActivo, setFiltroActivo] = useState('Todos');
   const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
   const [paginaActual, setPaginaActual] = useState(1);
+  const [users, setUsers] = useState<Usuario[]>(mockUsers);
+  const [usuarioAEliminar, setUsuarioAEliminar] = useState<Usuario | null>(null);
   const navigate = useNavigate();
 
+  const confirmarDeshabilitar = () => {
+    if (!usuarioAEliminar) return;
+    setUsers(prev => prev.map(u => u.id === usuarioAEliminar.id ? { ...u, status: 'INACTIVO' } : u));
+    setUsuarioAEliminar(null);
+  };
+
   // Filtrado de usuarios
-  const usuariosFiltrados = mockUsers.filter(user => {
+  const usuariosFiltrados = users.filter(user => {
     const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
                           user.role.toLowerCase().includes(searchTerm.toLowerCase());
@@ -143,11 +162,20 @@ export default function GestionUsuarios() {
   };
 
   // KPIs
-  const totalPersonal = mockUsers.length;
-  const personalActivo = mockUsers.filter(u => u.status === 'ACTIVO').length;
+  const totalPersonal = users.length;
+  const personalActivo = users.filter(u => u.status === 'ACTIVO').length;
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
+      <ConfirmModal
+        open={usuarioAEliminar !== null}
+        variant="danger"
+        title="Deshabilitar usuario"
+        message={<>¿Estás seguro que deseas deshabilitar a <strong className="text-slate-900 dark:text-white">{usuarioAEliminar?.name}</strong>? El usuario perderá el acceso al sistema.</>}
+        confirmLabel="Sí, deshabilitar"
+        onConfirm={confirmarDeshabilitar}
+        onCancel={() => setUsuarioAEliminar(null)}
+      />
       {/* 1. Encabezado */}
       <div className="flex justify-between items-center">
         <div>
@@ -268,9 +296,11 @@ export default function GestionUsuarios() {
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
-                        <button 
-                          onClick={() => confirm("¿Estás seguro que deseas deshabilitar a " + user.name + "?")}
-                          className="hover:text-red-600 dark:text-red-500 transition-colors cursor-pointer"
+                        <button
+                          onClick={() => setUsuarioAEliminar(user)}
+                          disabled={user.status === 'INACTIVO'}
+                          className="hover:text-red-600 dark:text-red-500 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-slate-500"
+                          title={user.status === 'INACTIVO' ? 'Usuario ya deshabilitado' : 'Deshabilitar usuario'}
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>

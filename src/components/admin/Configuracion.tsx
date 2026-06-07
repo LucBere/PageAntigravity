@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Banknote, Calendar, Ban, AlertTriangle, ArrowRight, Loader2 } from 'lucide-react';
+import AlertModal from '../common/AlertModal';
 
 export default function Configuracion() {
   const [reglas, setReglas] = useState({
@@ -8,6 +9,7 @@ export default function Configuracion() {
   });
 
   const [guardando, setGuardando] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const toggleRegla = (tipo: 'mora' | 'inasistencia') => {
     setReglas(prev => ({
@@ -45,7 +47,7 @@ export default function Configuracion() {
     setGuardando(true);
     setTimeout(() => {
       setGuardando(false);
-      alert("Reglas de negocio actualizadas correctamente en el sistema");
+      setShowSuccess(true);
     }, 1000);
   };
 
@@ -57,6 +59,13 @@ export default function Configuracion() {
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto pb-10">
+      <AlertModal
+        open={showSuccess}
+        variant="success"
+        title="Configuración actualizada"
+        message="Las reglas de negocio se actualizaron correctamente en el sistema."
+        onClose={() => setShowSuccess(false)}
+      />
       
       {/* 1. Encabezado */}
       <div>

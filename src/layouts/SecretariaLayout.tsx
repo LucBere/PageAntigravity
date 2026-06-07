@@ -2,10 +2,12 @@ import { useState, type FormEvent } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { LayoutGrid, Users, AlertTriangle, Settings, LogOut, Sun, Moon, Search } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import AlertModal from '../components/common/AlertModal';
 
 export default function SecretariaLayout() {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
+  const [showDevMsg, setShowDevMsg] = useState(false);
 
   const handleSearch = (e: FormEvent) => {
     e.preventDefault();
@@ -22,6 +24,13 @@ export default function SecretariaLayout() {
 
   return (
     <div className="flex w-full h-screen bg-slate-50 dark:bg-[#0E0E0E] text-slate-900 dark:text-zinc-100 font-sans overflow-hidden transition-colors duration-300">
+      <AlertModal
+        open={showDevMsg}
+        variant="info"
+        title="En desarrollo"
+        message="El módulo de Ajustes del Sistema está en desarrollo para la fase 2."
+        onClose={() => setShowDevMsg(false)}
+      />
       {/* Sidebar Izquierda */}
       <aside className="w-64 bg-slate-50 dark:bg-[#151515] flex flex-col justify-between border-r border-slate-200 dark:border-zinc-800/50 transition-colors duration-300">
         <div>
@@ -77,7 +86,7 @@ export default function SecretariaLayout() {
         {/* Footer Sidebar */}
         <div className="p-4 mb-4">
           <button 
-            onClick={() => alert('Módulo de Ajustes del Sistema en desarrollo para la fase 2.')}
+            onClick={() => setShowDevMsg(true)}
             className="flex items-center w-full px-4 py-3 text-sm font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-100 dark:text-zinc-500 dark:hover:text-zinc-300 dark:hover:bg-zinc-800/20 transition-colors rounded-xl cursor-pointer"
           >
             <Settings className="w-5 h-5 mr-3" />

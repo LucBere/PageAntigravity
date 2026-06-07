@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AlertModal from '../common/AlertModal';
 
 type Step = 'LOGIN_STUDENT' | 'LOGIN_STAFF' | 'REGISTER' | 'FORGOT_PASSWORD';
 
@@ -170,6 +171,7 @@ function LoginStaff({ setStep }: { setStep: (step: Step) => void }) {
   const [generalError, setGeneralError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [infoMsg, setInfoMsg] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent) => {
@@ -213,7 +215,7 @@ function LoginStaff({ setStep }: { setStep: (step: Step) => void }) {
         } else if (role === 'Encargado') {
           navigate('/encargado');
         } else {
-          alert(`El panel de ${role} se encuentra en construcción.`);
+          setInfoMsg(`El panel de ${role} se encuentra en construcción.`);
         }
       }
     }, 2000);
@@ -228,6 +230,14 @@ function LoginStaff({ setStep }: { setStep: (step: Step) => void }) {
         <h1 className="text-3xl font-black tracking-tight text-white mb-2">SQUATGYM</h1>
         <p className="text-zinc-400">Panel de Staff</p>
       </div>
+
+      <AlertModal
+        open={infoMsg !== null}
+        variant="info"
+        title="En construcción"
+        message={infoMsg ?? ''}
+        onClose={() => setInfoMsg(null)}
+      />
 
       <div className="flex mb-6 bg-[#0E0E0E]/50 p-1 rounded-lg border border-zinc-800/50">
         <button onClick={() => setStep('LOGIN_STUDENT')} className="flex-1 py-2 text-sm font-medium rounded-md text-zinc-400 hover:text-white transition-all">Alumno</button>

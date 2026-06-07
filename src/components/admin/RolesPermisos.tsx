@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Archive, BookOpen, Users, DollarSign, Shield } from 'lucide-react';
+import { Archive, BookOpen, Users, DollarSign, Shield, Lock, Pencil, AlertTriangle, X } from 'lucide-react';
+import AlertModal from '../common/AlertModal';
 
 type Rol = 'admin' | 'encargado' | 'secretario' | 'profesor' | 'alumno';
 type Modulo = 'inventario' | 'clases' | 'clientes' | 'finanzas' | 'seguridad';
@@ -62,9 +63,14 @@ const defaultPermisos: Record<Rol, Record<Modulo, Record<Accion, boolean>>> = {
 export default function RolesPermisos() {
   const [rolActivo, setRolActivo] = useState<Rol>('admin');
   const [permisos, setPermisos] = useState(defaultPermisos);
+  const [modoEdicion, setModoEdicion] = useState(false);
+  const [backupPermisos, setBackupPermisos] = useState(defaultPermisos);
+  const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
+  const [mostrarExito, setMostrarExito] = useState(false);
 
 
   const handleTogglePermiso = (modulo: Modulo, accion: Accion) => {
+    if (!modoEdicion) return; // En modo lectura no se puede modificar
     setPermisos(prev => {
       const rolPermisos = { ...prev[rolActivo] };
       const modPermisos = { ...rolPermisos[modulo] };
@@ -92,24 +98,44 @@ export default function RolesPermisos() {
     });
   };
 
-  const handleGuardarCambios = () => {
-    setTimeout(() => {
-      alert("¡Matriz de permisos guardada exitosamente!");
-    }, 300);
+  // Entrar en modo edición: guardamos una copia de respaldo para poder cancelar
+  const handleActivarEdicion = () => {
+    setBackupPermisos(permisos);
+    setModoEdicion(true);
+  };
+
+  // Cancelar: descartamos los cambios y volvemos al estado guardado
+  const handleCancelarEdicion = () => {
+    setPermisos(backupPermisos);
+    setModoEdicion(false);
+  };
+
+  // El botón "Guardar" solo abre el modal de confirmación
+  const handleSolicitarGuardado = () => {
+    setMostrarConfirmacion(true);
+  };
+
+  // Confirmar guardado desde el modal
+  const handleConfirmarGuardado = () => {
+    setBackupPermisos(permisos);
+    setMostrarConfirmacion(false);
+    setModoEdicion(false);
+    setMostrarExito(true);
   };
 
 
 
   const renderCheckbox = (modulo: Modulo, accion: Accion) => {
     const isChecked = permisos[rolActivo][modulo][accion];
-    
+
     return (
       <div className="flex justify-center">
-        <input 
+        <input
           type="checkbox"
           checked={isChecked}
+          disabled={!modoEdicion}
           onChange={() => handleTogglePermiso(modulo, accion)}
-          className="squat-checkbox"
+          className={`squat-checkbox ${!modoEdicion ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
         />
       </div>
     );
@@ -129,14 +155,41 @@ export default function RolesPermisos() {
           <p className="text-slate-500 dark:text-zinc-400 text-sm max-w-xl">
             Define los niveles de acceso y capacidades operativas para cada perfil dentro del ecosistema SquatGym.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            {/* Indicador de estado de la pantalla */}
+            <span className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest border ${
+              modoEdicion
+                ? 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-900/50'
+                : 'bg-slate-100 text-slate-500 border-slate-200 dark:bg-zinc-800/50 dark:text-zinc-400 dark:border-zinc-800'
+            }`}>
+              {modoEdicion ? <Pencil className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5" />}
+              {modoEdicion ? 'Modo edición' : 'Modo lectura'}
+            </span>
 
-            <button 
-              onClick={handleGuardarCambios}
-              className="px-6 py-3.5 rounded-xl bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
-            >
-              GUARDAR CAMBIOS
-            </button>
+            {!modoEdicion ? (
+              <button
+                onClick={handleActivarEdicion}
+                className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
+              >
+                <Pencil className="w-4 h-4" />
+                EDITAR PERMISOS
+              </button>
+            ) : (
+              <>
+                <button
+                  onClick={handleCancelarEdicion}
+                  className="px-6 py-3.5 rounded-xl border border-slate-300 dark:border-zinc-700 text-slate-600 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-zinc-800 text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
+                >
+                  CANCELAR
+                </button>
+                <button
+                  onClick={handleSolicitarGuardado}
+                  className="px-6 py-3.5 rounded-xl bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
+                >
+                  GUARDAR CAMBIOS
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -207,6 +260,56 @@ export default function RolesPermisos() {
           </table>
         </div>
       </div>
+
+      {/* Modal de Confirmación de Guardado */}
+      {mostrarConfirmacion && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-2xl p-8 max-w-md w-full shadow-2xl transition-colors relative">
+            <button
+              onClick={() => setMostrarConfirmacion(false)}
+              className="absolute top-5 right-5 text-slate-400 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-white transition-colors cursor-pointer"
+              aria-label="Cerrar"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="w-12 h-12 rounded-full bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center mb-5">
+              <AlertTriangle className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+            </div>
+
+            <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mb-2">
+              ¿Guardar cambios?
+            </h2>
+            <p className="text-sm text-slate-500 dark:text-zinc-400 mb-8 leading-relaxed">
+              Estás por modificar los permisos del perfil <strong className="text-slate-900 dark:text-white">{perfiles.find(p => p.roleKey === rolActivo)?.role}</strong>. Esta acción cambia los niveles de acceso al sistema. ¿Estás seguro que deseas guardar los cambios?
+            </p>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setMostrarConfirmacion(false)}
+                className="flex-1 py-3.5 rounded-xl border border-slate-300 dark:border-zinc-700 text-slate-600 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-zinc-800 text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
+              >
+                CANCELAR
+              </button>
+              <button
+                onClick={handleConfirmarGuardado}
+                className="flex-1 py-3.5 rounded-xl bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
+              >
+                SÍ, GUARDAR
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Éxito */}
+      <AlertModal
+        open={mostrarExito}
+        variant="success"
+        title="Permisos guardados"
+        message="La matriz de permisos se guardó exitosamente."
+        onClose={() => setMostrarExito(false)}
+      />
 
     </div>
   );

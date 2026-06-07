@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AlertModal from '../common/AlertModal';
 
 export default function ModificarUsuario() {
   const navigate = useNavigate();
+  const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
@@ -50,8 +52,7 @@ export default function ModificarUsuario() {
     // Simular guardado
     setTimeout(() => {
       setIsSaving(false);
-      alert("Cambios guardados con éxito");
-      navigate('/admin/usuarios');
+      setShowSuccess(true);
     }, 1500);
   };
 
@@ -65,6 +66,13 @@ export default function ModificarUsuario() {
 
   return (
     <div className="max-w-3xl space-y-8">
+      <AlertModal
+        open={showSuccess}
+        variant="success"
+        title="Cambios guardados"
+        message="Los cambios se guardaron con éxito."
+        onClose={() => navigate('/admin/usuarios')}
+      />
       {/* Encabezado */}
       <div>
         <h1 className="text-[2rem] font-bold text-slate-900 dark:text-[#FAFAFA] tracking-wide mb-1 transition-colors">
