@@ -31,7 +31,7 @@ export default function NuevoSocio() {
   const [terminosAceptados, setTerminosAceptados] = useState(false);
 
   return (
-    <div className="bg-slate-50 dark:bg-[#0E0E0E] min-h-full p-8 font-sans text-zinc-100">
+    <div className="bg-slate-50 dark:bg-[#0E0E0E] min-h-full p-8 font-sans text-slate-800 dark:text-zinc-100">
 
       {/* 1. Encabezado de la Página */}
       <div className="max-w-4xl mx-auto">
@@ -54,8 +54,8 @@ export default function NuevoSocio() {
       <div className="max-w-4xl mx-auto flex flex-col gap-8">
 
         {/* SECCIÓN A: DATOS PERSONALES */}
-        <div className="bg-white dark:bg-[#151515] rounded-2xl p-8 border border-slate-100 dark:border-slate-200 dark:border-zinc-800/30 shadow-xl shadow-black/20 transition-colors shadow-sm dark:shadow-none">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white border-l-4 border-[#7B8B9E] pl-3 mb-6 uppercase tracking-wide">
+        <div className="bg-white dark:bg-[#151515] rounded-2xl p-8 border border-slate-100 dark:border-zinc-800/30 transition-colors shadow-sm dark:shadow-none">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white border-l-4 border-[#6366F1] pl-3 mb-6 uppercase tracking-wide">
             DATOS PERSONALES
           </h2>
 
@@ -72,7 +72,7 @@ export default function NuevoSocio() {
                   const val = e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
                   setFormData({...formData, nombre: val});
                 }}
-                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors"
+                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors"
               />
             </div>
 
@@ -89,7 +89,7 @@ export default function NuevoSocio() {
                   const val = e.target.value.replace(/\D/g, '');
                   setFormData({...formData, dni: val});
                 }}
-                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors"
+                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors"
               />
             </div>
 
@@ -106,7 +106,7 @@ export default function NuevoSocio() {
                   const val = e.target.value.replace(/[^0-9\s\-+]/g, '');
                   setFormData({...formData, telefono: val});
                 }}
-                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors"
+                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors"
               />
             </div>
 
@@ -130,15 +130,15 @@ export default function NuevoSocio() {
                     setEmailError(false);
                   }
                 }}
-                className={`w-full bg-slate-50 dark:bg-[#1A1A1A] border ${emailError ? 'border-red-500/50 focus:border-red-500/50' : 'border-slate-200 dark:border-zinc-800 focus:border-slate-400 dark:focus:border-zinc-600'} rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-zinc-600 focus:outline-none transition-colors`}
+                className={`w-full bg-slate-50 dark:bg-[#1A1A1A] border ${emailError ? 'border-red-500/50 focus:border-red-500/50' : 'border-slate-200 dark:border-zinc-800 focus:border-slate-400 dark:focus:border-zinc-600'} rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-600 focus:outline-none transition-colors`}
               />
             </div>
           </div>
         </div>
 
         {/* SECCIÓN B: DECLARACIÓN JURADA DE SALUD */}
-        <div className="bg-white dark:bg-[#151515] rounded-2xl p-8 border border-slate-100 dark:border-slate-200 dark:border-zinc-800/30 shadow-xl shadow-black/20 transition-colors shadow-sm dark:shadow-none">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white border-l-4 border-[#7B8B9E] pl-3 mb-6 uppercase tracking-wide">
+        <div className="bg-white dark:bg-[#151515] rounded-2xl p-8 border border-slate-100 dark:border-zinc-800/30 transition-colors shadow-sm dark:shadow-none">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white border-l-4 border-[#6366F1] pl-3 mb-6 uppercase tracking-wide">
             DECLARACIÓN JURADA DE SALUD
           </h2>
 
@@ -148,28 +148,28 @@ export default function NuevoSocio() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             <label className="flex items-center space-x-3 cursor-pointer group" onClick={() => setSalud({...salud, cardiovascular: !salud.cardiovascular})}>
-              <div className={`w-5 h-5 rounded border ${salud.cardiovascular ? 'bg-slate-800 dark:bg-[#7B8B9E] border-[#7B8B9E]' : 'border-slate-300 dark:border-zinc-700 bg-slate-50 dark:bg-[#1A1A1A] group-hover:border-[#7B8B9E]'} flex items-center justify-center transition-colors`}>
-                {salud.cardiovascular && <Check className="w-3 h-3 text-slate-900 dark:text-white" strokeWidth={3} />}
+              <div className={`w-5 h-5 rounded border ${salud.cardiovascular ? 'bg-slate-800 dark:bg-[#6366F1] border-[#6366F1]' : 'border-slate-300 dark:border-zinc-700 bg-slate-50 dark:bg-[#1A1A1A] group-hover:border-[#6366F1]'} flex items-center justify-center transition-colors`}>
+                {salud.cardiovascular && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
               </div>
-              <span className="text-sm text-slate-500 dark:text-zinc-400 group-hover:text-slate-600 dark:text-zinc-300 transition-colors">¿Padece alguna enfermedad cardiovascular?</span>
+              <span className="text-sm text-slate-500 dark:text-zinc-400 group-hover:text-slate-600 dark:group-hover:text-zinc-300 transition-colors">¿Padece alguna enfermedad cardiovascular?</span>
             </label>
             <label className="flex items-center space-x-3 cursor-pointer group" onClick={() => setSalud({...salud, asma: !salud.asma})}>
-              <div className={`w-5 h-5 rounded border ${salud.asma ? 'bg-slate-800 dark:bg-[#7B8B9E] border-[#7B8B9E]' : 'border-slate-300 dark:border-zinc-700 bg-slate-50 dark:bg-[#1A1A1A] group-hover:border-[#7B8B9E]'} flex items-center justify-center transition-colors`}>
-                {salud.asma && <Check className="w-3 h-3 text-slate-900 dark:text-white" strokeWidth={3} />}
+              <div className={`w-5 h-5 rounded border ${salud.asma ? 'bg-slate-800 dark:bg-[#6366F1] border-[#6366F1]' : 'border-slate-300 dark:border-zinc-700 bg-slate-50 dark:bg-[#1A1A1A] group-hover:border-[#6366F1]'} flex items-center justify-center transition-colors`}>
+                {salud.asma && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
               </div>
-              <span className="text-sm text-slate-500 dark:text-zinc-400 group-hover:text-slate-600 dark:text-zinc-300 transition-colors">¿Tiene asma?</span>
+              <span className="text-sm text-slate-500 dark:text-zinc-400 group-hover:text-slate-600 dark:group-hover:text-zinc-300 transition-colors">¿Tiene asma?</span>
             </label>
             <label className="flex items-center space-x-3 cursor-pointer group" onClick={() => setSalud({...salud, presionAlta: !salud.presionAlta})}>
-              <div className={`w-5 h-5 rounded border ${salud.presionAlta ? 'bg-slate-800 dark:bg-[#7B8B9E] border-[#7B8B9E]' : 'border-slate-300 dark:border-zinc-700 bg-slate-50 dark:bg-[#1A1A1A] group-hover:border-[#7B8B9E]'} flex items-center justify-center transition-colors`}>
-                {salud.presionAlta && <Check className="w-3 h-3 text-slate-900 dark:text-white" strokeWidth={3} />}
+              <div className={`w-5 h-5 rounded border ${salud.presionAlta ? 'bg-slate-800 dark:bg-[#6366F1] border-[#6366F1]' : 'border-slate-300 dark:border-zinc-700 bg-slate-50 dark:bg-[#1A1A1A] group-hover:border-[#6366F1]'} flex items-center justify-center transition-colors`}>
+                {salud.presionAlta && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
               </div>
-              <span className="text-sm text-slate-500 dark:text-zinc-400 group-hover:text-slate-600 dark:text-zinc-300 transition-colors">¿Sufre de presión alta?</span>
+              <span className="text-sm text-slate-500 dark:text-zinc-400 group-hover:text-slate-600 dark:group-hover:text-zinc-300 transition-colors">¿Sufre de presión alta?</span>
             </label>
             <label className="flex items-center space-x-3 cursor-pointer group" onClick={() => setSalud({...salud, cirugias: !salud.cirugias})}>
-              <div className={`w-5 h-5 rounded border ${salud.cirugias ? 'bg-slate-800 dark:bg-[#7B8B9E] border-[#7B8B9E]' : 'border-slate-300 dark:border-zinc-700 bg-slate-50 dark:bg-[#1A1A1A] group-hover:border-[#7B8B9E]'} flex items-center justify-center transition-colors`}>
-                {salud.cirugias && <Check className="w-3 h-3 text-slate-900 dark:text-white" strokeWidth={3} />}
+              <div className={`w-5 h-5 rounded border ${salud.cirugias ? 'bg-slate-800 dark:bg-[#6366F1] border-[#6366F1]' : 'border-slate-300 dark:border-zinc-700 bg-slate-50 dark:bg-[#1A1A1A] group-hover:border-[#6366F1]'} flex items-center justify-center transition-colors`}>
+                {salud.cirugias && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
               </div>
-              <span className="text-sm text-slate-500 dark:text-zinc-400 group-hover:text-slate-600 dark:text-zinc-300 transition-colors">¿Ha tenido cirugías recientes?</span>
+              <span className="text-sm text-slate-500 dark:text-zinc-400 group-hover:text-slate-600 dark:group-hover:text-zinc-300 transition-colors">¿Ha tenido cirugías recientes?</span>
             </label>
           </div>
 
@@ -184,7 +184,7 @@ export default function NuevoSocio() {
                 value={medicacion}
                 onChange={(e) => setMedicacion(e.target.value)}
                 placeholder="Detalle medicación actual y dosis..."
-                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors resize-none"
+                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors resize-none"
               ></textarea>
             </div>
             <div className="flex flex-col space-y-2">
@@ -197,7 +197,7 @@ export default function NuevoSocio() {
                 value={alergias}
                 onChange={(e) => setAlergias(e.target.value)}
                 placeholder="Liste alergias a medicamentos o alimentos..."
-                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors resize-none"
+                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors resize-none"
               ></textarea>
             </div>
           </div>
@@ -219,7 +219,7 @@ export default function NuevoSocio() {
                   setContactoEmergencia({...contactoEmergencia, nombre: val});
                 }}
                 placeholder="Nombre completo"
-                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors"
+                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors"
               />
             </div>
             <div className="flex flex-col space-y-2">
@@ -234,13 +234,13 @@ export default function NuevoSocio() {
                   setContactoEmergencia({...contactoEmergencia, telefono: val});
                 }}
                 placeholder="+54 11 0000-0000"
-                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors"
+                className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-600 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors"
               />
             </div>
           </div>
 
           {/* SECCIÓN C: TÉRMINOS Y CONFIRMACIÓN */}
-          <div className="bg-slate-50 dark:bg-[#1A1A1A] p-6 rounded-xl flex flex-col md:flex-row justify-between items-center gap-6 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">
+          <div className="bg-slate-50 dark:bg-[#1A1A1A] p-6 rounded-xl flex flex-col md:flex-row justify-between items-center gap-6 border border-slate-200 dark:border-zinc-800/50">
             <p className="text-[10px] text-slate-500 dark:text-zinc-500 leading-relaxed md:w-[70%]">
               Declaro bajo juramento que los datos consignados en la presente declaración son veraces y exactos. Me comprometo a informar cualquier cambio en mi estado de salud al personal de SquatGym. Asumo la responsabilidad total por la práctica de actividad física dentro de las instalaciones.
             </p>
@@ -248,8 +248,8 @@ export default function NuevoSocio() {
               onClick={() => setTerminosAceptados(!terminosAceptados)}
               className="flex items-center px-5 py-3 bg-slate-200 dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded-lg text-sm font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors whitespace-nowrap"
             >
-              <div className={`w-4 h-4 rounded border ${terminosAceptados ? 'bg-slate-800 dark:bg-[#7B8B9E] border-[#7B8B9E]' : 'border-zinc-500'} mr-3 flex items-center justify-center transition-colors`}>
-                {terminosAceptados && <Check className="w-3 h-3 text-slate-900 dark:text-white" strokeWidth={3} />}
+              <div className={`w-4 h-4 rounded border ${terminosAceptados ? 'bg-slate-800 dark:bg-[#6366F1] border-[#6366F1]' : 'border-zinc-500'} mr-3 flex items-center justify-center transition-colors`}>
+                {terminosAceptados && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
               </div>
               ACEPTO TÉRMINOS
             </button>
@@ -262,7 +262,7 @@ export default function NuevoSocio() {
             type="button"
             onClick={() => navigate('/secretaria/pago', { state: { nuevoSocioNombre: formData.nombre } })}
             disabled={!terminosAceptados}
-            className={`flex items-center px-8 py-4 bg-[#388E3C] text-slate-900 dark:text-white text-sm font-black tracking-widest uppercase rounded-full transition-colors shadow-lg shadow-[#388E3C]/20 ${!terminosAceptados ? 'opacity-50 cursor-not-allowed' : 'hover:bg-emerald-600'}`}
+            className={`flex items-center px-8 py-4 bg-[#388E3C] text-white text-sm font-black tracking-widest uppercase rounded-full transition-colors shadow-lg shadow-[#388E3C]/20 ${!terminosAceptados ? 'opacity-50 cursor-not-allowed' : 'hover:bg-emerald-600'}`}
           >
             REGISTRAR Y PAGAR
             <ArrowRight className="w-5 h-5 ml-3" />

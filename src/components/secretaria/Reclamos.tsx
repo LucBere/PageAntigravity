@@ -119,7 +119,7 @@ export default function Reclamos() {
       </div>
 
       {/* 2. Tabla Principal */}
-      <div className="bg-white dark:bg-[#151515] rounded-2xl border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 p-6 transition-colors shadow-sm dark:shadow-none">
+      <div className="bg-white dark:bg-[#151515] rounded-2xl border border-slate-200 dark:border-zinc-800/50 p-6 transition-colors shadow-sm dark:shadow-none">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-max">
             <thead>
@@ -131,10 +131,10 @@ export default function Reclamos() {
                 <th className="pb-4 font-bold text-right">ACCIONES</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-800/50">
+            <tbody className="divide-y divide-slate-200 dark:divide-zinc-800/50">
               {currentReclamos.length > 0 ? (
                 currentReclamos.map((r) => (
-                  <tr key={r.id} className="hover:bg-slate-100 dark:hover:bg-zinc-800/20 transition-colors">
+                  <tr key={r.id} className="hover:bg-slate-50 dark:hover:bg-zinc-800/20 transition-colors">
                     <td className="py-4">
                       <p className="text-sm font-bold text-slate-900 dark:text-white uppercase">{r.date}</p>
                       <p className="text-xs text-slate-500 dark:text-zinc-500">{r.time}</p>
@@ -181,7 +181,7 @@ export default function Reclamos() {
         </div>
 
         {/* Footer Tabla */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between pt-6 mt-2 border-t border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">
+        <div className="flex flex-col md:flex-row md:items-center justify-between pt-6 mt-2 border-t border-slate-200 dark:border-zinc-800/50">
           <p className="text-[11px] text-slate-500 dark:text-zinc-500 font-bold tracking-widest uppercase">
             MOSTRANDO {reclamosFiltrados.length === 0 ? 0 : ((currentPage - 1) * itemsPerPage) + 1} AL {Math.min(currentPage * itemsPerPage, reclamosFiltrados.length)} DE {reclamosFiltrados.length} RECLAMOS PENDIENTES
           </p>
@@ -189,7 +189,7 @@ export default function Reclamos() {
             <button 
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className="p-2 rounded-lg bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors cursor-pointer disabled:opacity-50"
+              className="p-2 rounded-lg bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer disabled:opacity-50"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -198,7 +198,7 @@ export default function Reclamos() {
               <button 
                 key={i}
                 onClick={() => setCurrentPage(i + 1)}
-                className={`w-8 h-8 flex items-center justify-center rounded-lg border font-bold text-xs cursor-pointer transition-colors ${currentPage === i + 1 ? 'bg-slate-800 dark:bg-[#7B8B9E] border-slate-800 dark:border-[#7B8B9E] text-white' : 'bg-transparent border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 hover:border-slate-400 dark:hover:border-zinc-600'}`}
+                className={`w-8 h-8 flex items-center justify-center rounded-lg border font-bold text-xs cursor-pointer transition-colors ${currentPage === i + 1 ? 'bg-slate-800 dark:bg-[#6366F1] border-slate-800 dark:border-[#6366F1] text-white' : 'bg-transparent border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 hover:border-slate-400 dark:hover:border-zinc-600'}`}
               >
                 {i + 1}
               </button>
@@ -207,7 +207,7 @@ export default function Reclamos() {
             <button 
               onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
               disabled={currentPage === totalPages || totalPages === 0}
-              className="p-2 rounded-lg bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors cursor-pointer disabled:opacity-50"
+              className="p-2 rounded-lg bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer disabled:opacity-50"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -219,7 +219,7 @@ export default function Reclamos() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
         
         {/* Tarjeta 1 (Pendientes) */}
-        <div className="bg-white dark:bg-[#151515] rounded-xl p-6 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 border-l-2 border-l-red-500 relative overflow-hidden transition-all transition-colors shadow-sm dark:shadow-none">
+        <div className="bg-white dark:bg-[#151515] rounded-xl p-6 border border-slate-200 dark:border-zinc-800/50 border-l-2 border-l-red-500 relative overflow-hidden transition-all transition-colors shadow-sm dark:shadow-none">
           <div className="flex justify-between items-start mb-4">
             <h3 className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest">PENDIENTES HOY</h3>
             <ClipboardList className="w-5 h-5 text-red-600 dark:text-red-500" />
@@ -233,7 +233,7 @@ export default function Reclamos() {
         </div>
 
         {/* Tarjeta 2 (Tiempo) */}
-        <div className="bg-white dark:bg-[#151515] rounded-xl p-6 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 relative overflow-hidden transition-colors shadow-sm dark:shadow-none">
+        <div className="bg-white dark:bg-[#151515] rounded-xl p-6 border border-slate-200 dark:border-zinc-800/50 relative overflow-hidden transition-colors shadow-sm dark:shadow-none">
           <div className="flex justify-between items-start mb-4">
             <h3 className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest">TIEMPO RESPUESTA</h3>
             <Timer className="w-5 h-5 text-slate-500 dark:text-zinc-500" />
@@ -245,13 +245,13 @@ export default function Reclamos() {
         </div>
 
         {/* Tarjeta 3 (Resueltos) */}
-        <div className="bg-white dark:bg-[#151515] rounded-xl p-6 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 relative overflow-hidden transition-colors shadow-sm dark:shadow-none">
+        <div className="bg-white dark:bg-[#151515] rounded-xl p-6 border border-slate-200 dark:border-zinc-800/50 relative overflow-hidden transition-colors shadow-sm dark:shadow-none">
           <div className="flex justify-between items-start mb-4">
             <h3 className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest">RESUELTOS SEMANA</h3>
             <CheckCircle2 className="w-5 h-5 text-slate-500 dark:text-zinc-500" />
           </div>
           <p className="text-5xl font-normal text-slate-900 dark:text-white mb-2 tracking-tight">142</p>
-          <p className="text-[10px] font-bold text-[#7B8B9E] uppercase tracking-widest">
+          <p className="text-[10px] font-bold text-[#6366F1] uppercase tracking-widest">
             92% EFECTIVIDAD DE COBRO
           </p>
         </div>
@@ -261,7 +261,7 @@ export default function Reclamos() {
       {/* Modal de Verificación */}
       {reclamoSeleccionado && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-          <div className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-2xl p-8 max-w-lg w-full shadow-2xl shadow-black transition-colors shadow-sm dark:shadow-none">
+          <div className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-2xl p-8 max-w-lg w-full shadow-2xl transition-colors">
             
             <div className="mb-6 text-center">
               <p className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold mb-2">VERIFICACIÓN DE COMPROBANTE</p>
@@ -276,7 +276,7 @@ export default function Reclamos() {
               
               <Image className="w-12 h-12 mb-3 opacity-40" />
               <p className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-zinc-600">Comprobante_Transferencia.jpg</p>
-              <p className="text-[10px] text-zinc-700 mt-2">Fecha: {reclamoSeleccionado.date} - {reclamoSeleccionado.time}</p>
+              <p className="text-[10px] text-slate-400 dark:text-zinc-700 mt-2">Fecha: {reclamoSeleccionado.date} - {reclamoSeleccionado.time}</p>
             </div>
 
             {/* Botones de Acción */}
@@ -289,7 +289,7 @@ export default function Reclamos() {
               </button>
               <button 
                 onClick={() => resolverReclamo(reclamoSeleccionado.id)}
-                className="flex-1 py-4 bg-[#388E3C] hover:bg-emerald-600 text-slate-900 dark:text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all shadow-lg shadow-[#388E3C]/20 hover:shadow-[#388E3C]/40"
+                className="flex-1 py-4 bg-[#388E3C] hover:bg-emerald-600 text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all shadow-lg shadow-[#388E3C]/20 hover:shadow-[#388E3C]/40"
               >
                 APROBAR PAGO
               </button>
@@ -298,7 +298,7 @@ export default function Reclamos() {
             <div className="mt-4 text-center">
               <button 
                 onClick={() => setReclamoSeleccionado(null)}
-                className="py-2 px-4 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white text-[10px] font-bold tracking-widest uppercase transition-colors"
+                className="py-2 px-4 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white text-[10px] font-bold tracking-widest uppercase transition-colors"
               >
                 CERRAR SIN CAMBIOS
               </button>

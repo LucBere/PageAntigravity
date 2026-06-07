@@ -25,7 +25,7 @@ const variantConfig: Record<Variant, { icon: typeof AlertTriangle; iconWrap: str
     icon: HelpCircle,
     iconWrap: 'bg-amber-50 dark:bg-amber-900/20',
     iconColor: 'text-amber-600 dark:text-amber-400',
-    confirmBtn: 'bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white',
+    confirmBtn: 'bg-slate-800 dark:bg-[#6366F1] hover:bg-slate-700 dark:hover:bg-[#4F46E5] text-white',
   },
 };
 

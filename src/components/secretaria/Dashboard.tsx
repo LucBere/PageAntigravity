@@ -15,20 +15,20 @@ export default function SecretariaDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
         
         {/* Tarjeta 1 */}
-        <div className="bg-white dark:bg-[#151515] p-6 rounded-2xl border border-slate-100 dark:border-slate-200 dark:border-zinc-800/30 transition-colors shadow-sm dark:shadow-none">
+        <div className="bg-white dark:bg-[#151515] p-6 rounded-2xl border border-slate-100 dark:border-zinc-800/30 transition-colors shadow-sm dark:shadow-none">
           <div className="flex items-start justify-between mb-4">
             <h3 className="text-[11px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest leading-relaxed">SOCIOS ACTIVOS<br/>HOY</h3>
             <Users className="w-5 h-5 text-slate-400 dark:text-zinc-600" />
           </div>
           <div className="text-5xl font-black text-slate-900 dark:text-white tracking-tighter mb-2">142</div>
-          <div className="flex items-center text-[#7B8B9E] text-[10px] font-bold">
+          <div className="flex items-center text-[#6366F1] text-[10px] font-bold">
             <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
             +8% vs ayer
           </div>
         </div>
 
         {/* Tarjeta 2 */}
-        <div className="bg-white dark:bg-[#151515] p-6 rounded-2xl border border-slate-100 dark:border-slate-200 dark:border-zinc-800/30 transition-colors shadow-sm dark:shadow-none">
+        <div className="bg-white dark:bg-[#151515] p-6 rounded-2xl border border-slate-100 dark:border-zinc-800/30 transition-colors shadow-sm dark:shadow-none">
           <div className="flex items-start justify-between mb-4">
             <h3 className="text-[11px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest">PAGOS PENDIENTES</h3>
             <Banknote className="w-5 h-5 text-red-600 dark:text-red-500/50" />
@@ -40,7 +40,7 @@ export default function SecretariaDashboard() {
         </div>
 
         {/* Tarjeta 3 */}
-        <div className="bg-white dark:bg-[#151515] p-6 rounded-2xl border border-slate-100 dark:border-slate-200 dark:border-zinc-800/30 transition-colors shadow-sm dark:shadow-none">
+        <div className="bg-white dark:bg-[#151515] p-6 rounded-2xl border border-slate-100 dark:border-zinc-800/30 transition-colors shadow-sm dark:shadow-none">
           <div className="flex items-start justify-between mb-4">
             <h3 className="text-[11px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest">PAGOS REALIZADOS</h3>
             <Wallet className="w-5 h-5 text-[#22C55E]/50" />
@@ -53,12 +53,12 @@ export default function SecretariaDashboard() {
         </div>
 
         {/* Tarjeta 4 */}
-        <div className="bg-white dark:bg-[#151515] p-6 rounded-2xl border-l-2 border-l-[#7B8B9E] border-y border-r border-slate-100 dark:border-slate-200 dark:border-zinc-800/30 transition-colors shadow-sm dark:shadow-none">
+        <div className="bg-white dark:bg-[#151515] p-6 rounded-2xl border-l-2 border-l-[#6366F1] border-y border-r border-slate-100 dark:border-zinc-800/30 transition-colors shadow-sm dark:shadow-none">
           <div className="flex items-start justify-between mb-4">
             <h3 className="text-[11px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest">INGRESOS DEL DÍA</h3>
-            <Wallet className="w-5 h-5 text-[#7B8B9E]/50" />
+            <Wallet className="w-5 h-5 text-[#6366F1]/50" />
           </div>
-          <div className="text-4xl lg:text-5xl font-black text-[#7B8B9E] tracking-tighter mb-2">$124.800</div>
+          <div className="text-4xl lg:text-5xl font-black text-[#6366F1] tracking-tighter mb-2">$124.800</div>
           <div className="text-slate-500 dark:text-zinc-500 text-[10px] font-bold">
             AR Peso Argentino
           </div>
@@ -69,7 +69,7 @@ export default function SecretariaDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
         
         {/* Izquierda: Actividad de Pagos */}
-        <div className="lg:col-span-2 bg-white dark:bg-[#151515] p-6 rounded-2xl border border-slate-100 dark:border-slate-200 dark:border-zinc-800/30 flex flex-col transition-colors shadow-sm dark:shadow-none">
+        <div className="lg:col-span-2 bg-white dark:bg-[#151515] p-6 rounded-2xl border border-slate-100 dark:border-zinc-800/30 flex flex-col transition-colors shadow-sm dark:shadow-none">
           <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-6 gap-4">
             <div>
               <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-wide">Actividad de Pagos</h2>
@@ -156,23 +156,23 @@ export default function SecretariaDashboard() {
         </div>
 
         {/* Derecha: Estado de Sistema */}
-        <div className="lg:col-span-1 bg-white dark:bg-[#151515] p-6 rounded-2xl border border-slate-100 dark:border-slate-200 dark:border-zinc-800/30 flex flex-col h-80 transition-colors shadow-sm dark:shadow-none">
+        <div className="lg:col-span-1 bg-white dark:bg-[#151515] p-6 rounded-2xl border border-slate-100 dark:border-zinc-800/30 flex flex-col h-80 transition-colors shadow-sm dark:shadow-none">
           <div className="flex items-center justify-between mb-10">
             <h2 className="text-[11px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest">ESTADO DE SISTEMA</h2>
-            <div className="w-2 h-2 rounded-full bg-slate-800 dark:bg-[#7B8B9E]"></div>
+            <div className="w-2 h-2 rounded-full bg-slate-800 dark:bg-[#6366F1]"></div>
           </div>
           
           <div className="mb-6">
             <div className="flex items-center justify-between mb-3">
               <span className="text-sm font-medium text-slate-600 dark:text-zinc-300">Capacidad Operativa</span>
-              <span className="text-sm font-bold text-[#7B8B9E]">85%</span>
+              <span className="text-sm font-bold text-[#6366F1]">85%</span>
             </div>
             <div className="w-full bg-slate-100 dark:bg-zinc-800/50 rounded-full h-2.5">
-              <div className="bg-slate-800 dark:bg-[#7B8B9E] h-2.5 rounded-full" style={{ width: '85%' }}></div>
+              <div className="bg-slate-800 dark:bg-[#6366F1] h-2.5 rounded-full" style={{ width: '85%' }}></div>
             </div>
           </div>
 
-          <div className="mt-auto pt-6 border-t border-slate-100 dark:border-slate-200 dark:border-zinc-800/30">
+          <div className="mt-auto pt-6 border-t border-slate-100 dark:border-zinc-800/30">
             <p className="text-[11px] leading-relaxed text-slate-500 dark:text-zinc-500 italic">
               El servidor está respondiendo dentro de los parámetros normales. Todas las terminales de pago están sincronizadas.
             </p>
@@ -181,8 +181,8 @@ export default function SecretariaDashboard() {
       </div>
 
       {/* 4. Sección Inferior */}
-      <div className="bg-white dark:bg-[#151515] p-10 rounded-2xl border border-slate-100 dark:border-slate-200 dark:border-zinc-800/30 flex flex-col items-center justify-center text-center mt-6 transition-colors shadow-sm dark:shadow-none">
-        <div className="w-16 h-16 rounded-full border border-slate-300 dark:border-zinc-700/50 flex items-center justify-center bg-slate-200 dark:bg-zinc-900/50 mb-6">
+      <div className="bg-white dark:bg-[#151515] p-10 rounded-2xl border border-slate-100 dark:border-zinc-800/30 flex flex-col items-center justify-center text-center mt-6 transition-colors shadow-sm dark:shadow-none">
+        <div className="w-16 h-16 rounded-full border border-slate-300 dark:border-zinc-700/50 flex items-center justify-center bg-slate-100 dark:bg-zinc-900/50 mb-6">
           <LineChart className="w-8 h-8 text-slate-500 dark:text-zinc-500" />
         </div>
         <h2 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-widest mb-3">
@@ -193,7 +193,7 @@ export default function SecretariaDashboard() {
         </p>
         <div className="mt-8 flex space-x-2 items-center opacity-30">
           <div className="w-10 h-px bg-zinc-600"></div>
-          <div className="w-1 h-1 bg-slate-800 dark:bg-[#7B8B9E] rounded-full"></div>
+          <div className="w-1 h-1 bg-slate-800 dark:bg-[#6366F1] rounded-full"></div>
           <div className="w-10 h-px bg-zinc-600"></div>
         </div>
       </div>

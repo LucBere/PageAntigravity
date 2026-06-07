@@ -69,7 +69,7 @@ export default function CheckoutSocio() {
       
       {showSuccess && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-50 dark:bg-[#0E0E0E] transition-colors duration-300/90 backdrop-blur-sm">
-          <div className="bg-white dark:bg-[#151515] border border-emerald-500/30 p-8 rounded-3xl flex flex-col items-center shadow-[0_0_50px_rgba(16,185,129,0.1)] transition-colors shadow-sm dark:shadow-none">
+          <div className="bg-white dark:bg-[#151515] border border-emerald-500/30 p-8 rounded-2xl flex flex-col items-center shadow-[0_0_50px_rgba(16,185,129,0.1)] transition-colors shadow-sm dark:shadow-none">
             <CheckCircle2 className="w-20 h-20 text-emerald-600 dark:text-emerald-500 mb-6" />
             <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-wider mb-2">¡PAGO COMPLETADO!</h2>
             <p className="text-slate-500 dark:text-zinc-400 font-medium tracking-widest text-xs">Redirigiendo a tus pagos...</p>
@@ -86,20 +86,20 @@ export default function CheckoutSocio() {
           
           {/* 1. SELECCIONAR PLAN */}
           <div>
-            <h2 className="text-[11px] font-bold text-[#7B8B9E] uppercase tracking-widest mb-4">1. SELECCIONAR PLAN</h2>
+            <h2 className="text-[11px] font-bold text-[#6366F1] uppercase tracking-widest mb-4">1. SELECCIONAR PLAN</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {['Plan Musculación', 'Pase Libre', 'Cross Training'].map((plan) => (
                 <div 
                   key={plan}
                   onClick={() => setSelectedPlan(plan)}
-                  className={`bg-white dark:bg-[#151515] border rounded-2xl p-6 cursor-pointer transition-colors relative ${selectedPlan === plan ? 'border-[#7B8B9E] shadow-[0_0_15px_rgba(123,139,158,0.1)]' : 'border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 hover:border-zinc-600'}`}
+                  className={`bg-white dark:bg-[#151515] border rounded-2xl p-6 cursor-pointer transition-colors relative ${selectedPlan === plan ? 'border-[#6366F1] shadow-[0_0_15px_rgba(99,102,241,0.1)]' : 'border-slate-200 dark:border-zinc-800/50 hover:border-slate-300 dark:hover:border-zinc-600'}`}
                 >
                   {selectedPlan === plan && (
-                    <div className="absolute top-4 right-4 text-[#7B8B9E]">
+                    <div className="absolute top-4 right-4 text-[#6366F1]">
                       <CheckCircle2 className="w-5 h-5" />
                     </div>
                   )}
-                  <h3 className={`text-[10px] font-bold uppercase tracking-widest mb-4 ${selectedPlan === plan ? 'text-[#7B8B9E]' : 'text-slate-900 dark:text-white'}`}>{plan}</h3>
+                  <h3 className={`text-[10px] font-bold uppercase tracking-widest mb-4 ${selectedPlan === plan ? 'text-[#6366F1]' : 'text-slate-900 dark:text-white'}`}>{plan}</h3>
                   <p className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">
                     ${plans[plan as keyof typeof plans].toLocaleString()} <span className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 tracking-normal uppercase">/ MES</span>
                   </p>
@@ -110,25 +110,25 @@ export default function CheckoutSocio() {
 
           {/* 2. MÉTODO DE PAGO */}
           <div>
-            <h2 className="text-[11px] font-bold text-[#7B8B9E] uppercase tracking-widest mb-4">2. MÉTODO DE PAGO</h2>
+            <h2 className="text-[11px] font-bold text-[#6366F1] uppercase tracking-widest mb-4">2. MÉTODO DE PAGO</h2>
             <div className="bg-slate-50 dark:bg-[#1A1A1A] p-1.5 rounded-xl flex items-center space-x-1">
               <button 
                 onClick={() => setPaymentMethod('tarjeta')}
-                className={`flex-1 flex items-center justify-center py-3 rounded-lg shadow-sm transition-colors cursor-pointer ${paymentMethod === 'tarjeta' ? 'bg-slate-800 dark:bg-[#7B8B9E] text-white' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white'}`}
+                className={`flex-1 flex items-center justify-center py-3 rounded-lg shadow-sm transition-colors cursor-pointer ${paymentMethod === 'tarjeta' ? 'bg-slate-800 dark:bg-[#6366F1] text-white' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white'}`}
               >
                 <CreditCard className="w-4 h-4 mr-2" />
                 <span className="text-[10px] font-bold uppercase tracking-widest">TARJETA</span>
               </button>
               <button 
                 onClick={() => setPaymentMethod('transferencia')}
-                className={`flex-1 flex items-center justify-center py-3 rounded-lg shadow-sm transition-colors cursor-pointer ${paymentMethod === 'transferencia' ? 'bg-slate-800 dark:bg-[#7B8B9E] text-white' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white'}`}
+                className={`flex-1 flex items-center justify-center py-3 rounded-lg shadow-sm transition-colors cursor-pointer ${paymentMethod === 'transferencia' ? 'bg-slate-800 dark:bg-[#6366F1] text-white' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white'}`}
               >
                 <Building2 className="w-4 h-4 mr-2" />
                 <span className="text-[10px] font-bold uppercase tracking-widest">TRANSFERENCIA</span>
               </button>
               <button 
                 onClick={() => setPaymentMethod('qr')}
-                className={`flex-1 flex items-center justify-center py-3 rounded-lg shadow-sm transition-colors cursor-pointer ${paymentMethod === 'qr' ? 'bg-slate-800 dark:bg-[#7B8B9E] text-white' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white'}`}
+                className={`flex-1 flex items-center justify-center py-3 rounded-lg shadow-sm transition-colors cursor-pointer ${paymentMethod === 'qr' ? 'bg-slate-800 dark:bg-[#6366F1] text-white' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white'}`}
               >
                 <QrCode className="w-4 h-4 mr-2" />
                 <span className="text-[10px] font-bold uppercase tracking-widest">QR</span>
@@ -137,7 +137,7 @@ export default function CheckoutSocio() {
           </div>
 
           {/* 3. DETALLES DE PAGO */}
-          <div className="bg-white dark:bg-[#151515] p-8 md:p-10 rounded-3xl border-l-4 border-l-emerald-500 border-y border-r border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 shadow-[-10px_0_30px_rgba(16,185,129,0.05)] relative overflow-hidden transition-colors shadow-sm dark:shadow-none">
+          <div className="bg-white dark:bg-[#151515] p-8 md:p-10 rounded-2xl border-l-4 border-l-emerald-500 border-y border-r border-slate-200 dark:border-zinc-800/50 shadow-[-10px_0_30px_rgba(16,185,129,0.05)] relative overflow-hidden transition-colors shadow-sm dark:shadow-none">
             <h2 className="text-3xl font-normal text-slate-900 dark:text-white uppercase tracking-wider mb-8 relative z-10">
               DETALLES DE PAGO
             </h2>
@@ -147,26 +147,26 @@ export default function CheckoutSocio() {
                 <>
                   <div>
                     <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest mb-2">TITULAR DE LA TARJETA</label>
-                    <input type="text" placeholder="NOMBRE COMPLETO" value={cardHolder} onChange={handleCardHolderChange} className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-4 px-5 text-sm text-slate-900 dark:text-white placeholder-zinc-700 focus:outline-none focus:border-emerald-500 transition-colors" required />
+                    <input type="text" placeholder="NOMBRE COMPLETO" value={cardHolder} onChange={handleCardHolderChange} className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-4 px-5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-700 focus:outline-none focus:border-emerald-500 transition-colors" required />
                   </div>
                   <div>
                     <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest mb-2">NÚMERO DE TARJETA</label>
                     <div className="relative">
-                      <input type="text" placeholder="0000 0000 0000 0000" value={cardNumber} onChange={handleCardNumberChange} className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-4 px-5 pr-16 text-sm text-slate-900 dark:text-white tracking-widest placeholder-zinc-700 focus:outline-none focus:border-emerald-500 transition-colors font-mono" required />
+                      <input type="text" placeholder="0000 0000 0000 0000" value={cardNumber} onChange={handleCardNumberChange} className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-4 px-5 pr-16 text-sm text-slate-900 dark:text-white tracking-widest placeholder-slate-400 dark:placeholder-zinc-700 focus:outline-none focus:border-emerald-500 transition-colors font-mono" required />
                       <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
-                        <div className={`w-6 h-4 rounded-sm ${cardNumber.startsWith('4') ? 'bg-blue-600' : cardNumber.startsWith('5') ? 'bg-red-500' : 'bg-zinc-700'}`}></div>
-                        <div className="w-6 h-4 bg-zinc-700 rounded-sm"></div>
+                        <div className={`w-6 h-4 rounded-sm ${cardNumber.startsWith('4') ? 'bg-blue-600' : cardNumber.startsWith('5') ? 'bg-red-500' : 'bg-slate-300 dark:bg-zinc-700'}`}></div>
+                        <div className="w-6 h-4 bg-slate-300 dark:bg-zinc-700 rounded-sm"></div>
                       </div>
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest mb-2">VENCIMIENTO</label>
-                      <input type="text" placeholder="MM / YY" value={expiry} onChange={(e) => setExpiry(e.target.value)} className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-4 px-5 text-sm text-slate-900 dark:text-white tracking-widest placeholder-zinc-700 focus:outline-none focus:border-emerald-500 transition-colors font-mono text-center" required />
+                      <input type="text" placeholder="MM / YY" value={expiry} onChange={(e) => setExpiry(e.target.value)} className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-4 px-5 text-sm text-slate-900 dark:text-white tracking-widest placeholder-slate-400 dark:placeholder-zinc-700 focus:outline-none focus:border-emerald-500 transition-colors font-mono text-center" required />
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest mb-2">CVV</label>
-                      <input type="password" placeholder="***" maxLength={4} value={cvv} onChange={(e) => setCvv(e.target.value.replace(/\D/g, ''))} className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-4 px-5 text-sm text-slate-900 dark:text-white tracking-widest placeholder-zinc-700 focus:outline-none focus:border-emerald-500 transition-colors font-mono text-center" required />
+                      <input type="password" placeholder="***" maxLength={4} value={cvv} onChange={(e) => setCvv(e.target.value.replace(/\D/g, ''))} className="w-full bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl py-4 px-5 text-sm text-slate-900 dark:text-white tracking-widest placeholder-slate-400 dark:placeholder-zinc-700 focus:outline-none focus:border-emerald-500 transition-colors font-mono text-center" required />
                     </div>
                   </div>
                 </>
@@ -174,7 +174,7 @@ export default function CheckoutSocio() {
 
               {paymentMethod === 'transferencia' && (
                 <div className="bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl p-6 text-center space-y-4">
-                  <Building2 className="w-12 h-12 text-[#7B8B9E] mx-auto mb-2" />
+                  <Building2 className="w-12 h-12 text-[#6366F1] mx-auto mb-2" />
                   <div className="space-y-1">
                     <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest">BANCO</p>
                     <p className="text-lg font-bold text-slate-900 dark:text-white tracking-widest">SQUAT BANK</p>
@@ -186,7 +186,7 @@ export default function CheckoutSocio() {
                   <div className="space-y-1 pt-4 border-t border-slate-200 dark:border-zinc-800 relative">
                     <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest">CBU</p>
                     <p className="text-lg font-bold text-emerald-600 dark:text-emerald-500 tracking-widest font-mono">0000003100000000000001</p>
-                    <button type="button" onClick={copyCBU} className="mt-4 inline-flex items-center space-x-2 px-4 py-2 bg-slate-100 dark:bg-zinc-800 hover:bg-zinc-700 rounded-lg text-slate-900 dark:text-white text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer">
+                    <button type="button" onClick={copyCBU} className="mt-4 inline-flex items-center space-x-2 px-4 py-2 bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 rounded-lg text-slate-900 dark:text-white text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer">
                       {copied ? <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-500" /> : <Copy className="w-4 h-4" />}
                       <span>{copied ? '¡COPIADO!' : 'COPIAR CBU'}</span>
                     </button>
@@ -217,7 +217,7 @@ export default function CheckoutSocio() {
 
         {/* COLUMNA DERECHA (Resumen) */}
         <div className="lg:col-span-1 space-y-6">
-          <div className="bg-white dark:bg-[#151515] p-8 rounded-3xl border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
+          <div className="bg-white dark:bg-[#151515] p-8 rounded-2xl border border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
             <h2 className="text-[11px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-[0.3em] mb-8">RESUMEN DE ORDEN</h2>
             <div className="space-y-6 mb-8">
               <div className="flex items-center justify-between">
@@ -236,7 +236,7 @@ export default function CheckoutSocio() {
               </div>
             </div>
 
-            <div className="border-t border-slate-300 dark:border-slate-200 dark:border-zinc-800/80 pt-8 flex items-center justify-between">
+            <div className="border-t border-slate-300 dark:border-zinc-800/80 pt-8 flex items-center justify-between">
               <span className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-[0.2em]">TOTAL A PAGAR</span>
               <div className="text-right flex flex-col items-end">
                 <span className="text-4xl font-black text-[#388E3C] tracking-tighter flex items-end">
@@ -246,7 +246,7 @@ export default function CheckoutSocio() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-zinc-800/80 to-[#151515] p-8 rounded-3xl border border-slate-300 dark:border-zinc-700/50 relative overflow-hidden flex flex-col items-center text-center mt-6">
+          <div className="bg-gradient-to-br from-zinc-800/80 to-[#151515] p-8 rounded-2xl border border-slate-300 dark:border-zinc-700/50 relative overflow-hidden flex flex-col items-center text-center mt-6">
             <ShieldCheck className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 text-slate-500 dark:text-zinc-500/10" />
             <div className="relative z-10 py-4">
               <h3 className="text-[11px] font-bold text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-3">MEMBRESÍA ACTIVA</h3>

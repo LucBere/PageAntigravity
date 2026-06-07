@@ -69,7 +69,7 @@ export default function Configuracion() {
       
       {/* 1. Encabezado */}
       <div>
-        <h1 className="text-[3rem] font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-2 uppercase leading-none transition-colors">
+        <h1 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-2 uppercase leading-none transition-colors">
           REGLAS DE NEGOCIO
         </h1>
         <p className="text-slate-500 dark:text-zinc-400 text-sm max-w-3xl transition-colors">
@@ -92,7 +92,7 @@ export default function Configuracion() {
             {/* Toggle Switch */}
             <div 
               onClick={() => toggleRegla('mora')}
-              className={`w-12 h-6 rounded-full flex items-center px-1 cursor-pointer transition-colors ${reglas.mora.activa ? 'bg-slate-800 dark:bg-[#7B8B9E] justify-end' : 'bg-slate-300 dark:bg-zinc-700 justify-start'}`}
+              className={`w-12 h-6 rounded-full flex items-center px-1 cursor-pointer transition-colors ${reglas.mora.activa ? 'bg-slate-800 dark:bg-[#6366F1] justify-end' : 'bg-slate-300 dark:bg-zinc-700 justify-start'}`}
             >
               <div className={`w-4 h-4 rounded-full shadow-sm transition-all ${reglas.mora.activa ? 'bg-white' : 'bg-slate-100 dark:bg-zinc-400'}`}></div>
             </div>
@@ -106,7 +106,7 @@ export default function Configuracion() {
                 value={reglas.mora.dias}
                 onChange={(e) => handleDiasChange('mora', e.target.value)}
                 disabled={!reglas.mora.activa}
-                className="w-16 h-10 bg-white dark:bg-[#2A3441] text-slate-900 dark:text-white text-center font-bold rounded-lg border border-slate-300 dark:border-transparent focus:outline-none focus:ring-1 focus:ring-slate-400 dark:focus:ring-[#7B8B9E] transition-colors"
+                className="w-16 h-10 bg-white dark:bg-[#2A3441] text-slate-900 dark:text-white text-center font-bold rounded-lg border border-slate-300 dark:border-transparent focus:outline-none focus:ring-1 focus:ring-slate-400 dark:focus:ring-[#6366F1] transition-colors"
               />
               <p className="text-slate-600 dark:text-zinc-400 text-sm font-medium transition-colors">días</p>
             </div>
@@ -140,7 +140,7 @@ export default function Configuracion() {
             {/* Toggle Switch */}
             <div 
               onClick={() => toggleRegla('inasistencia')}
-              className={`w-12 h-6 rounded-full flex items-center px-1 cursor-pointer transition-colors ${reglas.inasistencia.activa ? 'bg-slate-800 dark:bg-[#7B8B9E] justify-end' : 'bg-slate-300 dark:bg-zinc-700 justify-start'}`}
+              className={`w-12 h-6 rounded-full flex items-center px-1 cursor-pointer transition-colors ${reglas.inasistencia.activa ? 'bg-slate-800 dark:bg-[#6366F1] justify-end' : 'bg-slate-300 dark:bg-zinc-700 justify-start'}`}
             >
               <div className={`w-4 h-4 rounded-full shadow-sm transition-all ${reglas.inasistencia.activa ? 'bg-white' : 'bg-slate-100 dark:bg-zinc-400'}`}></div>
             </div>
@@ -154,7 +154,7 @@ export default function Configuracion() {
                 value={reglas.inasistencia.dias}
                 onChange={(e) => handleDiasChange('inasistencia', e.target.value)}
                 disabled={!reglas.inasistencia.activa}
-                className="w-16 h-10 bg-white dark:bg-[#2A3441] text-slate-900 dark:text-white text-center font-bold rounded-lg border border-slate-300 dark:border-transparent focus:outline-none focus:ring-1 focus:ring-slate-400 dark:focus:ring-[#7B8B9E] transition-colors"
+                className="w-16 h-10 bg-white dark:bg-[#2A3441] text-slate-900 dark:text-white text-center font-bold rounded-lg border border-slate-300 dark:border-transparent focus:outline-none focus:ring-1 focus:ring-slate-400 dark:focus:ring-[#6366F1] transition-colors"
               />
               <p className="text-slate-600 dark:text-zinc-400 text-sm font-medium transition-colors">días</p>
             </div>
@@ -183,7 +183,7 @@ export default function Configuracion() {
         <button 
           onClick={handleGuardarCambios}
           disabled={guardando}
-          className="flex items-center justify-center bg-slate-800 hover:bg-slate-700 dark:bg-[#7B8B9E] dark:hover:bg-slate-400 text-white font-bold px-8 py-3.5 rounded-xl transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-w-[200px] shadow-sm dark:shadow-none"
+          className="flex items-center justify-center bg-slate-800 hover:bg-slate-700 dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] text-white font-bold px-8 py-3.5 rounded-xl transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-w-[200px] shadow-sm dark:shadow-none"
         >
           {guardando ? (
             <>

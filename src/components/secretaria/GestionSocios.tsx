@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ConfirmModal from '../common/ConfirmModal';
 import AlertModal from '../common/AlertModal';
+import Badge from '../common/Badge';
 
 const mockSocios = [
   { 
@@ -148,14 +149,14 @@ export default function GestionSocios() {
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
             <button 
               onClick={() => navigate('/secretaria/socios/nuevo')}
-              className="w-full sm:w-auto flex items-center justify-center px-6 py-3 bg-slate-800 dark:bg-[#7B8B9E] hover:bg-[#687a8e] text-white text-sm font-bold rounded-xl transition-colors shadow-lg shadow-[#7B8B9E]/20"
+              className="w-full sm:w-auto flex items-center justify-center px-6 py-3 bg-slate-800 dark:bg-[#6366F1] hover:bg-[#687a8e] text-white text-sm font-bold rounded-xl transition-colors shadow-lg shadow-[#6366F1]/20"
             >
               <UserPlus className="w-5 h-5 mr-2" />
               NUEVO SOCIO
             </button>
             <button
               onClick={() => navigate('/secretaria/pago')}
-              className="w-full sm:w-auto flex items-center justify-center px-6 py-3 bg-transparent border border-slate-300 dark:border-zinc-700 hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-white text-sm font-bold rounded-xl transition-colors"
+              className="w-full sm:w-auto flex items-center justify-center px-6 py-3 bg-transparent border border-slate-300 dark:border-zinc-700 hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white text-sm font-bold rounded-xl transition-colors"
             >
               <CreditCard className="w-5 h-5 mr-2" />
               REGISTRAR PAGO
@@ -200,7 +201,7 @@ export default function GestionSocios() {
           <div className="relative">
             <button 
               onClick={() => setMostrarFiltros(!mostrarFiltros)}
-              className="flex items-center text-xs font-bold text-slate-500 dark:text-zinc-500 hover:text-slate-600 dark:text-zinc-300 tracking-widest transition-colors shrink-0"
+              className="flex items-center text-xs font-bold text-slate-500 dark:text-zinc-500 hover:text-slate-600 dark:hover:text-zinc-300 tracking-widest transition-colors shrink-0"
             >
               <ListFilter className="w-4 h-4 mr-2" />
               FILTROS AVANZADOS
@@ -210,19 +211,19 @@ export default function GestionSocios() {
               <div className="absolute right-0 mt-2 w-56 bg-slate-50 dark:bg-[#1A1A1A] border border-slate-200 dark:border-zinc-800 rounded-xl shadow-xl z-10 py-2">
                 <button 
                   onClick={() => { setCriterioOrden('nombre'); setMostrarFiltros(false); }}
-                  className={`w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'nombre' ? 'text-[#7B8B9E] font-bold' : 'text-slate-600 dark:text-zinc-300'}`}
+                  className={`w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'nombre' ? 'text-[#6366F1] font-bold' : 'text-slate-600 dark:text-zinc-300'}`}
                 >
                   Ordenar por Nombre (A-Z)
                 </button>
                 <button 
                   onClick={() => { setCriterioOrden('fecha'); setMostrarFiltros(false); }}
-                  className={`w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'fecha' ? 'text-[#7B8B9E] font-bold' : 'text-slate-600 dark:text-zinc-300'}`}
+                  className={`w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'fecha' ? 'text-[#6366F1] font-bold' : 'text-slate-600 dark:text-zinc-300'}`}
                 >
                   Ordenar por Último Pago
                 </button>
                 <button 
                   onClick={() => { setCriterioOrden('plan'); setMostrarFiltros(false); }}
-                  className={`w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'plan' ? 'text-[#7B8B9E] font-bold' : 'text-slate-600 dark:text-zinc-300'}`}
+                  className={`w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-zinc-800 text-sm transition-colors ${criterioOrden === 'plan' ? 'text-[#6366F1] font-bold' : 'text-slate-600 dark:text-zinc-300'}`}
                 >
                   Filtrar por Plan
                 </button>
@@ -232,7 +233,7 @@ export default function GestionSocios() {
         </div>
 
         {/* 4. Tabla Principal */}
-        <div className="bg-white dark:bg-[#151515] rounded-2xl p-6 border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 shadow-xl shadow-black/20 overflow-hidden transition-colors shadow-sm dark:shadow-none">
+        <div className="bg-white dark:bg-[#151515] rounded-2xl p-6 border border-slate-200 dark:border-zinc-800/50 overflow-hidden transition-colors shadow-sm dark:shadow-none">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[800px]">
               <thead>
@@ -244,7 +245,7 @@ export default function GestionSocios() {
                   <th className="pb-4 font-bold text-right pr-4">ACCIONES</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800/50">
+              <tbody className="divide-y divide-slate-200 dark:divide-zinc-800/50">
                 {sociosPaginados.map((socio) => (
                   <tr key={socio.id} className="hover:bg-slate-50 dark:hover:bg-zinc-800/20 transition-colors">
                     {/* SOCIO */}
@@ -276,15 +277,9 @@ export default function GestionSocios() {
                     {/* ESTADO */}
                     <td className="py-5 pr-4">
                       {socio.estado === 'HABILITADO' ? (
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-800 border border-green-200 dark:bg-zinc-950 dark:text-zinc-300 dark:border-zinc-800/50">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] mr-2"></span>
-                          HABILITADO
-                        </span>
+                        <Badge variant="success" dot>HABILITADO</Badge>
                       ) : (
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-red-100 text-red-800 border border-red-200 dark:bg-[#2A1111] dark:text-[#EF4444] dark:border-[#EF4444]/20">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444] mr-2"></span>
-                          DEUDOR
-                        </span>
+                        <Badge variant="danger" dot>DEUDOR</Badge>
                       )}
                     </td>
                     {/* ACCIONES */}
@@ -293,7 +288,7 @@ export default function GestionSocios() {
                         <button
                           onClick={() => setShowEditInfo(true)}
                           title="Editar socio"
-                          className="hover:text-[#7B8B9E] transition-colors cursor-pointer"
+                          className="hover:text-[#6366F1] transition-colors cursor-pointer"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
@@ -324,7 +319,7 @@ export default function GestionSocios() {
                 className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-colors ${
                   paginaActual === 1 
                     ? 'bg-transparent border-transparent text-zinc-700 cursor-not-allowed' 
-                    : 'bg-slate-200 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white'
+                    : 'bg-slate-100 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -336,8 +331,8 @@ export default function GestionSocios() {
                   onClick={() => setPaginaActual(pag)}
                   className={`w-8 h-8 flex items-center justify-center rounded-lg font-bold text-xs transition-colors ${
                     paginaActual === pag
-                      ? 'bg-transparent text-[#7B8B9E]'
-                      : 'bg-transparent text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white'
+                      ? 'bg-transparent text-[#6366F1]'
+                      : 'bg-transparent text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   {pag}
@@ -350,7 +345,7 @@ export default function GestionSocios() {
                 className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-colors ${
                   paginaActual === totalPaginas || totalPaginas === 0
                     ? 'bg-transparent border-transparent text-zinc-700 cursor-not-allowed' 
-                    : 'bg-slate-200 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white'
+                    : 'bg-slate-100 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <ChevronRight className="w-4 h-4" />

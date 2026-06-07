@@ -87,15 +87,15 @@ export default function NotificacionesSocio() {
     switch (type) {
       case 'urgent': return <AlertTriangle className="w-5 h-5 text-red-600 dark:text-red-500" />;
       case 'success': return <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-500" />;
-      case 'info': return <Info className="w-5 h-5 text-[#7B8B9E]" />;
+      case 'info': return <Info className="w-5 h-5 text-[#6366F1]" />;
     }
   };
 
   const renderBorder = (type: NotificationType) => {
     switch (type) {
-      case 'urgent': return 'border-l-4 border-l-red-500 border-y border-r border-slate-200 dark:border-slate-200 dark:border-zinc-800/50';
-      case 'success': return 'border-l-4 border-l-emerald-500 border-y border-r border-slate-200 dark:border-slate-200 dark:border-zinc-800/50';
-      case 'info': return 'border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50';
+      case 'urgent': return 'border-l-4 border-l-red-500 border-y border-r border-slate-200 dark:border-zinc-800/50';
+      case 'success': return 'border-l-4 border-l-emerald-500 border-y border-r border-slate-200 dark:border-zinc-800/50';
+      case 'info': return 'border border-slate-200 dark:border-zinc-800/50';
     }
   };
 
@@ -107,10 +107,10 @@ export default function NotificacionesSocio() {
       {/* MODAL HORARIOS */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-50 dark:bg-[#0E0E0E] transition-colors duration-300/90 backdrop-blur-sm p-4">
-          <div className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 max-w-sm w-full relative shadow-[0_0_50px_rgba(0,0,0,0.5)] transition-colors shadow-sm dark:shadow-none">
+          <div className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-2xl p-8 max-w-sm w-full relative shadow-[0_0_50px_rgba(0,0,0,0.5)] transition-colors shadow-sm dark:shadow-none">
             <button 
               onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors cursor-pointer"
+              className="absolute top-4 right-4 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -123,7 +123,7 @@ export default function NotificacionesSocio() {
             </div>
             <button 
               onClick={() => setShowModal(false)}
-              className="w-full bg-slate-800 dark:bg-[#7B8B9E] hover:bg-[#6A788A] text-white py-4 rounded-xl text-xs font-black uppercase tracking-[0.2em] transition-colors cursor-pointer"
+              className="w-full bg-slate-800 dark:bg-[#6366F1] hover:bg-[#6A788A] text-white py-4 rounded-xl text-xs font-black uppercase tracking-[0.2em] transition-colors cursor-pointer"
             >
               CERRAR
             </button>
@@ -140,7 +140,7 @@ export default function NotificacionesSocio() {
           <h2 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center">
             NOTIFICACIONES
             {unreadCount > 0 && (
-              <span className="ml-3 bg-slate-800 dark:bg-[#7B8B9E] text-white text-[10px] py-1 px-2.5 rounded-full">
+              <span className="ml-3 bg-slate-800 dark:bg-[#6366F1] text-white text-[10px] py-1 px-2.5 rounded-full">
                 {unreadCount} NUEVAS
               </span>
             )}
@@ -148,7 +148,7 @@ export default function NotificacionesSocio() {
         </div>
         <button 
           onClick={markAllAsRead}
-          className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white uppercase tracking-widest transition-colors cursor-pointer border border-slate-200 dark:border-zinc-800 hover:border-zinc-600 px-4 py-2 rounded-lg"
+          className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white uppercase tracking-widest transition-colors cursor-pointer border border-slate-200 dark:border-zinc-800 hover:border-slate-300 dark:hover:border-zinc-600 px-4 py-2 rounded-lg"
         >
           MARCAR TODAS COMO LEÍDAS
         </button>
@@ -158,19 +158,19 @@ export default function NotificacionesSocio() {
       <div className="bg-slate-50 dark:bg-[#1A1A1A] p-1.5 rounded-xl flex items-center space-x-1 mb-8 max-w-md">
         <button 
           onClick={() => setActiveTab('todas')}
-          className={`flex-1 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors cursor-pointer ${activeTab === 'todas' ? 'bg-slate-800 dark:bg-[#7B8B9E] text-white shadow-sm' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white'}`}
+          className={`flex-1 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors cursor-pointer ${activeTab === 'todas' ? 'bg-slate-800 dark:bg-[#6366F1] text-white shadow-sm' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white'}`}
         >
           TODAS
         </button>
         <button 
           onClick={() => setActiveTab('no_leidas')}
-          className={`flex-1 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors cursor-pointer ${activeTab === 'no_leidas' ? 'bg-slate-800 dark:bg-[#7B8B9E] text-white shadow-sm' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white'}`}
+          className={`flex-1 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors cursor-pointer ${activeTab === 'no_leidas' ? 'bg-slate-800 dark:bg-[#6366F1] text-white shadow-sm' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white'}`}
         >
           NO LEÍDAS
         </button>
         <button 
           onClick={() => setActiveTab('importantes')}
-          className={`flex-1 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors cursor-pointer ${activeTab === 'importantes' ? 'bg-slate-800 dark:bg-[#7B8B9E] text-white shadow-sm' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white'}`}
+          className={`flex-1 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors cursor-pointer ${activeTab === 'importantes' ? 'bg-slate-800 dark:bg-[#6366F1] text-white shadow-sm' : 'text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white'}`}
         >
           IMPORTANTES
         </button>
@@ -179,18 +179,18 @@ export default function NotificacionesSocio() {
       {/* LISTA DE NOTIFICACIONES */}
       <div className="space-y-4">
         {filteredNotifications.length === 0 ? (
-          <div className="text-center py-12 bg-white dark:bg-[#151515] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 rounded-2xl transition-colors shadow-sm dark:shadow-none">
+          <div className="text-center py-12 bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800/50 rounded-2xl transition-colors shadow-sm dark:shadow-none">
             <p className="text-slate-500 dark:text-zinc-500 text-sm font-bold tracking-widest uppercase">No hay notificaciones en esta categoría.</p>
           </div>
         ) : (
           filteredNotifications.map((notif) => (
             <div 
               key={notif.id}
-              className={`bg-white dark:bg-[#151515] rounded-2xl p-6 relative flex flex-col md:flex-row md:items-center justify-between gap-6 transition-all ${renderBorder(notif.type)} ${!notif.isRead ? 'shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : 'opacity-70 hover:opacity-100'}`}
+              className={`bg-white dark:bg-[#151515] rounded-2xl p-6 relative flex flex-col md:flex-row md:items-center justify-between gap-6 transition-all ${renderBorder(notif.type)} ${!notif.isRead ? 'shadow-sm dark:shadow-none' : 'opacity-70 hover:opacity-100'}`}
             >
               {/* Indicador No Leído */}
               {!notif.isRead && (
-                <div className="absolute top-6 right-6 w-2.5 h-2.5 rounded-full bg-slate-800 dark:bg-[#7B8B9E] shadow-[0_0_8px_rgba(123,139,158,0.8)]"></div>
+                <div className="absolute top-6 right-6 w-2.5 h-2.5 rounded-full bg-slate-800 dark:bg-[#6366F1] shadow-[0_0_8px_rgba(99,102,241,0.8)]"></div>
               )}
 
               {/* Contenido Izquierdo */}
@@ -232,7 +232,7 @@ export default function NotificacionesSocio() {
                       setShowModal(true);
                       markAsRead(notif.id);
                     }}
-                    className="w-full md:w-auto px-6 py-3 bg-slate-50 dark:bg-[#1A1A1A] hover:bg-slate-100 dark:bg-zinc-800 text-slate-900 dark:text-white border border-slate-300 dark:border-zinc-700 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-colors cursor-pointer"
+                    className="w-full md:w-auto px-6 py-3 bg-slate-50 dark:bg-[#1A1A1A] hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-900 dark:text-white border border-slate-300 dark:border-zinc-700 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-colors cursor-pointer"
                   >
                     VER HORARIOS
                   </button>
@@ -240,7 +240,7 @@ export default function NotificacionesSocio() {
                 {notif.id !== '1' && notif.id !== '2' && !notif.isRead && (
                   <button 
                     onClick={() => markAsRead(notif.id)}
-                    className="w-full md:w-auto px-6 py-3 bg-slate-50 dark:bg-[#1A1A1A] hover:bg-slate-100 dark:bg-zinc-800 text-slate-900 dark:text-white border border-slate-300 dark:border-zinc-700 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-colors cursor-pointer"
+                    className="w-full md:w-auto px-6 py-3 bg-slate-50 dark:bg-[#1A1A1A] hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-900 dark:text-white border border-slate-300 dark:border-zinc-700 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-colors cursor-pointer"
                   >
                     ENTENDIDO
                   </button>

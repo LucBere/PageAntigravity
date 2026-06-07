@@ -112,7 +112,7 @@ export default function AuditoriaLogs() {
       {/* 1. Encabezado */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-[3rem] font-black tracking-tighter mb-1 uppercase leading-none">
+          <h1 className="text-4xl lg:text-5xl font-black tracking-tighter mb-1 uppercase leading-none">
             <span className="text-slate-900 dark:text-[#FAFAFA] transition-colors">AUDITORÍA</span> <span className="text-slate-500 transition-colors">(LOGS)</span>
           </h1>
           <p className="text-slate-500 dark:text-zinc-400 text-sm transition-colors">
@@ -122,7 +122,7 @@ export default function AuditoriaLogs() {
         <div className="flex items-center gap-4">
           <button
             onClick={handleExportPDF}
-            className="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-white dark:bg-[#7B8B9E] dark:hover:bg-slate-400 px-5 py-3 rounded-xl text-sm font-bold transition-colors cursor-pointer shadow-sm dark:shadow-none"
+            className="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-white dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] px-5 py-3 rounded-xl text-sm font-bold transition-colors cursor-pointer shadow-sm dark:shadow-none"
           >
             <Download className="w-4 h-4" />
             <span>Exportar Reporte PDF</span>
@@ -229,7 +229,7 @@ export default function AuditoriaLogs() {
           </div>
         </div>
 
-        <div className="md:col-span-1 bg-slate-800 dark:bg-[#7B8B9E] rounded-2xl p-6 relative flex flex-col justify-between min-h-[140px] transition-colors shadow-sm dark:shadow-none">
+        <div className="md:col-span-1 bg-slate-800 dark:bg-[#6366F1] rounded-2xl p-6 relative flex flex-col justify-between min-h-[140px] transition-colors shadow-sm dark:shadow-none">
           <History className="w-6 h-6 text-white mb-4" />
           <div>
             <p className="text-[2.5rem] font-normal text-white leading-none mb-1">
@@ -321,7 +321,7 @@ export default function AuditoriaLogs() {
                 key={page}
                 onClick={() => handlePageChange(page)}
                 className={`w-8 h-8 flex items-center justify-center rounded text-xs font-bold cursor-pointer transition-colors ${paginaActual === page
-                    ? 'bg-slate-800 text-white dark:bg-[#7B8B9E] dark:text-white'
+                    ? 'bg-slate-800 text-white dark:bg-[#6366F1] dark:text-white'
                     : 'bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-white'
                   }`}
               >

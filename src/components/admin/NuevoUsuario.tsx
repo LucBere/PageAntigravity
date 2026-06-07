@@ -164,7 +164,7 @@ export default function NuevoUsuario() {
             className={`w-full font-bold text-sm h-12 rounded-xl mt-4 transition-all tracking-wide uppercase ${
               !isValid || isLoading
                 ? 'bg-slate-100 dark:bg-zinc-800 text-slate-500 dark:text-zinc-500 cursor-not-allowed opacity-50'
-                : 'bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white cursor-pointer'
+                : 'bg-slate-800 dark:bg-[#6366F1] hover:bg-slate-700 dark:hover:bg-[#4F46E5] text-white cursor-pointer'
             }`}
           >
             {isLoading ? 'CREANDO...' : 'CREAR USUARIO'}

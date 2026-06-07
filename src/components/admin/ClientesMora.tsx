@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Search, FileText, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 import FilterSelect from '../common/FilterSelect';
+import Badge from '../common/Badge';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -88,7 +89,7 @@ export default function ClientesMora() {
         onClick={() => handlePageChange(page)}
         className={`w-8 h-8 flex items-center justify-center rounded-lg font-medium text-xs transition-colors cursor-pointer ${
           isActive 
-            ? 'bg-slate-800 text-white dark:bg-[#7B8B9E] shadow-sm dark:shadow-none' 
+            ? 'bg-slate-800 text-white dark:bg-[#6366F1] shadow-sm dark:shadow-none' 
             : 'bg-white dark:bg-transparent text-slate-600 dark:text-zinc-400 hover:bg-slate-100 dark:hover:bg-zinc-800 border border-slate-200 dark:border-transparent'
         }`}
       >
@@ -128,7 +129,7 @@ export default function ClientesMora() {
     <div className="space-y-6 max-w-7xl mx-auto flex flex-col h-full min-h-[calc(100vh-100px)]">
       {/* Encabezado */}
       <div>
-        <h1 className="text-[3rem] font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-2 uppercase leading-none transition-colors">
+        <h1 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-2 uppercase leading-none transition-colors">
           CLIENTES EN MORA
         </h1>
         <div className="flex items-center space-x-2">
@@ -209,13 +210,9 @@ export default function ClientesMora() {
                       <p className="text-sm font-bold text-slate-900 dark:text-[#FAFAFA] transition-colors">{formatCurrency(m.montoAdeudado)}</p>
                     </td>
                     <td className="px-6 py-4 text-right">
-                      <span className={`inline-flex items-center px-2 py-1 rounded border text-[9px] font-bold uppercase tracking-wider transition-colors ${
-                        m.alerta === 'NOTIFICADO' ? 'border-green-200 bg-green-50 text-green-700 dark:border-[#234A2E] dark:bg-[#1B2A1E]/80 dark:text-[#4ADE80]' :
-                        m.alerta === 'PENDIENTE' ? 'border-orange-200 bg-orange-50 text-orange-700 dark:border-orange-900/50 dark:bg-orange-900/20 dark:text-orange-400' :
-                        'border-red-200 bg-red-50 text-red-700 dark:border-red-900/50 dark:bg-red-900/20 dark:text-red-400'
-                      }`}>
+                      <Badge variant={m.alerta === 'NOTIFICADO' ? 'success' : m.alerta === 'PENDIENTE' ? 'orange' : 'danger'}>
                         {m.alerta}
-                      </span>
+                      </Badge>
                     </td>
                   </tr>
                 ))
@@ -263,7 +260,7 @@ export default function ClientesMora() {
       <div className="flex items-center justify-end mt-auto pt-2">
         <button
           onClick={handleExportPDF}
-          className="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-white dark:bg-[#7B8B9E] dark:hover:bg-slate-400 px-6 py-3.5 rounded-xl text-xs font-bold tracking-widest uppercase transition-colors cursor-pointer shadow-sm dark:shadow-none"
+          className="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-white dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] px-6 py-3.5 rounded-xl text-xs font-bold tracking-widest uppercase transition-colors cursor-pointer shadow-sm dark:shadow-none"
         >
           <FileText className="w-4 h-4" />
           <span>Exportar Listado de Morosos</span>

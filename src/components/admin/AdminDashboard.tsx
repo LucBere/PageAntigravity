@@ -19,7 +19,7 @@ export default function AdminDashboard() {
     <div className="space-y-8 max-w-7xl mx-auto pb-10">
       {/* Header */}
       <div>
-        <h1 className="text-[3rem] font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-4 uppercase leading-none transition-colors">
+        <h1 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-4 uppercase leading-none transition-colors">
           DASHBOARD
         </h1>
         <p className="text-slate-500 dark:text-zinc-400 text-sm max-w-xl transition-colors">

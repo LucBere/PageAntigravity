@@ -4,6 +4,7 @@ import { Search, Filter, Download, Edit2, Trash2, Plus, ChevronLeft, ChevronRigh
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import ConfirmModal from '../common/ConfirmModal';
+import Badge from '../common/Badge';
 
 type Usuario = {
   id: number;
@@ -121,7 +122,7 @@ export default function GestionUsuarios() {
         onClick={() => handlePageChange(page)}
         className={`w-8 h-8 flex items-center justify-center rounded-lg font-medium text-xs transition-colors cursor-pointer ${
           isActive 
-            ? 'bg-slate-800 dark:bg-[#7B8B9E] text-white' 
+            ? 'bg-slate-800 dark:bg-[#6366F1] text-white' 
             : 'hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-500 dark:text-zinc-400'
         }`}
       >
@@ -179,7 +180,7 @@ export default function GestionUsuarios() {
       {/* 1. Encabezado */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-[3rem] font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-4 uppercase leading-none transition-colors">
+          <h1 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-4 uppercase leading-none transition-colors">
             GESTIÓN DE USUARIO
           </h1>
           <p className="text-slate-500 dark:text-zinc-400 text-sm max-w-xl transition-colors">
@@ -188,7 +189,7 @@ export default function GestionUsuarios() {
         </div>
         <button 
           onClick={() => navigate('/admin/usuarios/nuevo')}
-          className="flex items-center space-x-2 bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white px-6 py-3.5 rounded-lg font-bold text-[11px] uppercase tracking-widest transition-colors cursor-pointer"
+          className="flex items-center space-x-2 bg-slate-800 dark:bg-[#6366F1] hover:bg-slate-700 dark:hover:bg-[#4F46E5] text-white px-6 py-3.5 rounded-lg font-bold text-[11px] uppercase tracking-widest transition-colors cursor-pointer"
         >
           <Plus className="w-4 h-4 mr-1" />
           <span>NUEVO USUARIO</span>
@@ -211,7 +212,7 @@ export default function GestionUsuarios() {
         <div className="relative">
           <button 
             onClick={() => setIsFilterMenuOpen(!isFilterMenuOpen)}
-            className={`p-3 border rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${isFilterMenuOpen || filtroActivo !== 'Todos' ? 'bg-slate-100 dark:bg-zinc-800 border-zinc-600 text-slate-900 dark:text-[#FAFAFA]' : 'bg-white dark:bg-[#151515] border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-[#FAFAFA] hover:bg-slate-100 dark:hover:bg-zinc-800 hover:border-zinc-600'}`}
+            className={`p-3 border rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${isFilterMenuOpen || filtroActivo !== 'Todos' ? 'bg-slate-100 dark:bg-zinc-800 border-zinc-600 text-slate-900 dark:text-[#FAFAFA]' : 'bg-white dark:bg-[#151515] border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-[#FAFAFA] hover:bg-slate-100 dark:hover:bg-zinc-800 hover:border-zinc-600'}`}
           >
             <Filter className="w-4 h-4" />
             {filtroActivo !== 'Todos' && <span className="text-xs font-medium">{filtroActivo}</span>}
@@ -240,7 +241,7 @@ export default function GestionUsuarios() {
 
         <button 
           onClick={handleDownloadPDF}
-          className="p-3 bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-[#FAFAFA] hover:bg-slate-100 dark:hover:bg-zinc-800 hover:border-zinc-600 transition-colors cursor-pointer shadow-sm dark:shadow-none"
+          className="p-3 bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-[#FAFAFA] hover:bg-slate-100 dark:hover:bg-zinc-800 hover:border-zinc-600 transition-colors cursor-pointer shadow-sm dark:shadow-none"
         >
           <Download className="w-4 h-4" />
         </button>
@@ -262,7 +263,7 @@ export default function GestionUsuarios() {
             <tbody>
               {currentUsers.length > 0 ? (
                 currentUsers.map((user) => (
-                  <tr key={user.id} className="border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 hover:bg-slate-50 dark:bg-white/[0.02] transition-colors last:border-0">
+                  <tr key={user.id} className="border-b border-slate-200 dark:border-zinc-800/50 hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors last:border-0">
                     <td className="px-8 py-5">
                       <div className="flex items-center space-x-4">
                         <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-zinc-800" />
@@ -276,14 +277,9 @@ export default function GestionUsuarios() {
                       <p className="text-xs text-slate-900 dark:text-[#FAFAFA] whitespace-pre-line leading-snug transition-colors">{user.role}</p>
                     </td>
                     <td className="px-8 py-5">
-                      <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-wider border ${
-                        user.status === 'ACTIVO' 
-                          ? 'bg-[#1B2A1E]/80 border-[#234A2E] text-[#4ADE80]' 
-                          : 'bg-[#2A2A2A]/80 border-slate-300 dark:border-zinc-700 text-slate-500 dark:text-zinc-400'
-                      }`}>
-                        <span className={`w-1.5 h-1.5 rounded-full mr-2 ${user.status === 'ACTIVO' ? 'bg-[#4ADE80]' : 'bg-zinc-400'}`}></span>
+                      <Badge variant={user.status === 'ACTIVO' ? 'success' : 'neutral'} dot>
                         {user.status}
-                      </span>
+                      </Badge>
                     </td>
                     <td className="px-8 py-5 text-xs text-slate-500 dark:text-zinc-400">
                       {user.lastConnection}
@@ -292,7 +288,7 @@ export default function GestionUsuarios() {
                       <div className="flex items-center justify-end space-x-4 text-slate-500 dark:text-zinc-500">
                         <button 
                           onClick={() => navigate('/admin/usuarios/editar')}
-                          className="hover:text-[#7B8B9E] transition-colors cursor-pointer"
+                          className="hover:text-[#6366F1] transition-colors cursor-pointer"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
@@ -329,7 +325,7 @@ export default function GestionUsuarios() {
               <button 
                 onClick={handlePrevPage}
                 disabled={paginaActual === 1}
-                className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-[#0E0E0E] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-[#0E0E0E] border border-slate-200 dark:border-zinc-800/50 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
@@ -339,7 +335,7 @@ export default function GestionUsuarios() {
               <button 
                 onClick={handleNextPage}
                 disabled={paginaActual === totalPages}
-                className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-[#0E0E0E] border border-slate-200 dark:border-slate-200 dark:border-zinc-800/50 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-[#0E0E0E] border border-slate-200 dark:border-zinc-800/50 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -355,7 +351,7 @@ export default function GestionUsuarios() {
           <p className="text-4xl font-normal text-slate-900 dark:text-[#FAFAFA] transition-colors">{totalPersonal}</p>
         </div>
         {/* highlighted card */}
-        <div className="bg-white dark:bg-[#151515] border border-[#7B8B9E] rounded-xl p-6 shadow-[0_0_20px_rgba(123,139,158,0.08)] transition-colors shadow-sm dark:shadow-none">
+        <div className="bg-white dark:bg-[#151515] border border-[#6366F1] rounded-xl p-6 shadow-[0_0_20px_rgba(99,102,241,0.08)] transition-colors shadow-sm dark:shadow-none">
           <p className="text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest mb-3">PERSONAL ACTIVO</p>
           <p className="text-4xl font-normal text-slate-900 dark:text-[#FAFAFA] transition-colors">{personalActivo}</p>
         </div>

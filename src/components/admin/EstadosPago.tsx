@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Banknote, Clock, AlertTriangle, Search, Download, MapPin, CircleDot, Calendar, X, ChevronDown } from 'lucide-react';
 import FilterSelect from '../common/FilterSelect';
+import Badge from '../common/Badge';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -162,7 +163,7 @@ export default function EstadosPago() {
         key={page}
         onClick={() => handlePageChange(page)}
         className={`w-7 h-7 flex items-center justify-center rounded text-xs font-bold transition-colors cursor-pointer ${isActive
-            ? 'bg-slate-800 dark:bg-[#7B8B9E] text-white'
+            ? 'bg-slate-800 dark:bg-[#6366F1] text-white'
             : 'hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-500 dark:text-zinc-400 font-medium'
           }`}
       >
@@ -341,7 +342,7 @@ export default function EstadosPago() {
     <div className="space-y-6 max-w-7xl mx-auto flex flex-col h-full min-h-[calc(100vh-100px)]">
       {/* Encabezado */}
       <div>
-        <h1 className="text-[3rem] font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-6 uppercase leading-none transition-colors">
+        <h1 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter mb-6 uppercase leading-none transition-colors">
           ESTADOS DE PAGO
         </h1>
       </div>
@@ -464,18 +465,18 @@ export default function EstadosPago() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr>
-                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">FECHA</th>
-                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">SOCIO / ALUMNO</th>
-                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">SEDE</th>
-                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">CONCEPTO</th>
-                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">MONTO</th>
-                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">ESTADO</th>
+                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-zinc-800/50">FECHA</th>
+                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-zinc-800/50">SOCIO / ALUMNO</th>
+                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-zinc-800/50">SEDE</th>
+                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-zinc-800/50">CONCEPTO</th>
+                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-zinc-800/50">MONTO</th>
+                <th className="px-6 py-5 text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest border-b border-slate-200 dark:border-zinc-800/50">ESTADO</th>
               </tr>
             </thead>
             <tbody>
               {currentPagos.length > 0 ? (
                 currentPagos.map((p) => (
-                  <tr key={p.id} className="bg-slate-50 dark:bg-[#1A1A1A] border-b border-slate-100 dark:border-slate-200 dark:border-zinc-800/30 hover:bg-slate-50 dark:bg-white/[0.02] transition-colors last:border-0">
+                  <tr key={p.id} className="bg-slate-50 dark:bg-[#1A1A1A] border-b border-slate-100 dark:border-zinc-800/30 hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors last:border-0">
                     <td className="px-6 py-4">
                       <p className={`text-sm font-medium ${p.estado === 'Deuda' ? 'text-red-600 dark:text-red-500' : 'text-slate-900 dark:text-[#FAFAFA]'}`}>
                         {p.fecha}
@@ -502,13 +503,9 @@ export default function EstadosPago() {
                       <p className="text-sm font-bold text-slate-900 dark:text-[#FAFAFA] transition-colors">{formatCurrency(p.monto)}</p>
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase
-                        ${p.estado === 'Recibido' ? 'bg-green-50 text-green-700 border border-green-200 dark:bg-[#1B2A1E]/80 dark:text-[#4ADE80] dark:border-[#234A2E]' :
-                          p.estado === 'Pendiente' ? 'bg-yellow-50 text-yellow-700 border border-yellow-200 dark:bg-[#3A2D12]/80 dark:text-[#FBBF24] dark:border-[#52401A]' :
-                            'bg-red-50 text-red-700 border border-red-200 dark:bg-[#3A1818]/80 dark:text-[#F87171] dark:border-[#5A2525]'}`}
-                      >
+                      <Badge variant={p.estado === 'Recibido' ? 'success' : p.estado === 'Pendiente' ? 'warning' : 'danger'}>
                         {p.estado}
-                      </span>
+                      </Badge>
                     </td>
                   </tr>
                 ))
@@ -531,7 +528,7 @@ export default function EstadosPago() {
               <button
                 onClick={handlePrevPage}
                 disabled={paginaActual === 1}
-                className="px-3 py-1.5 rounded text-xs text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1.5 rounded text-xs text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Anterior
               </button>
@@ -554,7 +551,7 @@ export default function EstadosPago() {
       <div className="flex items-center justify-end mt-auto pt-2">
         <button
           onClick={exportarReportePDF}
-          className="flex items-center space-x-2 bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white px-6 py-3.5 rounded-xl text-xs font-bold tracking-widest uppercase transition-colors cursor-pointer"
+          className="flex items-center space-x-2 bg-slate-800 dark:bg-[#6366F1] hover:bg-slate-700 dark:hover:bg-[#4F46E5] text-white px-6 py-3.5 rounded-xl text-xs font-bold tracking-widest uppercase transition-colors cursor-pointer"
         >
           <Download className="w-4 h-4" />
           <span>Exportar Reporte</span>

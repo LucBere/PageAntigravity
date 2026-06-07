@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Search, Eye, AlertTriangle, Users, DollarSign, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import Badge from '../common/Badge';
 
 interface Socio {
   id: number;
@@ -177,9 +178,7 @@ export default function ConsultaDeudoresEncargado() {
                       <span className="text-xs text-slate-600 dark:text-zinc-400 font-medium">{d.dni}</span>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="inline-flex items-center px-2 py-1 rounded bg-red-100 dark:bg-red-500/10 border border-red-200 dark:border-red-900/50 mb-1">
-                        <span className="text-[9px] font-bold text-red-700 dark:text-red-400 tracking-widest uppercase">DEUDOR</span>
-                      </div>
+                      <Badge variant="danger" className="mb-1">DEUDOR</Badge>
                       <p className="text-xs font-bold text-red-600 dark:text-red-500 mt-0.5">{d.vencimiento}</p>
                     </td>
                     <td className="px-6 py-4">
@@ -248,7 +247,7 @@ export default function ConsultaDeudoresEncargado() {
       {/* Modal Ficha de Alumno */}
       {selectedSocio && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 transition-opacity">
-          <div className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 max-w-md w-full relative shadow-2xl transition-colors">
+          <div className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-2xl p-8 max-w-md w-full relative shadow-2xl transition-colors">
             
             <button 
               onClick={() => setSelectedSocio(null)}

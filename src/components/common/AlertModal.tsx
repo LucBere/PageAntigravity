@@ -75,7 +75,7 @@ export default function AlertModal({
 
         <button
           onClick={onClose}
-          className="w-full py-3.5 rounded-xl bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
+          className="w-full py-3.5 rounded-xl bg-slate-800 dark:bg-[#6366F1] hover:bg-slate-700 dark:hover:bg-[#4F46E5] text-white text-[11px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
         >
           {confirmLabel}
         </button>
