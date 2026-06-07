@@ -1,9 +1,16 @@
+import { useState, type FormEvent } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import { LayoutGrid, Users, AlertTriangle, Settings, LogOut, Sun, Moon, Search, Bell } from 'lucide-react';
+import { LayoutGrid, Users, AlertTriangle, Settings, LogOut, Sun, Moon, Search } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 export default function SecretariaLayout() {
   const navigate = useNavigate();
+  const [query, setQuery] = useState('');
+
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault();
+    if (query.trim()) navigate(`/buscar?q=${encodeURIComponent(query.trim())}`);
+  };
 
   const { theme, toggleTheme } = useTheme();
   
@@ -98,21 +105,19 @@ export default function SecretariaLayout() {
           {/* Centro/Derecha: Controles */}
           <div className="flex items-center space-x-6">
             {/* Barra de Búsqueda Global */}
-            <div className="relative w-80 hidden md:block">
+            <form onSubmit={handleSearch} className="relative w-80 hidden md:block">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="w-4 h-4 text-slate-400 dark:text-zinc-500" />
               </div>
-              <input 
-                type="text" 
-                placeholder="Buscar por nombre, DNI o comprobante..." 
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Buscar por nombre, DNI o comprobante..."
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#1A1A1A] text-sm text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-[#7B8B9E] transition-colors shadow-sm dark:shadow-none"
               />
-            </div>
+            </form>
 
-            <button className="text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-white transition-colors cursor-pointer">
-              <Bell className="w-5 h-5" />
-            </button>
-            
             <div className="flex items-center space-x-3 border-l border-slate-200 dark:border-zinc-800/50 pl-6">
               <div className="text-right hidden sm:block">
                 <p className="text-sm font-bold text-slate-900 dark:text-white">Alicia Rossi</p>

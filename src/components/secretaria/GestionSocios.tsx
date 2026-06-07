@@ -1,10 +1,11 @@
-import { 
-  UserPlus, 
+import {
+  UserPlus,
   CreditCard,
   ListFilter,
   MoreVertical,
-  ChevronLeft, 
-  ChevronRight 
+  ChevronLeft,
+  ChevronRight,
+  Search
 } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -55,6 +56,7 @@ export default function GestionSocios() {
   const [paginaActual, setPaginaActual] = useState(1);
   const [mostrarFiltros, setMostrarFiltros] = useState(false);
   const [criterioOrden, setCriterioOrden] = useState<string>('defecto');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleFiltroClick = (filtro: 'TODOS' | 'DEUDORES' | 'HABILITADOS') => {
     setFiltroActivo(filtro);
@@ -68,7 +70,12 @@ export default function GestionSocios() {
 
   const sociosFiltrados = mockSocios
     .filter(socio => {
-      if (filtroActivo === 'TODOS') return true;
+      const q = searchTerm.toLowerCase();
+      const matchSearch =
+        socio.nombre.toLowerCase().includes(q) ||
+        socio.dni.includes(searchTerm) ||
+        socio.plan.toLowerCase().includes(q);
+      if (!matchSearch) return false;
       if (filtroActivo === 'DEUDORES') return socio.estado === 'DEUDOR';
       if (filtroActivo === 'HABILITADOS') return socio.estado === 'HABILITADO';
       return true;
@@ -118,13 +125,25 @@ export default function GestionSocios() {
               <UserPlus className="w-5 h-5 mr-2" />
               NUEVO SOCIO
             </button>
-            <button 
+            <button
               onClick={() => navigate('/secretaria/pago')}
               className="w-full sm:w-auto flex items-center justify-center px-6 py-3 bg-transparent border border-slate-300 dark:border-zinc-700 hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-white text-sm font-bold rounded-xl transition-colors"
             >
               <CreditCard className="w-5 h-5 mr-2" />
               REGISTRAR PAGO
             </button>
+          </div>
+
+          {/* Búsqueda */}
+          <div className="relative w-full md:w-80 md:ml-auto">
+            <Search className="w-4 h-4 absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-zinc-500" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => { setSearchTerm(e.target.value); setPaginaActual(1); }}
+              placeholder="Buscar por nombre, DNI o plan..."
+              className="w-full bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 pl-11 pr-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors shadow-sm dark:shadow-none"
+            />
           </div>
         </div>
 

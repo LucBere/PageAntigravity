@@ -26,6 +26,7 @@ import ConsultaDeudoresEncargado from './components/encargado/ConsultaDeudoresEn
 import PagosSocio from './components/socio/PagosSocio';
 import CheckoutSocio from './components/socio/CheckoutSocio';
 import NotificacionesSocio from './components/socio/NotificacionesSocio';
+import GlobalSearch from './components/search/GlobalSearch';
 
 function App() {
   return (
@@ -72,6 +73,9 @@ function App() {
             <Route path="checkout" element={<CheckoutSocio />} />
             <Route path="notificaciones" element={<NotificacionesSocio />} />
           </Route>
+
+          {/* Búsqueda global (accesible desde la top bar de cualquier rol) */}
+          <Route path="/buscar" element={<GlobalSearch />} />
 
           {/* Fallback route - Redirige a Login */}
           <Route path="*" element={<Navigate to="/" replace />} />

@@ -26,11 +26,25 @@ const allLogs = [
   { id: 20, usuario: 'SuperAdmin', ip: '127.0.0.1', avatar: 'SA', avatarBg: 'bg-yellow-100 text-yellow-700 dark:bg-[#3A2D12] dark:text-[#FBBF24]', accion: 'ELIMINACIÓN DE USUARIO', actionBg: 'bg-red-50 text-red-600 border border-red-200 dark:bg-red-950/30 dark:text-red-500 dark:border-red-900/50', modulo: 'Gestión Clientes', fechaHora: '12 Mar, 2025\n11:11:11', estado: 'Éxito', statusColor: 'bg-green-500 dark:bg-[#4ADE80]', isAlert: false },
 ];
 
+// Convierte la fecha de un log ("14 May, 2026\n14:22:05") en un objeto Date (solo fecha).
+const MESES: Record<string, number> = {
+  Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+  Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11,
+};
+
+const parseLogDate = (fechaHora: string): Date => {
+  const datePart = fechaHora.split('\n')[0]; // "14 May, 2026"
+  const m = datePart.match(/(\d{1,2})\s+([A-Za-z]{3}),?\s+(\d{4})/);
+  if (!m) return new Date(NaN);
+  return new Date(Number(m[3]), MESES[m[2]] ?? 0, Number(m[1]));
+};
+
 export default function AuditoriaLogs() {
   const [busquedaAvanzada, setBusquedaAvanzada] = useState('');
   const [tipoAccion, setTipoAccion] = useState('Todos los eventos');
   const [usuarioResponsable, setUsuarioResponsable] = useState('Cualquier administrador');
-  const [rangoFechas, setRangoFechas] = useState('Todas las fechas');
+  const [fechaDesde, setFechaDesde] = useState('');
+  const [fechaHasta, setFechaHasta] = useState('');
 
   const [paginaActual, setPaginaActual] = useState(1);
   const itemsPerPage = 5;
@@ -43,11 +57,15 @@ export default function AuditoriaLogs() {
 
       const matchAccion = tipoAccion === 'Todos los eventos' || log.accion === tipoAccion;
       const matchUsuario = usuarioResponsable === 'Cualquier administrador' || log.usuario === usuarioResponsable;
-      const matchFecha = rangoFechas === 'Todas las fechas' || log.fechaHora.includes(rangoFechas);
+
+      const logDate = parseLogDate(log.fechaHora);
+      let matchFecha = true;
+      if (fechaDesde) matchFecha = matchFecha && logDate >= new Date(`${fechaDesde}T00:00:00`);
+      if (fechaHasta) matchFecha = matchFecha && logDate <= new Date(`${fechaHasta}T23:59:59`);
 
       return matchBusqueda && matchAccion && matchUsuario && matchFecha;
     });
-  }, [busquedaAvanzada, tipoAccion, usuarioResponsable, rangoFechas]);
+  }, [busquedaAvanzada, tipoAccion, usuarioResponsable, fechaDesde, fechaHasta]);
 
   const totalPages = Math.max(1, Math.ceil(filteredLogs.length / itemsPerPage));
 
@@ -113,7 +131,7 @@ export default function AuditoriaLogs() {
 
       {/* 2. Panel de Filtros */}
       <div className="bg-white dark:bg-[#151515] rounded-2xl p-6 border border-slate-200 dark:border-zinc-800/50 transition-colors shadow-sm dark:shadow-none">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <div className="flex flex-col space-y-2">
             <label className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-zinc-500 font-bold transition-colors">BÚSQUEDA AVANZADA</label>
             <div className="relative">
@@ -156,23 +174,27 @@ export default function AuditoriaLogs() {
               <option value="Anónimo">Anónimo</option>
             </select>
           </div>
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 md:col-span-2">
             <label className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-zinc-500 font-bold transition-colors">RANGO DE FECHAS</label>
-            <select
-              value={rangoFechas}
-              onChange={(e) => setRangoFechas(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 text-slate-900 dark:bg-[#1A1A1A] dark:border-transparent dark:text-white h-10 rounded-lg px-3 text-sm focus:outline-none focus:border-slate-400 dark:focus:ring-1 dark:focus:ring-zinc-700 appearance-none cursor-pointer transition-colors"
-            >
-              <option value="Todas las fechas">Todas las fechas</option>
-              <option value="14 May, 2026">14 May, 2026</option>
-              <option value="13 May, 2026">13 May, 2026</option>
-              <option value="10 Mar, 2026">10 Mar, 2026</option>
-              <option value="15 Jan, 2026">15 Jan, 2026</option>
-              <option value="02 Nov, 2025">02 Nov, 2025</option>
-              <option value="20 Sep, 2025">20 Sep, 2025</option>
-              <option value="05 Jul, 2025">05 Jul, 2025</option>
-              <option value="12 Mar, 2025">12 Mar, 2025</option>
-            </select>
+            <div className="flex items-center gap-2">
+              <input
+                type="date"
+                value={fechaDesde}
+                max={fechaHasta || undefined}
+                onChange={(e) => setFechaDesde(e.target.value)}
+                aria-label="Fecha desde"
+                className="w-full min-w-0 bg-slate-50 border border-slate-200 text-slate-900 dark:bg-[#1A1A1A] dark:border-transparent dark:text-white h-10 rounded-lg px-3 text-sm focus:outline-none focus:border-slate-400 dark:focus:ring-1 dark:focus:ring-zinc-700 cursor-pointer transition-colors [color-scheme:light] dark:[color-scheme:dark]"
+              />
+              <span className="text-slate-400 dark:text-zinc-600 text-xs shrink-0">—</span>
+              <input
+                type="date"
+                value={fechaHasta}
+                min={fechaDesde || undefined}
+                onChange={(e) => setFechaHasta(e.target.value)}
+                aria-label="Fecha hasta"
+                className="w-full min-w-0 bg-slate-50 border border-slate-200 text-slate-900 dark:bg-[#1A1A1A] dark:border-transparent dark:text-white h-10 rounded-lg px-3 text-sm focus:outline-none focus:border-slate-400 dark:focus:ring-1 dark:focus:ring-zinc-700 cursor-pointer transition-colors [color-scheme:light] dark:[color-scheme:dark]"
+              />
+            </div>
           </div>
         </div>
       </div>

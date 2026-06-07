@@ -1,5 +1,18 @@
-import { useState } from 'react';
-import { Image, ClipboardList, Timer, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Image, ClipboardList, Timer, CheckCircle2, ChevronLeft, ChevronRight, Search } from 'lucide-react';
+
+// Convierte "19 MAY 2026" en un objeto Date para poder ordenar por fecha.
+const MESES_ES: Record<string, number> = {
+  ENE: 0, FEB: 1, MAR: 2, ABR: 3, MAY: 4, JUN: 5,
+  JUL: 6, AGO: 7, SEP: 8, OCT: 9, NOV: 10, DIC: 11,
+};
+
+const parseReclamoDate = (fecha: string): number => {
+  const m = fecha.trim().match(/(\d{1,2})\s+([A-Za-zÁÉÍÓÚ]{3})\s+(\d{4})/);
+  if (!m) return 0;
+  const mes = MESES_ES[m[2].toUpperCase()] ?? 0;
+  return new Date(Number(m[3]), mes, Number(m[1])).getTime();
+};
 
 type Reclamo = {
   id: number;
@@ -29,12 +42,36 @@ export default function Reclamos() {
 
   const [reclamoSeleccionado, setReclamoSeleccionado] = useState<Reclamo | null>(null);
   const [comprobanteAbierto, setComprobanteAbierto] = useState<Reclamo | null>(null);
-  
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [orden, setOrden] = useState('recientes');
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  const totalPages = Math.ceil(reclamos.length / itemsPerPage);
-  
-  const currentReclamos = reclamos.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  // Búsqueda + filtro de orden
+  const reclamosFiltrados = reclamos
+    .filter((r) => {
+      const q = searchTerm.toLowerCase();
+      return (
+        r.name.toLowerCase().includes(q) ||
+        r.email.toLowerCase().includes(q) ||
+        r.dni.includes(searchTerm)
+      );
+    })
+    .sort((a, b) => {
+      if (orden === 'nombre') return a.name.localeCompare(b.name);
+      if (orden === 'antiguos') return parseReclamoDate(a.date) - parseReclamoDate(b.date);
+      return parseReclamoDate(b.date) - parseReclamoDate(a.date); // recientes
+    });
+
+  const totalPages = Math.ceil(reclamosFiltrados.length / itemsPerPage);
+
+  useEffect(() => {
+    if (currentPage > totalPages) setCurrentPage(1);
+  }, [reclamosFiltrados.length, currentPage, totalPages]);
+
+  const currentReclamos = reclamosFiltrados.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const handleVerificar = (reclamo: Reclamo) => {
     setReclamoSeleccionado(reclamo);
@@ -51,6 +88,29 @@ export default function Reclamos() {
       <div>
         <p className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase tracking-widest font-bold mb-2">RECLAMOS</p>
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-[#FAFAFA] tracking-tighter uppercase transition-colors">RECLAMOS DE PAGO</h1>
+      </div>
+
+      {/* Barra de Herramientas: Búsqueda + Filtro */}
+      <div className="flex flex-col md:flex-row items-center gap-4">
+        <div className="flex-grow relative w-full md:w-auto">
+          <Search className="w-4 h-4 absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-zinc-500" />
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
+            placeholder="Buscar por nombre, email o DNI..."
+            className="w-full bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 pl-11 pr-4 text-sm text-slate-900 dark:text-[#FAFAFA] placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors shadow-sm dark:shadow-none"
+          />
+        </div>
+        <select
+          value={orden}
+          onChange={(e) => { setOrden(e.target.value); setCurrentPage(1); }}
+          className="w-full md:w-auto bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 appearance-none pr-10 cursor-pointer transition-colors shadow-sm dark:shadow-none"
+        >
+          <option value="recientes">Más recientes</option>
+          <option value="antiguos">Más antiguos</option>
+          <option value="nombre">Nombre (A-Z)</option>
+        </select>
       </div>
 
       {/* 2. Tabla Principal */}
@@ -118,7 +178,7 @@ export default function Reclamos() {
         {/* Footer Tabla */}
         <div className="flex flex-col md:flex-row md:items-center justify-between pt-6 mt-2 border-t border-slate-200 dark:border-slate-200 dark:border-zinc-800/50">
           <p className="text-[11px] text-slate-500 dark:text-zinc-500 font-bold tracking-widest uppercase">
-            MOSTRANDO {reclamos.length === 0 ? 0 : ((currentPage - 1) * itemsPerPage) + 1} AL {Math.min(currentPage * itemsPerPage, reclamos.length)} DE {reclamos.length} RECLAMOS PENDIENTES
+            MOSTRANDO {reclamosFiltrados.length === 0 ? 0 : ((currentPage - 1) * itemsPerPage) + 1} AL {Math.min(currentPage * itemsPerPage, reclamosFiltrados.length)} DE {reclamosFiltrados.length} RECLAMOS PENDIENTES
           </p>
           <div className="flex items-center space-x-2 mt-4 md:mt-0">
             <button 

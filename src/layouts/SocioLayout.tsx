@@ -1,3 +1,4 @@
+import { useState, type FormEvent } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, CreditCard, Bell, Settings, LogOut, Search, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
@@ -5,6 +6,12 @@ import { useTheme } from '../context/ThemeContext';
 export default function SocioLayout() {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
+  const [query, setQuery] = useState('');
+
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault();
+    if (query.trim()) navigate(`/buscar?q=${encodeURIComponent(query.trim())}`);
+  };
   const navItems = [
     { name: 'INICIO', path: '/socio', icon: LayoutDashboard, exact: true },
     { name: 'PAGOS', path: '/socio/pagos', icon: CreditCard },
@@ -79,14 +86,16 @@ export default function SocioLayout() {
 
           <div className="flex items-center gap-4 md:gap-6">
             {/* Buscador */}
-            <div className="relative hidden md:block">
+            <form onSubmit={handleSearch} className="relative hidden md:block">
               <Search className="w-4 h-4 absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 dark:text-zinc-500" />
               <input
                 type="text"
-                placeholder="BUSCAR ENTRENAMIENTO..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="BUSCAR..."
                 className="w-64 bg-white dark:bg-[#151515] border border-slate-300 dark:border-zinc-800/80 rounded-full py-2.5 pl-11 pr-4 text-xs font-bold tracking-wider text-slate-700 dark:text-zinc-200 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors shadow-sm dark:shadow-none"
               />
-            </div>
+            </form>
             
             {/* Theme Toggle Button */}
             <button

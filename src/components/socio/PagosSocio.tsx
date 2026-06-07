@@ -1,12 +1,25 @@
 import { useState } from 'react';
-import { Calendar, SlidersHorizontal, Download, Ban } from 'lucide-react';
+import { Calendar, SlidersHorizontal, Download, Ban, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
+// Convierte "15 MAY, 2026" en un objeto Date para filtrar por período.
+const MESES_ES: Record<string, number> = {
+  ENE: 0, FEB: 1, MAR: 2, ABR: 3, MAY: 4, JUN: 5,
+  JUL: 6, AGO: 7, SEP: 8, OCT: 9, NOV: 10, DIC: 11,
+};
+
+const parsePagoDate = (fecha: string): Date => {
+  const m = fecha.match(/(\d{1,2})\s+([A-Za-zÁÉÍÓÚ]{3}),?\s+(\d{4})/);
+  if (!m) return new Date(NaN);
+  return new Date(Number(m[3]), MESES_ES[m[2].toUpperCase()] ?? 0, Number(m[1]));
+};
+
 export default function PagosSocio() {
   const navigate = useNavigate();
   const [showFilters, setShowFilters] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const [filtroPeriodo, setFiltroPeriodo] = useState('');
   const [filtroMetodo, setFiltroMetodo] = useState('');
   const [filtroEstado, setFiltroEstado] = useState('');
@@ -91,6 +104,50 @@ export default function PagosSocio() {
     { id: 4, fecha: '08 FEB, 2026', monto: '$12.500', metodo: 'VISA DEBIT **** 4210', estado: 'RECHAZADO', rejected: true },
   ];
 
+  // Fecha de referencia para los períodos relativos = transacción más reciente.
+  const fechaReferencia = transacciones.reduce((max, t) => {
+    const d = parsePagoDate(t.fecha);
+    return d > max ? d : max;
+  }, new Date(0));
+
+  const transaccionesFiltradas = transacciones.filter((t) => {
+    // Búsqueda por método, fecha o estado
+    const q = searchTerm.toLowerCase();
+    const matchSearch =
+      t.metodo.toLowerCase().includes(q) ||
+      t.fecha.toLowerCase().includes(q) ||
+      t.estado.toLowerCase().includes(q) ||
+      t.monto.includes(searchTerm);
+    if (!matchSearch) return false;
+
+    // Filtro por estado
+    if (filtroEstado === 'Pagado' && t.rejected) return false;
+    if (filtroEstado === 'Rechazado' && !t.rejected) return false;
+
+    // Filtro por método
+    if (filtroMetodo === 'Tarjeta' && !/VISA|DEBIT|TARJETA|CREDIT/i.test(t.metodo)) return false;
+    if (filtroMetodo === 'Transferencia' && !/TRANSFERENCIA/i.test(t.metodo)) return false;
+    if (filtroMetodo === 'QR' && !/QR/i.test(t.metodo)) return false;
+
+    // Filtro por período
+    if (filtroPeriodo) {
+      const d = parsePagoDate(t.fecha);
+      if (filtroPeriodo === 'Año 2026' && d.getFullYear() !== 2026) return false;
+      if (filtroPeriodo === 'Últimos 30 días') {
+        const limite = new Date(fechaReferencia);
+        limite.setDate(limite.getDate() - 30);
+        if (d < limite) return false;
+      }
+      if (filtroPeriodo === 'Últimos 3 meses') {
+        const limite = new Date(fechaReferencia);
+        limite.setMonth(limite.getMonth() - 3);
+        if (d < limite) return false;
+      }
+    }
+
+    return true;
+  });
+
   return (
     <div className="max-w-6xl mx-auto pb-12">
 
@@ -156,7 +213,18 @@ export default function PagosSocio() {
       <div>
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4 relative">
           <h2 className="text-[11px] font-bold text-slate-900 dark:text-white uppercase tracking-[0.3em]">HISTORIAL DE TRANSACCIONES</h2>
-          <div className="relative">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+            <div className="relative flex-grow sm:flex-grow-0 sm:w-64">
+              <Search className="w-4 h-4 absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-zinc-500" />
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Buscar por método, fecha o estado..."
+                className="w-full bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-2.5 pl-11 pr-4 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 transition-colors shadow-sm dark:shadow-none"
+              />
+            </div>
+            <div className="relative">
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="flex items-center space-x-2 px-6 py-2.5 bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:text-white transition-colors cursor-pointer text-[10px] font-bold tracking-widest uppercase shadow-sm dark:shadow-none"
@@ -202,6 +270,7 @@ export default function PagosSocio() {
                 </div>
               </div>
             )}
+            </div>
           </div>
         </div>
 
@@ -218,7 +287,14 @@ export default function PagosSocio() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-800/50">
-                {transacciones.map((t) => (
+                {transaccionesFiltradas.length === 0 && (
+                  <tr>
+                    <td colSpan={5} className="px-8 py-10 text-center text-slate-500 dark:text-zinc-500 text-sm">
+                      No se encontraron transacciones con los filtros seleccionados.
+                    </td>
+                  </tr>
+                )}
+                {transaccionesFiltradas.map((t) => (
                   <tr key={t.id} className="hover:bg-slate-100 dark:bg-zinc-800/20 transition-colors">
                     <td className="px-8 py-6">
                       <span className={`text-sm font-bold uppercase tracking-wider ${t.rejected ? 'text-slate-500 dark:text-zinc-500' : 'text-slate-900 dark:text-white'}`}>{t.fecha}</span>
