@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Banknote, Clock, AlertTriangle, Search, ArrowLeft, Download } from 'lucide-react';
+import { Banknote, Clock, AlertTriangle, Search, Download } from 'lucide-react';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
-// Mock Data (25 registros)
-const mockPagos = [
+// Mock Data (25 registros) — fuente única, también usada por el dashboard Caja/Pagos
+export const mockPagos = [
   // Sede Norte, Abril 2026
   { id: 1, fecha: '24 Abr 2026', socio: 'Martín Rodríguez', dni: '34.555.880', sede: 'Sede Norte', concepto: 'Cuota Mensual', monto: 25000, estado: 'Recibido', periodo: 'Abril 2026', avatar: 'MR' },
   { id: 2, fecha: '20 Abr 2026', socio: 'Ana Paz', dni: '40.111.222', sede: 'Sede Norte', concepto: 'Pase Libre', monto: 35000, estado: 'Recibido', periodo: 'Abril 2026', avatar: 'AP' },
@@ -38,16 +37,66 @@ const mockPagos = [
   { id: 22, fecha: '15 Nov 2025', socio: 'Tomás Herrero', dni: '36.444.111', sede: 'Sede Sur', concepto: 'Musculación', monto: 28000, estado: 'Deuda', periodo: 'Noviembre 2025', avatar: 'TH' },
   { id: 23, fecha: '19 Nov 2025', socio: 'Paula Blanco', dni: '35.555.222', sede: 'Sede Sur', concepto: 'Cross Training', monto: 45000, estado: 'Recibido', periodo: 'Noviembre 2025', avatar: 'PB' },
   { id: 24, fecha: '24 Nov 2025', socio: 'Nicolás Rojas', dni: '42.666.333', sede: 'Sede Sur', concepto: 'Pase Libre', monto: 12000, estado: 'Pendiente', periodo: 'Noviembre 2025', avatar: 'NR' },
-  { id: 25, fecha: '27 Nov 2025', socio: 'Esteban Cruz', dni: '38.888.555', sede: 'Sede Sur', concepto: 'Cross Training', monto: 16000, estado: 'Deuda', periodo: 'Noviembre 2025', avatar: 'EC' }
+  { id: 25, fecha: '27 Nov 2025', socio: 'Esteban Cruz', dni: '38.888.555', sede: 'Sede Sur', concepto: 'Cross Training', monto: 16000, estado: 'Deuda', periodo: 'Noviembre 2025', avatar: 'EC' },
+
+  // --- Relleno: todos los meses de 2026 ---
+  // Enero 2026
+  { id: 26, fecha: '08 Ene 2026', socio: 'Martín Rodríguez', dni: '34.555.880', sede: 'Sede Norte', concepto: 'Cuota Mensual', monto: 25000, estado: 'Recibido', periodo: 'Enero 2026', avatar: 'MR' },
+  { id: 27, fecha: '15 Ene 2026', socio: 'Ana Paz', dni: '40.111.222', sede: 'Sede Centro', concepto: 'Pase Libre', monto: 35000, estado: 'Pendiente', periodo: 'Enero 2026', avatar: 'AP' },
+  { id: 28, fecha: '22 Ene 2026', socio: 'Carlos Rey', dni: '35.444.555', sede: 'Sede Sur', concepto: 'Cross Training', monto: 28000, estado: 'Deuda', periodo: 'Enero 2026', avatar: 'CR' },
+  // Febrero 2026
+  { id: 29, fecha: '05 Feb 2026', socio: 'Lucía Fernández', dni: '38.452.910', sede: 'Sede Norte', concepto: 'Musculación', monto: 18000, estado: 'Recibido', periodo: 'Febrero 2026', avatar: 'LF' },
+  { id: 30, fecha: '12 Feb 2026', socio: 'Juan Pérez', dni: '31.144.255', sede: 'Sede Centro', concepto: 'Inscripción Inicial', monto: 15000, estado: 'Recibido', periodo: 'Febrero 2026', avatar: 'JP' },
+  { id: 31, fecha: '20 Feb 2026', socio: 'María López', dni: '42.333.444', sede: 'Sede Sur', concepto: 'Pase Libre', monto: 35000, estado: 'Pendiente', periodo: 'Febrero 2026', avatar: 'ML' },
+  // Marzo 2026
+  { id: 32, fecha: '03 Mar 2026', socio: 'Laura Gómez', dni: '41.214.557', sede: 'Sede Centro', concepto: 'Pase Libre Anual', monto: 180000, estado: 'Recibido', periodo: 'Marzo 2026', avatar: 'LG' },
+  { id: 33, fecha: '14 Mar 2026', socio: 'Santiago Ruiz', dni: '36.555.666', sede: 'Sede Norte', concepto: 'Musculación', monto: 20000, estado: 'Deuda', periodo: 'Marzo 2026', avatar: 'SR' },
+  { id: 34, fecha: '25 Mar 2026', socio: 'Elena Gil', dni: '39.777.888', sede: 'Sede Sur', concepto: 'Cross Training', monto: 30000, estado: 'Pendiente', periodo: 'Marzo 2026', avatar: 'EG' },
+  // Junio 2026
+  { id: 35, fecha: '04 Jun 2026', socio: 'Marcos Rossi', dni: '41.201.033', sede: 'Sede Centro', concepto: 'Cross Training', monto: 28500, estado: 'Recibido', periodo: 'Junio 2026', avatar: 'MR' },
+  { id: 36, fecha: '13 Jun 2026', socio: 'Sofía Méndez', dni: '35.981.222', sede: 'Sede Norte', concepto: 'Pase Libre', monto: 22400, estado: 'Recibido', periodo: 'Junio 2026', avatar: 'SM' },
+  { id: 37, fecha: '21 Jun 2026', socio: 'Mateo Gómez', dni: '40.112.553', sede: 'Sede Sur', concepto: 'Musculación', monto: 12400, estado: 'Pendiente', periodo: 'Junio 2026', avatar: 'MG' },
+  // Julio 2026
+  { id: 38, fecha: '06 Jul 2026', socio: 'Valentina Ortiz', dni: '39.882.112', sede: 'Sede Centro', concepto: 'Yoga & Balance', monto: 9800, estado: 'Recibido', periodo: 'Julio 2026', avatar: 'VO' },
+  { id: 39, fecha: '17 Jul 2026', socio: 'Diego Torres', dni: '34.777.555', sede: 'Sede Sur', concepto: 'Musculación', monto: 15000, estado: 'Deuda', periodo: 'Julio 2026', avatar: 'DT' },
+  { id: 40, fecha: '28 Jul 2026', socio: 'Camila Ríos', dni: '39.888.666', sede: 'Sede Norte', concepto: 'Cross Training', monto: 40000, estado: 'Pendiente', periodo: 'Julio 2026', avatar: 'CR' },
+  // Agosto 2026
+  { id: 41, fecha: '05 Ago 2026', socio: 'Andrés Castro', dni: '40.999.777', sede: 'Sede Sur', concepto: 'Pase Libre', monto: 18000, estado: 'Recibido', periodo: 'Agosto 2026', avatar: 'AC' },
+  { id: 42, fecha: '16 Ago 2026', socio: 'Florencia Luna', dni: '38.111.888', sede: 'Sede Centro', concepto: 'Musculación', monto: 18000, estado: 'Recibido', periodo: 'Agosto 2026', avatar: 'FL' },
+  { id: 43, fecha: '27 Ago 2026', socio: 'Santiago Vega', dni: '37.222.999', sede: 'Sede Norte', concepto: 'Cross Training', monto: 21000, estado: 'Pendiente', periodo: 'Agosto 2026', avatar: 'SV' },
+  // Septiembre 2026
+  { id: 44, fecha: '07 Sep 2026', socio: 'Martina Paz', dni: '41.333.000', sede: 'Sede Sur', concepto: 'Pase Libre', monto: 35000, estado: 'Recibido', periodo: 'Septiembre 2026', avatar: 'MP' },
+  { id: 45, fecha: '18 Sep 2026', socio: 'Tomás Herrero', dni: '36.444.111', sede: 'Sede Centro', concepto: 'Musculación', monto: 28000, estado: 'Deuda', periodo: 'Septiembre 2026', avatar: 'TH' },
+  { id: 46, fecha: '29 Sep 2026', socio: 'Paula Blanco', dni: '35.555.222', sede: 'Sede Norte', concepto: 'Cross Training', monto: 45000, estado: 'Recibido', periodo: 'Septiembre 2026', avatar: 'PB' },
+  // Octubre 2026
+  { id: 47, fecha: '09 Oct 2026', socio: 'Nicolás Rojas', dni: '42.666.333', sede: 'Sede Sur', concepto: 'Pase Libre', monto: 12000, estado: 'Pendiente', periodo: 'Octubre 2026', avatar: 'NR' },
+  { id: 48, fecha: '20 Oct 2026', socio: 'Esteban Cruz', dni: '38.888.555', sede: 'Sede Centro', concepto: 'Cross Training', monto: 16000, estado: 'Recibido', periodo: 'Octubre 2026', avatar: 'EC' },
+  { id: 49, fecha: '30 Oct 2026', socio: 'Martín Rodríguez', dni: '34.555.880', sede: 'Sede Norte', concepto: 'Cuota Mensual', monto: 25000, estado: 'Recibido', periodo: 'Octubre 2026', avatar: 'MR' },
+  // Noviembre 2026
+  { id: 50, fecha: '08 Nov 2026', socio: 'Ana Paz', dni: '40.111.222', sede: 'Sede Centro', concepto: 'Pase Libre', monto: 35000, estado: 'Recibido', periodo: 'Noviembre 2026', avatar: 'AP' },
+  { id: 51, fecha: '19 Nov 2026', socio: 'Carlos Rey', dni: '35.444.555', sede: 'Sede Sur', concepto: 'Cross Training', monto: 28000, estado: 'Pendiente', periodo: 'Noviembre 2026', avatar: 'CR' },
+  { id: 52, fecha: '28 Nov 2026', socio: 'Lucía Fernández', dni: '38.452.910', sede: 'Sede Norte', concepto: 'Musculación', monto: 14200, estado: 'Deuda', periodo: 'Noviembre 2026', avatar: 'LF' },
+  // Diciembre 2026
+  { id: 53, fecha: '05 Dic 2026', socio: 'Juan Pérez', dni: '31.144.255', sede: 'Sede Centro', concepto: 'Inscripción Inicial', monto: 15000, estado: 'Recibido', periodo: 'Diciembre 2026', avatar: 'JP' },
+  { id: 54, fecha: '16 Dic 2026', socio: 'María López', dni: '42.333.444', sede: 'Sede Norte', concepto: 'Pase Libre', monto: 35000, estado: 'Recibido', periodo: 'Diciembre 2026', avatar: 'ML' },
+  { id: 55, fecha: '27 Dic 2026', socio: 'Laura Gómez', dni: '41.214.557', sede: 'Sede Sur', concepto: 'Cross Training', monto: 30000, estado: 'Pendiente', periodo: 'Diciembre 2026', avatar: 'LG' }
 ];
 
-export default function EstadosPago() {
-  const navigate = useNavigate();
+// Convierte "Mayo 2026" -> "2026-05" para usar con el selector de mes (input type="month")
+const MESES_NUM: Record<string, string> = {
+  Enero: '01', Febrero: '02', Marzo: '03', Abril: '04', Mayo: '05', Junio: '06',
+  Julio: '07', Agosto: '08', Septiembre: '09', Octubre: '10', Noviembre: '11', Diciembre: '12',
+};
+const periodoToISO = (periodo: string): string => {
+  const [mes, anio] = periodo.split(' ');
+  return `${anio}-${MESES_NUM[mes] ?? '01'}`;
+};
 
+export default function EstadosPago() {
   // Estados
   const [searchTerm, setSearchTerm] = useState('');
   const [filtroSede, setFiltroSede] = useState('Todas las Sedes');
-  const [filtroPeriodo, setFiltroPeriodo] = useState('Todos los Meses');
+  const [filtroMes, setFiltroMes] = useState('');
   const [filtroEstado, setFiltroEstado] = useState('Todos los Estados');
   const [paginaActual, setPaginaActual] = useState(1);
 
@@ -59,7 +108,7 @@ export default function EstadosPago() {
   const pagosFiltrados = mockPagos.filter(p => {
     const searchMatch = p.socio.toLowerCase().includes(searchTerm.toLowerCase()) || p.dni.includes(searchTerm);
     const sedeMatch = filtroSede === 'Todas las Sedes' || p.sede === filtroSede;
-    const periodoMatch = filtroPeriodo === 'Todos los Meses' || p.periodo === filtroPeriodo;
+    const periodoMatch = !filtroMes || periodoToISO(p.periodo) === filtroMes;
     const estadoMatch = filtroEstado === 'Todos los Estados' || p.estado === filtroEstado;
     return searchMatch && sedeMatch && periodoMatch && estadoMatch;
   });
@@ -343,17 +392,13 @@ export default function EstadosPago() {
           <option value="Sede Centro">Sede Centro</option>
           <option value="Sede Sur">Sede Sur</option>
         </select>
-        <select
-          value={filtroPeriodo}
-          onChange={(e) => setFiltroPeriodo(e.target.value)}
-          className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 appearance-none pr-10 min-w-[140px] cursor-pointer transition-colors shadow-sm dark:shadow-none"
-        >
-          <option value="Todos los Meses">Todos los Meses</option>
-          <option value="Mayo 2026">Mayo 2026</option>
-          <option value="Abril 2026">Abril 2026</option>
-          <option value="Noviembre 2025">Noviembre 2025</option>
-          <option value="Octubre 2025">Octubre 2025</option>
-        </select>
+        <input
+          type="month"
+          value={filtroMes}
+          onChange={(e) => setFiltroMes(e.target.value)}
+          aria-label="Filtrar por mes"
+          className="bg-white dark:bg-[#151515] border border-slate-200 dark:border-zinc-800 rounded-xl py-3 px-4 text-sm text-slate-900 dark:text-[#FAFAFA] focus:outline-none focus:border-slate-400 dark:focus:border-zinc-600 min-w-[160px] cursor-pointer transition-colors shadow-sm dark:shadow-none [color-scheme:light] dark:[color-scheme:dark]"
+        />
         <select
           value={filtroEstado}
           onChange={(e) => setFiltroEstado(e.target.value)}
@@ -459,15 +504,7 @@ export default function EstadosPago() {
       </div>
 
       {/* Footer (Acciones Inferiores) */}
-      <div className="flex items-center justify-between mt-auto pt-2">
-        <button
-          onClick={() => navigate('/admin/finanzas')}
-          className="flex items-center space-x-2 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:text-white transition-colors text-xs font-bold tracking-widest uppercase cursor-pointer"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>VOLVER AL DASHBOARD FINANCIERO</span>
-        </button>
-
+      <div className="flex items-center justify-end mt-auto pt-2">
         <button
           onClick={exportarReportePDF}
           className="flex items-center space-x-2 bg-slate-800 dark:bg-[#7B8B9E] hover:bg-slate-700 dark:hover:bg-slate-400 text-white px-6 py-3.5 rounded-xl text-xs font-bold tracking-widest uppercase transition-colors cursor-pointer"

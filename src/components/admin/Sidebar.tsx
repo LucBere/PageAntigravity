@@ -5,6 +5,7 @@ import { useTheme } from '../../context/ThemeContext';
 
 export default function Sidebar() {
   const [isSecurityOpen, setIsSecurityOpen] = useState(false);
+  const [isFinanzasOpen, setIsFinanzasOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -14,6 +15,9 @@ export default function Sidebar() {
   useEffect(() => {
     if (location.pathname.includes('/admin/seguridad')) {
       setIsSecurityOpen(true);
+    }
+    if (location.pathname.includes('/admin/finanzas')) {
+      setIsFinanzasOpen(true);
     }
   }, [location.pathname]);
 
@@ -30,7 +34,6 @@ export default function Sidebar() {
   const navItems = [
     { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
     { name: 'Gestión de usuario', path: '/admin/usuarios', icon: Users },
-    { name: 'Comercial y Finanzas', path: '/admin/finanzas', icon: Banknote },
   ];
 
   return (
@@ -70,6 +73,50 @@ export default function Sidebar() {
             <span className="text-sm">{item.name}</span>
           </NavLink>
         ))}
+
+        {/* Cobranzas y Pagos (Accordion) */}
+        <div>
+          <button
+            onClick={() => setIsFinanzasOpen(!isFinanzasOpen)}
+            className={`w-full flex items-center justify-between px-4 py-3 rounded-lg font-medium transition-colors cursor-pointer ${location.pathname.includes('/admin/finanzas') || isFinanzasOpen
+                ? 'bg-slate-200 text-slate-900 dark:bg-zinc-800/60 dark:text-white'
+                : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100 dark:text-zinc-400 dark:hover:text-zinc-200 dark:hover:bg-zinc-800/30'
+              }`}
+          >
+            <div className="flex items-center space-x-3">
+              <Banknote className="w-5 h-5" />
+              <span className="text-sm">Cobranzas y Pagos</span>
+            </div>
+            {isFinanzasOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </button>
+
+          {isFinanzasOpen && (
+            <div className="mt-2 space-y-1 pl-12 pr-4">
+              <NavLink
+                to="/admin/finanzas/mora"
+                className={({ isActive }) =>
+                  `block py-2 text-[12px] font-medium transition-colors ${isActive
+                    ? 'text-slate-900 dark:text-white'
+                    : 'text-slate-500 hover:text-slate-800 dark:text-zinc-500 dark:hover:text-zinc-300'
+                  }`
+                }
+              >
+                Clientes en Mora
+              </NavLink>
+              <NavLink
+                to="/admin/finanzas/pagos"
+                className={({ isActive }) =>
+                  `block py-2 text-[12px] font-medium transition-colors ${isActive
+                    ? 'text-slate-900 dark:text-white'
+                    : 'text-slate-500 hover:text-slate-800 dark:text-zinc-500 dark:hover:text-zinc-300'
+                  }`
+                }
+              >
+                Estados de Pago
+              </NavLink>
+            </div>
+          )}
+        </div>
 
         {/* Seguridad y Control (Accordion) */}
         <div>

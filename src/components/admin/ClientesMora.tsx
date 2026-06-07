@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Search, ArrowLeft, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
-// Mock data (20 objects)
-const mockMorosos = [
+// Mock data (20 objects) — fuente única, también usada por el dashboard Caja/Pagos
+export const mockMorosos = [
   { id: 1, avatar: 'https://i.pravatar.cc/150?u=a1', alumno: 'Lucía Fernández', dni: '38.452.910', plan: 'Musculación', planColor: 'bg-red-50 text-red-600 dark:bg-red-900/30 dark:text-red-400', diasMora: 45, montoAdeudado: 14200, alerta: 'NOTIFICADO' },
   { id: 2, avatar: 'https://i.pravatar.cc/150?u=a2', alumno: 'Marcos Rossi', dni: '41.201.033', plan: 'Cross Training', planColor: 'bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400', diasMora: 12, montoAdeudado: 8500, alerta: 'PENDIENTE' },
   { id: 3, avatar: 'https://i.pravatar.cc/150?u=a3', alumno: 'Sofía Méndez', dni: '35.981.222', plan: 'Pase Libre', planColor: 'bg-emerald-50 text-emerald-600 dark:bg-green-900/30 dark:text-green-400', diasMora: 62, montoAdeudado: 22400, alerta: 'NOTIFICADO' },
@@ -29,7 +28,6 @@ const mockMorosos = [
 ];
 
 export default function ClientesMora() {
-  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [filtroDiasMora, setFiltroDiasMora] = useState('Todos');
   const [paginaActual, setPaginaActual] = useState(1);
@@ -257,24 +255,14 @@ export default function ClientesMora() {
       </div>
 
       {/* Footer (Acciones Inferiores) */}
-      <div className="flex items-center justify-between mt-auto pt-2">
-        <button 
-          onClick={() => navigate('/admin/finanzas')}
-          className="flex items-center space-x-2 text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white transition-colors text-xs font-bold tracking-widest uppercase cursor-pointer"
+      <div className="flex items-center justify-end mt-auto pt-2">
+        <button
+          onClick={handleExportPDF}
+          className="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-white dark:bg-[#7B8B9E] dark:hover:bg-slate-400 px-6 py-3.5 rounded-xl text-xs font-bold tracking-widest uppercase transition-colors cursor-pointer shadow-sm dark:shadow-none"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span>VOLVER AL DASHBOARD FINANCIERO</span>
+          <FileText className="w-4 h-4" />
+          <span>Exportar Listado de Morosos</span>
         </button>
-        
-        <div className="flex items-center space-x-4">
-          <button 
-            onClick={handleExportPDF}
-            className="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-white dark:bg-[#7B8B9E] dark:hover:bg-slate-400 px-6 py-3.5 rounded-xl text-xs font-bold tracking-widest uppercase transition-colors cursor-pointer shadow-sm dark:shadow-none"
-          >
-            <FileText className="w-4 h-4" />
-            <span>Exportar Listado de Morosos</span>
-          </button>
-        </div>
       </div>
     </div>
   );

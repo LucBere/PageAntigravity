@@ -6,7 +6,6 @@ import AdminDashboard from './components/admin/AdminDashboard';
 import GestionUsuarios from './components/admin/GestionUsuarios';
 import NuevoUsuario from './components/admin/NuevoUsuario';
 import ModificarUsuario from './components/admin/ModificarUsuario';
-import CajaPagos from './components/admin/CajaPagos';
 import ClientesMora from './components/admin/ClientesMora';
 import EstadosPago from './components/admin/EstadosPago';
 import RolesPermisos from './components/admin/RolesPermisos';
@@ -41,7 +40,7 @@ function App() {
             <Route path="usuarios" element={<GestionUsuarios />} /> {/* Pantallas 2 y 3 */}
             <Route path="usuarios/nuevo" element={<NuevoUsuario />} /> {/* Nueva Pantalla */}
             <Route path="usuarios/editar" element={<ModificarUsuario />} /> {/* Pantalla 4 */}
-            <Route path="finanzas" element={<CajaPagos />} />
+            <Route path="finanzas" element={<Navigate to="/admin/finanzas/mora" replace />} />
             <Route path="finanzas/mora" element={<ClientesMora />} />
             <Route path="finanzas/pagos" element={<EstadosPago />} />
             <Route path="seguridad/roles" element={<RolesPermisos />} />
