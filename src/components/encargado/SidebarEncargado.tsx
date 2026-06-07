@@ -40,30 +40,22 @@ export default function SidebarEncargado() {
 
 
       {/* Navegación */}
-      <nav className="flex-1 px-4 pt-4 space-y-2 overflow-y-auto scrollbar-hide pb-6">
+      <nav className="flex-1 px-4 space-y-2 overflow-y-auto scrollbar-hide pb-6">
         {navItems.map((item) => (
           <NavLink
             key={item.name}
             to={item.path}
             end={item.exact}
             className={({ isActive }) =>
-              `flex items-center space-x-3 px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
+              `flex items-center space-x-3 px-4 py-3 rounded-lg font-medium transition-colors ${
                 isActive
-                  ? 'bg-slate-200 text-slate-800 font-semibold dark:bg-zinc-800/40 dark:text-white border-l-[3px] border-[#7B8B9E]'
-                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50 dark:text-zinc-500 dark:hover:text-zinc-300 dark:hover:bg-zinc-800/20 border-l-[3px] border-transparent'
+                  ? 'bg-slate-200 text-slate-900 dark:bg-zinc-800/60 dark:text-white'
+                  : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100 dark:text-zinc-400 dark:hover:text-zinc-200 dark:hover:bg-zinc-800/30'
               }`
             }
           >
-            {({ isActive }) => (
-              <>
-                <item.icon
-                  className={`w-5 h-5 transition-colors ${
-                    isActive ? 'text-[#7B8B9E]' : 'text-slate-500 dark:text-zinc-500'
-                  }`}
-                />
-                <span className="text-sm">{item.name}</span>
-              </>
-            )}
+            <item.icon className="w-5 h-5" />
+            <span className="text-sm">{item.name}</span>
           </NavLink>
         ))}
       </nav>

@@ -12,14 +12,14 @@ export default function EncargadoLayout() {
       <main className="flex-1 flex flex-col overflow-hidden bg-slate-50 dark:bg-[#0E0E0E] transition-colors duration-300">
         
         {/* Header (Top) */}
-        <header className="h-20 px-8 flex justify-end items-center border-b border-slate-200 dark:border-zinc-800/50 shrink-0 bg-white dark:bg-[#151515] transition-colors shadow-sm dark:shadow-none">
+        <header className="h-20 px-8 flex justify-end items-center border-b border-slate-200 dark:border-zinc-800/50 shrink-0 bg-slate-50 dark:bg-[#0E0E0E] transition-colors duration-300">
           <div className="flex items-center space-x-6">
-            <div className="flex items-center gap-3">
-               <img src="https://i.pravatar.cc/150?img=11" alt="Profile" className="w-10 h-10 rounded-full border-2 border-slate-200 dark:border-zinc-700 transition-colors" />
-               <div className="hidden sm:block text-left">
-                 <p className="text-sm font-semibold text-slate-800 dark:text-white tracking-wide leading-tight">Juan Pérez</p>
-                 <p className="text-[10px] font-medium text-slate-500 dark:text-zinc-400">Encargado Sede Centro</p>
+            <div className="flex items-center space-x-3">
+               <div className="text-right hidden sm:block">
+                 <p className="text-sm font-bold text-slate-900 dark:text-white leading-tight transition-colors">Juan Pérez</p>
+                 <p className="text-[10px] text-slate-500 dark:text-zinc-500 font-bold tracking-wider uppercase transition-colors">Encargado Sede Centro</p>
                </div>
+               <img src="https://i.pravatar.cc/150?img=11" alt="Profile" className="w-10 h-10 rounded-full border-2 border-slate-200 dark:border-zinc-700 transition-colors" />
             </div>
           </div>
         </header>
